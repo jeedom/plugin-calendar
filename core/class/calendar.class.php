@@ -148,7 +148,7 @@ class calendar extends eqLogic {
                     '#event_id#' => $event['id'],
                     '#name#' => $event['title'],
                     '#date#' => $event['start'],
-                    '#start#' => convertDayEnToFr(date('l', strtotime($event['start']))) . ' ' . date('d H:i', strtotime($event['start'])),
+                    '#start#' => date_fr(date('l', strtotime($event['start']))) . ' ' . date('d H:i', strtotime($event['start'])),
                     '#background_color#' => $event['color'],
                     '#text_color#' => $event['textColor']
                 );
