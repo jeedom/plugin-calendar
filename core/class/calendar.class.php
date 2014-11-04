@@ -150,6 +150,7 @@ class calendar extends eqLogic {
                     '#date#' => $event['start'],
                     '#start#' => convertDayEnToFr(date('l', strtotime($event['start']))) . ' ' . date('d H:i', strtotime($event['start'])),
                     '#background_color#' => $event['color'],
+                    '#text_color#' => $event['textColor']
                 );
                 $dEvent .= template_replace($replace, $tEvent);
             }
