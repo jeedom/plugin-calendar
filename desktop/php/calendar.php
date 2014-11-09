@@ -71,9 +71,15 @@ sendVarToJS('eqType', 'calendar');
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-4 control-label">{{Nombre de jours à afficher dans le widget}}</label>
+                            <label class="col-lg-8 control-label">{{Nombre de jours à afficher dans le widget}}</label>
                             <div class="col-lg-2">
                                 <input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetDay" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-8 control-label">{{Ne pas afficher le status et les commandes d'activation/désactivation}}</label>
+                            <div class="col-lg-1">
+                                <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="noStateDisplay" />
                             </div>
                         </div>
                         <div class="form-group">

@@ -164,18 +164,24 @@ class calendar extends eqLogic {
             '#background_color#' => $this->getBackgroundColor($_version),
             '#events#' => $dEvent
         );
-        if ($this->getConfiguration('enableCalendar', 1) == 1) {
-            $replace['#icon#'] = '<i class="fa fa-check"></i>';
+        if ($this->getConfiguration('noStateDisplay') == 0) {
+            if ($this->getConfiguration('enableCalendar', 1) == 1) {
+                $replace['#icon#'] = '<i class="fa fa-check"></i>';
+            } else {
+                $replace['#icon#'] = '<i class="fa fa-times"></i>';
+            }
         } else {
-            $replace['#icon#'] = '<i class="fa fa-times"></i>';
+            $replace['#icon#'] = '';
         }
         if ($_version == 'dview' || $_version == 'mview') {
             $object = $this->getObject();
             $replace['#name#'] = (is_object($object)) ? $object->getName() . ' - ' . $replace['#name#'] : $replace['#name#'];
         }
         $info = '';
-        foreach ($this->getCmd(null, null, true) as $cmd) {
-            $info .= $cmd->toHtml($_version);
+        if ($this->getConfiguration('noStateDisplay') == 0) {
+            foreach ($this->getCmd(null, null, true) as $cmd) {
+                $info .= $cmd->toHtml($_version);
+            }
         }
         $replace['#cmd#'] = $info;
         $parameters = $this->getDisplay('parameters');
