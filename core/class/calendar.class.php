@@ -73,7 +73,11 @@ class calendar extends eqLogic {
                 $options = $cron->getOption();
                 $cron->remove();
                 $event = calendar_event::byId($options['event_id']);
-                $event->reschedule();
+                if (is_object($event)) {
+                    $event->reschedule();
+                } else {
+                    log::add('calendar', 'error', __('Impossible de trouver l\'evenement correspondant à l\'id :', __FILE__) . print_r($options, true));
+                }
             }
         }
     }
