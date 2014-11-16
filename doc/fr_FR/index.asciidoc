@@ -1,0 +1,10 @@
+== Agenda
+
+=== Description
+Plugin permetant de creer un agenda
+
+=== Configuration
+include::configuration.asciidoc[]
+
+=== Changelog
+include::changelog.asciidoc[]
