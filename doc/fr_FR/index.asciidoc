@@ -3,8 +3,14 @@
 === Description
 Plugin permetant de creer un agenda
 
+'''
 === Configuration
 include::configuration.asciidoc[]
 
+'''
+=== FAQ
+include::faq.asciidoc[]
+
+'''
 === Changelog
 include::changelog.asciidoc[]
