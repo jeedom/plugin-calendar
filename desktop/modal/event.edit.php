@@ -51,48 +51,48 @@ if (init('id') != '') {
             <a class="btn btn-xs btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fa fa-check-circle"></i> {{Enregistrer}}</a>
         </legend>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Nom de l'évenement}}</label>
-            <div class="col-lg-3">
+            <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
+            <div class="col-sm-3">
                 <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName' />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Icône}}</label>
-            <div class="col-lg-3">
+            <label class="col-sm-3 control-label">{{Icône}}</label>
+            <div class="col-sm-3">
                 <input type="text" class="calendarAttr form-control" data-l1key="eqLogic_id" style="display: none;" value="<?php echo init('eqLogic_id') ?>"/>
                 <input type="text" class="calendarAttr form-control" data-l1key="id" style="display: none;" />
                 <div class="calendarAttr" data-l1key="cmd_param" data-l2key="icon" ></div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-sm-2">
                 <a class="btn btn-default btn-sm" id="bt_chooseIcon"><i class="fa fa-flag"></i> {{Choisir une icône}}</a>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Couleur}}</label>
-            <div class="col-lg-1">
+            <label class="col-sm-3 control-label">{{Couleur}}</label>
+            <div class="col-sm-1">
                 <input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='color' value='#2980b9' />
             </div>
-            <label class="col-lg-1 control-label">{{Transparent}}</label>
-            <div class="col-lg-3">
+            <label class="col-sm-1 control-label">{{Transparent}}</label>
+            <div class="col-sm-3">
                 <input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='transparent' />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Couleur du texte}}</label>
-            <div class="col-lg-3">
+            <label class="col-sm-3 control-label">{{Couleur du texte}}</label>
+            <div class="col-sm-3">
                 <input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='text_color' value='#000000' />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Ne pas à afficher dans le dashboard}}</label>
-            <div class="col-lg-3">
+            <label class="col-sm-3 control-label">{{Ne pas à afficher dans le dashboard}}</label>
+            <div class="col-sm-3">
                 <input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard' />
             </div>
         </div>
         <legend>Action de début</legend>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Type}}</label>
-            <div class="col-lg-3" >
+            <label class="col-sm-3 control-label">{{Type}}</label>
+            <div class="col-sm-3" >
                 <select class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='start_type'>
                     <option value="none">Aucune</option>
                     <option value="cmd">Commande</option>
@@ -102,32 +102,32 @@ if (init('id') != '') {
         </div>
         <div class="div_startType div_startcmd">
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Nom de la commande}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
+                <div class="col-sm-3">
                     <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='start_name' />
                 </div>
-                <div class="col-lg-1">
+                <div class="col-sm-1">
                     <a class="btn btn-default btn-sm listCmdAction" data-target="start_name"><i class="fa fa-list-alt"></i></a>
                 </div>
             </div>
             <div id="div_eventEditCmdStart" class="form-group">
-                <label class="col-lg-3 control-label">{{Options}}</label>
-                <div class="col-lg-3 options"></div>
+                <label class="col-sm-3 control-label">{{Options}}</label>
+                <div class="col-sm-3 options"></div>
             </div>
         </div>
         <div class="div_startType div_startscenario" style="display: none;">
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Nom du scénario}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Nom du scénario}}</label>
+                <div class="col-sm-3">
                     <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='start_scenarioName' />
                 </div>
-                <div class="col-lg-1">
+                <div class="col-sm-1">
                     <a class="btn btn-default btn-sm listScenario" data-target="start_scenarioName"><i class="fa fa-list-alt"></i></a>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Action}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Action}}</label>
+                <div class="col-sm-3">
                     <select class="calendarAttr form-control input-sm" data-l1key="cmd_param" data-l2key="start_action">
                         <option value="start">{{Start}}</option>
                         <option value="stop">{{Stop}}</option>
@@ -139,8 +139,8 @@ if (init('id') != '') {
         </div>
         <legend>Action de fin</legend>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Type}}</label>
-            <div class="col-lg-3" >
+            <label class="col-sm-3 control-label">{{Type}}</label>
+            <div class="col-sm-3" >
                 <select class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='end_type'>
                     <option value="none">Aucune</option>
                     <option value="cmd">Commande</option>
@@ -151,32 +151,32 @@ if (init('id') != '') {
 
         <div class="div_endType div_endcmd">
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Nom de la commande}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
+                <div class="col-sm-3">
                     <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='end_name' />
                 </div>
-                <div class="col-lg-1">
+                <div class="col-sm-1">
                     <a class="btn btn-default btn-sm listCmdAction" data-target="end_name"><i class="fa fa-list-alt"></i></a>
                 </div>
             </div>
             <div id="div_eventEditCmdEnd" class="form-group">
-                <label class="col-lg-3 control-label">{{Options}}</label>
-                <div class="col-lg-3 options"></div>
+                <label class="col-sm-3 control-label">{{Options}}</label>
+                <div class="col-sm-3 options"></div>
             </div>
         </div>
         <div class="div_endType div_endscenario" style="display: none;">
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Nom du scénario}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Nom du scénario}}</label>
+                <div class="col-sm-3">
                     <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='end_scenarioName' />
                 </div>
-                <div class="col-lg-1">
+                <div class="col-sm-1">
                     <a class="btn btn-default btn-sm listScenario" data-target="end_scenarioName"><i class="fa fa-list-alt"></i></a>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Action}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Action}}</label>
+                <div class="col-sm-3">
                     <select class="calendarAttr form-control input-sm" data-l1key="cmd_param" data-l2key="end_action">
                         <option value="start">{{Start}}</option>
                         <option value="stop">{{Stop}}</option>
@@ -188,33 +188,35 @@ if (init('id') != '') {
         </div>
         <legend>Programmation</legend>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Début}}</label>
-            <div class="col-lg-2">
+            <label class="col-sm-3 control-label">{{Début}}</label>
+            <div class="col-sm-2">
                 <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="startDate" value="2014-09-22 21:15:00" />
             </div>
-            <label class="col-lg-1 control-label">{{Fin}}</label>
-            <div class="col-lg-2">
+            <label class="col-sm-1 control-label">{{Fin}}</label>
+            <div class="col-sm-2">
                 <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="endDate" value="2014-09-22 22:00:00"/>
             </div>
-            <div class="col-lg-1">
+            <div class="col-sm-1">
                 <a class="btn btn-default calendarAction" data-action="allDay"><i class="fa fa-history"></i> Toute la journée</a>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{Répété}}</label>
-            <div class="col-lg-3">
+            <label class="col-sm-3 control-label">{{Répété}}</label>
+            <div class="col-sm-3">
                 <input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="enable" />
             </div>
         </div>
 
         <div class="div_repeatOption" style="display : none;">
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Répéter tous les}}</label>
-                <div class="col-lg-1">
+                <label class="col-sm-3 control-label">{{Répéter tous les}}</label>
+                <div class="col-sm-1">
                     <input class="calendarAttr form-control" data-l1key="repeat" data-l2key="freq" />
                 </div>
-                <div class="col-lg-2">
+                <div class="col-sm-2">
                     <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="unite" >
+                        <option value="minutes">{{Minutes(s)}}</option>
+                        <option value="hours">{{Heure(s)}}</option>
                         <option value="days">{{Jour(s)}}</option>
                         <option value="month">{{Mois}}</option>
                         <option value="years">{{Année(s)}}</option>
@@ -222,8 +224,8 @@ if (init('id') != '') {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Uniquement les}}</label>
-                <div class="col-lg-9">
+                <label class="col-sm-3 control-label">{{Uniquement les}}</label>
+                <div class="col-sm-9">
                     <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='1' checked /> {{Lundis}}
                     <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='2' checked /> {{Mardis}}
                     <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='3' checked /> {{Mercredis}}
@@ -234,8 +236,8 @@ if (init('id') != '') {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Restriction}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Restriction}}</label>
+                <div class="col-sm-3">
                     <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="nationalDay" >
                         <option value="all">{{Aucune}}</option>
                         <option value="exeptNationalDay">{{Tous sauf les jours fériés}}</option>
@@ -244,14 +246,14 @@ if (init('id') != '') {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Jusqu'à}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Jusqu'à}}</label>
+                <div class="col-sm-3">
                     <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="until" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-3 control-label">{{Exclure (date sous forme 2014-04-08,2014-04-09...)}}</label>
-                <div class="col-lg-3">
+                <label class="col-sm-3 control-label">{{Exclure (date sous forme 2014-04-08,2014-04-09...)}}</label>
+                <div class="col-sm-3">
                     <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDate" />
                 </div>
             </div>

@@ -1,0 +1,3 @@
+==== 23/11/2014
+
+- Possibilité de repeter un evenement toutes les heures/minutes
