@@ -225,6 +225,36 @@ class calendarCmd extends cmd {
             $eqLogic->setConfiguration('enableCalendar', 1);
             $eqLogic->save();
             $eqLogic->refreshWidget();
+            foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
+                if ($eqLogic->getIsEnable() == 0) {
+                    continue;
+                }
+                $nowtime = strtotime('now');
+                $repeat = $event->getRepeat();
+                if ($repeat['enable'] == 1) {
+                    $startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+                    $endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+                } else {
+                    $startDate = null;
+                    $endDate = null;
+                }
+                if (jeedom::isDateOk() && $eqLogic->getConfiguration('enableCalendar', 1) == 1) {
+                    $results = $event->calculOccurence($startDate, $endDate);
+                    if (count($results) == 0) {
+                        return null;
+                    }
+                    for ($i = 0; $i < count($results); $i++) {
+                        if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
+                            $event->doAction('start');
+                            break;
+                        }
+                        if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
+                            break;
+                        }
+                    }
+                }
+                $event->reschedule();
+            }
         }
         if ($this->getLogicalId() == 'disable') {
             $eqLogic = $this->getEqLogic();

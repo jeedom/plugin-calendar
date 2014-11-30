@@ -4,7 +4,7 @@
     <span style="font-size : 0.7em;">#start#</span>
     <script>
         $('.removeEvent[data-uid=#uid#]').on('click', function() {
-            bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cet événement ?}}', function(result) {
+            bootbox.confirm('Etes-vous sûr de vouloir supprimer cet événement ?', function(result) {
                 if (result) {
                     $.ajax({
                         type: 'POST',

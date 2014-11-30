@@ -1,3 +1,7 @@
+==== 30/11/2014
+
+- Lors de la reactivation d'un agenda si des evenements sont dans la plage alors leurs actions sont executées
+
 ==== 23/11/2014
 
 - Possibilité de repeter un evenement toutes les heures/minutes

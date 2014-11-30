@@ -112,7 +112,7 @@ if (init('id') != '') {
             </div>
             <div id="div_eventEditCmdStart" class="form-group">
                 <label class="col-sm-3 control-label">{{Options}}</label>
-                <div class="col-sm-3 options"></div>
+                <div class="col-sm-6 options"></div>
             </div>
         </div>
         <div class="div_startType div_startscenario" style="display: none;">
@@ -161,7 +161,7 @@ if (init('id') != '') {
             </div>
             <div id="div_eventEditCmdEnd" class="form-group">
                 <label class="col-sm-3 control-label">{{Options}}</label>
-                <div class="col-sm-3 options"></div>
+                <div class="col-sm-6 options"></div>
             </div>
         </div>
         <div class="div_endType div_endscenario" style="display: none;">
@@ -190,11 +190,11 @@ if (init('id') != '') {
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Début}}</label>
             <div class="col-sm-2">
-                <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="startDate" value="2014-09-22 21:15:00" />
+                <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="startDate" />
             </div>
             <label class="col-sm-1 control-label">{{Fin}}</label>
             <div class="col-sm-2">
-                <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="endDate" value="2014-09-22 22:00:00"/>
+                <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="endDate" />
             </div>
             <div class="col-sm-1">
                 <a class="btn btn-default calendarAction" data-action="allDay"><i class="fa fa-history"></i> Toute la journée</a>
