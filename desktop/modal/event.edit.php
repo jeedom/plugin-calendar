@@ -103,7 +103,7 @@ if (init('id') != '') {
         <div class="div_startType div_startcmd">
             <div class="form-group">
                 <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
-                <div class="col-sm-3">
+                <div class="col-sm-5">
                     <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='start_name' />
                 </div>
                 <div class="col-sm-1">
@@ -152,7 +152,7 @@ if (init('id') != '') {
         <div class="div_endType div_endcmd">
             <div class="form-group">
                 <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
-                <div class="col-sm-3">
+                <div class="col-sm-5">
                     <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='end_name' />
                 </div>
                 <div class="col-sm-1">
