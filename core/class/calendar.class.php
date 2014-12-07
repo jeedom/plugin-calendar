@@ -145,7 +145,11 @@ class calendar extends eqLogic {
         usort($events, 'calendar::orderEvent');
         $tEvent = getTemplate('core', $_version, 'event', 'calendar');
         $dEvent = '';
+        $nbEvent = 1;
         foreach ($events as $event) {
+            if($this->getConfiguration('nbWidgetMaxEvent', 0) != 0 && $this->getConfiguration('nbWidgetMaxEvent', 0) < $nbEvent){
+                break;
+            }
             if ($event['noDisplayOnDashboard'] == 0) {
                 $replace = array(
                     '#uid#' => mt_rand() . $this->getId() . $event['id'],
@@ -158,6 +162,7 @@ class calendar extends eqLogic {
                     '#text_color#' => $event['textColor']
                 );
                 $dEvent .= template_replace($replace, $tEvent);
+                $nbEvent++;
             }
         }
 

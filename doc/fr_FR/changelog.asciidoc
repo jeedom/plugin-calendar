@@ -1,3 +1,7 @@
+==== 07/12/2014
+
+- Possibilité de définir le nombre maximum d'évenement à afficher sur le widget
+
 ==== 30/11/2014
 
 - Lors de la reactivation d'un agenda si des evenements sont dans la plage alors leurs actions sont executées

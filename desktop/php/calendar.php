@@ -77,6 +77,12 @@ sendVarToJS('eqType', 'calendar');
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-4 control-label">{{Nombre d'évenement maximum (0 pour tous)}}</label>
+                            <div class="col-sm-2">
+                                <input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetMaxEvent" />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-4 control-label">{{Ne pas afficher le status et les commandes d'activation/désactivation}}</label>
                             <div class="col-sm-1">
                                 <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="noStateDisplay" />
