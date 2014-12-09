@@ -217,7 +217,7 @@ if (init('id') != '') {
                     <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="unite" >
                         <option value="minutes">{{Minutes(s)}}</option>
                         <option value="hours">{{Heure(s)}}</option>
-                        <option value="days">{{Jour(s)}}</option>
+                        <option value="days" selected>{{Jour(s)}}</option>
                         <option value="month">{{Mois}}</option>
                         <option value="years">{{Année(s)}}</option>
                     </select>

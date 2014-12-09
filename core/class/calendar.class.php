@@ -147,7 +147,7 @@ class calendar extends eqLogic {
         $dEvent = '';
         $nbEvent = 1;
         foreach ($events as $event) {
-            if($this->getConfiguration('nbWidgetMaxEvent', 0) != 0 && $this->getConfiguration('nbWidgetMaxEvent', 0) < $nbEvent){
+            if ($this->getConfiguration('nbWidgetMaxEvent', 0) != 0 && $this->getConfiguration('nbWidgetMaxEvent', 0) < $nbEvent) {
                 break;
             }
             if ($event['noDisplayOnDashboard'] == 0) {
@@ -296,6 +296,16 @@ class calendar_event {
         return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
     }
 
+    public static function searchByCmd($_cmd_id) {
+        $values = array(
+            'cmd_param' => '%"start_type":"cmd"%#' . $_cmd_id . '#%'
+        );
+        $sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+                FROM calendar_event
+                WHERE cmd_param LIKE :cmd_param';
+        return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+    }
+
     public static function all() {
         $sql = 'SELECT ' . DB::buildField(__CLASS__) . '
                 FROM calendar_event';
@@ -394,7 +404,7 @@ class calendar_event {
         }
     }
 
-    public function nextOccurrence() {
+    public function nextOccurrence($_position = null, $_details = false) {
         $repeat = $this->getRepeat();
         if ($repeat['enable'] == 1) {
             $startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
@@ -409,11 +419,19 @@ class calendar_event {
         }
 
         foreach ($results as $result) {
-            if (strtotime($result['start']) > strtotime('now')) {
-                return $result['start'];
+            if (strtotime($result['start']) > strtotime('now') && ($_position == null || $_position = 'start')) {
+                if ($_details) {
+                    return array('date' => $result['start'], 'position' => 'start');
+                } else {
+                    return $result['start'];
+                }
             }
-            if (strtotime($result['end']) > strtotime('now')) {
-                return $result['end'];
+            if (strtotime($result['end']) > strtotime('now') && ($_position == null || $_position = 'end')) {
+                if ($_details) {
+                    return array('date' => $result['end'], 'position' => 'end');
+                } else {
+                    return $result['end'];
+                }
             }
         }
         return null;
