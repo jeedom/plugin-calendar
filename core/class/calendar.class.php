@@ -417,16 +417,15 @@ class calendar_event {
         if (count($results) == 0) {
             return null;
         }
-
         foreach ($results as $result) {
-            if (strtotime($result['start']) > strtotime('now') && ($_position == null || $_position = 'start')) {
+            if (strtotime($result['start']) > strtotime('now') && ($_position == null || $_position == 'start')) {
                 if ($_details) {
                     return array('date' => $result['start'], 'position' => 'start');
                 } else {
                     return $result['start'];
                 }
             }
-            if (strtotime($result['end']) > strtotime('now') && ($_position == null || $_position = 'end')) {
+            if (strtotime($result['end']) > strtotime('now') && ($_position == null || $_position == 'end')) {
                 if ($_details) {
                     return array('date' => $result['end'], 'position' => 'end');
                 } else {
