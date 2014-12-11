@@ -44,11 +44,11 @@ class calendar extends eqLogic {
                     return null;
                 }
                 for ($i = 0; $i < count($results); $i++) {
-                    if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
+                    if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > ($nowtime + 60)) {
                         $event->doAction('start');
                         break;
                     }
-                    if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
+                    if (strtotime($results[$i]['end']) <= ($nowtime - 60) && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
                         $event->doAction('end');
                         break;
                     }
