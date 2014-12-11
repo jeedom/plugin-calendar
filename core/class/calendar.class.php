@@ -376,6 +376,14 @@ class calendar_event {
             date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 1, $easterYear)),
             date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 40, $easterYear)),
             date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 50, $easterYear)),
+            date('Y-m-d', mktime(0, 0, 0, 1, 1, $year + 1)), // 1er janvier
+            date('Y-m-d', mktime(0, 0, 0, 5, 1, $year + 1)), // Fête du travail
+            date('Y-m-d', mktime(0, 0, 0, 5, 8, $year + 1)), // Victoire des alliés
+            date('Y-m-d', mktime(0, 0, 0, 7, 14, $year + 1)), // Fête nationale
+            date('Y-m-d', mktime(0, 0, 0, 8, 15, $year + 1)), // Assomption
+            date('Y-m-d', mktime(0, 0, 0, 11, 1, $year + 1)), // Toussaint
+            date('Y-m-d', mktime(0, 0, 0, 11, 11, $year + 1)), // Armistice
+            date('Y-m-d', mktime(0, 0, 0, 12, 25, $year + 1)), // Noel
         );
         sort($holidays);
         return $holidays;
