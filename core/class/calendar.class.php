@@ -32,8 +32,8 @@ class calendar extends eqLogic {
             $nowtime = strtotime('now');
             $repeat = $event->getRepeat();
             if ($repeat['enable'] == 1) {
-                $startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-                $endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+                $startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+                $endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
             } else {
                 $startDate = null;
                 $endDate = null;
@@ -580,6 +580,7 @@ class calendar_event {
             $cmd = cmd::byId(str_replace('#', '', $this->getCmd_param($_action . '_name')));
             if (is_object($cmd) && $cmd->getType() == 'action') {
                 $options = $this->getCmd_param($_action . '_options');
+                log::add('calendar', 'debug', 'Execution de : ' . $cmd->getHumanName() . ' => ' . print_r($options, true));
                 $cmd->execCmd($options);
             }
         }
