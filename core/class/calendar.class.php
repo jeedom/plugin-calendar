@@ -30,6 +30,7 @@ class calendar extends eqLogic {
                 return;
             }
             $nowtime = strtotime('now');
+            $time = date('Y-m-d H:i:s');
             $repeat = $event->getRepeat();
             if ($repeat['enable'] == 1) {
                 $startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
@@ -44,11 +45,11 @@ class calendar extends eqLogic {
                     return null;
                 }
                 for ($i = 0; $i < count($results); $i++) {
-                    if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > ($nowtime + 60)) {
+                    if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > ($nowtime + 120)) {
                         $event->doAction('start');
                         break;
                     }
-                    if (strtotime($results[$i]['end']) <= ($nowtime + 60) && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
+                    if (strtotime($results[$i]['end']) <= ($nowtime + 120) && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
                         $event->doAction('end');
                         break;
                     }
