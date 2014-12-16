@@ -555,7 +555,6 @@ class calendar_event {
     }
 
     public function postSave() {
-        $nowtime = strtotime('now');
         $repeat = $this->getRepeat();
         if ($repeat['enable'] == 1) {
             $startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));

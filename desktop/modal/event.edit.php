@@ -42,13 +42,13 @@ if (init('id') != '') {
 <form class="form-horizontal" id="form_eventEdit">
     <fieldset>
         <legend>{{Evènement}}
+            <a class="btn btn-xs btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fa fa-check-circle"></i> {{Enregistrer}}</a>
             <?php
             if (is_object($event)) {
-                echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
                 echo '<a class="btn btn-warning pull-right btn-xs" id="md_eventEditDuplicate" style="color: white;"><i class="fa fa-files-o"></i> {{Duplication}}</a>';
+                echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
             }
             ?>
-            <a class="btn btn-xs btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fa fa-check-circle"></i> {{Enregistrer}}</a>
         </legend>
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
