@@ -22,8 +22,8 @@ $eqLogics = eqLogic::byType('calendar');
             </ul>
         </div>
     </div>
-    
-     <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+
+    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes agendas}}
         </legend>
         <?php
@@ -95,28 +95,22 @@ $eqLogics = eqLogic::byType('calendar');
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">{{Nombre de jours à afficher dans le widget}}</label>
+                            <label class="col-sm-4 control-label">{{Widget, nombre de jours}}</label>
                             <div class="col-sm-2">
                                 <input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetDay" />
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">{{Nombre d'évenement maximum (0 pour tous)}}</label>
+                            <label class="col-sm-4 control-label">{{Nombre d'événement maximum}}</label>
                             <div class="col-sm-2">
                                 <input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetMaxEvent" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">{{Ne pas afficher le status et les commandes d'activation/désactivation}}</label>
+                            <label class="col-sm-8 control-label">{{Ne pas afficher le status et les commandes d'activation/désactivation}}</label>
                             <div class="col-sm-1">
                                 <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="noStateDisplay" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-4">
-                                <a class="btn btn-default" id="bt_addEvent"><i class="fa fa-plus-circle"></i> {{Ajouter événement}}</a>
-                            </div>
-                        </div>
+
                     </fieldset> 
                 </form>
             </div>
@@ -125,6 +119,12 @@ $eqLogics = eqLogic::byType('calendar');
                     <fieldset>
                         <legend>{{Liste des événements de l'agenda}}</legend>
                         <div id="div_eventList"></div>
+                        <br/>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <a class="btn btn-default" id="bt_addEvent"><i class="fa fa-plus-circle"></i> {{Ajouter événement}}</a>
+                            </div>
+                        </div>
                     </fieldset>
                 </form>
             </div>
