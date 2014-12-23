@@ -135,6 +135,7 @@ class calendar extends eqLogic {
         $disable->setLogicalId('disable');
         $disable->setDisplay('icon', '<i class="fa fa-times"></i>');
         $disable->save();
+        $this->refreshWidget();
     }
 
     public function toHtml($_version = 'dashboard') {
@@ -226,8 +227,8 @@ class calendarCmd extends cmd {
     }
 
     public function execute($_options = null) {
+        $eqLogic = $this->getEqLogic();
         if ($this->getLogicalId() == 'enable') {
-            $eqLogic = $this->getEqLogic();
             $eqLogic->setConfiguration('enableCalendar', 1);
             $eqLogic->save();
             $eqLogic->refreshWidget();
@@ -263,7 +264,6 @@ class calendarCmd extends cmd {
             }
         }
         if ($this->getLogicalId() == 'disable') {
-            $eqLogic = $this->getEqLogic();
             $eqLogic->setConfiguration('enableCalendar', 0);
             $eqLogic->save();
             $eqLogic->refreshWidget();

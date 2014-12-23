@@ -87,7 +87,8 @@ $eqLogics = eqLogic::byType('calendar');
                         <div class="form-group">
                             <label class="col-sm-4 control-label">{{Activer}}</label>
                             <div class="col-sm-1">
-                                <input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>
+                                <span class="eqLogicAttr" data-l1key="isEnable" style="display: none;">1</span>
+                                <input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="enableCalendar" checked/>
                             </div>
                             <label class="col-sm-4 control-label">{{Visible}}</label>
                             <div class="col-sm-1">
