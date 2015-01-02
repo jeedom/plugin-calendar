@@ -1,3 +1,7 @@
+==== 02/01/2015
+
+- Correction d'un bug si les evenements sont uniquement sur les jours feriés
+
 ==== 07/12/2014
 
 - Possibilité de définir le nombre maximum d'évenement à afficher sur le widget
