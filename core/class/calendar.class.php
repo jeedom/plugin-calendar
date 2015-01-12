@@ -23,10 +23,8 @@ class calendar extends eqLogic {
     /*     * *************************Attributs****************************** */
 
     public static function pull($_option) {
-        log::add('calendar','debug','================PULL============');
         $event = calendar_event::byId($_option['event_id']);
         if (is_object($event)) {
-            log::add('calendar','debug','Event : '.print_r($event,true));
             $eqLogic = $event->getEqLogic();
             $nowtime = strtotime('now');
             $repeat = $event->getRepeat();
@@ -42,21 +40,17 @@ class calendar extends eqLogic {
                 $startDate = null;
                 $endDate = null;
             }
-            log::add('calendar','debug','Startdate : '.$startDate.' / Enddate => '.$endDate);
             if (jeedom::isDateOk() && $eqLogic->getConfiguration('enableCalendar', 1) == 1) {
                 $results = $event->calculOccurence($startDate, $endDate);
-                log::add('calendar','debug','Occurence : '.print_r($results,true));
                 if (count($results) == 0) {
                     return null;
                 }
                 for ($i = 0; $i < count($results); $i++) {
                     if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-                        log::add('calendar','debug','Do start action');
                         $event->doAction('start');
                         break;
                     }
                     if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-                        log::add('calendar','debug','Do end action');
                         $event->doAction('end');
                         break;
                     }
