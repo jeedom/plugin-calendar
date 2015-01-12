@@ -23,12 +23,11 @@ class calendar extends eqLogic {
     /*     * *************************Attributs****************************** */
 
     public static function pull($_option) {
+        log::add('calendar','debug','================PULL============');
         $event = calendar_event::byId($_option['event_id']);
         if (is_object($event)) {
+            log::add('calendar','debug','Event : '.print_r($event,true));
             $eqLogic = $event->getEqLogic();
-            if ($eqLogic->getIsEnable() == 0) {
-                return;
-            }
             $nowtime = strtotime('now');
             $repeat = $event->getRepeat();
             if ($repeat['enable'] == 1) {
@@ -43,17 +42,21 @@ class calendar extends eqLogic {
                 $startDate = null;
                 $endDate = null;
             }
+            log::add('calendar','debug','Startdate : '.$startDate.' / Enddate => '.$endDate);
             if (jeedom::isDateOk() && $eqLogic->getConfiguration('enableCalendar', 1) == 1) {
                 $results = $event->calculOccurence($startDate, $endDate);
+                log::add('calendar','debug','Occurence : '.print_r($results,true));
                 if (count($results) == 0) {
                     return null;
                 }
                 for ($i = 0; $i < count($results); $i++) {
                     if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
+                        log::add('calendar','debug','Do start action');
                         $event->doAction('start');
                         break;
                     }
                     if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
+                        log::add('calendar','debug','Do end action');
                         $event->doAction('end');
                         break;
                     }
@@ -112,6 +115,7 @@ class calendar extends eqLogic {
         if ($this->getConfiguration('nbWidgetDay') == '') {
             $this->setConfiguration('nbWidgetDay', 7);
         }
+        $this->setIsEnable(1);
     }
 
     public function postSave() {
@@ -174,7 +178,7 @@ class calendar extends eqLogic {
 
         $replace = array(
             '#id#' => $this->getId(),
-            '#name#' => ($this->getIsEnable()) ? $this->getName() : '<del>' . $this->getName() . '</del>',
+            '#name#' => ($this->getConfiguration('enableCalendar', 1) == 1) ? $this->getName() : '<del>' . $this->getName() . '</del>',
             '#eqLink#' => $this->getLinkToConfiguration(),
             '#category#' => $this->getPrimaryCategory(),
             '#background_color#' => $this->getBackgroundColor($_version),
@@ -238,7 +242,7 @@ class calendarCmd extends cmd {
             $eqLogic->save();
             $eqLogic->refreshWidget();
             foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
-                if ($eqLogic->getIsEnable() == 0) {
+                if ($eqLogic->getConfiguration('enableCalendar', 1) == 0) {
                     continue;
                 }
                 $nowtime = strtotime('now');
@@ -420,7 +424,7 @@ public function reschedule() {
 public function nextOccurrence($_position = null, $_details = false) {
     $repeat = $this->getRepeat();
     if ($repeat['enable'] == 1) {
-     if($repeat['nationalDay'] == 'onlyNationalDay'){
+       if($repeat['nationalDay'] == 'onlyNationalDay'){
         $startDate = date('Y-m-d H:i:s', strtotime('-6 month ' . date('Y-m-d H:i:s')));
         $endDate = date('Y-m-d H:i:s', strtotime('+6 month ' . date('Y-m-d H:i:s')));
     } else {
@@ -598,11 +602,7 @@ public function doAction($_action = 'start') {
         if (is_object($scenario)) {
             switch ($this->getCmd_param($_action . '_action')) {
                 case 'start':
-                if ($this->getCmd_param('eventName') != '') {
-                    $name = $this->getCmd_param('eventName');
-                } else {
-                    $name = $this->getCmd_param('name');
-                }
+                $name = $this->getCmd_param('eventName',$this->getCmd_param('name'));
                 $scenario->launch(false, __('Lancement provoque par le calendrier  : ', __FILE__) . $name);
                 break;
                 case 'stop':
@@ -617,6 +617,8 @@ public function doAction($_action = 'start') {
                 $scenario->save();
                 break;
             }
+        }else{
+            log::add('calendar','error',__('Scénario non trouvé : ',__FILE__). $this->getCmd_param($_action . '_scenarioName'));
         }
     }
     return true;
