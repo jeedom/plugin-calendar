@@ -19,11 +19,14 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 function calendar_install() {
-    $sql = file_get_contents(dirname(__FILE__) . '/install.sql');
-    DB::Prepare($sql, array(), DB::FETCH_TYPE_ROW);
+	$sql = file_get_contents(dirname(__FILE__) . '/install.sql');
+	DB::Prepare($sql, array(), DB::FETCH_TYPE_ROW);
+	foreach (calendar::byType('calendar') as $calendar) {
+		$calendar->save();
+	}
 }
 
 function calendar_remove() {
-    DB::Prepare('DROP TABLE IF EXISTS `calendar_event`', array(), DB::FETCH_TYPE_ROW);
+	DB::Prepare('DROP TABLE IF EXISTS `calendar_event`', array(), DB::FETCH_TYPE_ROW);
 }
 ?>

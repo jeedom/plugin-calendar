@@ -112,6 +112,9 @@ class calendar extends eqLogic {
         if ($this->getConfiguration('nbWidgetDay') == '') {
             $this->setConfiguration('nbWidgetDay', 7);
         }
+        if ($this->getIsEnable() != 1) {
+            $this->setIsEnable(1);
+        }
     }
 
     public function postSave() {
@@ -420,7 +423,7 @@ public function reschedule() {
 public function nextOccurrence($_position = null, $_details = false) {
     $repeat = $this->getRepeat();
     if ($repeat['enable'] == 1) {
-     if($repeat['nationalDay'] == 'onlyNationalDay'){
+       if($repeat['nationalDay'] == 'onlyNationalDay'){
         $startDate = date('Y-m-d H:i:s', strtotime('-6 month ' . date('Y-m-d H:i:s')));
         $endDate = date('Y-m-d H:i:s', strtotime('+6 month ' . date('Y-m-d H:i:s')));
     } else {
