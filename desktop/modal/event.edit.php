@@ -80,7 +80,7 @@ if (init('id') != '') {
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Couleur du texte}}</label>
             <div class="col-sm-3">
-                <input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='text_color' value='#000000' />
+                <input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='text_color' value='#FFFFFF' />
             </div>
         </div>
         <div class="form-group">
