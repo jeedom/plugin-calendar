@@ -25,6 +25,7 @@ $eqLogic = eqLogic::byId(init('eqLogic_id'));
 if (!is_object($eqLogic)) {
     throw new Exception('{{Aucun équipement associé à l\'id : }}' . init('eqLogic_id'));
 }
+ $event = null;
 if (init('id') != '') {
     $event = jeedom::toHumanReadable(calendar_event::byId(init('id')));
     if (!is_object($event)) {
