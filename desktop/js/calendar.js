@@ -26,7 +26,7 @@
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open');
 });
 
- if (!isNaN(getUrlVars('event_id'))) {
+ if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
     setTimeout(function(){
         $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
         $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open');
