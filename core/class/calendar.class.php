@@ -240,6 +240,9 @@ class calendarCmd extends cmd {
         if ($this->getLogicalId() == 'disable') {
             return true;
         }
+        if ($this->getLogicalId() == 'in_progress') {
+            return true;
+        }
         return false;
     }
 
