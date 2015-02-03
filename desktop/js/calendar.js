@@ -94,7 +94,6 @@ function updateEventList() {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            console.log(data);
             var html = '';
             for (var i in data.result) {
                 console.log(data.result[i].cmd_param.textColor);
