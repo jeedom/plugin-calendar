@@ -163,7 +163,8 @@ class calendar extends eqLogic {
                     '#start#' => date_fr(date('D', strtotime($event['start']))) . ' ' . date('d H:i', strtotime($event['start'])),
                     '#end#' => date_fr(date('D', strtotime($event['end']))) . ' ' . date('d H:i', strtotime($event['end'])),
                     '#background_color#' => $event['color'],
-                    '#text_color#' => $event['textColor']
+                    '#text_color#' => $event['textColor'],
+                    '#eventLink#' => 'index.php?v=d&m=calendar&p=calendar&id='.$this->getId().'&event_id='.$event['id']
                     );
                 $dEvent .= template_replace($replace, $tEvent);
                 $nbEvent++;
