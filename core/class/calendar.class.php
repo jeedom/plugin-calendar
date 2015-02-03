@@ -291,13 +291,13 @@ class calendarCmd extends cmd {
             foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
                 if($event->getCmd_param('in_progress',0) == 1){
                   if ($event->getCmd_param('eventName') != '') {
-                    $return .= $event->getCmd_param('eventName').',';
+                    $return .= $event->getCmd_param('eventName').', ';
                 } else {
-                    $return .= $event->getCmd_param('name').',';
+                    $return .= $event->getCmd_param('name').', ';
                 }
             }
         }
-        return trim($return,',');
+        return trim(trim($return),',');
     }
 
 }
