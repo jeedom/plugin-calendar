@@ -138,6 +138,19 @@ class calendar extends eqLogic {
         $disable->setLogicalId('disable');
         $disable->setDisplay('icon', '<i class="fa fa-times"></i>');
         $disable->save();
+
+        $disable = $this->getCmd(null, 'in_progress');
+        if (!is_object($disable)) {
+            $disable = new calendarCmd();
+            $disable->setIsVisible(0);
+        }
+        $disable->setEqLogic_id($this->getId());
+        $disable->setName(__('En cours', __FILE__));
+        $disable->setType('info');
+        $disable->setSubType('string');
+        $disable->setLogicalId('in_progress');
+        $disable->save();
+
         $this->refreshWidget();
     }
 
@@ -272,9 +285,24 @@ class calendarCmd extends cmd {
             $eqLogic->save();
             $eqLogic->refreshWidget();
         }
+
+        if ($this->getLogicalId() == 'in_progress') {
+            $return = '';
+            foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
+                if($event->getCmd_param('in_progress',0) == 1){
+                  if ($event->getCmd_param('eventName') != '') {
+                    $return .= $event->getCmd_param('eventName').',';
+                } else {
+                    $return .= $event->getCmd_param('name').',';
+                }
+            }
+        }
+        return trim($return,',');
     }
 
-    /*     * **********************Getteur Setteur*************************** */
+}
+
+/*     * **********************Getteur Setteur*************************** */
 }
 
 class calendar_event {
@@ -584,6 +612,15 @@ public function remove() {
 }
 
 public function doAction($_action = 'start') {
+    if($_action == 'start'){
+        $this->setCmd_param('in_progress',1);
+        DB::save($this,true);
+    }
+    if($_action == 'end'){
+        $this->setCmd_param('in_progress',0);
+        DB::save($this,true);
+    }
+
     if ($this->getCmd_param($_action . '_type') == 'cmd') {
         $cmd = cmd::byId(str_replace('#', '', $this->getCmd_param($_action . '_name')));
         if (is_object($cmd) && $cmd->getType() == 'action') {
