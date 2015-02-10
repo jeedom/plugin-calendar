@@ -98,8 +98,7 @@ class calendar extends eqLogic {
 	/*     * *********************Methode d'instance************************* */
 
 	public function preRemove() {
-		$events = calendar_event::getEventsByEqLogic($this->getId());
-		foreach ($events as $event) {
+		foreach ($this->getEvents() as $event) {
 			$event->remove();
 		}
 	}
@@ -221,6 +220,10 @@ class calendar extends eqLogic {
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
+
+	public function getEvents() {
+		return calendar_event::getEventsByEqLogic($this->getId());
+	}
 }
 
 class calendarCmd extends cmd {
@@ -302,7 +305,7 @@ class calendarCmd extends cmd {
 
 	}
 
-/*     * **********************Getteur Setteur*************************** */
+	/*     * **********************Getteur Setteur*************************** */
 }
 
 class calendar_event {
@@ -323,8 +326,8 @@ class calendar_event {
 			'id' => $_id,
 		);
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
-        FROM calendar_event
-        WHERE id=:id';
+		FROM calendar_event
+		WHERE id=:id';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
 	}
 
@@ -333,14 +336,14 @@ class calendar_event {
 			'cmd_param' => '%"start_type":"cmd"%#' . $_cmd_id . '#%',
 		);
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
-        FROM calendar_event
-        WHERE cmd_param LIKE :cmd_param';
+		FROM calendar_event
+		WHERE cmd_param LIKE :cmd_param';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
 	public static function all() {
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
-        FROM calendar_event';
+		FROM calendar_event';
 		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
 	}
 
@@ -349,13 +352,13 @@ class calendar_event {
 			'eqLogic_id' => $_eqLogic_id,
 		);
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
-        FROM calendar_event
-        WHERE eqLogic_id=:eqLogic_id';
+		FROM calendar_event
+		WHERE eqLogic_id=:eqLogic_id';
 		if ($_startDate != null && $_endDate = null) {
 			$values['startDate'] = $_startDate;
 			$values['endDate'] = $_endDate;
 			$sql .= ' AND ((startDate >=:startDate
-                AND startDate <=:endDate)
+				AND startDate <=:endDate)
 OR until >=:startDate
 OR until = "0000-00-00 00:00:00")';
 		}
@@ -504,11 +507,29 @@ OR until = "0000-00-00 00:00:00")';
 					$excludeDate[] = $date;
 				}
 			}
+			if (isset($repeat['excludeDateFromCalendar']) && $repeat['excludeDateFromCalendar'] != '') {
+				$excludeEvent = self::byId($repeat['excludeDateFromCalendar']);
+				if (is_object($excludeEvent)) {
+					$excludeEventOccurence = $excludeEvent->calculOccurence($_startDate, $_endDate, $_max);
+					foreach ($excludeEventOccurence as $occurence) {
+						$startDate = date('Y-m-d', strtotime($occurence['start']));
+						$endDate = date('Y-m-d', strtotime($occurence['end']));
+						if ($startDate == $endDate) {
+							$excludeDate[] = $startDate;
+						} else {
+							while (strtotime($startDate) <= strtotime($endDate)) {
+								$excludeDate[] = $startDate;
+								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+							}
+						}
+					}
+				}
+			}
 			$startDate = $this->getStartDate();
 			$endDate = $this->getEndDate();
 			while ((strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00') && strtotime($endDate) <= $endTime) {
 				if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
-					if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1) {
+					if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
 						if (!isset($repeat['nationalDay']) || $repeat['nationalDay'] == 'all') {
 							$return[] = array(
 								'start' => $startDate,
@@ -536,8 +557,15 @@ OR until = "0000-00-00 00:00:00")';
 						}
 					}
 				}
-				$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
-				$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+				if (isset($repeat['mode']) && $repeat['mode'] == 'advance') {
+					$nextMonth = date('M', strtotime('+1 month ' . $startDate));
+					$tmp_startDate = date('Y-m-d', strtotime($repeat['positionAt'] . ' ' . $repeat['day'] . ' of ' . $nextMonth . date('Y', strtotime($startDate))));
+					$endDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($endDate));
+					$startDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($startDate));
+				} else {
+					$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
+					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+				}
 			}
 		} else {
 			if (strtotime($this->getStartDate()) <= $endTime && strtotime($this->getStartDate()) >= $startTime) {
