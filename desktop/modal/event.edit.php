@@ -16,26 +16,26 @@
  */
 
 if (!isConnect('admin')) {
-    throw new Exception('401 Unauthorized');
+	throw new Exception('401 Unauthorized');
 }
 if (init('eqLogic_id') == '') {
-    throw new Exception('{{L\'id de l\'équipement ne peut etre vide : }}' . init('eqLogic_id'));
+	throw new Exception('{{L\'id de l\'équipement ne peut etre vide : }}' . init('eqLogic_id'));
 }
 $eqLogic = eqLogic::byId(init('eqLogic_id'));
 if (!is_object($eqLogic)) {
-    throw new Exception('{{Aucun équipement associé à l\'id : }}' . init('eqLogic_id'));
+	throw new Exception('{{Aucun équipement associé à l\'id : }}' . init('eqLogic_id'));
 }
- $event = null;
+$event = null;
 if (init('id') != '') {
-    $event = jeedom::toHumanReadable(calendar_event::byId(init('id')));
-    if (!is_object($event)) {
-        throw new Exception('{{Event id non trouvé : }}' . init('id'));
-    }
-    sendVarToJS('calendarEvent', utils::o2a($event));
-    sendVarToJS('dateEvent', init('date'));
+	$event = jeedom::toHumanReadable(calendar_event::byId(init('id')));
+	if (!is_object($event)) {
+		throw new Exception('{{Event id non trouvé : }}' . init('id'));
+	}
+	sendVarToJS('calendarEvent', utils::o2a($event));
+	sendVarToJS('dateEvent', init('date'));
 } else {
-    sendVarToJS('calendarEvent', null);
-    sendVarToJS('dateEvent', null);
+	sendVarToJS('calendarEvent', null);
+	sendVarToJS('dateEvent', null);
 }
 ?>
 <div id='div_eventEditAlert' style="display: none;"></div>
@@ -45,11 +45,11 @@ if (init('id') != '') {
         <legend>{{Evènement}}
             <a class="btn btn-xs btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fa fa-check-circle"></i> {{Enregistrer}}</a>
             <?php
-            if (is_object($event)) {
-                echo '<a class="btn btn-warning pull-right btn-xs" id="md_eventEditDuplicate" style="color: white;"><i class="fa fa-files-o"></i> {{Duplication}}</a>';
-                echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
-            }
-            ?>
+if (is_object($event)) {
+	echo '<a class="btn btn-warning pull-right btn-xs" id="md_eventEditDuplicate" style="color: white;"><i class="fa fa-files-o"></i> {{Duplication}}</a>';
+	echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
+}
+?>
         </legend>
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
@@ -60,7 +60,7 @@ if (init('id') != '') {
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Icône}}</label>
             <div class="col-sm-3">
-                <input type="text" class="calendarAttr form-control" data-l1key="eqLogic_id" style="display: none;" value="<?php echo init('eqLogic_id') ?>"/>
+                <input type="text" class="calendarAttr form-control" data-l1key="eqLogic_id" style="display: none;" value="<?php echo init('eqLogic_id')?>"/>
                 <input type="text" class="calendarAttr form-control" data-l1key="id" style="display: none;" />
                 <div class="calendarAttr" data-l1key="cmd_param" data-l2key="icon" ></div>
             </div>
@@ -253,13 +253,13 @@ if (init('id') != '') {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">{{Exclure (date sous forme 2014-04-08,2014-04-09...)}}</label>
+                <label class="col-sm-3 control-label">{{Exclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
                 <div class="col-sm-3">
                     <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDate" />
                 </div>
             </div>
         </div>
-    </fieldset> 
+    </fieldset>
 </form>
 
 <script>

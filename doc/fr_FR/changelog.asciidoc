@@ -1,3 +1,7 @@
+==== 10/02/2015
+
+- Possibilité de mettre une plage d'exclusion, ex : "2015-02-12:2015-02-20" pour exlude tous les jour du 12 (inclus) au 20 (inclus) Février 2015
+
 ==== 02/01/2015
 
 - Correction d'un bug si les evenements sont uniquement sur les jours feriés
