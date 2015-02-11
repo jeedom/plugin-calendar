@@ -50,8 +50,8 @@ if (is_object($event)) {
 	echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
 }
 ?>
-     </legend>
-     <div class="form-group">
+       </legend>
+       <div class="form-group">
         <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
         <div class="col-sm-3">
             <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName' />
@@ -211,38 +211,38 @@ if (is_object($event)) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Mode de repetition}}</label>
         <div class="col-sm-3">
-         <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
-             <option value="simple">{{Repetition simple}}</option>
-             <option value="advance">{{Repetition le premier,deuxieme...}}</option>
-         </select>
-     </div>
- </div>
+           <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
+               <option value="simple">{{Repetition simple}}</option>
+               <option value="advance">{{Repetition le premier,deuxieme...}}</option>
+           </select>
+       </div>
+   </div>
 
- <div class="div_repeatOption" style="display : none;">
-     <div class="repeatMode advance" style="display : none;">
+   <div class="div_repeatOption" style="display : none;">
+       <div class="repeatMode advance" style="display : none;">
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Le}}</label>
             <div class="col-sm-2">
-               <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
-                 <option value="first">{{Premier}}</option>
-                 <option value="second">{{Deuxième}}</option>
-                 <option value="third">{{Troisième}}</option>
-                 <option value="fourth">{{Quatrieme}}</option>
-                 <option value="last">{{Dernier}}</option>
-             </select>
-         </div>
-         <div class="col-sm-2">
-           <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
-             <option value="monday">{{Lundi}}</option>
-             <option value="tuesday">{{Mardi}}</option>
-             <option value="wednesday">{{Mercredi}}</option>
-             <option value="thurday">{{Jeudi}}</option>
-             <option value="friday">{{Vendredi}}</option>
-             <option value="saturday">{{Samedi}}</option>
-             <option value="sundy">{{Dimanche}}</option>
-         </select>
-     </div>
-      <label class="col-sm-1 control-label">{{du mois}}</label>
+             <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
+               <option value="first">{{Premier}}</option>
+               <option value="second">{{Deuxième}}</option>
+               <option value="third">{{Troisième}}</option>
+               <option value="fourth">{{Quatrieme}}</option>
+               <option value="last">{{Dernier}}</option>
+           </select>
+       </div>
+       <div class="col-sm-2">
+         <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
+           <option value="monday">{{Lundi}}</option>
+           <option value="tuesday">{{Mardi}}</option>
+           <option value="wednesday">{{Mercredi}}</option>
+           <option value="thurday">{{Jeudi}}</option>
+           <option value="friday">{{Vendredi}}</option>
+           <option value="saturday">{{Samedi}}</option>
+           <option value="sundy">{{Dimanche}}</option>
+       </select>
+   </div>
+   <label class="col-sm-1 control-label">{{du mois}}</label>
 </div>
 </div>
 <div class="repeatMode simple">
@@ -291,6 +291,37 @@ if (is_object($event)) {
         <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="until" />
     </div>
 </div>
+<legend>Inclusion</legend>
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{Inclure par un autre agenda}}</label>
+    <div class="col-sm-3">
+        <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDateFromCalendar">
+            <option value="">{{Aucun}}</option>
+            <?php
+foreach (calendar::byType('calendar') as $calendar) {
+	foreach ($calendar->getEvents() as $eventCalendar) {
+		if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
+			if ($eventCalendar->getCmd_param('eventName') != '') {
+				echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('eventName') . '</option>';
+			} else {
+				echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('name') . '</option>';
+			}
+		}
+	}
+}
+?>
+    </select>
+</div>
+</div>
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
+    <div class="col-sm-3">
+        <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDate" />
+    </div>
+</div>
+
+
+<legend>Exclusion</legend>
 <div class="form-group">
     <label class="col-sm-3 control-label">{{Exclure par un autre agenda}}</label>
     <div class="col-sm-3">
@@ -309,7 +340,7 @@ foreach (calendar::byType('calendar') as $calendar) {
 	}
 }
 ?>
-</select>
+    </select>
 </div>
 </div>
 <div class="form-group">

@@ -527,6 +527,9 @@ OR until = "0000-00-00 00:00:00")';
 			}
 			$startDate = $this->getStartDate();
 			$endDate = $this->getEndDate();
+			$initStartTime = date('H:i:s', strtotime($startDate));
+			$initEndTime = date('H:i:s', strtotime($endDate));
+
 			while ((strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00') && strtotime($endDate) <= $endTime) {
 				if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
 					if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
@@ -567,6 +570,53 @@ OR until = "0000-00-00 00:00:00")';
 					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
 				}
 			}
+
+			$includeDate = array();
+			if (isset($repeat['includeDate'])) {
+				$includeDate_tmp = explode(',', $repeat['includeDate']);
+
+				foreach ($includeDate_tmp as $date) {
+					if (strpos($date, ':') !== false) {
+						$expDate = explode(':', $date);
+						if (count($expDate) == 2) {
+							$startDate = $expDate[0];
+							$endDate = $expDate[1];
+							while (strtotime($startDate) <= strtotime($endDate)) {
+								$includeDate[] = $startDate;
+								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+							}
+						}
+					} else {
+						$includeDate[] = $date;
+					}
+				}
+			}
+			if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
+				$includeEvent = self::byId($repeat['includeDateFromCalendar']);
+				if (is_object($includeEvent)) {
+					$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max);
+					foreach ($includeEventOccurence as $occurence) {
+						$startDate = date('Y-m-d', strtotime($occurence['start']));
+						$endDate = date('Y-m-d', strtotime($occurence['end']));
+						if ($startDate == $endDate) {
+							$includeDate[] = $startDate;
+						} else {
+							while (strtotime($startDate) <= strtotime($endDate)) {
+								$includeDate[] = $startDate;
+								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+							}
+						}
+					}
+				}
+			}
+
+			foreach ($includeDate as $date) {
+				$return[] = array(
+					'start' => $date . ' ' . $initStartTime,
+					'end' => $date . ' ' . $initEndTime,
+				);
+			}
+
 		} else {
 			if (strtotime($this->getStartDate()) <= $endTime && strtotime($this->getStartDate()) >= $startTime) {
 				$return[] = array(
