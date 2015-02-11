@@ -30,7 +30,7 @@
     setTimeout(function(){
         $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
         $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open');
-    }, 500);
+    }, 1000);
 }
 
 function printEqLogic() {

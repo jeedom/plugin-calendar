@@ -661,7 +661,7 @@ OR until = "0000-00-00 00:00:00")';
 			$this->setRepeat('excludeDay', $repeat['excludeDay']);
 		}
 
-		if ($this->getRepeat('enable') == 1) {
+		if ($this->getRepeat('enable') == 1 && $this->getRepeat('mode') == 'simple') {
 			if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
 				throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
 			}
