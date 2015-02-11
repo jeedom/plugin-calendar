@@ -10,5 +10,6 @@
     <require>1.50</require>
     <version>1.0</version>
     <category>organization</category>
+    <mobile>event</mobile>
 </info>
 

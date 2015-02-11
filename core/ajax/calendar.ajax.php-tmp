@@ -53,7 +53,7 @@ try {
 			throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
 		}
 		if (init('startDate') == '') {
-                throw new Exception(__("La date de début ne peut être vide",__FILE__));
+			throw new Exception(__("La date de début ne peut être vide", __FILE__));
 		}
 		$includeDate = $event->getRepeat('includeDate');
 		if ($includeDate != '') {
