@@ -69,7 +69,7 @@ $('#bt_validateIncludeDate').on('click',function(){
             $('#div_calendarEvent').show();
             $('#div_addIncludeDate').hide();
             $('#div_addIncludeDate #in_event_id').value('');
-            $('#div_alert').showAlert({message: "Ajout réussi", level: 'success'});
+            notify("Evènement","Ajout réussi");
         }
     });
 });
