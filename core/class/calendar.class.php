@@ -725,6 +725,7 @@ OR until = "0000-00-00 00:00:00")';
 		if ($this->getCmd_param($_action . '_type') == 'scenario') {
 			$scenario = scenario::byId(str_replace(array('#', 'scenario'), '', $this->getCmd_param($_action . '_scenarioName')));
 			if (is_object($scenario)) {
+				log::add('calendar', 'debug', 'Execution du scénario : ' . $scenario->getHumanName());
 				switch ($this->getCmd_param($_action . '_action')) {
 					case 'start':
 						$name = $this->getCmd_param('eventName', $this->getCmd_param('name'));
