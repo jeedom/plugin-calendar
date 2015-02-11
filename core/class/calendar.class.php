@@ -570,53 +570,6 @@ OR until = "0000-00-00 00:00:00")';
 					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
 				}
 			}
-
-			$includeDate = array();
-			if (isset($repeat['includeDate'])) {
-				$includeDate_tmp = explode(',', $repeat['includeDate']);
-
-				foreach ($includeDate_tmp as $date) {
-					if (strpos($date, ':') !== false) {
-						$expDate = explode(':', $date);
-						if (count($expDate) == 2) {
-							$startDate = $expDate[0];
-							$endDate = $expDate[1];
-							while (strtotime($startDate) <= strtotime($endDate)) {
-								$includeDate[] = $startDate;
-								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
-							}
-						}
-					} else {
-						$includeDate[] = $date;
-					}
-				}
-			}
-			if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
-				$includeEvent = self::byId($repeat['includeDateFromCalendar']);
-				if (is_object($includeEvent)) {
-					$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max);
-					foreach ($includeEventOccurence as $occurence) {
-						$startDate = date('Y-m-d', strtotime($occurence['start']));
-						$endDate = date('Y-m-d', strtotime($occurence['end']));
-						if ($startDate == $endDate) {
-							$includeDate[] = $startDate;
-						} else {
-							while (strtotime($startDate) <= strtotime($endDate)) {
-								$includeDate[] = $startDate;
-								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
-							}
-						}
-					}
-				}
-			}
-
-			foreach ($includeDate as $date) {
-				$return[] = array(
-					'start' => $date . ' ' . $initStartTime,
-					'end' => $date . ' ' . $initEndTime,
-				);
-			}
-
 		} else {
 			if (strtotime($this->getStartDate()) <= $endTime && strtotime($this->getStartDate()) >= $startTime) {
 				$return[] = array(
@@ -624,6 +577,52 @@ OR until = "0000-00-00 00:00:00")';
 					'end' => $this->getEndDate(),
 				);
 			}
+		}
+
+		$includeDate = array();
+		if (isset($repeat['includeDate'])) {
+			$includeDate_tmp = explode(',', $repeat['includeDate']);
+
+			foreach ($includeDate_tmp as $date) {
+				if (strpos($date, ':') !== false) {
+					$expDate = explode(':', $date);
+					if (count($expDate) == 2) {
+						$startDate = $expDate[0];
+						$endDate = $expDate[1];
+						while (strtotime($startDate) <= strtotime($endDate)) {
+							$includeDate[] = $startDate;
+							$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+						}
+					}
+				} else {
+					$includeDate[] = $date;
+				}
+			}
+		}
+		if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
+			$includeEvent = self::byId($repeat['includeDateFromCalendar']);
+			if (is_object($includeEvent)) {
+				$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max);
+				foreach ($includeEventOccurence as $occurence) {
+					$startDate = date('Y-m-d', strtotime($occurence['start']));
+					$endDate = date('Y-m-d', strtotime($occurence['end']));
+					if ($startDate == $endDate) {
+						$includeDate[] = $startDate;
+					} else {
+						while (strtotime($startDate) <= strtotime($endDate)) {
+							$includeDate[] = $startDate;
+							$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+						}
+					}
+				}
+			}
+		}
+
+		foreach ($includeDate as $date) {
+			$return[] = array(
+				'start' => $date . ' ' . $initStartTime,
+				'end' => $date . ' ' . $initEndTime,
+			);
 		}
 		return $return;
 	}
