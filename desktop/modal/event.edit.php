@@ -45,11 +45,11 @@ if (init('id') != '') {
         <legend>{{Evènement}}
             <a class="btn btn-xs btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fa fa-check-circle"></i> {{Enregistrer}}</a>
             <?php
-            if (is_object($event)) {
-               echo '<a class="btn btn-warning pull-right btn-xs" id="md_eventEditDuplicate" style="color: white;"><i class="fa fa-files-o"></i> {{Duplication}}</a>';
-               echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
-           }
-           ?>
+if (is_object($event)) {
+	echo '<a class="btn btn-warning pull-right btn-xs" id="md_eventEditDuplicate" style="color: white;"><i class="fa fa-files-o"></i> {{Duplication}}</a>';
+	echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
+}
+?>
        </legend>
        <div class="form-group">
         <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
@@ -201,26 +201,31 @@ if (init('id') != '') {
             <a class="btn btn-default calendarAction" data-action="allDay"><i class="fa fa-history"></i> Toute la journée</a>
         </div>
     </div>
-    <legend>Inclusion</legend>
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Inclure par un autre agenda}}</label>
         <div class="col-sm-3">
             <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDateFromCalendar">
                 <option value="">{{Aucun}}</option>
                 <?php
-                foreach (calendar::byType('calendar') as $calendar) {
-                   foreach ($calendar->getEvents() as $eventCalendar) {
-                      if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
-                         if ($eventCalendar->getCmd_param('eventName') != '') {
-                            echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('eventName') . '</option>';
-                        } else {
-                            echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('name') . '</option>';
-                        }
-                    }
-                }
-            }
-            ?>
+foreach (calendar::byType('calendar') as $calendar) {
+	foreach ($calendar->getEvents() as $eventCalendar) {
+		if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
+			if ($eventCalendar->getCmd_param('eventName') != '') {
+				echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('eventName') . '</option>';
+			} else {
+				echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('name') . '</option>';
+			}
+		}
+	}
+}
+?>
         </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
+    <div class="col-sm-3">
+        <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDate" />
     </div>
 </div>
 <div class="form-group">
@@ -314,32 +319,23 @@ if (init('id') != '') {
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
-    <div class="col-sm-3">
-        <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDate" />
-    </div>
-</div>
-
-
-<legend>Exclusion</legend>
-<div class="form-group">
     <label class="col-sm-3 control-label">{{Exclure par un autre agenda}}</label>
     <div class="col-sm-3">
         <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDateFromCalendar">
             <option value="">{{Aucun}}</option>
             <?php
-            foreach (calendar::byType('calendar') as $calendar) {
-               foreach ($calendar->getEvents() as $eventCalendar) {
-                  if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
-                     if ($eventCalendar->getCmd_param('eventName') != '') {
-                        echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('eventName') . '</option>';
-                    } else {
-                        echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('name') . '</option>';
-                    }
-                }
-            }
-        }
-        ?>
+foreach (calendar::byType('calendar') as $calendar) {
+	foreach ($calendar->getEvents() as $eventCalendar) {
+		if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
+			if ($eventCalendar->getCmd_param('eventName') != '') {
+				echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('eventName') . '</option>';
+			} else {
+				echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('name') . '</option>';
+			}
+		}
+	}
+}
+?>
     </select>
 </div>
 </div>

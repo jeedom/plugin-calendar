@@ -488,8 +488,8 @@ OR until = "0000-00-00 00:00:00")';
 		$startTime = ($_startDate != null) ? strtotime($_startDate) : 0;
 		$endTime = ($_endDate != null) ? strtotime($_endDate) : 999999999999;
 		$return = array();
+		$repeat = $this->getRepeat();
 		if ($this->getRepeat('enable') == 1) {
-			$repeat = $this->getRepeat();
 			$excludeDate_tmp = explode(',', $repeat['excludeDate']);
 			$excludeDate = array();
 			foreach ($excludeDate_tmp as $date) {
@@ -578,6 +578,11 @@ OR until = "0000-00-00 00:00:00")';
 				);
 			}
 		}
+
+		$startDate = $this->getStartDate();
+		$endDate = $this->getEndDate();
+		$initStartTime = date('H:i:s', strtotime($startDate));
+		$initEndTime = date('H:i:s', strtotime($endDate));
 
 		$includeDate = array();
 		if (isset($repeat['includeDate'])) {
