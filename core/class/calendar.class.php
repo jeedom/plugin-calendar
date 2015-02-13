@@ -490,21 +490,23 @@ public function calculOccurence($_startDate, $_endDate, $_max = 9999999999) {
 	$return = array();
 	$repeat = $this->getRepeat();
 	if ($this->getRepeat('enable') == 1) {
-		$excludeDate_tmp = explode(',', $repeat['excludeDate']);
 		$excludeDate = array();
-		foreach ($excludeDate_tmp as $date) {
-			if (strpos($date, ':') !== false) {
-				$expDate = explode(':', $date);
-				if (count($expDate) == 2) {
-					$startDate = $expDate[0];
-					$endDate = $expDate[1];
-					while (strtotime($startDate) <= strtotime($endDate)) {
-						$excludeDate[] = $startDate;
-						$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+		if (isset($repeat['excludeDate']) && $repeat['excludeDate'] != '') {
+			$excludeDate_tmp = explode(',', $repeat['excludeDate']);
+			foreach ($excludeDate_tmp as $date) {
+				if (strpos($date, ':') !== false) {
+					$expDate = explode(':', $date);
+					if (count($expDate) == 2) {
+						$startDate = $expDate[0];
+						$endDate = $expDate[1];
+						while (strtotime($startDate) <= strtotime($endDate)) {
+							$excludeDate[] = $startDate;
+							$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+						}
 					}
+				} else {
+					$excludeDate[] = $date;
 				}
-			} else {
-				$excludeDate[] = $date;
 			}
 		}
 		if (isset($repeat['excludeDateFromCalendar']) && $repeat['excludeDateFromCalendar'] != '') {
@@ -585,7 +587,7 @@ public function calculOccurence($_startDate, $_endDate, $_max = 9999999999) {
 	$initEndTime = date('H:i:s', strtotime($endDate));
 
 	$includeDate = array();
-	if (isset($repeat['includeDate'])) {
+	if (isset($repeat['includeDate']) && $repeat['includeDate'] != '') {
 		$includeDate_tmp = explode(',', $repeat['includeDate']);
 
 		foreach ($includeDate_tmp as $date) {
