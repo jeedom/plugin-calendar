@@ -484,7 +484,11 @@ public function nextOccurrence($_position = null, $_details = false) {
 	return null;
 }
 
-public function calculOccurence($_startDate, $_endDate, $_max = 9999999999) {
+public function calculOccurence($_startDate, $_endDate, $_max = 9999999999,$_recurence = 0) {
+	if($_recurence > 5){
+		return array();
+	}
+	$_recurence++;
 	$startTime = ($_startDate != null) ? strtotime($_startDate) : 0;
 	$endTime = ($_endDate != null) ? strtotime($_endDate) : 999999999999;
 	$return = array();
@@ -512,7 +516,7 @@ public function calculOccurence($_startDate, $_endDate, $_max = 9999999999) {
 		if (isset($repeat['excludeDateFromCalendar']) && $repeat['excludeDateFromCalendar'] != '') {
 			$excludeEvent = self::byId($repeat['excludeDateFromCalendar']);
 			if (is_object($excludeEvent)) {
-				$excludeEventOccurence = $excludeEvent->calculOccurence($_startDate, $_endDate, $_max);
+				$excludeEventOccurence = $excludeEvent->calculOccurence($_startDate, $_endDate, $_max,$_recurence);
 				foreach ($excludeEventOccurence as $occurence) {
 					$startDate = date('Y-m-d', strtotime($occurence['start']));
 					$endDate = date('Y-m-d', strtotime($occurence['end']));
@@ -609,7 +613,7 @@ public function calculOccurence($_startDate, $_endDate, $_max = 9999999999) {
 	if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
 		$includeEvent = self::byId($repeat['includeDateFromCalendar']);
 		if (is_object($includeEvent)) {
-			$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max);
+			$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max,$_recurence);
 			foreach ($includeEventOccurence as $occurence) {
 				$startDate = date('Y-m-d', strtotime($occurence['start']));
 				$endDate = date('Y-m-d', strtotime($occurence['end']));
