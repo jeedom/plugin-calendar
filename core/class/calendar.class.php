@@ -535,7 +535,6 @@ public function calculOccurence($_startDate, $_endDate, $_max = 9999999999,$_rec
 		$endDate = $this->getEndDate();
 		$initStartTime = date('H:i:s', strtotime($startDate));
 		$initEndTime = date('H:i:s', strtotime($endDate));
-
 		while ((strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00') && strtotime($endDate) <= $endTime) {
 			if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
 				if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
@@ -566,9 +565,14 @@ public function calculOccurence($_startDate, $_endDate, $_max = 9999999999,$_rec
 					}
 				}
 			}
+			
 			if (isset($repeat['mode']) && $repeat['mode'] == 'advance') {
-				$nextMonth = date('M', strtotime('+1 month ' . $startDate));
-				$tmp_startDate = date('Y-m-d', strtotime($repeat['positionAt'] . ' ' . $repeat['day'] . ' of ' . $nextMonth . date('Y', strtotime($startDate))));
+				$nextMonth = date('F', strtotime('+1 month ' . $startDate));
+				$year = date('Y', strtotime('+1 month ' . $startDate));
+				$tmp_startDate = date('Y-m-d', strtotime($repeat['positionAt'] . ' ' . $repeat['day'] . ' of ' . $nextMonth .' '.$year));
+				if($tmp_startDate == '1970-01-01'){
+					break;
+				}
 				$endDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($endDate));
 				$startDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($startDate));
 			} else {
