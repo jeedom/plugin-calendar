@@ -1,0 +1,23 @@
+{
+    "plugins\/calendar\/desktop\/php\/calendar.php": {
+        "Ajouter un agenda": "Ajouter un agenda",
+        "Rechercher": "Rechercher",
+        "Mes agendas": "Mes agendas",
+        "Général": "Général",
+        "Nom de l'équipement": "Nom de l'équipement",
+        "Nom de l'équipement gCalendar": "Nom de l'équipement gCalendar",
+        "Objet parent": "Objet parent",
+        "Aucun": "Aucun",
+        "Catégorie": "Catégorie",
+        "Activer": "Activer",
+        "Visible": "Visible",
+        "Widget, nombre de jours": "Widget, nombre de jours",
+        "Nombre d'événement maximum": "Nombre d'événement maximum",
+        "Ne pas afficher le status et les commandes d'activation\/désactivation": "Ne pas afficher le status et les commandes d'activation\/désactivation",
+        "Liste des événements de l'agenda": "Liste des événements de l'agenda",
+        "Ajouter événement": "Ajouter événement",
+        "Agenda": "Agenda",
+        "Supprimer": "Supprimer",
+        "Sauvegarder": "Sauvegarder"
+    }
+}
