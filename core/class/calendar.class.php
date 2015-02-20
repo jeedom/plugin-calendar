@@ -558,7 +558,7 @@ OR until = "0000-00-00 00:00:00")';
 						}
 					}
 				}
-
+				$prevStartDate = $startDate;
 				if (isset($repeat['mode']) && $repeat['mode'] == 'advance') {
 					$nextMonth = date('F', strtotime('+1 month ' . $startDate));
 					$year = date('Y', strtotime('+1 month ' . $startDate));
@@ -569,8 +569,14 @@ OR until = "0000-00-00 00:00:00")';
 					$endDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($endDate));
 					$startDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($startDate));
 				} else {
+					if ($repeat['freq'] == 0) {
+						break;
+					}
 					$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
 					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+				}
+				if (strtotime($startDate) <= strtotime($prevStartDate)) {
+					break;
 				}
 			}
 		} else {

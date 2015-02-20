@@ -96,7 +96,6 @@ function updateEventList() {
             }
             var html = '';
             for (var i in data.result) {
-                console.log(data.result[i].cmd_param.textColor);
                 var color = init(data.result[i].cmd_param.color, '#2980b9');
                 if(data.result[i].cmd_param.transparent == 1){
                  color = 'transparent';
