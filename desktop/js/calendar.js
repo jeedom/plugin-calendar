@@ -14,17 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
-calendar = null;
+ calendar = null;
 
-$('#bt_addEvent').on('click', function () {
+ $('#bt_addEvent').on('click', function () {
     $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open');
 });
 
-$('#div_eventList').delegate('.editEvent', 'click', function () {
+ $('#div_eventList').delegate('.editEvent', 'click', function () {
     $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open');
 });
+
+ if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
+    setTimeout(function(){
+        $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
+        $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open');
+    }, 1000);
+}
 
 function printEqLogic() {
     if (calendar !== null) {
@@ -67,7 +74,7 @@ function printEqLogic() {
             updateCalendarEvent(eventSave);
         }
     });
-    updateEventList();
+updateEventList();
 }
 
 function updateEventList() {
@@ -87,26 +94,24 @@ function updateEventList() {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            console.log(data);
             var html = '';
             for (var i in data.result) {
-                console.log(data.result[i].cmd_param.textColor);
                 var color = init(data.result[i].cmd_param.color, '#2980b9');
                 if(data.result[i].cmd_param.transparent == 1){
-                   color = 'transparent';
-                }
+                 color = 'transparent';
+             }
 
-                html += '<span class="label label-info editEvent cursor" data-event_id="' + data.result[i].id + '" style="background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">';
-                if (data.result[i].cmd_param.eventName != '') {
-                    html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName;
-                } else {
-                    html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name;
-                }
-                html += '</span><br\>';
+             html += '<span class="label label-info editEvent cursor" data-event_id="' + data.result[i].id + '" style="background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">';
+             if (data.result[i].cmd_param.eventName != '') {
+                html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName;
+            } else {
+                html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name;
             }
-            $('#div_eventList').empty().append(html);
+            html += '</span><br\>';
         }
-    });
+        $('#div_eventList').empty().append(html);
+    }
+});
 }
 
 function updateCalendarEvent(_event) {

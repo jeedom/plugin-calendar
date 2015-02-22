@@ -17,75 +17,107 @@
  */
 
 try {
-    require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-    include_file('core', 'authentification', 'php');
-    include_file('core', 'calendar', 'class', 'calendar');
+	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+	include_file('core', 'authentification', 'php');
+	include_file('core', 'calendar', 'class', 'calendar');
 
-    if (!isConnect()) {
-        throw new Exception(__('401 - Accès non autorisé', __FILE__));
-    }
+	if (!isConnect()) {
+		throw new Exception(__('401 - Accès non autorisé', __FILE__));
+	}
 
-    if (init('action') == 'getEvents') {
-        echo json_encode(calendar_event::calculeEvents(calendar_event::getEventsByEqLogic(init('eqLogic_id'), init('start'), init('end')), init('start'), init('end')), JSON_UNESCAPED_UNICODE);
-        die();
-    }
+	if (init('action') == 'getEvents') {
+		echo json_encode(calendar_event::calculeEvents(calendar_event::getEventsByEqLogic(init('eqLogic_id'), init('start'), init('end')), init('start'), init('end')), JSON_UNESCAPED_UNICODE);
+		die();
+	}
 
-    if (init('action') == 'getAllEvents') {
-        if (!isConnect('admin')) {
-            throw new Exception(__('401 - Accès non autorisé', __FILE__));
-        }
-        ajax::success(utils::o2a(calendar_event::getEventsByEqLogic(init('eqLogic_id'))));
-    }
+	if (init('action') == 'getAllEvents') {
+		if (!isConnect('admin')) {
+			throw new Exception(__('401 - Accès non autorisé', __FILE__));
+		}
+		ajax::success(utils::o2a(calendar_event::getEventsByEqLogic(init('eqLogic_id'))));
+	}
 
-    if (init('action') == 'saveEvent') {
-        if (!isConnect('admin')) {
-            throw new Exception(__('401 - Accès non autorisé', __FILE__));
-        }
-        $eventSave = json_decode(init('event'), true);
-        $event = null;
-        if (isset($eventSave['id'])) {
-            $event = calendar_event::byId($eventSave['id']);
-        }
-        if (!is_object($event)) {
-            $event = new calendar_event();
-        }
-        utils::a2o($event, jeedom::fromHumanReadable($eventSave));
-        $event->save();
-        ajax::success();
-    }
+	if (init('action') == 'getAllCalendarAndEvents') {
+		$return = array();
+		foreach (calendar::byType('calendar') as $calendar) {
+			$array_calendar = utils::o2a($calendar);
+			$array_calendar['events'] = utils::o2a($calendar->getEvents());
+			$return[] = $array_calendar;
+		}
+		ajax::success($return);
+	}
 
-    if (init('action') == 'removeEvent') {
-        if (!isConnect('admin')) {
-            throw new Exception(__('401 - Accès non autorisé', __FILE__));
-        }
-        $event = calendar_event::byId(init('id'));
-        if (!is_object($event)) {
-            throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
-        }
-        $event->remove();
-        ajax::success();
-    }
+	if (init('action') == 'addIncludeDateToEvent') {
+		$event = calendar_event::byId(init('id'));
+		if (!is_object($event)) {
+			throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
+		}
+		if (init('startDate') == '') {
+                throw new Exception(__("La date de début ne peut être vide",__FILE__));
+		}
+		$includeDate = $event->getRepeat('includeDate');
+		if ($includeDate != '') {
+			$includeDate .= ',';
+		}
+		if (init('endDate') != '' && init('endDate') != init('startDate')) {
+			$includeDate .= init('startDate') . ':' . init('endDate');
+		} else {
+			$includeDate .= init('startDate');
+		}
+		$event->setRepeat('includeDate', $includeDate);
+		$event->save();
+		ajax::success();
+	}
 
-    if (init('action') == 'removeOccurence') {
-        if (!isConnect('admin')) {
-            throw new Exception(__('401 - Accès non autorisé', __FILE__));
-        }
-        $event = calendar_event::byId(init('id'));
-        if (!is_object($event)) {
-            throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
-        }
-        if (init('date') == '') {
-            throw new Exception(__('La date de l\'occurence ne peut etre vide : ', __FILE__) . init('date'));
-        }
-        $date = date('Y-m-d', strtotime(init('date')));
-        $event->setRepeat('excludeDate', trim($event->getRepeat('excludeDate') . ',' . $date, ','));
-        $event->save();
-        ajax::success();
-    }
+	if (init('action') == 'saveEvent') {
+		if (!isConnect('admin')) {
+			throw new Exception(__('401 - Accès non autorisé', __FILE__));
+		}
+		$eventSave = json_decode(init('event'), true);
+		$event = null;
+		if (isset($eventSave['id'])) {
+			$event = calendar_event::byId($eventSave['id']);
+		}
+		if (!is_object($event)) {
+			$event = new calendar_event();
+		}
+		utils::a2o($event, jeedom::fromHumanReadable($eventSave));
+		$event->save();
+		ajax::success();
+	}
 
-    throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
-    /*     * *********Catch exeption*************** */
+	if (init('action') == 'removeEvent') {
+		if (!isConnect('admin')) {
+			throw new Exception(__('401 - Accès non autorisé', __FILE__));
+		}
+		$event = calendar_event::byId(init('id'));
+		if (!is_object($event)) {
+			throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
+		}
+		$event->remove();
+		ajax::success();
+	}
+
+	if (init('action') == 'removeOccurence') {
+		if (!isConnect('admin')) {
+			throw new Exception(__('401 - Accès non autorisé', __FILE__));
+		}
+		$event = calendar_event::byId(init('id'));
+		if (!is_object($event)) {
+			throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
+		}
+		if (init('date') == '') {
+			throw new Exception(__('La date de l\'occurence ne peut etre vide : ', __FILE__) . init('date'));
+		}
+		$date = date('Y-m-d', strtotime(init('date')));
+		$event->setRepeat('excludeDate', trim($event->getRepeat('excludeDate') . ',' . $date, ','));
+		$event->save();
+		ajax::success();
+	}
+
+	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
+/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
-    ajax::error(displayExeption($e), $e->getCode());
+	ajax::error(displayExeption($e), $e->getCode());
 }
 ?>

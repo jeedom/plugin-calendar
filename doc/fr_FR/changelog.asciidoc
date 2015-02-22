@@ -1,3 +1,13 @@
+==== 11/02/2015
+
+- Possibilité d'ajouter des jour d'inclusion forcé
+
+==== 10/02/2015
+
+- Possibilité de mettre une plage d'exclusion, ex : "2015-02-12:2015-02-20" pour exlude tous les jour du 12 (inclus) au 20 (inclus) Février 2015
+- Un agenda peut servir de regle d'exclusion pour un autre
+- Possibilité de programmer un evènement le premier, deuxieme... lundi,mardi... du mois
+
 ==== 02/01/2015
 
 - Correction d'un bug si les evenements sont uniquement sur les jours feriés
