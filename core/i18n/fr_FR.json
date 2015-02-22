@@ -97,5 +97,9 @@
     "plugins\/calendar\/desktop\/js\/calendar.js": {
         "Ajouter évènement": "Ajouter évènement",
         "Evènement modifié avec success": "Evènement modifié avec success"
+    },
+    "plugins\/calendar\/plugin_info\/info.xml": {
+        "Plugin pour créer un calendrier": "Plugin pour créer un calendrier",
+        "Aucune": "Aucune"
     }
 }
