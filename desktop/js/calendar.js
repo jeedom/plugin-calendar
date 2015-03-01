@@ -131,7 +131,7 @@ function updateCalendarEvent(_event) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
-            $('#div_alert').showAlert({message: '{{Evènement modifié avec success}}', level: 'success'});
+            $('#div_alert').showAlert({message: '{{Evènement modifié avec succès}}', level: 'success'});
             calendar.fullCalendar('refetchEvents');
         }
     });

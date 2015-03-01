@@ -96,10 +96,15 @@
     },
     "plugins\/calendar\/desktop\/js\/calendar.js": {
         "Ajouter évènement": "Ajouter évènement",
-        "Evènement modifié avec success": "Evènement modifié avec success"
+        "Evènement modifié avec succès": "Evènement modifié avec succès"
     },
     "plugins\/calendar\/plugin_info\/info.xml": {
         "Plugin pour créer un calendrier": "Plugin pour créer un calendrier",
         "Aucune": "Aucune"
+    },
+    "plugins\/calendar\/core\/class\/calendar.class.php": {
+        "Activer": "Activer",
+        "Désactiver": "Désactiver",
+        "En cours": "En cours"
     }
 }
