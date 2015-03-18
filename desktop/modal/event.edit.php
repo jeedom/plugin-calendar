@@ -101,7 +101,7 @@ if (is_object($event)) {
             </select>
         </div>
     </div>
-    <div class="div_startType div_startcmd">
+    <div class="div_startType div_startcmd" style="display: none;">
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
             <div class="col-sm-5">
@@ -150,7 +150,7 @@ if (is_object($event)) {
         </div>
     </div>
 
-    <div class="div_endType div_endcmd">
+    <div class="div_endType div_endcmd" style="display: none;">
         <div class="form-group">
             <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
             <div class="col-sm-5">

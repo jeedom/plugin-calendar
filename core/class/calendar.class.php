@@ -40,22 +40,27 @@ class calendar extends eqLogic {
 				$startDate = null;
 				$endDate = null;
 			}
+			log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
 			if (jeedom::isDateOk() && $eqLogic->getConfiguration('enableCalendar', 1) == 1) {
 				$results = $event->calculOccurence($startDate, $endDate);
 				if (count($results) == 0) {
 					return null;
 				}
+				log::add('calendar', 'debug', 'Recherche de l\'action à faire (start ou end)');
 				for ($i = 0; $i < count($results); $i++) {
 					if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
+						log::add('calendar', 'debug', 'Action de début');
 						$event->doAction('start');
 						break;
 					}
 					if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
+						log::add('calendar', 'debug', 'Action de fin');
 						$event->doAction('end');
 						break;
 					}
 				}
 			}
+			log::add('calendar', 'debug', 'Reprogrammation');
 			$event->reschedule();
 		}
 	}
