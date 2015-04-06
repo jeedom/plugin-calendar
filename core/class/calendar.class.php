@@ -67,7 +67,7 @@ class calendar extends eqLogic {
 
 	public static function start() {
 		foreach (calendar_event::all() as $event) {
-			$event->reschedule();
+			$event->save();
 		}
 	}
 
@@ -75,7 +75,7 @@ class calendar extends eqLogic {
 		foreach (event::all() as $event) {
 			$crons = cron::searchClassAndFunction('calendar', 'pull', '"event_id":' . $event->getId());
 			if (count($crons) == 0) {
-				$event->reschedule();
+				$event->save();
 			}
 		}
 	}
@@ -424,6 +424,7 @@ OR until = "0000-00-00 00:00:00")';
 
 	public function reschedule() {
 		$next = $this->nextOccurrence();
+		log::add('calendar', 'debug', 'Reprogrammation à : ' . print_r($next, true) . ' de  : ' . print_r($this, true));
 		$cron = cron::byClassAndFunction('calendar', 'pull', array('event_id' => intval($this->getId())));
 		if ($next != null) {
 			if (!is_object($cron)) {
