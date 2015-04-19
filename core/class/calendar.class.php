@@ -93,6 +93,20 @@ class calendar extends eqLogic {
 
 	/*     * *********************Methode d'instance************************* */
 
+	public function copy($_name) {
+		$eqLogicCopy = clone $this;
+		$eqLogicCopy->setName($_name);
+		$eqLogicCopy->setId('');
+		$eqLogicCopy->save();
+		foreach ($this->getEvents() as $event) {
+			$eventCopy = clone $event;
+			$eventCopy->setId('');
+			$eventCopy->setEqLogic_id($eqLogicCopy->getId());
+			$eventCopy->save();
+		}
+		return $eqLogicCopy;
+	}
+
 	public function preRemove() {
 		foreach ($this->getEvents() as $event) {
 			$event->remove();
