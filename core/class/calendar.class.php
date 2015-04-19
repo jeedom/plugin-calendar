@@ -163,6 +163,9 @@ class calendar extends eqLogic {
 	}
 
 	public function toHtml($_version = 'dashboard') {
+		if (!$this->hasRight('r')) {
+			return '';
+		}
 		$_version = jeedom::versionAlias($_version);
 		$startDate = date('Y-m-d H:i:s');
 		$endDate = date('Y-m-d H:i:s', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')));
