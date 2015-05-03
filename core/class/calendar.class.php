@@ -75,7 +75,7 @@ class calendar extends eqLogic {
 		foreach (event::all() as $event) {
 			$crons = cron::searchClassAndFunction('calendar', 'pull', '"event_id":' . $event->getId());
 			if (count($crons) == 0) {
-				$event->save();
+				//$event->save();
 			}
 		}
 	}
