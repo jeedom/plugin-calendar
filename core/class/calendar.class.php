@@ -72,10 +72,20 @@ class calendar extends eqLogic {
 	}
 
 	public static function cronHourly() {
-		foreach (event::all() as $event) {
-			$crons = cron::searchClassAndFunction('calendar', 'pull', '"event_id":' . $event->getId());
-			if (count($crons) == 0) {
-				//$event->save();
+		foreach (cron::searchClassAndFunction('calendar', 'pull') as $cron) {
+			$c = new Cron\CronExpression($cron->getSchedule(), new Cron\FieldFactory);
+			try {
+				if (!$c->isDue()) {
+					$c->getNextRunDate();
+				}
+			} catch (Exception $ex) {
+				if ($c->getPreviousRunDate()->getTimestamp() < (strtotime('now') - 300)) {
+					$option = $cron->getOption();
+					$event = calendar_event::byId($option['event_id']);
+					if (is_object($event)) {
+						$event->reschedule();
+					}
+				}
 			}
 		}
 	}
