@@ -432,8 +432,9 @@ OR until = "0000-00-00 00:00:00")';
 			date('Y-m-d', mktime(0, 0, 0, 12, 25, $year)), // Noel
 			// Dates variables
 			date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 1, $easterYear)),
-			date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 40, $easterYear)),
+			date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 39, $easterYear)),
 			date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 50, $easterYear)),
+
 			date('Y-m-d', mktime(0, 0, 0, 1, 1, $year + 1)), // 1er janvier
 			date('Y-m-d', mktime(0, 0, 0, 5, 1, $year + 1)), // Fête du travail
 			date('Y-m-d', mktime(0, 0, 0, 5, 8, $year + 1)), // Victoire des alliés
