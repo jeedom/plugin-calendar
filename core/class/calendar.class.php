@@ -766,6 +766,14 @@ OR until = "0000-00-00 00:00:00")';
 			$cmd = cmd::byId(str_replace('#', '', $this->getCmd_param($_action . '_name')));
 			if (is_object($cmd) && $cmd->getType() == 'action') {
 				$options = $this->getCmd_param($_action . '_options');
+				if (is_array($options)) {
+					foreach ($options as $key => $value) {
+						$options[$key] = str_replace('"', '', scenarioExpression::setTags($value, $scenario));
+						if (evaluate($options[$key]) != 0) {
+							$options[$key] = evaluate($options[$key]);
+						}
+					}
+				}
 				log::add('calendar', 'debug', 'Execution de : ' . $cmd->getHumanName() . ' du à : ' . $this->getName() . ' avec les options : ' . print_r($options, true));
 				$cmd->execCmd($options);
 			}
