@@ -614,12 +614,12 @@ OR until = "0000-00-00 00:00:00")';
 				}
 			}
 		} else {
-			//if (strtotime($this->getStartDate()) <= $endTime && strtotime($this->getStartDate()) >= $startTime) {
-			$return[] = array(
-				'start' => $this->getStartDate(),
-				'end' => $this->getEndDate(),
-			);
-			//}
+			if (strtotime($this->getStartDate()) <= $endTime && strtotime($this->getStartDate()) >= $startTime) {
+				$return[] = array(
+					'start' => $this->getStartDate(),
+					'end' => $this->getEndDate(),
+				);
+			}
 		}
 
 		$startDate = $this->getStartDate();
