@@ -314,7 +314,7 @@ class calendarCmd extends cmd {
 
 		if ($this->getLogicalId() == 'in_progress') {
 			$return = '';
-			foreach $eqLogic->getEvents() as $event) {
+			foreach ($eqLogic->getEvents() as $event) {
 				if ($event->getCmd_param('in_progress', 0) == 1) {
 					if ($event->getCmd_param('eventName') != '') {
 						$return .= $event->getCmd_param('eventName') . ', ';

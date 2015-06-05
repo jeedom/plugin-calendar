@@ -2,10 +2,9 @@
 == Agenda
 
 === Description
-Plugin permetant de creer un agenda
+Plugin permetant de creer un agenda et de declenché des actions (commande ou scénario)
 
 '''
-=== Configuration
 include::configuration.asciidoc[]
 
 '''
