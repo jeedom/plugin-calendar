@@ -18,6 +18,10 @@ Vous retrouvez ici la liste de vos Agenda. Une fois que vous cliquez sur un équ
 
 image::../images/calendar4.PNG[]
 
+[icon="../images/plugin/tip.png"]
+[TIP]
+Comme à beaucoup d'endroit sur Jeedom, mettre la souris tout à gauche permet de faire apparaître un menu d'accès rapide (vous pouvez à partir de votre profils le laisser toujours visible)
+
 Vous retrouvez ici toute la configuration de votre équipement : 
 
 * *Nom de l'équipement* : nom de votre agenda
