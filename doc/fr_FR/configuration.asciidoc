@@ -42,7 +42,7 @@ Partie la plus importante du plugin c'est ici que vous allez pouvoir configurer 
 
 ==== Evènement
 
- image::../images/calendar8.PNG[]
+image::../images/calendar8.PNG[]
 
 Ici vous retrouvez : 
 
@@ -54,27 +54,27 @@ Ici vous retrouvez :
 
 ==== Action de debut
 
- image::../images/calendar9.PNG[]
+image::../images/calendar9.PNG[]
 
 Permet de choisir l'action lors du lancement de l'evenement (une seule action possible). Il est ici possible de choisir entre aucun, pour ne rien faire, commande pour éxecuter une commande et scénario pour une action sur un scénario (lancement, arret, désactivation, activation). En fonction de vos choix vous aurez differentes options : 
 
 *Commande*
 
- image::../images/calendar7.PNG[]
+image::../images/calendar7.PNG[]
 
- Vous pouvez ici choisir la commande (le bouton a droite de "Nom de la commande" vous permet de rechercche la commande), en fonction de la commande vous aurez differente option en dessous pour configurer les options de la commande
+Vous pouvez ici choisir la commande (le bouton a droite de "Nom de la commande" vous permet de rechercche la commande), en fonction de la commande vous aurez differente option en dessous pour configurer les options de la commande
 
- ==== Action de fin
+==== Action de fin
 
-  image::../images/calendar10.PNG[]
+image::../images/calendar10.PNG[]
 
- Idem à l'action de début mais cette fois si c'est l'action à effectuer à la fin de l'évenement
+Idem à l'action de début mais cette fois si c'est l'action à effectuer à la fin de l'évenement
 
- ==== Programmation
+==== Programmation
 
- image::../images/calendar6.PNG[]
+image::../images/calendar6.PNG[]
 
- C'est ici que se trouve tout la gestion temporelle de votre évènement : 
+C'est ici que se trouve tout la gestion temporelle de votre évènement : 
 
  * *Début* : Date de début de l'évènement
  * *Fin* : Date de fin de l'évènement
