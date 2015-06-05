@@ -37,7 +37,6 @@ Vous retrouvez ici toute la configuration de votre équipement :
 
 image::../images/calendar5.PNG[]
 
-
 Partie la plus importante du plugin c'est ici que vous allez pouvoir configurer votre évènement
 
 ==== Evènement
