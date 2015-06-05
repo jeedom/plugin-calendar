@@ -106,7 +106,7 @@ Un agenda possède plusieurs commandes :
 
 * *Activer* : permet d'activer l'agenda.
 * *Désactiver* : permet de désactiver l'agenda.
-* *En cours* : donne la liste des évènements en cours séparés par des virgules, pour l'utiliser dans un scénario le plus simple et d'utiliser l'opérateur contient ( ~ ) ou ne contient pas ( !~ ), par exemple #[Appartement][test][En cours]# ~ "Anniv", sera vrai si dans la liste des évènements en cours il y a un "Anniv"
+* *En cours* : donne la liste des évènements en cours séparés par des virgules, pour l'utiliser dans un scénario le plus simple et d'utiliser l'opérateur contient (\~ ) ou ne contient pas ( !\~ ), par exemple #[Appartement][test][En cours]# ~ "Anniv", sera vrai si dans la liste des évènements en cours il y a un "Anniv"
 
 
 
