@@ -20,28 +20,28 @@ image::../images/calendar4.PNG[]
 
 [icon="../images/plugin/tip.png"]
 [TIP]
-Comme à beaucoup d'endroit sur Jeedom, mettre la souris tout à gauche permet de faire apparaître un menu d'accès rapide (vous pouvez à partir de votre profils le laisser toujours visible)
+Comme à beaucoup d'endroits sur Jeedom, mettre la souris tout à gauche permet de faire apparaître un menu d'accès rapide (vous pouvez à partir de votre profil le laisser toujours visible).
 
 Vous retrouvez ici toute la configuration de votre équipement : 
 
-* *Nom de l'équipement* : nom de votre agenda
-* *Objet parent* : indique l'objet parent auquel appartient l'équipement
-* *Catégorie* : les catégories de l'équipement (il peut appartenir à plusieurs catégories)
-* *Activer* : permet de rendre votre équipement actif
-* *Visible* : le rend visible sur le dashboard
-* *Widget, nombre de jours* : défini le nombre de jour d'evenement à afficher sur le widget
-* *Nombre d'événement maximum* : défini le nombre maximum d'évènement à afficher sur le dashboard
-* *Ne pas afficher le statut et les commandes d'activation/désactivation* : permet de masquer le statut de l'agenda ainsi que les commandes d'activation ou non de celui-ci
-* *Liste des événements de l'agenda* : affichage en dessous la liste de tous les evenements de l'agenda (un clique dessus permet d'éditer l'evenement directement)
-* *Ajouter évènement* : permet d'ajouter un évènement à l'agenda
-* *Agenda* : Affichage une vue type agenda avec tous les evenements, vous pouvez vous deplacer dedans, choisir de l'afficher par semaine ou jour, deplacer des evenements (glisser déposé) et un clique sur un evenement vous ouvrira sa fenetre d'édition
+* *Nom de l'équipement* : nom de votre agenda.
+* *Objet parent* : indique l'objet parent auquel appartient l'équipement.
+* *Catégorie* : les catégories de l'équipement (il peut appartenir à plusieurs catégories).
+* *Activer* : permet de rendre votre équipement actif.
+* *Visible* : le rend visible sur le dashboard.
+* *Widget, nombre de jours* : défini le nombre de jours d'évènements à afficher sur le widget.
+* *Nombre d'évènements maximum* : défini le nombre maximum d'évènements à afficher sur le dashboard.
+* *Ne pas afficher le statut et les commandes d'activation/désactivation* : permet de masquer le statut de l'agenda ainsi que les commandes d'activation ou non de celui-ci.
+* *Liste des évènements de l'agenda* : affichage en-dessous la liste de tous les évènements de l'agenda (un clic dessus permet d'éditer l'évènement directement).
+* *Ajouter évènement* : permet d'ajouter un évènement à l'agenda.
+* *Agenda* : Affichage une vue type agenda avec tous les évènement, vous pouvez vous déplacer dedans, choisir de l'afficher par semaine ou jour, déplacer des évènements (glisser/déposer) et un clic sur un évènement vous ouvrira sa fenêtre d'édition.
 
 
 === Edition d'un évènement
 
 image::../images/calendar5.PNG[]
 
-Partie la plus importante du plugin c'est ici que vous allez pouvoir configurer votre évènement
+Partie la plus importante du plugin, c'est ici que vous allez pouvoir configurer votre évènement.
 
 ==== Evènement
 
@@ -49,64 +49,64 @@ image::../images/calendar8.PNG[]
 
 Ici vous retrouvez : 
 
-* *Nom de l'évenement* : Nom de votre évènement
-* *Icone* : permet d'ajouter une icone devant le nom de votre équipement (pour se faire il faut cliquer sur "Choisir une icône")
-* *Couleur* : permet de choisir la couleur de votre évènement (une coche vous permet aussi de le rendre transparent)
-* *Couleur du texte* : permet de choisir la couleur du texte de votre évènement
-* *Ne pas à afficher dans le dashboard* : permet de ne pas afficher cette évènement sur le widget
+* *Nom de l'évènement* : Nom de votre évènement.
+* *Icône* : permet d'ajouter une icône devant le nom de votre équipement (pour ce faire il faut cliquer sur "Choisir une icône").
+* *Couleur* : permet de choisir la couleur de votre évènement (une coche vous permet aussi de le rendre transparent).
+* *Couleur du texte* : permet de choisir la couleur du texte de votre évènement.
+* *Ne pas afficher dans le dashboard* : permet de ne pas afficher cet évènement sur le widget.
 
-==== Action de debut
+==== Action de début
 
 image::../images/calendar9.PNG[]
 
-Permet de choisir l'action lors du lancement de l'evenement (une seule action possible). Il est ici possible de choisir entre aucun, pour ne rien faire, commande pour éxecuter une commande et scénario pour une action sur un scénario (lancement, arret, désactivation, activation). En fonction de vos choix vous aurez differentes options : 
+Permet de choisir l'action lors du lancement de l'évènement (une seule action possible). Il est ici possible de choisir entre *aucun*, pour ne rien faire, *commande* pour exécuter une commande et *scénario* pour une action sur un scénario (lancement, arrêt, désactivation, activation). En fonction de vos choix vous aurez différentes options : 
 
 *Commande*
 
 image::../images/calendar7.PNG[]
 
-Vous pouvez ici choisir la commande (le bouton a droite de "Nom de la commande" vous permet de rechercche la commande), en fonction de la commande vous aurez differente option en dessous pour configurer les options de la commande
+Vous pouvez ici choisir la commande (le bouton à droite de "Nom de la commande" vous permet de rechercher la commande), en fonction de la commande vous aurez différentes options en-dessous pour configurer les options de la commande.
 
 ==== Action de fin
 
 image::../images/calendar10.PNG[]
 
-Idem à l'action de début mais cette fois si c'est l'action à effectuer à la fin de l'évenement
+Idem à l'action de début mais cette fois si c'est l'action à effectuer à la fin de l'évènement.
 
 ==== Programmation
 
 image::../images/calendar6.PNG[]
 
-C'est ici que se trouve tout la gestion temporelle de votre évènement : 
+C'est ici que se trouve toute la gestion temporelle de votre évènement : 
 
- * *Début* : Date de début de l'évènement
- * *Fin* : Date de fin de l'évènement
- * *Toute la journée* : permet de définir l'évènement sur la toute la journée
- * *Inclure par un autre agenda* : Permet d'inclure un autre évènement dans votre événement courant. Par exemple si vous avez un évènement A repeté tous les lundi et que vous inclus cette évènement A dans votre évènement courant alors celui-ci sera automatiquement repeté tous les lundi
- * *Inclure* : permet de forcer une date d'occurence, vous pouvez en mettre plusieurs en les séparant par des , (virgule), vous pouvez aussi définir une plage avec des : (deux points)
-* *Répété* : permet de dire que votre évènement est répété (si cette case n'est pas cochée vous n'aurez pas les options qui suivent)
-* *Mode de repetition* : permet de spécifier le mode de répétition, soit simple : tous les jours, tous les X jours... ou répétition tous les 1er, 2eme... pour répéter un événement tous les 3eme lundi du mois par exemple (les options qui suivent peuvent être differentes en fonction de ce choix)
-* *Répéter tous les* : [mode répetition simple seulement] permet de définir la fréquence de répétition de répétition de l'évènement (ex tous les 1 jours ou tous les 2 mois...)
-* *Le* : [mode répétition le premier, deuxieme seulement] : permet de choisir une répetition tous les 2eme lundi du mois par exemple
-* *Uniquement les* : permet de restreindre la répétition à certain jours de la semaine
-* *Restriction* : permet de retreindre l'évènement seulement les jours feriés ou d'exclure les jours fériés
-* *Jusqu'à* : donne la date de fin d'occurence de l'évènement
-* *Exclure par un autre agenda* : permet de mettre en exclusion cette évenement en fonction d'un autre (pour éviter par exemple que 2 évènements contradictoire se retrouve ensemble)
-* *Exclure* : idem que "Inclure" mais cette fois pour exclure des dates
+ * *Début* : Date de début de l'évènement.
+ * *Fin* : Date de fin de l'évènement.
+ * *Toute la journée* : permet de définir l'évènement sur toute la journée.
+ * *Inclure par un autre agenda* : Permet d'inclure un autre évènement dans votre évènement courant. Par exemple, si vous avez un évènement A répété tous les lundis, et que vous incluez cet évènement A dans votre évènement courant, alors celui-ci sera automatiquement répété tous les lundis.
+ * *Inclure* : permet de forcer une date d'occurence, vous pouvez en mettre plusieurs en les séparant par des , (virgules), vous pouvez aussi définir une plage avec des : (deux points).
+* *Répété* : permet de dire que votre évènement est répété (si cette case n'est pas cochée vous n'aurez pas les options qui suivent).
+* *Mode de répétition* : permet de spécifier le mode de répétition, soit simple : tous les jours, tous les X jours... ou répétition tous les 1er, 2ème... pour répéter un évènement tous les 3ème lundis du mois par exemple (les options qui suivent peuvent être différentes en fonction de ce choix).
+* *Répéter tous les* : [mode répétition simple seulement] permet de définir la fréquence de répétition de l'évènement (ex tous les 3 jours ou tous les 2 mois...).
+* *Le* : [mode répétition le premier, le deuxième... seulement] : permet de choisir une répetition tous les 2ème lundis du mois par exemple.
+* *Uniquement les* : permet de restreindre la répétition à certains jours de la semaine.
+* *Restriction* : permet de retreindre l'évènement seulement les jours fériés ou d'exclure les jours fériés.
+* *Jusqu'à* : donne la date de fin d'occurence de l'évènement.
+* *Exclure par un autre agenda* : permet de mettre en exclusion cet évènement en fonction d'un autre agenda (pour éviter par exemple que 2 évènements contradictoires se retrouvent ensemble).
+* *Exclure* : idem que "Inclure" mais cette fois pour exclure des dates.
 
 === Widget
 
 image::../images/calendar11.PNG[]
 
-Voila a quoi ressemble le widget (en fonction des options il peut changer), vous pouvez actif/désactiver tous l'agenda et supprimer une occurence d'un évènement à partit de celui-ci
+Voilà à quoi ressemble le widget (en fonction des options il peut changer), vous pouvez activer/désactiver tout l'agenda et supprimer une occurence d'un évènement à partir de celui-ci.
 
 === Agenda, commandes et scénario
 
-Un agenda possède plusieurs commande : 
+Un agenda possède plusieurs commandes : 
 
-* *Activer* : permet d'activer l'agenda
-* *Désactiver* : permet de désactiver l'agenda
-* *En cours* : donne la liste des évenements en cours séparé par des virgules, pour l'utiliser dans un scénario le plus simple et d'utiliser l'opérateur contient (~) ou ne contient pas (!~), par exemple #[Appartement][test][En cours]# ~ "Anniv", sera vrai si dans la liste des évènements en cours il y a un "Anniv"
+* *Activer* : permet d'activer l'agenda.
+* *Désactiver* : permet de désactiver l'agenda.
+* *En cours* : donne la liste des évènements en cours séparés par des virgules, pour l'utiliser dans un scénario le plus simple et d'utiliser l'opérateur contient ( \~ ) ou ne contient pas ( !~ ), par exemple #[Appartement][test][En cours]# ~ "Anniv", sera vrai si dans la liste des évènements en cours il y a un "Anniv"
 
 
 
