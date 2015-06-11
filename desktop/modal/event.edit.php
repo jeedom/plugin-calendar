@@ -50,8 +50,8 @@ if (is_object($event)) {
 	echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
 }
 ?>
-     </legend>
-     <div class="form-group">
+       </legend>
+       <div class="form-group">
         <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
         <div class="col-sm-3">
             <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName' />
@@ -75,7 +75,7 @@ if (is_object($event)) {
         </div>
         <label class="col-sm-1 control-label">{{Transparent}}</label>
         <div class="col-sm-3">
-            <input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='transparent' />
+            <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="cmd_param" data-l2key='transparent' />
         </div>
     </div>
     <div class="form-group">
@@ -87,7 +87,7 @@ if (is_object($event)) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Ne pas à afficher dans le dashboard}}</label>
         <div class="col-sm-3">
-            <input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard' />
+            <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard' />
         </div>
     </div>
     <legend>Action de début</legend>
@@ -219,8 +219,8 @@ foreach (calendar::byType('calendar') as $calendar) {
 	}
 }
 ?>
-</select>
-</div>
+        </select>
+    </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
@@ -229,9 +229,9 @@ foreach (calendar::byType('calendar') as $calendar) {
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-3 control-label">{{Répété}}</label>
+    <label class="col-sm-3 control-label"></label>
     <div class="col-sm-3">
-        <input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="enable" />
+        <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="enable" data-label-text="{{Répété}}" />
     </div>
 </div>
 
@@ -290,27 +290,20 @@ foreach (calendar::byType('calendar') as $calendar) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Uniquement les}}</label>
         <div class="col-sm-9">
-            <label class="checkbox-inline">
-                <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='1' checked /> {{Lundis}}
-            </label>
-            <label class="checkbox-inline">
-                <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='2' checked /> {{Mardis}}
-            </label>
-            <label class="checkbox-inline">
-                <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='3' checked /> {{Mercredis}}
-            </label>
-            <label class="checkbox-inline">
-                <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='4' checked /> {{Jeudis}}
-            </label>
-            <label class="checkbox-inline">
-                <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='5' checked /> {{Vendredis}}
-            </label>
-            <label class="checkbox-inline">
-                <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='6' checked /> {{Samedis}}
-            </label>
-            <label class="checkbox-inline">
-                <input type='checkbox' class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='7' checked /> {{Dimanches}}
-            </label>
+            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='1' checked data-label-text="{{Lundis}}" />
+
+            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='2' checked data-label-text="{{Mardis}}" />
+
+            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='3' checked data-label-text="{{Mercredis}}" />
+
+            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='4' checked data-label-text="{{Jeudis}}" />
+
+            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='5' checked data-label-text="{{Vendredis}}" />
+
+            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='6' checked data-label-text="{{Samedis}}" />
+
+            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='7' checked data-label-text="{{Dimanches}}" />
+
         </div>
     </div>
 </div>
@@ -349,7 +342,7 @@ foreach (calendar::byType('calendar') as $calendar) {
 	}
 }
 ?>
-</select>
+    </select>
 </div>
 </div>
 <div class="form-group">

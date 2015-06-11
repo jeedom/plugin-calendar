@@ -2,7 +2,9 @@
 == Agenda
 
 === Description
-Plugin permetant de creer un agenda et de declenché des actions (commande ou scénario)
+Ce plugin est un peu la "boite à outils" intégrée de Jeedom, il est un des liens de communication depuis/vers l'extérieur.Il permet entre autre de faire exécuter à Jeedom des fichiers de programmation type php (.php), python(.py), ruby (.rb) et des scripts shell (.sh). 
+
+Jeedom se base sur le nom de l'extension pour exécuter les scripts.
 
 '''
 include::configuration.asciidoc[]
