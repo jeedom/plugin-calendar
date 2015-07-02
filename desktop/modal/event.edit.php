@@ -293,7 +293,7 @@ foreach (calendar::byType('calendar') as $calendar) {
         $('#div_' + _type + ' .' + _type + ':last').setValues(_action, '.expressionAttr');
     }
 
-    $('body').delegate('.cmdAction.expressionAttr[data-l1key=cmd]', 'focusout', function (event) {
+    $('body').undelegate(".cmdAction.expressionAttr[data-l1key=cmd]", 'focusout').delegate('.cmdAction.expressionAttr[data-l1key=cmd]', 'focusout', function (event) {
         var type = $(this).attr('data-type')
         var expression = $(this).closest('.' + type).getValues('.expressionAttr');
         var el = $(this);
@@ -302,7 +302,7 @@ foreach (calendar::byType('calendar') as $calendar) {
         })
     });
 
-    $("body").delegate(".listCmdAction", 'click', function () {
+    $("body").undelegate(".listCmdAction", 'click').delegate(".listCmdAction", 'click', function () {
         var type = $(this).attr('data-type');
         var el = $(this).closest('.' + type).find('.expressionAttr[data-l1key=cmd]');
         jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {
@@ -313,29 +313,34 @@ foreach (calendar::byType('calendar') as $calendar) {
         });
     });
 
-    $('.bt_addAction').on('click',function(){
+    $("body").undelegate('.bt_removeAction', 'click').delegate('.bt_removeAction', 'click', function () {
+    var type = $(this).attr('data-type');
+    $(this).closest('.' + type).remove();
+});
+
+    $('.bt_addAction').off('click').on('click',function(){
         addAction({}, $(this).attr('data-type'), '{{Action}}');
     });
 
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=start_name]').on('change', function () {
+    $('.calendarAttr[data-l1key=cmd_param][data-l2key=start_name]').off('change').on('change', function () {
         var html = jeedom.cmd.displayActionOption($(this).value());
         $('#div_eventEditCmdStart .options').empty().append(html);
     });
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=start_type]').on('change', function () {
+    $('.calendarAttr[data-l1key=cmd_param][data-l2key=start_type]').off('change').on('change', function () {
         $('.div_startType').hide();
         $('.div_start' + $(this).value()).show();
     });
 
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=end_name]').on('change', function () {
+    $('.calendarAttr[data-l1key=cmd_param][data-l2key=end_name]').off('change').on('change', function () {
         var html = jeedom.cmd.displayActionOption($(this).value());
         $('#div_eventEditCmdEnd .options').empty().append(html);
     });
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=end_type]').on('change', function () {
+    $('.calendarAttr[data-l1key=cmd_param][data-l2key=end_type]').off('change').on('change', function () {
         $('.div_endType').hide();
         $('.div_end' + $(this).value()).show();
     });
 
-    $('.calendarAction[data-action=allDay]').on('click', function () {
+    $('.calendarAction[data-action=allDay]').off('click').on('click', function () {
         var startDate = $('.calendarAttr[data-l1key=startDate]').value().substr(0, 10);
         if (startDate == '') {
             var startDate = new Date();
@@ -361,7 +366,7 @@ foreach (calendar::byType('calendar') as $calendar) {
         });
     });
 
-    $('.calendarAttr[data-l1key=repeat][data-l2key=enable]').on('change', function () {
+    $('.calendarAttr[data-l1key=repeat][data-l2key=enable]').off('change').on('change', function () {
         if ($(this).value() == 1) {
             $('#form_eventEdit .div_repeatOption').show();
         } else {
@@ -369,14 +374,13 @@ foreach (calendar::byType('calendar') as $calendar) {
         }
     });
 
-    $('.calendarAttr[data-l1key=repeat][data-l2key=mode]').on('change', function () {
+    $('.calendarAttr[data-l1key=repeat][data-l2key=mode]').off('change').on('change', function () {
         $('#form_eventEdit .repeatMode').hide();
         $('#form_eventEdit .repeatMode.'+$(this).value()).show();
     });
 
     if (calendarEvent != null && is_array(calendarEvent)) {
         $('#form_eventEdit').setValues(calendarEvent, '.calendarAttr');
-
         if (isset(calendarEvent.cmd_param.start)) {
             for (var i in calendarEvent.cmd_param.start) {
                 addAction(calendarEvent.cmd_param.start[i], 'start', '{{Action}}');
@@ -388,21 +392,6 @@ foreach (calendar::byType('calendar') as $calendar) {
             }
         }
     }
-
-    $("#form_eventEdit").delegate(".listCmdAction", 'click', function () {
-        var el = $(this).closest('.form-group').find('.calendarAttr[data-l1key=cmd_param][data-l2key=' + $(this).attr('data-target') + ']');
-        jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {
-            el.value(result.human);
-        });
-    });
-
-
-    $("#form_eventEdit").delegate(".listScenario", 'click', function () {
-        var el = $(this).closest('.form-group').find('.calendarAttr[data-l1key=cmd_param][data-l2key=' + $(this).attr('data-target') + ']');
-        jeedom.scenario.getSelectModal({}, function (result) {
-            el.value(result.human);
-        });
-    });
 
     $('.datetimepicker').datetimepicker({lang: 'fr',
         i18n: {

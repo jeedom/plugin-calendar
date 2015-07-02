@@ -31,22 +31,22 @@ function calendar_update() {
 	foreach (calendar_event::all() as $event) {
 		foreach (array('start', 'end') as $_action) {
 			if ($event->getCmd_param($_action . '_type') == 'cmd') {
-				$_action = array();
-				$_action['cmd'] = $event->getCmd_param($_action . '_name');
-				$_action['options'] = $event->getCmd_param($_action . '_options');
+				$action = array();
+				$action['cmd'] = $event->getCmd_param($_action . '_name');
+				$action['options'] = $event->getCmd_param($_action . '_options');
 				$event->setCmd_param($_action . '_type', '');
 				$event->setCmd_param($_action . '_name', '');
 				$event->setCmd_param($_action . '_options', '');
-				$event->setCmd_param($_action, array($_action));
+				$event->setCmd_param($_action, array($action));
 			}
 			if ($event->getCmd_param($_action . '_type') == 'scenario') {
-				$_action = array();
-				$_action['cmd'] = 'scenario';
-				$_action['options'] = array('scenario_id' => str_replace(array('#', 'scenario'), '', $event->getCmd_param($_action . '_scenarioName')), 'action' => $event->getCmd_param($_action . '_action'));
+				$action = array();
+				$action['cmd'] = 'scenario';
+				$action['options'] = array('scenario_id' => str_replace(array('#', 'scenario'), '', $event->getCmd_param($_action . '_scenarioName')), 'action' => $event->getCmd_param($_action . '_action'));
 				$event->setCmd_param($_action . '_type', '');
 				$event->setCmd_param($_action . '_name', '');
 				$event->setCmd_param($_action . '_options', '');
-				$event->setCmd_param($_action, array($_action));
+				$event->setCmd_param($_action, array($action));
 			}
 		}
 	}
