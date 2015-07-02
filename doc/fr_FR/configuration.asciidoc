@@ -59,19 +59,19 @@ Ici vous retrouvez :
 
 image::../images/calendar9.PNG[]
 
-Permet de choisir l'action lors du lancement de l'évènement (une seule action possible). Il est ici possible de choisir entre *aucun*, pour ne rien faire, *commande* pour exécuter une commande et *scénario* pour une action sur un scénario (lancement, arrêt, désactivation, activation). En fonction de vos choix vous aurez différentes options : 
+Permet de choisir la ou les action(s) à faire lors du lancement de l'évènement. 
 
-*Commande*
+Pour ajouter une action il suffit de cliquer sur le bouton + au bout de la ligne puis vous allez avoir un bouton pour chercher une commande une fois celle-ci trouvé vous aurez le choix des options si elle en a. VOus pouvez ajouter autant d'action que vous le voulez.
 
-image::../images/calendar7.PNG[]
-
-Vous pouvez ici choisir la commande (le bouton à droite de "Nom de la commande" vous permet de rechercher la commande), en fonction de la commande vous aurez différentes options en-dessous pour configurer les options de la commande.
+[icon="../images/plugin/tip.png"]
+[TIP]
+Pour piloter un scénario il suffit d'écrire scénario dans la case puis de cliquer ailleurs et Jeedom fera apparaitre les options possible
 
 ==== Action de fin
 
 image::../images/calendar10.PNG[]
 
-Idem à l'action de début mais cette fois si c'est l'action à effectuer à la fin de l'évènement.
+Idem à l'action de début mais cette fois si c'est la ou les action(s) à effectuer à la fin de l'évènement.
 
 ==== Programmation
 
