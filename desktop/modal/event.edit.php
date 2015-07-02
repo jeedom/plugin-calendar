@@ -50,8 +50,8 @@ if (is_object($event)) {
 	echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
 }
 ?>
-       </legend>
-       <div class="form-group">
+     </legend>
+     <div class="form-group">
         <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
         <div class="col-sm-3">
             <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName' />
@@ -90,103 +90,12 @@ if (is_object($event)) {
             <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard' />
         </div>
     </div>
-    <legend>Action de début</legend>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">{{Type}}</label>
-        <div class="col-sm-3" >
-            <select class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='start_type'>
-                <option value="none">Aucune</option>
-                <option value="cmd">Commande</option>
-                <option value="scenario">Scénario</option>
-            </select>
-        </div>
-    </div>
-    <div class="div_startType div_startcmd" style="display: none;">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
-            <div class="col-sm-5">
-                <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='start_name' />
-            </div>
-            <div class="col-sm-1">
-                <a class="btn btn-default btn-sm listCmdAction" data-target="start_name"><i class="fa fa-list-alt"></i></a>
-            </div>
-        </div>
-        <div id="div_eventEditCmdStart" class="form-group">
-            <label class="col-sm-3 control-label">{{Options}}</label>
-            <div class="col-sm-6 options"></div>
-        </div>
-    </div>
-    <div class="div_startType div_startscenario" style="display: none;">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">{{Nom du scénario}}</label>
-            <div class="col-sm-3">
-                <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='start_scenarioName' />
-            </div>
-            <div class="col-sm-1">
-                <a class="btn btn-default btn-sm listScenario" data-target="start_scenarioName"><i class="fa fa-list-alt"></i></a>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">{{Action}}</label>
-            <div class="col-sm-3">
-                <select class="calendarAttr form-control input-sm" data-l1key="cmd_param" data-l2key="start_action">
-                    <option value="start">{{Start}}</option>
-                    <option value="stop">{{Stop}}</option>
-                    <option value="activate">{{Activer}}</option>
-                    <option value="deactivate">{{Désactiver}}</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <legend>Action de fin</legend>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">{{Type}}</label>
-        <div class="col-sm-3" >
-            <select class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='end_type'>
-                <option value="none">Aucune</option>
-                <option value="cmd">Commande</option>
-                <option value="scenario">Scénario</option>
-            </select>
-        </div>
-    </div>
+    <legend>Action de début <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
+    <div id="div_start"></div>
 
-    <div class="div_endType div_endcmd" style="display: none;">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">{{Nom de la commande}}</label>
-            <div class="col-sm-5">
-                <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='end_name' />
-            </div>
-            <div class="col-sm-1">
-                <a class="btn btn-default btn-sm listCmdAction" data-target="end_name"><i class="fa fa-list-alt"></i></a>
-            </div>
-        </div>
-        <div id="div_eventEditCmdEnd" class="form-group">
-            <label class="col-sm-3 control-label">{{Options}}</label>
-            <div class="col-sm-6 options"></div>
-        </div>
-    </div>
-    <div class="div_endType div_endscenario" style="display: none;">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">{{Nom du scénario}}</label>
-            <div class="col-sm-3">
-                <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='end_scenarioName' />
-            </div>
-            <div class="col-sm-1">
-                <a class="btn btn-default btn-sm listScenario" data-target="end_scenarioName"><i class="fa fa-list-alt"></i></a>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">{{Action}}</label>
-            <div class="col-sm-3">
-                <select class="calendarAttr form-control input-sm" data-l1key="cmd_param" data-l2key="end_action">
-                    <option value="start">{{Start}}</option>
-                    <option value="stop">{{Stop}}</option>
-                    <option value="activate">{{Activer}}</option>
-                    <option value="deactivate">{{Désactiver}}</option>
-                </select>
-            </div>
-        </div>
-    </div>
+    <legend>Action de fin <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fa fa-plus-circle"></i></a></legend>
+    <div id="div_end"></div>
+
     <legend>Programmation</legend>
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Début}}</label>
@@ -219,8 +128,8 @@ foreach (calendar::byType('calendar') as $calendar) {
 	}
 }
 ?>
-        </select>
-    </div>
+</select>
+</div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
@@ -342,7 +251,7 @@ foreach (calendar::byType('calendar') as $calendar) {
 	}
 }
 ?>
-    </select>
+</select>
 </div>
 </div>
 <div class="form-group">
@@ -357,6 +266,57 @@ foreach (calendar::byType('calendar') as $calendar) {
 </form>
 
 <script>
+    function addAction(_action, _type, _name) {
+        if (!isset(_action)) {
+            _action = {};
+        }
+        if (!isset(_action.options)) {
+            _action.options = {};
+        }
+        var div = '<div class="' + _type + '">';
+        div += '<div class="form-group ">';
+        div += '<label class="col-sm-1 control-label">' + _name + '</label>';
+        div += '<div class="col-sm-1">';
+        div += '<a class="btn btn-default btn-sm listCmdAction" data-type="' + _type + '"><i class="fa fa-list-alt"></i></a>';
+        div += '</div>';
+        div += '<div class="col-sm-3">';
+        div += '<input class="expressionAttr form-control input-sm cmdAction" data-l1key="cmd" data-type="' + _type + '" />';
+        div += '</div>';
+        div += '<div class="col-sm-6 actionOptions">';
+        div += jeedom.cmd.displayActionOption(init(_action.cmd, ''), _action.options);
+        div += '</div>';
+        div += '<div class="col-sm-1">';
+        div += '<i class="fa fa-minus-circle pull-right cursor bt_removeAction" data-type="' + _type + '"></i>';
+        div += '</div>';
+        div += '</div>';
+        $('#div_' + _type).append(div);
+        $('#div_' + _type + ' .' + _type + ':last').setValues(_action, '.expressionAttr');
+    }
+
+    $('body').delegate('.cmdAction.expressionAttr[data-l1key=cmd]', 'focusout', function (event) {
+        var type = $(this).attr('data-type')
+        var expression = $(this).closest('.' + type).getValues('.expressionAttr');
+        var el = $(this);
+        jeedom.cmd.displayActionOption($(this).value(), init(expression[0].options), function (html) {
+            el.closest('.' + type).find('.actionOptions').html(html);
+        })
+    });
+
+    $("body").delegate(".listCmdAction", 'click', function () {
+        var type = $(this).attr('data-type');
+        var el = $(this).closest('.' + type).find('.expressionAttr[data-l1key=cmd]');
+        jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {
+            el.value(result.human);
+            jeedom.cmd.displayActionOption(el.value(), '', function (html) {
+                el.closest('.' + type).find('.actionOptions').html(html);
+            });
+        });
+    });
+
+    $('.bt_addAction').on('click',function(){
+        addAction({}, $(this).attr('data-type'), '{{Action}}');
+    });
+
     $('.calendarAttr[data-l1key=cmd_param][data-l2key=start_name]').on('change', function () {
         var html = jeedom.cmd.displayActionOption($(this).value());
         $('#div_eventEditCmdStart .options').empty().append(html);
@@ -416,15 +376,16 @@ foreach (calendar::byType('calendar') as $calendar) {
 
     if (calendarEvent != null && is_array(calendarEvent)) {
         $('#form_eventEdit').setValues(calendarEvent, '.calendarAttr');
-        if (isset(calendarEvent.cmd_param) && isset(calendarEvent.cmd_param.start_name)) {
-            jeedom.cmd.displayActionOption(calendarEvent.cmd_param.start_name, init(calendarEvent.cmd_param.start_options), function (html) {
-                $('#div_eventEditCmdStart .options').empty().append(html);
-            });
+
+        if (isset(calendarEvent.cmd_param.start)) {
+            for (var i in calendarEvent.cmd_param.start) {
+                addAction(calendarEvent.cmd_param.start[i], 'start', '{{Action}}');
+            }
         }
-        if (isset(calendarEvent.cmd_param) && isset(calendarEvent.cmd_param.end_name)) {
-            jeedom.cmd.displayActionOption(calendarEvent.cmd_param.end_name, init(calendarEvent.cmd_param.end_options), function (html) {
-                $('#div_eventEditCmdEnd .options').empty().append(html);
-            });
+        if (isset(calendarEvent.cmd_param.end)) {
+            for (var i in calendarEvent.cmd_param.end) {
+                addAction(calendarEvent.cmd_param.end[i], 'end', '{{Action}}');
+            }
         }
     }
 
@@ -463,14 +424,8 @@ foreach (calendar::byType('calendar') as $calendar) {
     $('#md_eventEditSave').on('click', function () {
         var calendarEvent = $('#form_eventEdit').getValues('.calendarAttr');
         calendarEvent = calendarEvent[0];
-        var option = $('#div_eventEditCmdStart').getValues('.expressionAttr');
-        if (isset(option[0]) && isset(option[0].options)) {
-            calendarEvent.cmd_param.start_options = option[0].options;
-        }
-        var option = $('#div_eventEditCmdEnd').getValues('.expressionAttr');
-        if (isset(option[0]) && isset(option[0].options)) {
-            calendarEvent.cmd_param.end_options = option[0].options;
-        }
+        calendarEvent.cmd_param.start = $('#div_start .start').getValues('.expressionAttr');
+        calendarEvent.cmd_param.end = $('#div_end .end').getValues('.expressionAttr');
         $.ajax({
             type: 'POST',
             url: 'plugins/calendar/core/ajax/calendar.ajax.php',

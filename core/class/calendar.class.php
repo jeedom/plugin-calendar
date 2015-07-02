@@ -367,7 +367,7 @@ class calendar_event {
 	public static function all() {
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
 		FROM calendar_event';
-		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
+		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
 	public static function getEventsByEqLogic($_eqLogic_id, $_startDate = null, $_endDate = null) {
@@ -762,46 +762,15 @@ OR until = "0000-00-00 00:00:00")';
 			$this->setCmd_param('in_progress', 0);
 			DB::save($this, true);
 		}
-
-		if ($this->getCmd_param($_action . '_type') == 'cmd') {
-			$cmd = cmd::byId(str_replace('#', '', $this->getCmd_param($_action . '_name')));
-			if (is_object($cmd) && $cmd->getType() == 'action') {
-				$options = $this->getCmd_param($_action . '_options');
-				if (is_array($options)) {
-					foreach ($options as $key => $value) {
-						$options[$key] = str_replace('"', '', scenarioExpression::setTags($value, $scenario));
-						if (evaluate($options[$key]) != 0) {
-							$options[$key] = evaluate($options[$key]);
-						}
-					}
+		foreach ($this->getCmd_param($_action) as $action) {
+			try {
+				$options = array();
+				if (isset($action['options'])) {
+					$options = $action['options'];
 				}
-				log::add('calendar', 'debug', 'Execution de : ' . $cmd->getHumanName() . ' du à : ' . $this->getName() . ' avec les options : ' . print_r($options, true));
-				$cmd->execCmd($options);
-			}
-		}
-		if ($this->getCmd_param($_action . '_type') == 'scenario') {
-			$scenario = scenario::byId(str_replace(array('#', 'scenario'), '', $this->getCmd_param($_action . '_scenarioName')));
-			if (is_object($scenario)) {
-				log::add('calendar', 'debug', 'Execution du scénario : ' . $scenario->getHumanName() . ' du à : ' . $this->getName());
-				switch ($this->getCmd_param($_action . '_action')) {
-					case 'start':
-						$name = $this->getCmd_param('eventName', $this->getCmd_param('name'));
-						$scenario->launch(false, __('Lancement provoque par le calendrier  : ', __FILE__) . $name);
-						break;
-					case 'stop':
-						$scenario->stop();
-						break;
-					case 'deactivate':
-						$scenario->setIsActive(0);
-						$scenario->save();
-						break;
-					case 'activate':
-						$scenario->setIsActive(1);
-						$scenario->save();
-						break;
-				}
-			} else {
-				log::add('calendar', 'error', __('Scénario non trouvé : ', __FILE__) . $this->getCmd_param($_action . '_scenarioName'));
+				scenarioExpression::createAndExec('action', $action['cmd'], $options);
+			} catch (Exception $e) {
+				log::add('alarm', 'error', __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
 			}
 		}
 		return true;

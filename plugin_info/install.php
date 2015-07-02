@@ -26,6 +26,32 @@ function calendar_install() {
 	}
 }
 
+function calendar_update() {
+	$calendar = new calendar();
+	foreach (calendar_event::all() as $event) {
+		foreach (array('start', 'end') as $_action) {
+			if ($event->getCmd_param($_action . '_type') == 'cmd') {
+				$_action = array();
+				$_action['cmd'] = $event->getCmd_param($_action . '_name');
+				$_action['options'] = $event->getCmd_param($_action . '_options');
+				$event->setCmd_param($_action . '_type', '');
+				$event->setCmd_param($_action . '_name', '');
+				$event->setCmd_param($_action . '_options', '');
+				$event->setCmd_param($_action, array($_action));
+			}
+			if ($event->getCmd_param($_action . '_type') == 'scenario') {
+				$_action = array();
+				$_action['cmd'] = 'scenario';
+				$_action['options'] = array('scenario_id' => str_replace(array('#', 'scenario'), '', $event->getCmd_param($_action . '_scenarioName')), 'action' => $event->getCmd_param($_action . '_action'));
+				$event->setCmd_param($_action . '_type', '');
+				$event->setCmd_param($_action . '_name', '');
+				$event->setCmd_param($_action . '_options', '');
+				$event->setCmd_param($_action, array($_action));
+			}
+		}
+	}
+}
+
 function calendar_remove() {
 	DB::Prepare('DROP TABLE IF EXISTS `calendar_event`', array(), DB::FETCH_TYPE_ROW);
 }
