@@ -293,6 +293,10 @@ foreach (calendar::byType('calendar') as $calendar) {
         $('#div_' + _type + ' .' + _type + ':last').setValues(_action, '.expressionAttr');
     }
 
+    $("#div_start").sortable({axis: "y", cursor: "move", items: ".start", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+
+    $("#div_end").sortable({axis: "y", cursor: "move", items: ".end", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+
     $('body').undelegate(".cmdAction.expressionAttr[data-l1key=cmd]", 'focusout').delegate('.cmdAction.expressionAttr[data-l1key=cmd]', 'focusout', function (event) {
         var type = $(this).attr('data-type')
         var expression = $(this).closest('.' + type).getValues('.expressionAttr');

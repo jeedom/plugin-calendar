@@ -65,7 +65,11 @@ Pour ajouter une action il suffit de cliquer sur le bouton + au bout de la ligne
 
 [icon="../images/plugin/tip.png"]
 [TIP]
-Pour piloter un scénario il suffit d'écrire scénario dans la case puis de cliquer ailleurs et Jeedom fera apparaitre les options possible
+Pour piloter un scénario il suffit d'écrire scénario dans la case puis de cliquer ailleurs et Jeedom fera apparaitre les options possible. Pour changer la valeur d'une variable il faut écrire variable
+
+[icon="../images/plugin/tip.png"]
+[TIP]
+Il est possible de modifier l'ordre des actions en maintenant/glissant celle-ci
 
 ==== Action de fin
 
