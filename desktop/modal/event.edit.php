@@ -50,8 +50,8 @@ if (is_object($event)) {
 	echo '<a class="btn btn-danger pull-right btn-xs" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
 }
 ?>
-     </legend>
-     <div class="form-group">
+       </legend>
+       <div class="form-group">
         <label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
         <div class="col-sm-3">
             <input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName' />
@@ -128,8 +128,8 @@ foreach (calendar::byType('calendar') as $calendar) {
 	}
 }
 ?>
-</select>
-</div>
+        </select>
+    </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
@@ -148,36 +148,36 @@ foreach (calendar::byType('calendar') as $calendar) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Mode de repetition}}</label>
         <div class="col-sm-3">
-         <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
-             <option value="simple">{{Repetition simple}}</option>
-             <option value="advance">{{Repetition le premier,deuxieme...}}</option>
-         </select>
-     </div>
- </div>
- <div class="repeatMode advance" style="display : none;">
+           <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
+               <option value="simple">{{Repetition simple}}</option>
+               <option value="advance">{{Repetition le premier,deuxieme...}}</option>
+           </select>
+       </div>
+   </div>
+   <div class="repeatMode advance" style="display : none;">
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Le}}</label>
         <div class="col-sm-2">
-           <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
-             <option value="first">{{Premier}}</option>
-             <option value="second">{{Deuxième}}</option>
-             <option value="third">{{Troisième}}</option>
-             <option value="fourth">{{Quatrieme}}</option>
-             <option value="last">{{Dernier}}</option>
-         </select>
-     </div>
-     <div class="col-sm-2">
-       <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
-         <option value="monday">{{Lundi}}</option>
-         <option value="tuesday">{{Mardi}}</option>
-         <option value="wednesday">{{Mercredi}}</option>
-         <option value="thursday">{{Jeudi}}</option>
-         <option value="friday">{{Vendredi}}</option>
-         <option value="saturday">{{Samedi}}</option>
-         <option value="sundy">{{Dimanche}}</option>
-     </select>
- </div>
- <label class="col-sm-1 control-label">{{du mois}}</label>
+         <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
+           <option value="first">{{Premier}}</option>
+           <option value="second">{{Deuxième}}</option>
+           <option value="third">{{Troisième}}</option>
+           <option value="fourth">{{Quatrieme}}</option>
+           <option value="last">{{Dernier}}</option>
+       </select>
+   </div>
+   <div class="col-sm-2">
+     <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
+       <option value="monday">{{Lundi}}</option>
+       <option value="tuesday">{{Mardi}}</option>
+       <option value="wednesday">{{Mercredi}}</option>
+       <option value="thursday">{{Jeudi}}</option>
+       <option value="friday">{{Vendredi}}</option>
+       <option value="saturday">{{Samedi}}</option>
+       <option value="sundy">{{Dimanche}}</option>
+   </select>
+</div>
+<label class="col-sm-1 control-label">{{du mois}}</label>
 </div>
 </div>
 <div class="repeatMode simple">
@@ -251,7 +251,7 @@ foreach (calendar::byType('calendar') as $calendar) {
 	}
 }
 ?>
-</select>
+    </select>
 </div>
 </div>
 <div class="form-group">
@@ -266,6 +266,10 @@ foreach (calendar::byType('calendar') as $calendar) {
 </form>
 
 <script>
+    setTimeout(function(){
+       initCheckBox();
+   }, 100);
+
     function addAction(_action, _type, _name) {
         if (!isset(_action)) {
             _action = {};
@@ -318,30 +322,12 @@ foreach (calendar::byType('calendar') as $calendar) {
     });
 
     $("body").undelegate('.bt_removeAction', 'click').delegate('.bt_removeAction', 'click', function () {
-    var type = $(this).attr('data-type');
-    $(this).closest('.' + type).remove();
-});
+        var type = $(this).attr('data-type');
+        $(this).closest('.' + type).remove();
+    });
 
     $('.bt_addAction').off('click').on('click',function(){
         addAction({}, $(this).attr('data-type'), '{{Action}}');
-    });
-
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=start_name]').off('change').on('change', function () {
-        var html = jeedom.cmd.displayActionOption($(this).value());
-        $('#div_eventEditCmdStart .options').empty().append(html);
-    });
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=start_type]').off('change').on('change', function () {
-        $('.div_startType').hide();
-        $('.div_start' + $(this).value()).show();
-    });
-
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=end_name]').off('change').on('change', function () {
-        var html = jeedom.cmd.displayActionOption($(this).value());
-        $('#div_eventEditCmdEnd .options').empty().append(html);
-    });
-    $('.calendarAttr[data-l1key=cmd_param][data-l2key=end_type]').off('change').on('change', function () {
-        $('.div_endType').hide();
-        $('.div_end' + $(this).value()).show();
     });
 
     $('.calendarAction[data-action=allDay]').off('click').on('click', function () {
@@ -370,7 +356,7 @@ foreach (calendar::byType('calendar') as $calendar) {
         });
     });
 
-    $('.calendarAttr[data-l1key=repeat][data-l2key=enable]').off('change').on('change', function () {
+    $('.calendarAttr[data-l1key=repeat][data-l2key=enable]').off('change switchChange.bootstrapSwitch').on('change switchChange.bootstrapSwitch', function () {
         if ($(this).value() == 1) {
             $('#form_eventEdit .div_repeatOption').show();
         } else {
@@ -378,7 +364,7 @@ foreach (calendar::byType('calendar') as $calendar) {
         }
     });
 
-    $('.calendarAttr[data-l1key=repeat][data-l2key=mode]').off('change').on('change', function () {
+    $('.calendarAttr[data-l1key=repeat][data-l2key=mode]').off('change switchChange.bootstrapSwitch').on('change switchChange.bootstrapSwitch', function () {
         $('#form_eventEdit .repeatMode').hide();
         $('#form_eventEdit .repeatMode.'+$(this).value()).show();
     });
