@@ -356,7 +356,7 @@ class calendar_event {
 
 	public static function searchByCmd($_cmd_id) {
 		$values = array(
-			'cmd_param' => '%"start_type":"cmd"%#' . $_cmd_id . '#%',
+			'cmd_param' => '%"cmd":"#' . $_cmd_id . '#"%',
 		);
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
 		FROM calendar_event
