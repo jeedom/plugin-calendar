@@ -72,6 +72,7 @@ class calendar extends eqLogic {
 	}
 
 	public static function cronHourly() {
+		return;
 		foreach (cron::searchClassAndFunction('calendar', 'pull') as $cron) {
 			$c = new Cron\CronExpression($cron->getSchedule(), new Cron\FieldFactory);
 			try {
