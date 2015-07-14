@@ -40,6 +40,8 @@ class calendar extends eqLogic {
 				$startDate = null;
 				$endDate = null;
 			}
+			log::add('calendar', 'debug', 'Reprogrammation');
+			$event->reschedule();
 			log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
 			if (jeedom::isDateOk() && $eqLogic->getConfiguration('enableCalendar', 1) == 1) {
 				$results = $event->calculOccurence($startDate, $endDate);
@@ -60,8 +62,6 @@ class calendar extends eqLogic {
 					}
 				}
 			}
-			log::add('calendar', 'debug', 'Reprogrammation');
-			$event->reschedule();
 		}
 	}
 
