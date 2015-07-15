@@ -723,7 +723,6 @@ OR until = "0000-00-00 00:00:00")';
 		if ($this->getUntil() == '') {
 			$this->setUntil('0000-00-00 00:00:00');
 		}
-		$this->setCmd_param('in_progress', 0);
 	}
 
 	public function save() {
