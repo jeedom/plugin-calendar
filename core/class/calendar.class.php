@@ -158,17 +158,18 @@ class calendar extends eqLogic {
 		$disable->setDisplay('icon', '<i class="fa fa-times"></i>');
 		$disable->save();
 
-		$disable = $this->getCmd(null, 'in_progress');
-		if (!is_object($disable)) {
-			$disable = new calendarCmd();
-			$disable->setIsVisible(0);
+		$in_progress = $this->getCmd(null, 'in_progress');
+		if (!is_object($in_progress)) {
+			$in_progress = new calendarCmd();
+			$in_progress->setIsVisible(0);
 		}
-		$disable->setEqLogic_id($this->getId());
-		$disable->setName(__('En cours', __FILE__));
-		$disable->setType('info');
-		$disable->setSubType('string');
-		$disable->setLogicalId('in_progress');
-		$disable->save();
+		$in_progress->setEqLogic_id($this->getId());
+		$in_progress->setName(__('En cours', __FILE__));
+		$in_progress->setType('info');
+		$in_progress->setSubType('string');
+		$in_progress->setLogicalId('in_progress');
+		$in_progress->setEventOnly(1);
+		$in_progress->save();
 
 		$this->refreshWidget();
 	}
@@ -761,6 +762,11 @@ OR until = "0000-00-00 00:00:00")';
 		if ($_action == 'end') {
 			$this->setCmd_param('in_progress', 0);
 			DB::save($this, true);
+		}
+		$eqLogic = $this->getEqLogic();
+		$cmd = $eqLogic->getCmd('info', 'in_progress');
+		if (is_object($cmd)) {
+			$cmd->event($cmd->execute());
 		}
 		foreach ($this->getCmd_param($_action) as $action) {
 			try {
