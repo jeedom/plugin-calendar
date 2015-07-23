@@ -179,8 +179,8 @@ class calendar extends eqLogic {
 			return '';
 		}
 		$_version = jeedom::versionAlias($_version);
-		$startDate = date('Y-m-d H:i:s');
-		$endDate = date('Y-m-d H:i:s', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')));
+		$startDate = date('Y-m-d 00:00:00');
+		$endDate = date('Y-m-d 00:00:00', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d 00:00:00')));
 		$events = calendar_event::calculeEvents(calendar_event::getEventsByEqLogic($this->getId(), $startDate, $endDate), $startDate, $endDate);
 		usort($events, 'calendar::orderEvent');
 		$tEvent = getTemplate('core', $_version, 'event', 'calendar');
