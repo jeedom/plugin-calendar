@@ -384,8 +384,7 @@ class calendar_event {
 			$values['endDate'] = $_endDate;
 			$sql .= ' AND ((startDate >=:startDate
 				AND startDate <=:endDate)
-OR until >=:startDate
-OR until = "0000-00-00 00:00:00")';
+OR (until >=:startDate AND until <=:endDate))';
 		}
 		$sql .= ' ORDER BY startDate';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
