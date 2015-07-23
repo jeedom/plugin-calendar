@@ -190,6 +190,9 @@ class calendar extends eqLogic {
 			if ($this->getConfiguration('nbWidgetMaxEvent', 0) != 0 && $this->getConfiguration('nbWidgetMaxEvent', 0) < $nbEvent) {
 				break;
 			}
+			if (strtotime($event['start']) < strtotime($startDate) || strtotime($event['start']) > strtotime($endDate)) {
+				continue;
+			}
 			if ($event['noDisplayOnDashboard'] == 0) {
 				$replace = array(
 					'#uid#' => mt_rand() . $this->getId() . $event['id'],
