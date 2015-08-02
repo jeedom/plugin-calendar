@@ -328,6 +328,10 @@ class calendarCmd extends cmd {
 					}
 				}
 			}
+			$return = trim(trim($return), ',');
+			if ($return == '') {
+				$return = __('Aucun', __FILE__);
+			}
 			return trim(trim($return), ',');
 		}
 
