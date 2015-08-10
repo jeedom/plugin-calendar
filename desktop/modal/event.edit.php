@@ -348,7 +348,7 @@ foreach (calendar::byType('calendar') as $calendar) {
         var m = endDate.getMonth() + 1;
         m = (m < 10) ? "0" + m : m;
         var d = endDate.getDate();
-        $('.calendarAttr[data-l1key=endDate]').value(y + '-' + m + '-' + d + ' 00:00:00');
+        $('.calendarAttr[data-l1key=endDate]').value(startDate + ' 23:59:00');
     });
 
     $('#bt_chooseIcon').on('click', function () {
