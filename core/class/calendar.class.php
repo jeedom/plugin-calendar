@@ -338,7 +338,7 @@ class calendarCmd extends cmd {
 			if ($return == '') {
 				$return = __('Aucun', __FILE__);
 			}
-			return trim(trim($return), ',');
+			return $return;
 		}
 
 	}
