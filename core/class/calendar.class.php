@@ -757,6 +757,11 @@ class calendar_event {
 			$endDate = null;
 		}
 		$this->reschedule();
+		$eqLogic = $this->getEqLogic();
+		$cmd = $eqLogic->getCmd('info', 'in_progress');
+		if (is_object($cmd)) {
+			$cmd->event($cmd->execute());
+		}
 	}
 
 	public function remove() {
