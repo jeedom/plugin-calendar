@@ -756,22 +756,32 @@ class calendar_event {
 			$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
 			$endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
 		} else {
+			$startDate = null;
 			$endDate = null;
 		}
 		$this->reschedule();
+		$in_progress = $this->getCmd_param('in_progress', 0);
 		$this->setCmd_param('in_progress', 0);
+		$nowtime = strtotime('now');
 		try {
 			if (jeedom::isDateOk()) {
 				$results = $this->calculOccurence($startDate, $endDate);
-				if (count($results) == 0) {
-					return null;
+				if (count($results) != 0) {
 					for ($i = 0; $i < count($results); $i++) {
 						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-							$this->setCmd_param('in_progress', 1);
+							if ($in_progress == 0) {
+								$this->doAction('start');
+							} else {
+								$this->setCmd_param('in_progress', 1);
+							}
 							break;
 						}
 						if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-							$this->setCmd_param('in_progress', 0);
+							if ($in_progress == 1) {
+								$this->doAction('end');
+							} else {
+								$this->setCmd_param('in_progress', 0);
+							}
 							break;
 						}
 					}
