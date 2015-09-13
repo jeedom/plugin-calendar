@@ -771,6 +771,7 @@ class calendar_event {
 						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
 							if ($in_progress == 0) {
 								$this->doAction('start');
+								return;
 							} else {
 								$this->setCmd_param('in_progress', 1);
 							}
@@ -779,6 +780,7 @@ class calendar_event {
 						if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
 							if ($in_progress == 1) {
 								$this->doAction('end');
+								return;
 							} else {
 								$this->setCmd_param('in_progress', 0);
 							}
