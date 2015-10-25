@@ -494,8 +494,8 @@ class calendar_event {
 		$repeat = $this->getRepeat();
 		if ($repeat['enable'] == 1) {
 			if ($repeat['nationalDay'] == 'onlyNationalDay') {
-				$startDate = date('Y-m-d H:i:s', strtotime('-6 month ' . date('Y-m-d H:i:s')));
-				$endDate = date('Y-m-d H:i:s', strtotime('+6 month ' . date('Y-m-d H:i:s')));
+				$startDate = date('Y-m-d H:i:s', strtotime('-1 month ' . date('Y-m-d H:i:s')));
+				$endDate = date('Y-m-d H:i:s', strtotime('+1 month ' . date('Y-m-d H:i:s')));
 			} else {
 				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 				$endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
