@@ -26,6 +26,9 @@ class calendar extends eqLogic {
 		$event = calendar_event::byId($_option['event_id']);
 		if (is_object($event)) {
 			$eqLogic = $event->getEqLogic();
+			if ($eqLogic->getConfiguration('enableCalendar', 1) != 1) {
+				return;
+			}
 			$nowtime = strtotime('now');
 			$repeat = $event->getRepeat();
 			if ($repeat['enable'] == 1) {
@@ -40,10 +43,9 @@ class calendar extends eqLogic {
 				$startDate = null;
 				$endDate = null;
 			}
-
 			log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
 			try {
-				if (jeedom::isDateOk() && $eqLogic->getConfiguration('enableCalendar', 1) == 1) {
+				if (jeedom::isDateOk()) {
 					$results = $event->calculOccurence($startDate, $endDate);
 					if (count($results) == 0) {
 						return null;
@@ -72,20 +74,14 @@ class calendar extends eqLogic {
 	}
 
 	public static function start() {
-		foreach (calendar_event::all() as $event) {
-			$event->save();
+		foreach (self::byType('calendar') as $eqLogic) {
+			$eqLogic->rescheduleEvent();
 		}
 	}
 
 	public static function restore() {
-		foreach (calendar_event::all() as $event) {
-			$event->save();
-		}
-	}
-
-	public static function cronHourly() {
-		foreach (calendar_event::all() as $event) {
-			$event->save();
+		foreach (self::byType('calendar') as $eqLogic) {
+			$eqLogic->rescheduleEvent();
 		}
 	}
 
@@ -168,8 +164,17 @@ class calendar extends eqLogic {
 		$in_progress->setLogicalId('in_progress');
 		$in_progress->setEventOnly(1);
 		$in_progress->save();
-
+		$this->rescheduleEvent();
 		$this->refreshWidget();
+	}
+
+	public function rescheduleEvent() {
+		if ($this->getConfiguration('enableCalendar', 1) != 1) {
+			return;
+		}
+		foreach ($this->getEvents() as $event) {
+			$event->save();
+		}
 	}
 
 	public function toHtml($_version = 'dashboard') {
