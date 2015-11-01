@@ -174,7 +174,7 @@ foreach (calendar::byType('calendar') as $calendar) {
          <option value="thursday">{{Jeudi}}</option>
          <option value="friday">{{Vendredi}}</option>
          <option value="saturday">{{Samedi}}</option>
-         <option value="sundy">{{Dimanche}}</option>
+         <option value="sunday">{{Dimanche}}</option>
      </select>
  </div>
  <label class="col-sm-1 control-label">{{du mois}}</label>
