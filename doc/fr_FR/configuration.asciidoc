@@ -96,6 +96,9 @@ C'est ici que se trouve toute la gestion temporelle de votre évènement :
 * *Exclure* : idem que "Inclure" mais cette fois pour exclure des dates.
 
 [NOTE]
+Les jours feriés sont ceux Francais et uniquement les Francais cela ne marche donc pas pour les autres pays
+
+[NOTE]
 En haut à droite vous avez 3 boutons, un pour supprimer, un pour sauvegarder et un pour dupliquer. Lors du clic sur ce dernier jeedom vous affiche l'evenement resultant de la duplication pour que vous puissiez changer le nom par exemple.Il ne faut donc pas oublier de sauvegarder suite à un clic sur le bouton dupliquer
 
 == Widget
