@@ -43,6 +43,8 @@ class calendar extends eqLogic {
 				$startDate = null;
 				$endDate = null;
 			}
+			log::add('calendar', 'debug', 'Reprogrammation');
+			$event->reschedule();
 			log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
 			try {
 				if (jeedom::isDateOk()) {
@@ -67,9 +69,6 @@ class calendar extends eqLogic {
 			} catch (Exception $e) {
 
 			}
-			log::add('calendar', 'debug', 'Reprogrammation');
-			$event->reschedule();
-
 		}
 	}
 
