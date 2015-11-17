@@ -60,7 +60,7 @@ if (is_object($event)) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Icône}}</label>
         <div class="col-sm-3">
-            <input type="text" class="calendarAttr form-control" data-l1key="eqLogic_id" style="display: none;" value="<?php echo init('eqLogic_id')?>"/>
+            <input type="text" class="calendarAttr form-control" data-l1key="eqLogic_id" style="display: none;" value="<?php echo init('eqLogic_id') ?>"/>
             <input type="text" class="calendarAttr form-control" data-l1key="id" style="display: none;" />
             <div class="calendarAttr" data-l1key="cmd_param" data-l2key="icon" ></div>
         </div>
@@ -148,36 +148,36 @@ foreach (calendar::byType('calendar') as $calendar) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Mode de repetition}}</label>
         <div class="col-sm-3">
-         <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
-             <option value="simple">{{Repetition simple}}</option>
-             <option value="advance">{{Repetition le premier,deuxieme...}}</option>
-         </select>
-     </div>
- </div>
- <div class="repeatMode advance" style="display : none;">
+           <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
+               <option value="simple">{{Repetition simple}}</option>
+               <option value="advance">{{Repetition le premier,deuxieme...}}</option>
+           </select>
+       </div>
+   </div>
+   <div class="repeatMode advance" style="display : none;">
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Le}}</label>
         <div class="col-sm-2">
-           <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
-             <option value="first">{{Premier}}</option>
-             <option value="second">{{Deuxième}}</option>
-             <option value="third">{{Troisième}}</option>
-             <option value="fourth">{{Quatrieme}}</option>
-             <option value="last">{{Dernier}}</option>
-         </select>
-     </div>
-     <div class="col-sm-2">
-       <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
-         <option value="monday">{{Lundi}}</option>
-         <option value="tuesday">{{Mardi}}</option>
-         <option value="wednesday">{{Mercredi}}</option>
-         <option value="thursday">{{Jeudi}}</option>
-         <option value="friday">{{Vendredi}}</option>
-         <option value="saturday">{{Samedi}}</option>
-         <option value="sunday">{{Dimanche}}</option>
-     </select>
- </div>
- <label class="col-sm-1 control-label">{{du mois}}</label>
+         <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
+           <option value="first">{{Premier}}</option>
+           <option value="second">{{Deuxième}}</option>
+           <option value="third">{{Troisième}}</option>
+           <option value="fourth">{{Quatrieme}}</option>
+           <option value="last">{{Dernier}}</option>
+       </select>
+   </div>
+   <div class="col-sm-2">
+     <select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
+       <option value="monday">{{Lundi}}</option>
+       <option value="tuesday">{{Mardi}}</option>
+       <option value="wednesday">{{Mercredi}}</option>
+       <option value="thursday">{{Jeudi}}</option>
+       <option value="friday">{{Vendredi}}</option>
+       <option value="saturday">{{Samedi}}</option>
+       <option value="sunday">{{Dimanche}}</option>
+   </select>
+</div>
+<label class="col-sm-1 control-label">{{du mois}}</label>
 </div>
 </div>
 <div class="repeatMode simple">
@@ -266,171 +266,175 @@ foreach (calendar::byType('calendar') as $calendar) {
 </form>
 
 <script>
-    setTimeout(function(){
-     initCheckBox();
- }, 100);
+   $("#div_start").sortable({axis: "y", cursor: "move", items: ".start", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+   $("#div_end").sortable({axis: "y", cursor: "move", items: ".end", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 
 
-    function addAction(_action, _type, _name) {
-        if (!isset(_action)) {
-            _action = {};
-        }
-        if (!isset(_action.options)) {
-            _action.options = {};
-        }
-        var div = '<div class="' + _type + '">';
-        div += '<div class="form-group ">';
-        div += '<div class="col-sm-5">';
-        div += '<div class="input-group">';
-        div += '<span class="input-group-btn">';
-        div += '<a class="btn btn-default btn-sm bt_removeAction" data-type="' + _type + '"><i class="fa fa-minus-circle"></i></a>';
-        div += '</span>';
-        div += '<input class="expressionAttr form-control input-sm cmdAction" data-l1key="cmd" data-type="' + _type + '" />';
-        div += '<span class="input-group-btn">';
-        div += '<a class="btn btn-default btn-sm listCmdAction" data-type="' + _type + '"><i class="fa fa-list-alt"></i></a>';
-        div += '</span>';
-        div += '</div>';
-        div += '</div>';
-        div += '<div class="col-sm-7 actionOptions">';
-        div += jeedom.cmd.displayActionOption(init(_action.cmd, ''), _action.options);
-        div += '</div>';
-        $('#div_' + _type).append(div);
-        $('#div_' + _type + ' .' + _type + ':last').setValues(_action, '.expressionAttr');
+   setTimeout(function(){
+       initCheckBox();
+   }, 100);
+
+
+   function addAction(_action, _type, _name) {
+    if (!isset(_action)) {
+        _action = {};
     }
+    if (!isset(_action.options)) {
+        _action.options = {};
+    }
+    var div = '<div class="' + _type + '">';
+    div += '<div class="form-group ">';
+    div += '<div class="col-sm-5">';
+    div += '<div class="input-group">';
+    div += '<span class="input-group-btn">';
+    div += '<a class="btn btn-default btn-sm bt_removeAction" data-type="' + _type + '"><i class="fa fa-minus-circle"></i></a>';
+    div += '</span>';
+    div += '<input class="expressionAttr form-control input-sm cmdAction" data-l1key="cmd" data-type="' + _type + '" />';
+    div += '<span class="input-group-btn">';
+    div += '<a class="btn btn-default btn-sm listCmdAction" data-type="' + _type + '"><i class="fa fa-list-alt"></i></a>';
+    div += '</span>';
+    div += '</div>';
+    div += '</div>';
+    div += '<div class="col-sm-7 actionOptions">';
+    div += jeedom.cmd.displayActionOption(init(_action.cmd, ''), _action.options);
+    div += '</div>';
+    $('#div_' + _type).append(div);
+    $('#div_' + _type + ' .' + _type + ':last').setValues(_action, '.expressionAttr');
+}
 
-    $("#div_start").sortable({axis: "y", cursor: "move", items: ".start", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+$("#div_start").sortable({axis: "y", cursor: "move", items: ".start", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 
-    $("#div_end").sortable({axis: "y", cursor: "move", items: ".end", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+$("#div_end").sortable({axis: "y", cursor: "move", items: ".end", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 
-    $('body').undelegate(".cmdAction.expressionAttr[data-l1key=cmd]", 'focusout').delegate('.cmdAction.expressionAttr[data-l1key=cmd]', 'focusout', function (event) {
-        var type = $(this).attr('data-type')
-        var expression = $(this).closest('.' + type).getValues('.expressionAttr');
-        var el = $(this);
-        jeedom.cmd.displayActionOption($(this).value(), init(expression[0].options), function (html) {
+$('body').undelegate(".cmdAction.expressionAttr[data-l1key=cmd]", 'focusout').delegate('.cmdAction.expressionAttr[data-l1key=cmd]', 'focusout', function (event) {
+    var type = $(this).attr('data-type')
+    var expression = $(this).closest('.' + type).getValues('.expressionAttr');
+    var el = $(this);
+    jeedom.cmd.displayActionOption($(this).value(), init(expression[0].options), function (html) {
+        el.closest('.' + type).find('.actionOptions').html(html);
+    })
+});
+
+$("body").undelegate(".listCmdAction", 'click').delegate(".listCmdAction", 'click', function () {
+    var type = $(this).attr('data-type');
+    var el = $(this).closest('.' + type).find('.expressionAttr[data-l1key=cmd]');
+    jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {
+        el.value(result.human);
+        jeedom.cmd.displayActionOption(el.value(), '', function (html) {
             el.closest('.' + type).find('.actionOptions').html(html);
-        })
-    });
-
-    $("body").undelegate(".listCmdAction", 'click').delegate(".listCmdAction", 'click', function () {
-        var type = $(this).attr('data-type');
-        var el = $(this).closest('.' + type).find('.expressionAttr[data-l1key=cmd]');
-        jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {
-            el.value(result.human);
-            jeedom.cmd.displayActionOption(el.value(), '', function (html) {
-                el.closest('.' + type).find('.actionOptions').html(html);
-            });
         });
     });
+});
 
-    $("body").undelegate('.bt_removeAction', 'click').delegate('.bt_removeAction', 'click', function () {
-        var type = $(this).attr('data-type');
-        $(this).closest('.' + type).remove();
-    });
+$("body").undelegate('.bt_removeAction', 'click').delegate('.bt_removeAction', 'click', function () {
+    var type = $(this).attr('data-type');
+    $(this).closest('.' + type).remove();
+});
 
-    $('.bt_addAction').off('click').on('click',function(){
-        addAction({}, $(this).attr('data-type'), '{{Action}}');
-    });
+$('.bt_addAction').off('click').on('click',function(){
+    addAction({}, $(this).attr('data-type'), '{{Action}}');
+});
 
-    $('.calendarAction[data-action=allDay]').off('click').on('click', function () {
-        var startDate = $('.calendarAttr[data-l1key=startDate]').value().substr(0, 10);
-        if (startDate == '') {
-            var startDate = new Date();
-            var y = startDate.getFullYear();
-            var m = startDate.getMonth() + 1;
-            var d = startDate.getDate();
-            m = (m < 10) ? "0" + m : m;
-            startDate = y + '-' + m + '-' + d;
-        }
-        $('.calendarAttr[data-l1key=startDate]').value(startDate + ' 00:00:00');
-        var endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 1);
-        var y = endDate.getFullYear();
-        var m = endDate.getMonth() + 1;
+$('.calendarAction[data-action=allDay]').off('click').on('click', function () {
+    var startDate = $('.calendarAttr[data-l1key=startDate]').value().substr(0, 10);
+    if (startDate == '') {
+        var startDate = new Date();
+        var y = startDate.getFullYear();
+        var m = startDate.getMonth() + 1;
+        var d = startDate.getDate();
         m = (m < 10) ? "0" + m : m;
-        var d = endDate.getDate();
-        $('.calendarAttr[data-l1key=endDate]').value(startDate + ' 23:59:00');
+        startDate = y + '-' + m + '-' + d;
+    }
+    $('.calendarAttr[data-l1key=startDate]').value(startDate + ' 00:00:00');
+    var endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 1);
+    var y = endDate.getFullYear();
+    var m = endDate.getMonth() + 1;
+    m = (m < 10) ? "0" + m : m;
+    var d = endDate.getDate();
+    $('.calendarAttr[data-l1key=endDate]').value(startDate + ' 23:59:00');
+});
+
+$('#bt_chooseIcon').on('click', function () {
+    chooseIcon(function (_icon) {
+        $('.calendarAttr[data-l1key=cmd_param][data-l2key=icon]').empty().append(_icon);
     });
-
-    $('#bt_chooseIcon').on('click', function () {
-        chooseIcon(function (_icon) {
-            $('.calendarAttr[data-l1key=cmd_param][data-l2key=icon]').empty().append(_icon);
-        });
-    });
+});
 
 
-    $("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=enable]", 'change switchChange.bootstrapSwitch').delegate('.calendarAttr[data-l1key=repeat][data-l2key=enable]','change switchChange.bootstrapSwitch', function () {
-        if ($(this).value() == 1) {
-            $('#form_eventEdit .div_repeatOption').show();
-        } else {
-            $('#form_eventEdit .div_repeatOption').hide();
-        }
-    });
+$("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=enable]", 'change switchChange.bootstrapSwitch').delegate('.calendarAttr[data-l1key=repeat][data-l2key=enable]','change switchChange.bootstrapSwitch', function () {
+    if ($(this).value() == 1) {
+        $('#form_eventEdit .div_repeatOption').show();
+    } else {
+        $('#form_eventEdit .div_repeatOption').hide();
+    }
+});
 
-    $("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=mode]", 'change').delegate('.calendarAttr[data-l1key=repeat][data-l2key=mode]','change', function () {
-        $('#form_eventEdit .repeatMode').hide();
-        $('#form_eventEdit .repeatMode.'+$(this).value()).show();
-    });
+$("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=mode]", 'change').delegate('.calendarAttr[data-l1key=repeat][data-l2key=mode]','change', function () {
+    $('#form_eventEdit .repeatMode').hide();
+    $('#form_eventEdit .repeatMode.'+$(this).value()).show();
+});
 
-    if (calendarEvent != null && is_array(calendarEvent)) {
-        $('#form_eventEdit').setValues(calendarEvent, '.calendarAttr');
-        $(".calendarAttr[data-l1key=repeat][data-l2key=enable]").trigger('switchChange.bootstrapSwitch');
-        if (isset(calendarEvent.cmd_param.start)) {
-            for (var i in calendarEvent.cmd_param.start) {
-                addAction(calendarEvent.cmd_param.start[i], 'start', '{{Action}}');
-            }
-        }
-        if (isset(calendarEvent.cmd_param.end)) {
-            for (var i in calendarEvent.cmd_param.end) {
-                addAction(calendarEvent.cmd_param.end[i], 'end', '{{Action}}');
-            }
+if (calendarEvent != null && is_array(calendarEvent)) {
+    $('#form_eventEdit').setValues(calendarEvent, '.calendarAttr');
+    $(".calendarAttr[data-l1key=repeat][data-l2key=enable]").trigger('switchChange.bootstrapSwitch');
+    if (isset(calendarEvent.cmd_param.start)) {
+        for (var i in calendarEvent.cmd_param.start) {
+            addAction(calendarEvent.cmd_param.start[i], 'start', '{{Action}}');
         }
     }
+    if (isset(calendarEvent.cmd_param.end)) {
+        for (var i in calendarEvent.cmd_param.end) {
+            addAction(calendarEvent.cmd_param.end[i], 'end', '{{Action}}');
+        }
+    }
+}
 
-    $('.datetimepicker').datetimepicker({lang: 'fr',
-        i18n: {
-            fr: {
-                months: [
-                'Janvier', 'Février', 'Mars', 'Avril',
-                'Mai', 'Juin', 'Juillet', 'Aout',
-                'Septembre', 'Octobre', 'Novembre', 'Décembre',
-                ],
-                dayOfWeek: [
-                "Di", "Lu", "Ma", "Me",
-                "Je", "Ve", "Sa",
-                ]
-            }
+$('.datetimepicker').datetimepicker({lang: 'fr',
+    i18n: {
+        fr: {
+            months: [
+            'Janvier', 'Février', 'Mars', 'Avril',
+            'Mai', 'Juin', 'Juillet', 'Aout',
+            'Septembre', 'Octobre', 'Novembre', 'Décembre',
+            ],
+            dayOfWeek: [
+            "Di", "Lu", "Ma", "Me",
+            "Je", "Ve", "Sa",
+            ]
+        }
+    },
+    format: 'Y-m-d H:i:00',
+    step: 15
+});
+$('#md_eventEditSave').on('click', function () {
+    var calendarEvent = $('#form_eventEdit').getValues('.calendarAttr');
+    calendarEvent = calendarEvent[0];
+    calendarEvent.cmd_param.start = $('#div_start .start').getValues('.expressionAttr');
+    calendarEvent.cmd_param.end = $('#div_end .end').getValues('.expressionAttr');
+    $.ajax({
+        type: 'POST',
+        url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+        data: {
+            action: 'saveEvent',
+            event: json_encode(calendarEvent)
         },
-        format: 'Y-m-d H:i:00',
-        step: 15
-    });
-    $('#md_eventEditSave').on('click', function () {
-        var calendarEvent = $('#form_eventEdit').getValues('.calendarAttr');
-        calendarEvent = calendarEvent[0];
-        calendarEvent.cmd_param.start = $('#div_start .start').getValues('.expressionAttr');
-        calendarEvent.cmd_param.end = $('#div_end .end').getValues('.expressionAttr');
-        $.ajax({
-            type: 'POST',
-            url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-            data: {
-                action: 'saveEvent',
-                event: json_encode(calendarEvent)
-            },
-            dataType: 'json',
-            error: function (request, status, error) {
-                handleAjaxError(request, status, error, $('#div_eventEditAlert'));
-            },
-            success: function (data) {
-                if (data.state != 'ok') {
-                    $('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
-                    return;
-                }
-                $('#div_eventEditAlert').showAlert({message: '{{Evènement ajouté avec succès}}', level: 'success'});
-                calendar.fullCalendar('refetchEvents');
-                updateEventList();
-                $('#form_eventEdit').closest("div.ui-dialog-content").dialog("close");
+        dataType: 'json',
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error, $('#div_eventEditAlert'));
+        },
+        success: function (data) {
+            if (data.state != 'ok') {
+                $('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
+                return;
             }
-        });
+            $('#div_eventEditAlert').showAlert({message: '{{Evènement ajouté avec succès}}', level: 'success'});
+            calendar.fullCalendar('refetchEvents');
+            updateEventList();
+            $('#form_eventEdit').closest("div.ui-dialog-content").dialog("close");
+        }
     });
+});
 
 $('#md_eventEditDuplicate').on('click', function () {
     $('.calendarAttr[data-l1key=id]').value('');
