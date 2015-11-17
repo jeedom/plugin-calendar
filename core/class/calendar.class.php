@@ -164,6 +164,7 @@ class calendar extends eqLogic {
 		$in_progress->setEventOnly(1);
 		$in_progress->save();
 		$this->rescheduleEvent();
+		$this->rescheduleEvent();
 		$this->refreshWidget();
 	}
 
@@ -283,7 +284,7 @@ class calendarCmd extends cmd {
 		$eqLogic = $this->getEqLogic();
 		if ($this->getLogicalId() == 'enable') {
 			$eqLogic->setConfiguration('enableCalendar', 1);
-			$eqLogic->save();
+			$eqLogic->save(true);
 			$eqLogic->refreshWidget();
 			foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
 				if ($eqLogic->getConfiguration('enableCalendar', 1) == 0) {
@@ -318,7 +319,7 @@ class calendarCmd extends cmd {
 		}
 		if ($this->getLogicalId() == 'disable') {
 			$eqLogic->setConfiguration('enableCalendar', 0);
-			$eqLogic->save();
+			$eqLogic->save(true);
 			$eqLogic->refreshWidget();
 		}
 
