@@ -268,13 +268,7 @@ class calendarCmd extends cmd {
 	/*     * *********************Methode d'instance************************* */
 
 	public function dontRemoveCmd() {
-		if ($this->getLogicalId() == 'enable') {
-			return true;
-		}
-		if ($this->getLogicalId() == 'disable') {
-			return true;
-		}
-		if ($this->getLogicalId() == 'in_progress') {
+		if (in_array($this->getLogicalId(), array('enable','disable','in_progress'))) {
 			return true;
 		}
 		return false;
@@ -316,13 +310,14 @@ class calendarCmd extends cmd {
 				}
 				$event->reschedule();
 			}
+			return;
 		}
 		if ($this->getLogicalId() == 'disable') {
 			$eqLogic->setConfiguration('enableCalendar', 0);
 			$eqLogic->save(true);
 			$eqLogic->refreshWidget();
+			return
 		}
-
 		if ($this->getLogicalId() == 'in_progress') {
 			$return = '';
 			foreach ($eqLogic->getEvents() as $event) {
