@@ -172,6 +172,7 @@ class calendar extends eqLogic {
 		if ($this->getConfiguration('enableCalendar', 1) != 1) {
 			return;
 		}
+		log::add('calendar', 'debug', 'Reprogrammation de tous les évènements');
 		foreach ($this->getEvents() as $event) {
 			$event->save();
 		}
