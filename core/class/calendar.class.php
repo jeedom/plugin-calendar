@@ -50,6 +50,8 @@ class calendar extends eqLogic {
 				if (jeedom::isDateOk()) {
 					$results = $event->calculOccurence($startDate, $endDate);
 					if (count($results) == 0) {
+						log::add('calendar', 'debug', 'Aucune programmation trouvée, lancement des actions de fin');
+						$event->doAction('end');
 						return null;
 					}
 					log::add('calendar', 'debug', 'Recherche de l\'action à faire (start ou end)');
@@ -469,6 +471,10 @@ class calendar_event {
 
 	public function reschedule() {
 		$next = $this->nextOccurrence();
+		if ($next === null || $next === false) {
+			log::add('calendar', 'debug', 'Aucune reprogrammation à faire car aucune occurence suivante trouvée');
+			return;
+		}
 		log::add('calendar', 'debug', 'Reprogrammation à : ' . print_r($next, true) . ' de  : ' . print_r($this, true));
 		$cron = cron::byClassAndFunction('calendar', 'pull', array('event_id' => intval($this->getId())));
 		if ($next != null) {
