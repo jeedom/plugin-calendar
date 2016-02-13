@@ -169,7 +169,6 @@ class calendar extends eqLogic {
 		$in_progress->setType('info');
 		$in_progress->setSubType('string');
 		$in_progress->setLogicalId('in_progress');
-		$in_progress->setEventOnly(1);
 		$in_progress->save();
 		$this->rescheduleEvent();
 		$this->rescheduleEvent();
