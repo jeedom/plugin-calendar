@@ -200,6 +200,7 @@ class calendar extends eqLogic {
 		$tEvent = getTemplate('core', $_version, 'event', 'calendar');
 		$dEvent = '';
 		$nbEvent = 1;
+		$eventList = array();
 		foreach ($events as $event) {
 			if ($this->getConfiguration('nbWidgetMaxEvent', 0) != 0 && $this->getConfiguration('nbWidgetMaxEvent', 0) < $nbEvent) {
 				break;
@@ -207,6 +208,10 @@ class calendar extends eqLogic {
 			if (strtotime($event['start']) < strtotime($startDate) || strtotime($event['start']) > strtotime($endDate)) {
 				continue;
 			}
+			if (isset($eventList[$this->getId() . '_' . $event['id'] . '_' . $event['start'] . '_' . $event['end']])) {
+				continue;
+			}
+			$eventList[$this->getId() . '_' . $event['id'] . '_' . $event['start'] . '_' . $event['end']] = true;
 			if ($event['noDisplayOnDashboard'] == 0) {
 				$replace = array(
 					'#uid#' => mt_rand() . $this->getId() . $event['id'],
