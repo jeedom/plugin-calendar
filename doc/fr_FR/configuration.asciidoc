@@ -63,7 +63,7 @@ Permet de choisir la ou les action(s) à faire lors du lancement de l'évènemen
 Pour ajouter une action il suffit de cliquer sur le bouton + au bout de la ligne puis vous allez avoir un bouton pour chercher une commande une fois celle-ci trouvé vous aurez le choix des options si elle en a. VOus pouvez ajouter autant d'action que vous le voulez.
 
 [TIP]
-Pour piloter un scénario il suffit d'écrire scénario dans la case puis de cliquer ailleurs et Jeedom fera apparaitre les options possible. Pour changer la valeur d'une variable il faut écrire variable
+Pour piloter un scénario il suffit d'écrire "scenario" dans la case puis de cliquer ailleurs et Jeedom fera apparaitre les options possible. Pour changer la valeur d'une variable il faut écrire variable
 
 [TIP]
 Il est possible de modifier l'ordre des actions en maintenant/glissant celle-ci
