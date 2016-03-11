@@ -241,10 +241,6 @@ class calendar extends eqLogic {
 		} else {
 			$replace['#icon#'] = '';
 		}
-		if ($_version == 'dview' || $_version == 'mview') {
-			$object = $this->getObject();
-			$replace['#name#'] = (is_object($object)) ? $object->getName() . ' - ' . $replace['#name#'] : $replace['#name#'];
-		}
 		$info = '';
 		if ($this->getConfiguration('noStateDisplay') == 0) {
 			foreach ($this->getCmd(null, null, true) as $cmd) {
