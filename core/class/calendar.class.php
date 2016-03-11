@@ -194,10 +194,6 @@ class calendar extends eqLogic {
 		if (!is_array($replace)) {
 			return $replace;
 		}
-
-		if (!$this->hasRight('r')) {
-			return '';
-		}
 		$_version = jeedom::versionAlias($_version);
 
 		$startDate = date('Y-m-d 00:00:00');
