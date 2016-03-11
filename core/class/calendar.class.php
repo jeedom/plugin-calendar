@@ -241,6 +241,7 @@ class calendar extends eqLogic {
 		} else {
 			$replace['#icon#'] = '';
 		}
+		$replace['#event#'] = $dEvent;
 		$info = '';
 		if ($this->getConfiguration('noStateDisplay') == 0) {
 			foreach ($this->getCmd(null, null, true) as $cmd) {
