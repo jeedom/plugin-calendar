@@ -22,6 +22,10 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 class calendar extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
+	public static $_widgetPossibility = array('custom' => true);
+
+	/*     * ***********************Methode static*************************** */
+
 	public static function pull($_option) {
 		$event = calendar_event::byId($_option['event_id']);
 		if (is_object($event)) {
@@ -186,13 +190,16 @@ class calendar extends eqLogic {
 	}
 
 	public function toHtml($_version = 'dashboard') {
+		$replace = $this->preToHtml($_version);
+		if (!is_array($replace)) {
+			return $replace;
+		}
+
 		if (!$this->hasRight('r')) {
 			return '';
 		}
 		$_version = jeedom::versionAlias($_version);
-		if ($this->getDisplay('hideOn' . $_version) == 1) {
-			return '';
-		}
+
 		$startDate = date('Y-m-d 00:00:00');
 		$endDate = date('Y-m-d 00:00:00', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d 00:00:00')));
 		$events = calendar_event::calculeEvents(calendar_event::getEventsByEqLogic($this->getId(), $startDate, $endDate), $startDate, $endDate);
@@ -213,7 +220,7 @@ class calendar extends eqLogic {
 			}
 			$eventList[$this->getId() . '_' . $event['id'] . '_' . $event['start'] . '_' . $event['end']] = true;
 			if ($event['noDisplayOnDashboard'] == 0) {
-				$replace = array(
+				$replaceCmd = array(
 					'#uid#' => mt_rand() . $this->getId() . $event['id'],
 					'#event_id#' => $event['id'],
 					'#name#' => $event['title'],
@@ -224,19 +231,11 @@ class calendar extends eqLogic {
 					'#text_color#' => $event['textColor'],
 					'#eventLink#' => 'index.php?v=d&m=calendar&p=calendar&id=' . $this->getId() . '&event_id=' . $event['id'],
 				);
-				$dEvent .= template_replace($replace, $tEvent);
+				$dEvent .= template_replace($replaceCmd, $tEvent);
 				$nbEvent++;
 			}
 		}
 
-		$replace = array(
-			'#id#' => $this->getId(),
-			'#name#' => ($this->getConfiguration('enableCalendar', 1) == 1) ? $this->getName() : '<del>' . $this->getName() . '</del>',
-			'#eqLink#' => $this->getLinkToConfiguration(),
-			'#category#' => $this->getPrimaryCategory(),
-			'#background_color#' => $this->getBackgroundColor($_version),
-			'#events#' => $dEvent,
-		);
 		if ($this->getConfiguration('noStateDisplay') == 0) {
 			if ($this->getConfiguration('enableCalendar', 1) == 1) {
 				$replace['#icon#'] = '<i class="fa fa-check"></i>';
@@ -257,12 +256,6 @@ class calendar extends eqLogic {
 			}
 		}
 		$replace['#cmd#'] = $info;
-		$parameters = $this->getDisplay('parameters');
-		if (is_array($parameters)) {
-			foreach ($parameters as $key => $value) {
-				$replace['#' . $key . '#'] = $value;
-			}
-		}
 		return template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'calendar'));
 	}
 
