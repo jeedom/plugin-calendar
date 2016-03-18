@@ -50,6 +50,9 @@ function calendar_update() {
 			}
 		}
 	}
+	foreach (calendar::byType('calendar') as $calendar) {
+		$calendar->save();
+	}
 }
 
 function calendar_remove() {

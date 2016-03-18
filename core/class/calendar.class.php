@@ -30,7 +30,8 @@ class calendar extends eqLogic {
 		$event = calendar_event::byId($_option['event_id']);
 		if (is_object($event)) {
 			$eqLogic = $event->getEqLogic();
-			if ($eqLogic->getConfiguration('enableCalendar', 1) != 1) {
+			$state = $eqLogic->getCmd(null, 'state');
+			if (is_object($state) && $state->execCmd() != 1) {
 				return;
 			}
 			$nowtime = strtotime('now');
@@ -174,13 +175,27 @@ class calendar extends eqLogic {
 		$in_progress->setSubType('string');
 		$in_progress->setLogicalId('in_progress');
 		$in_progress->save();
+
+		$state = $this->getCmd(null, 'state');
+		if (!is_object($state)) {
+			$state = new calendarCmd();
+			$state->setIsVisible(0);
+		}
+		$state->setEqLogic_id($this->getId());
+		$state->setName(__('Statut', __FILE__));
+		$state->setType('info');
+		$state->setSubType('binary');
+		$state->setLogicalId('state');
+		$state->save();
+
 		$this->rescheduleEvent();
 		$this->rescheduleEvent();
 		$this->refreshWidget();
 	}
 
 	public function rescheduleEvent() {
-		if ($this->getConfiguration('enableCalendar', 1) != 1) {
+		$state = $this->getCmd(null, 'state');
+		if (is_object($state) && $state->execCmd() != 1) {
 			return;
 		}
 		log::add('calendar', 'debug', 'Reprogrammation de tous les évènements');
@@ -233,7 +248,8 @@ class calendar extends eqLogic {
 		}
 
 		if ($this->getConfiguration('noStateDisplay') == 0) {
-			if ($this->getConfiguration('enableCalendar', 1) == 1) {
+			$state = $eqLogic->getCmd(null, 'state');
+			if (is_object($state) && $state->execCmd() == 1) {
 				$replace['#icon#'] = '<i class="fa fa-check"></i>';
 			} else {
 				$replace['#icon#'] = '<i class="fa fa-times"></i>';
@@ -276,13 +292,12 @@ class calendarCmd extends cmd {
 	public function execute($_options = null) {
 		$eqLogic = $this->getEqLogic();
 		if ($this->getLogicalId() == 'enable') {
-			$eqLogic->setConfiguration('enableCalendar', 1);
-			$eqLogic->save(true);
+			$state = $eqLogic->getCmd(null, 'state');
+			if (is_object($state)) {
+				$state->event(1);
+			}
 			$eqLogic->refreshWidget();
 			foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
-				if ($eqLogic->getConfiguration('enableCalendar', 1) == 0) {
-					continue;
-				}
 				$nowtime = strtotime('now');
 				$repeat = $event->getRepeat();
 				if ($repeat['enable'] == 1) {
@@ -292,7 +307,7 @@ class calendarCmd extends cmd {
 					$startDate = null;
 					$endDate = null;
 				}
-				if (jeedom::isDateOk() && $eqLogic->getConfiguration('enableCalendar', 1) == 1) {
+				if (jeedom::isDateOk()) {
 					$results = $event->calculOccurence($startDate, $endDate);
 					if (count($results) == 0) {
 						return null;
@@ -312,8 +327,10 @@ class calendarCmd extends cmd {
 			return;
 		}
 		if ($this->getLogicalId() == 'disable') {
-			$eqLogic->setConfiguration('enableCalendar', 0);
-			$eqLogic->save(true);
+			$state = $eqLogic->getCmd(null, 'state');
+			if (is_object($state)) {
+				$state->event(0);
+			}
 			$eqLogic->refreshWidget();
 			return;
 		}
