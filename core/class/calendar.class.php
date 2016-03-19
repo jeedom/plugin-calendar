@@ -209,7 +209,7 @@ class calendar extends eqLogic {
 		if (!is_array($replace)) {
 			return $replace;
 		}
-		$_version = jeedom::versionAlias($_version);
+		$version = jeedom::versionAlias($_version);
 
 		$startDate = date('Y-m-d 00:00:00');
 		$endDate = date('Y-m-d 00:00:00', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d 00:00:00')));
@@ -265,7 +265,7 @@ class calendar extends eqLogic {
 			}
 		}
 		$replace['#cmd#'] = $info;
-		return template_replace($replace, getTemplate('core', $_version, 'eqLogic', 'calendar'));
+		return template_replace($replace, getTemplate('core', $version, 'eqLogic', 'calendar'));
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
@@ -277,6 +277,8 @@ class calendar extends eqLogic {
 
 class calendarCmd extends cmd {
 	/*     * *************************Attributs****************************** */
+
+	public static $_widgetPossibility = array('custom' => false);
 
 	/*     * ***********************Methode static*************************** */
 
