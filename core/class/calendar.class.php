@@ -248,7 +248,7 @@ class calendar extends eqLogic {
 		}
 
 		if ($this->getConfiguration('noStateDisplay') == 0) {
-			$state = $eqLogic->getCmd(null, 'state');
+			$state = $this->getCmd(null, 'state');
 			if (is_object($state) && $state->execCmd() == 1) {
 				$replace['#icon#'] = '<i class="fa fa-check"></i>';
 			} else {
