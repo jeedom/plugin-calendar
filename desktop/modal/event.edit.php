@@ -85,18 +85,18 @@ if (is_object($event)) {
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-3 control-label">{{Ne pas à afficher dans le dashboard}}</label>
+        <label class="col-sm-3 control-label">{{Masquer dans le dashboard}}</label>
         <div class="col-sm-3">
             <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard' />
         </div>
     </div>
-    <legend><i class="fa fa-flag"></i>  Action de début <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
+    <legend><i class="fa fa-flag"></i>  {{Action de début}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
     <div id="div_start"></div>
 
-    <legend><i class="fa fa-flag-checkered"></i>  Action de fin <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fa fa-plus-circle"></i></a></legend>
+    <legend><i class="fa fa-flag-checkered"></i>  {{Action de fin}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fa fa-plus-circle"></i></a></legend>
     <div id="div_end"></div>
 
-    <legend><i class="fa fa-gears"></i>  Programmation</legend>
+    <legend><i class="fa fa-gears"></i>  {{Programmation}}</legend>
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Début}}</label>
         <div class="col-sm-2">
@@ -107,7 +107,7 @@ if (is_object($event)) {
             <input type="text" class="calendarAttr form-control datetimepicker" data-l1key="endDate" />
         </div>
         <div class="col-sm-1">
-            <a class="btn btn-default calendarAction" data-action="allDay"><i class="fa fa-history"></i> Toute la journée</a>
+            <a class="btn btn-default calendarAction" data-action="allDay"><i class="fa fa-history"></i> {{Toute la journée}}</a>
         </div>
     </div>
     <div class="form-group">
