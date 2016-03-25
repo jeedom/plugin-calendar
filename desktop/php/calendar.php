@@ -16,7 +16,7 @@ $eqLogics = eqLogic::byType('calendar');
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
                 <?php
 foreach ($eqLogics as $eqLogic) {
-	$opacity = ($eqLogic->getConfiguration('enableCalendar', 1) == 1) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+	$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
 	echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $eqLogic->getId() . '" style="' . $opacity . '"><a>' . $eqLogic->getHumanName(true) . '</a></li>';
 }
 ?>
@@ -25,7 +25,7 @@ foreach ($eqLogics as $eqLogic) {
    </div>
 
    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-    <legend>{{Mes agendas}}
+    <legend><i class="fa fa-calendar"></i>  {{Mes agendas}}
     </legend>
     <div class="eqLogicThumbnailContainer">
       <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
@@ -36,7 +36,7 @@ foreach ($eqLogics as $eqLogic) {
     </div>
     <?php
 foreach ($eqLogics as $eqLogic) {
-	$opacity = ($eqLogic->getConfiguration('enableCalendar', 1) == 1) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
+	$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
 	echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
 	echo "<center>";
 	echo '<img src="plugins/calendar/doc/images/calendar_icon.png" height="105" width="95" />';
@@ -120,7 +120,7 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 <div class="col-sm-6">
     <form class="form-horizontal">
         <fieldset>
-            <legend>{{Liste des événements de l'agenda}}</legend>
+            <legend><i class="fa fa-list"></i>  {{Liste des événements de l'agenda}}</legend>
             <div id="div_eventList"></div>
             <br/>
             <div class="form-group">
@@ -132,7 +132,15 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
     </form>
 </div>
 </div>
-<legend>{{Agenda}}</legend>
+<form class="form-horizontal">
+    <fieldset>
+        <div class="form-actions" align="right">
+            <a class="btn btn-danger eqLogicAction" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
+            <a class="btn btn-success eqLogicAction" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
+        </div>
+    </fieldset>
+</form>
+<legend><i class="fa fa-calendar"></i>  {{Agenda}}</legend>
 <div id="div_calendar"></div>
 <form class="form-horizontal">
     <fieldset>

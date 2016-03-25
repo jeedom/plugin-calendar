@@ -42,7 +42,7 @@ if (init('id') != '') {
 
 <form class="form-horizontal" id="form_eventEdit">
     <fieldset>
-        <legend>{{Evènement}}
+        <legend><i class="fa fa-list"></i>  {{Evènement}}
             <a class="btn btn-xs btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fa fa-check-circle"></i> {{Enregistrer}}</a>
             <?php
 if (is_object($event)) {
@@ -90,13 +90,13 @@ if (is_object($event)) {
             <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard' />
         </div>
     </div>
-    <legend>Action de début <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
+    <legend><i class="fa fa-flag"></i>  Action de début <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
     <div id="div_start"></div>
 
-    <legend>Action de fin <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fa fa-plus-circle"></i></a></legend>
+    <legend><i class="fa fa-flag-checkered"></i>  Action de fin <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fa fa-plus-circle"></i></a></legend>
     <div id="div_end"></div>
 
-    <legend>Programmation</legend>
+    <legend><i class="fa fa-gears"></i>  Programmation</legend>
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Début}}</label>
         <div class="col-sm-2">
