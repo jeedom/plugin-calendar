@@ -108,7 +108,7 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-8 control-label">{{Ne pas afficher le status et les commandes d'activation/désactivation}}</label>
+                <label class="col-sm-8 control-label">{{Masquer le status et les commandes d'activation/désactivation}}</label>
                 <div class="col-sm-1">
                     <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="configuration" data-l2key="noStateDisplay" />
                 </div>
