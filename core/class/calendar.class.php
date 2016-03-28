@@ -219,7 +219,7 @@ class calendar extends eqLogic {
 		$endDate = date('Y-m-d 00:00:00', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d 00:00:00')));
 		$events = calendar_event::calculeEvents(calendar_event::getEventsByEqLogic($this->getId(), $startDate, $endDate), $startDate, $endDate);
 		usort($events, 'calendar::orderEvent');
-		$tEvent = getTemplate('core', $_version, 'event', 'calendar');
+		$tEvent = getTemplate('core', $version, 'event', 'calendar');
 		$dEvent = '';
 		$nbEvent = 1;
 		$eventList = array();
