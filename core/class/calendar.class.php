@@ -285,7 +285,7 @@ class calendarCmd extends cmd {
 	/*     * *********************Methode d'instance************************* */
 
 	public function dontRemoveCmd() {
-		if (in_array($this->getLogicalId(), array('enable', 'disable', 'in_progress'))) {
+		if (in_array($this->getLogicalId(), array('enable', 'disable', 'in_progress', 'state'))) {
 			return true;
 		}
 		return false;
@@ -298,6 +298,8 @@ class calendarCmd extends cmd {
 			if (is_object($state)) {
 				$state->event(1);
 			}
+			$eqLogic->setConfiguration('enableCalendar', 1);
+			$eqLogic->save();
 			$eqLogic->refreshWidget();
 			foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
 				$nowtime = strtotime('now');
@@ -333,6 +335,8 @@ class calendarCmd extends cmd {
 			if (is_object($state)) {
 				$state->event(0);
 			}
+			$eqLogic->setConfiguration('enableCalendar', 0);
+			$eqLogic->save();
 			$eqLogic->refreshWidget();
 			return;
 		}
