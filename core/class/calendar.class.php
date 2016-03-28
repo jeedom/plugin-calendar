@@ -135,6 +135,10 @@ class calendar extends eqLogic {
 			$this->setConfiguration('nbWidgetDay', 7);
 		}
 		$this->setIsEnable(1);
+		$state = $this->getCmd(null, 'state');
+		if (is_object($state) && $state->execCmd() != $this->getIsEnable()) {
+			$state->event($this->getIsEnable());
+		}
 	}
 
 	public function postSave() {
@@ -298,7 +302,7 @@ class calendarCmd extends cmd {
 			if (is_object($state)) {
 				$state->event(1);
 			}
-			$eqLogic->setConfiguration('enableCalendar', 1);
+			$eqLogic->setIsEnable(1);
 			$eqLogic->save();
 			$eqLogic->refreshWidget();
 			foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
@@ -335,7 +339,7 @@ class calendarCmd extends cmd {
 			if (is_object($state)) {
 				$state->event(0);
 			}
-			$eqLogic->setConfiguration('enableCalendar', 0);
+			$eqLogic->setIsEnable(0);
 			$eqLogic->save();
 			$eqLogic->refreshWidget();
 			return;

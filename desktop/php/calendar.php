@@ -92,8 +92,7 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                <div class="form-group">
                 <label class="col-sm-4 control-label"></label>
                 <div class="col-sm-8">
-                    <span class="eqLogicAttr" data-l1key="isEnable" style="display: none;">1</span>
-                    <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="configuration" data-l2key="enableCalendar" data-label-text="{{Activer}}" checked/>
+                    <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="isEnable" data-label-text="{{Activer}}" checked/>
                     <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
                 </div>
             </div>
