@@ -301,8 +301,6 @@ class calendarCmd extends cmd {
 			if (is_object($state)) {
 				$state->event(1);
 			}
-			$eqLogic->setIsEnable(1);
-			$eqLogic->save();
 			$eqLogic->refreshWidget();
 			foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
 				$nowtime = strtotime('now');
@@ -338,8 +336,6 @@ class calendarCmd extends cmd {
 			if (is_object($state)) {
 				$state->event(0);
 			}
-			$eqLogic->setIsEnable(0);
-			$eqLogic->save();
 			$eqLogic->refreshWidget();
 			return;
 		}
