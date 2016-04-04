@@ -193,7 +193,6 @@ class calendar extends eqLogic {
 		$state->save();
 
 		$this->rescheduleEvent();
-		$this->rescheduleEvent();
 		$this->refreshWidget();
 	}
 
