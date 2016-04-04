@@ -31,7 +31,7 @@ class calendar extends eqLogic {
 		if (is_object($event)) {
 			$eqLogic = $event->getEqLogic();
 			$state = $eqLogic->getCmd(null, 'state');
-			if (is_object($state) && $state->execCmd() != 1) {
+			if ($eqLogic->getIsEnable() == 0 || (is_object($state) && $state->execCmd() != 1)) {
 				return;
 			}
 			$nowtime = strtotime('now');
@@ -134,11 +134,6 @@ class calendar extends eqLogic {
 		if ($this->getConfiguration('nbWidgetDay') == '') {
 			$this->setConfiguration('nbWidgetDay', 7);
 		}
-		$this->setIsEnable(1);
-		$state = $this->getCmd(null, 'state');
-		if (is_object($state) && $state->execCmd() != $this->getIsEnable()) {
-			$state->event($this->getIsEnable());
-		}
 	}
 
 	public function postSave() {
@@ -198,7 +193,7 @@ class calendar extends eqLogic {
 
 	public function rescheduleEvent() {
 		$state = $this->getCmd(null, 'state');
-		if (is_object($state) && $state->execCmd() != 1) {
+		if ($this->getIsEnable() == 0 || (is_object($state) && $state->execCmd() != 1)) {
 			return;
 		}
 		log::add('calendar', 'debug', 'Reprogrammation de tous les évènements');
@@ -252,7 +247,7 @@ class calendar extends eqLogic {
 
 		if ($this->getConfiguration('noStateDisplay') == 0) {
 			$state = $this->getCmd(null, 'state');
-			if (is_object($state) && $state->execCmd() == 1) {
+			if ($this->getIsEnable() == 1 && is_object($state) && $state->execCmd() == 1) {
 				$replace['#icon#'] = '<i class="fa fa-check"></i>';
 			} else {
 				$replace['#icon#'] = '<i class="fa fa-times"></i>';
