@@ -134,10 +134,6 @@ class calendar extends eqLogic {
 		if ($this->getConfiguration('nbWidgetDay') == '') {
 			$this->setConfiguration('nbWidgetDay', 7);
 		}
-		$state = $this->getCmd(null, 'state');
-		if (is_object($state) && $state->execCmd() != 0 ) {
-			$state->event(1);
-		}
 	}
 
 	public function postSave() {
@@ -291,6 +287,12 @@ class calendarCmd extends cmd {
 			return true;
 		}
 		return false;
+	}
+	
+	public function postSave() {
+		if ($this->getLogicalId() == 'state' && $this->execCmd() != 0 ) {
+			$this->event(1);
+		}
 	}
 
 	public function execute($_options = null) {
