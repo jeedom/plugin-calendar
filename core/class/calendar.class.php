@@ -290,7 +290,7 @@ class calendarCmd extends cmd {
 	}
 	
 	public function postSave() {
-		if ($this->getLogicalId() == 'state' && $this->execCmd() != 0 ) {
+		if ($this->getLogicalId() == 'state' && ($this->execCmd() == '' || $this->execCmd() != 0) ) {
 			$this->event(1);
 		}
 	}
