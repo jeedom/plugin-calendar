@@ -372,7 +372,7 @@ class calendar_event {
 	private $startDate;
 	private $endDate;
 	private $repeat;
-	private $until = '0000-00-00 00:00:00';
+	private $until = null;
 
 	/*     * ***********************Methode static*************************** */
 
@@ -415,7 +415,8 @@ class calendar_event {
 			$sql .= ' AND ((startDate >=:startDate
 				AND startDate <=:endDate)
 				OR until >=:startDate
-				OR until = "0000-00-00 00:00:00")';
+				OR until = "0000-00-00 00:00:00"
+				OR until is NULL)';
 		}
 		$sql .= ' ORDER BY startDate';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
@@ -597,7 +598,7 @@ class calendar_event {
 			$initStartTime = date('H:i:s', strtotime($startDate));
 			$initEndTime = date('H:i:s', strtotime($endDate));
 			$first = true;
-			while ((strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00') && (strtotime($endDate) <= $endTime || $first)) {
+			while ((strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00' || $this->getUntil() == null) && (strtotime($endDate) <= $endTime || $first)) {
 				$first = false;
 				if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
 					if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
@@ -756,7 +757,7 @@ class calendar_event {
 			$this->setUntil('');
 		}
 		if ($this->getUntil() == '') {
-			$this->setUntil('0000-00-00 00:00:00');
+			$this->setUntil(null);
 		}
 	}
 
