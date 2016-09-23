@@ -3,12 +3,9 @@
     <id>calendar</id>
     <name>Agenda</name>
     <description>Plugin pour créer un calendrier</description>
-    <icon>fa fa-calendar</icon>
     <licence>AGPL</licence>
-    <author>Loïc Gevrey</author>
-    <installation>Aucune</installation>
+    <author>Loïc</author>
     <require>2.2</require>
-    <version>1.2</version>
     <category>organization</category>
     <mobile>event</mobile>
 </info>
