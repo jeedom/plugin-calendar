@@ -1,0 +1,6 @@
+= Agenda
+
+Plugin, zum erstellen eines Kalenders und auslösen von Aktionen  (Befehl oder Szenario).
+
+'''
+include::configuration.asciidoc[]
