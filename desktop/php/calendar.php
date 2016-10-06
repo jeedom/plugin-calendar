@@ -25,15 +25,24 @@ foreach ($eqLogics as $eqLogic) {
    </div>
 
    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-    <legend><i class="fa fa-calendar"></i>  {{Mes agendas}}
+     <div class="eqLogicThumbnailContainer">
+	 <legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
+    <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
+           <center>
+            <i class="fa fa-plus-circle" style="font-size : 5em;color:#94ca02;"></i>
+        </center>
+        <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;;color:#94ca02"><center>{{Ajouter}}</center></span>
+    </div>
+  <div class="cursor" id="bt_healthcalendar" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
+    <center>
+      <i class="fa fa-medkit" style="font-size : 5em;color:#767676;"></i>
+    </center>
+    <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Santé}}</center></span>
+  </div>
+</div>
+	<legend><i class="fa fa-calendar"></i>  {{Mes agendas}}
     </legend>
     <div class="eqLogicThumbnailContainer">
-      <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-         <center>
-            <i class="fa fa-plus-circle" style="font-size : 7em;color:#94ca02;"></i>
-        </center>
-        <span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>Ajouter</center></span>
-    </div>
     <?php
 foreach ($eqLogics as $eqLogic) {
 	$opacity = ($eqLogic->getIsEnable()) ? '' : jeedom::getConfiguration('eqLogic:style:noactive');
@@ -90,12 +99,12 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                    </div>
                </div>
                <div class="form-group">
-                <label class="col-sm-4 control-label"></label>
-                <div class="col-sm-8">
-                    <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="isEnable" data-label-text="{{Activer}}" checked/>
-                    <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
-                </div>
-            </div>
+                    <label class="col-sm-4 control-label"></label>
+                    <div class="col-sm-8">
+                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+                        <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+                    </div>
+				</div>
             <div class="form-group">
                 <label class="col-sm-4 control-label">{{Widget, nombre de jours}}</label>
                 <div class="col-sm-2">
@@ -107,9 +116,9 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-8 control-label">{{Masquer le status et les commandes d'activation/désactivation}}</label>
-                <div class="col-sm-1">
-                    <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="configuration" data-l2key="noStateDisplay" />
+				<label class="col-sm-4 control-label"></label>
+                <div class="col-sm-8">
+					 <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="noStateDisplay" checked/>{{Masquer le statut et les commandes d'activation/désactivation}}</label>
                 </div>
             </div>
 
@@ -157,7 +166,7 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 include_file('3rdparty', 'fullcalendar/lib/moment.min', 'js', 'calendar');
 include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js', 'calendar');
 include_file('3rdparty', 'fullcalendar/fullcalendar.min', 'js', 'calendar');
-include_file('3rdparty', 'fullcalendar/lang/fr', 'js', 'calendar');
+include_file('3rdparty', 'fullcalendar/locale/fr', 'js', 'calendar');
 include_file('desktop', 'calendar', 'js', 'calendar');
 include_file('core', 'plugin.template', 'js');
 ?>

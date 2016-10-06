@@ -15,7 +15,10 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
  calendar = null;
-
+ $('#bt_healthcalendar').on('click', function () {
+    $('#md_modal').dialog({title: "{{Santé Agenda}}"});
+    $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open');
+});
  $('#bt_addEvent').on('click', function () {
     $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open');
@@ -24,6 +27,11 @@
  $('#div_eventList').delegate('.editEvent', 'click', function () {
     $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open');
+});
+
+$('.nav-tabs').click('tabsselect', function (event, ui) {
+	console.log('toto');
+     setTimeout(printEqLogic(),1000);
 });
 
  if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
