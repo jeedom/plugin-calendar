@@ -75,7 +75,7 @@ if (is_object($event)) {
         </div>
         <label class="col-sm-1 control-label">{{Transparent}}</label>
         <div class="col-sm-3">
-            <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="cmd_param" data-l2key='transparent' />
+			<input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='transparent'/>
         </div>
     </div>
     <div class="form-group">
@@ -87,7 +87,7 @@ if (is_object($event)) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Masquer dans le dashboard}}</label>
         <div class="col-sm-3">
-            <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard' />
+			<input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard'/>
         </div>
     </div>
     <legend><i class="fa fa-flag"></i>  {{Action de début}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
@@ -138,9 +138,9 @@ foreach (calendar::byType('calendar') as $calendar) {
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-3 control-label"></label>
+    <label class="col-sm-3 control-label">{{Répété}}</label>
     <div class="col-sm-3">
-        <input type="checkbox" class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="enable" data-label-text="{{Répété}}" />
+		<input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="enable"/>
     </div>
 </div>
 
@@ -199,20 +199,13 @@ foreach (calendar::byType('calendar') as $calendar) {
     <div class="form-group">
         <label class="col-sm-3 control-label">{{Uniquement les}}</label>
         <div class="col-sm-9">
-            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='1' checked data-label-text="{{Lundis}}" />
-
-            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='2' checked data-label-text="{{Mardis}}" />
-
-            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='3' checked data-label-text="{{Mercredis}}" />
-
-            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='4' checked data-label-text="{{Jeudis}}" />
-
-            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='5' checked data-label-text="{{Vendredis}}" />
-
-            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='6' checked data-label-text="{{Samedis}}" />
-
-            <input type='checkbox' class="calendarAttr bootstrapSwitch" data-l1key="repeat" data-l2key="excludeDay" data-l3key='7' checked data-label-text="{{Dimanches}}" />
-
+			<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='1' checked/>{{Lundis}}</label>
+			<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='2' checked/>{{Mardis}}</label>
+			<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='3' checked/>{{Mercredis}}</label>
+			<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='4' checked/>{{Jeudis}}</label>
+			<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='5' checked/>{{Vendredis}}</label>
+			<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='6' checked/>{{Samedis}}</label>
+			<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='7' checked/>{{Dimanches}}</label>
         </div>
     </div>
 </div>
