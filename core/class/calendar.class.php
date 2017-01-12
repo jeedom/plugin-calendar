@@ -623,7 +623,21 @@ class calendar_event {
 									'end' => $endDate,
 								);
 							}
-						}
+						}else if ($repeat['nationalDay'] == 'onlyEven') {
+							    if ((date ('W', strtotime($startDate)) % 2) == 0) {
+							$return[] = array(
+							   'start' => $startDate,
+							   'end' => $endDate,
+							);
+						     }
+						  } else if ($repeat['nationalDay'] == 'onlyOdd') {
+						      if ((date ('W', strtotime($startDate)) % 2) == 1) {
+							$return[] = array(
+							   'start' => $startDate,
+							   'end' => $endDate,
+							);
+						     }
+						  }
 						if (count($return) >= $_max) {
 							return $return;
 						}
