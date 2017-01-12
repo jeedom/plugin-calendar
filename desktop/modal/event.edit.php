@@ -217,6 +217,8 @@ foreach (calendar::byType('calendar') as $calendar) {
             <option value="all">{{Aucune}}</option>
             <option value="exeptNationalDay">{{Tous sauf les jours fériés}}</option>
             <option value="onlyNationalDay">{{Que les jours fériés}}</option>
+	    <option value="onlyEven">{{Que les semaines paires}}</option>
+           <option value="onlyOdd">{{Que les semaines impaires}}</option>
         </select>
     </div>
 </div>
