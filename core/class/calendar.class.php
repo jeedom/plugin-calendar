@@ -105,6 +105,29 @@ class calendar extends eqLogic {
 		}
 		return ($al > $bl) ? +1 : -1;
 	}
+	
+	public static function deadCmd() {
+		$return = array();
+		foreach (eqLogic::byType('calendar') as $calendar){
+			foreach (calendar_event::getEventsByEqLogic($calendar->getId()) as $events) {
+				foreach ($events->getCmd_param()['start'] as $cmdStart) {
+					if ($cmdStart['cmd'] != '' && strpos($cmdStart['cmd'],'#') !== false) {
+						if (!cmd::byId(str_replace('#','',$cmdStart['cmd']))){
+							$return[]= array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'],'help' => 'Action de début','who'=>$cmdStart['cmd']);
+						}
+					}
+				}
+				foreach ($events->getCmd_param()['end'] as $cmdEnd) {
+					if ($cmdEnd['cmd'] != '' && strpos($cmdEnd['cmd'],'#') !== false) {
+						if (!cmd::byId(str_replace('#','',$cmdEnd['cmd']))){
+							$return[]= array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'],'help' => 'Action de fin','who'=>$cmdEnd['cmd']);
+						}
+					}
+				}
+			}
+		}
+		return $return;
+	}
 
 	/*     * ***********************Methode static*************************** */
 
