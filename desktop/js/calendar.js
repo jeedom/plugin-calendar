@@ -111,7 +111,7 @@ function updateEventList() {
                    color = 'transparent';
                }
 
-               html += '<span class="label label-info editEvent cursor" data-event_id="' + data.result[i].id + '" style="background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">';
+               html += '<span class="label label-info editEvent cursor" data-event_id="' + data.result[i].id + '" style="background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;font-size:1em;display:inline-block;">';
                if (data.result[i].cmd_param.eventName != '') {
                 html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName;
             } else {
