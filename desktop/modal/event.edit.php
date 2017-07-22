@@ -55,7 +55,7 @@ if (is_object($event)) {
 </ul>
 
 <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;" id="div_eventEdit">
-  <div role="tabpanel" class="tab-pane active" id="generaltab">
+  <div role="tabpanel" class="tab-pane active" id="eventtab">
     <br/>
     <form class="form-horizontal">
         <fieldset>
