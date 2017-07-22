@@ -29,10 +29,11 @@
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open');
 });
 
-$('.nav-tabs').click('tabsselect', function (event, ui) {
-	console.log('toto');
-     setTimeout(printEqLogic(),1000);
-});
+ $('#bt_calendartab').on('click',function(){
+    setTimeout(function(){ $('#div_calendar').fullCalendar('render'); }, 100);
+    
+ });
+
 
  if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
     setTimeout(function(){
@@ -61,7 +62,7 @@ function printEqLogic() {
         editable: true,
         defaultView: 'month',
         allDayDefault: false,
-        timeFormat: 'H:mm', // uppercase H for 24-hour clock
+        timeFormat: 'H:mm',
         eventDrop: function (event) {
             var eventSave = {
                 id: event.id,
@@ -82,7 +83,8 @@ function printEqLogic() {
             updateCalendarEvent(eventSave);
         }
     });
-updateEventList();
+    updateEventList();
+     $('#div_calendar').fullCalendar('render');
 }
 
 function updateEventList() {
@@ -106,11 +108,11 @@ function updateEventList() {
             for (var i in data.result) {
                 var color = init(data.result[i].cmd_param.color, '#2980b9');
                 if(data.result[i].cmd_param.transparent == 1){
-                 color = 'transparent';
-             }
+                   color = 'transparent';
+               }
 
-             html += '<span class="label label-info editEvent cursor" data-event_id="' + data.result[i].id + '" style="background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">';
-             if (data.result[i].cmd_param.eventName != '') {
+               html += '<span class="label editEvent cursor" data-event_id="' + data.result[i].id + '" style="background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;font-size:1em;display:inline-block;">';
+               if (data.result[i].cmd_param.eventName != '') {
                 html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName;
             } else {
                 html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name;
