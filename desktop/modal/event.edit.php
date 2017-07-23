@@ -299,8 +299,7 @@ foreach (calendar::byType('calendar') as $calendar) {
     if (!isset(_action.options)) {
         _action.options = {};
     }
-    var div = '<div class="' + _type + '">';
-    div += '<div class="form-group ">';
+    var div = '<div class="' + _type + ' pull-left" style="margin-bottom:5px">';
     div += '<div class="col-sm-5">';
     div += '<div class="input-group">';
     div += '<span class="input-group-btn">';
