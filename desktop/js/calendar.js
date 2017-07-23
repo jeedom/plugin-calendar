@@ -20,18 +20,19 @@
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open');
 });
  $('#bt_addEvent').on('click', function () {
+	$('#bt_calendartab').trigger('click');
     $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open');
 });
 
  $('#div_eventList').delegate('.editEvent', 'click', function () {
+	$('#bt_calendartab').trigger('click');
     $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open');
 });
 
  $('#bt_calendartab').on('click',function(){
     setTimeout(function(){ $('#div_calendar').fullCalendar('render'); }, 100);
-    
  });
 
 
