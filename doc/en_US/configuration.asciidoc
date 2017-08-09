@@ -2,24 +2,11 @@
 
 La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout.
 
-image::../images/calendar1.PNG[]
-
 == Equipment configuration
 
-La configuration des équipements Agenda est accessible à partir du menu plugin : 
+La configuration des équipements Agenda est accessible à partir du menu plugin puis organisation.
 
-image::../images/calendar2.PNG[]
-
-Voilà à quoi ressemble la page du plugin Agenda (ici avec déjà 1 équipement) : 
-
-image::../images/calendar3.PNG[]
-
-Vous retrouvez ici la liste de vos Agenda. Une fois que vous cliquez sur un équipement vous obtenez :
-
-image::../images/calendar4.PNG[]
-
-[TIP]
-Comme à beaucoup d'endroits sur Jeedom, mettre la souris tout à gauche permet de faire apparaître un menu d'accès rapide (vous pouvez à partir de votre profil le laisser toujours visible).
+Une fois dessus vous retrouvez ici la liste de vos Agenda. 
 
 Vous retrouvez ici toute la configuration de votre équipement : 
 
@@ -38,13 +25,10 @@ Vous retrouvez ici toute la configuration de votre équipement :
 
 == Edition d'un événement
 
-image::../images/calendar5.PNG[]
 
 Partie la plus importante du plugin, c'est ici que vous allez pouvoir configurer votre événement.
 
 === Evènement
-
-image::../images/calendar8.PNG[]
 
 Ici vous retrouvez : 
 
@@ -56,27 +40,18 @@ Ici vous retrouvez :
 
 === Action de début
 
-image::../images/calendar9.PNG[]
-
 Permet de choisir la ou les action(s) à faire lors du lancement de l'événement. 
 
 Pour ajouter une action il suffit de cliquer sur le bouton + au bout de la ligne puis vous allez avoir un bouton pour chercher une commande une fois celle-ci trouvé vous aurez le choix des options si elle en a. VOus pouvez ajouter autant d'action que vous le voulez.
-
-[TIP]
-Pour piloter un scénario il suffit d'écrire "scenario" dans la case puis de cliquer ailleurs et Jeedom fera apparaître les options possibles. Pour changer la valeur d'une variable il faut écrire "variable"
 
 [TIP]
 Il est possible de modifier l'ordre des actions en maintenant/glissant celle-ci
 
 === Action de fin
 
-image::../images/calendar10.PNG[]
-
 Idem à l'action de début mais cette fois si c'est la ou les action(s) à effectuer à la fin de l'événement.
 
 === Programmation
-
-image::../images/calendar6.PNG[]
 
 C'est ici que se trouve toute la gestion temporelle de votre événement : 
 
@@ -100,12 +75,6 @@ Les jours feriés sont ceux Francais et uniquement les Francais cela ne marche d
 
 [NOTE]
 En haut à droite vous avez 3 boutons, un pour supprimer, un pour sauvegarder et un pour dupliquer. Lors du clic sur ce dernier jeedom vous affiche l'evenement resultant de la duplication pour que vous puissiez changer le nom par exemple.Il ne faut donc pas oublier de sauvegarder suite à un clic sur le bouton dupliquer
-
-== Widget
-
-image::../images/calendar11.PNG[]
-
-Voilà à quoi ressemble le widget (en fonction des options il peut changer), vous pouvez activer/désactiver tout l'agenda et supprimer une occurence d'un événement à partir de celui-ci.
 
 == Agenda, commandes et scénario
 
