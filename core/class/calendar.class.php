@@ -22,7 +22,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 class calendar extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
-	public static $_widgetPossibility = array('custom' => true);
+	public static $_widgetPossibility = array('custom' => true, 'custom::layout' => false);
 
 	/*     * ***********************Methode static*************************** */
 
@@ -105,22 +105,22 @@ class calendar extends eqLogic {
 		}
 		return ($al > $bl) ? +1 : -1;
 	}
-	
+
 	public static function deadCmd() {
 		$return = array();
-		foreach (eqLogic::byType('calendar') as $calendar){
+		foreach (eqLogic::byType('calendar') as $calendar) {
 			foreach (calendar_event::getEventsByEqLogic($calendar->getId()) as $events) {
 				foreach ($events->getCmd_param()['start'] as $cmdStart) {
-					if ($cmdStart['cmd'] != '' && strpos($cmdStart['cmd'],'#') !== false) {
-						if (!cmd::byId(str_replace('#','',$cmdStart['cmd']))){
-							$return[]= array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'],'help' => 'Action de début','who'=>$cmdStart['cmd']);
+					if ($cmdStart['cmd'] != '' && strpos($cmdStart['cmd'], '#') !== false) {
+						if (!cmd::byId(str_replace('#', '', $cmdStart['cmd']))) {
+							$return[] = array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'], 'help' => 'Action de début', 'who' => $cmdStart['cmd']);
 						}
 					}
 				}
 				foreach ($events->getCmd_param()['end'] as $cmdEnd) {
-					if ($cmdEnd['cmd'] != '' && strpos($cmdEnd['cmd'],'#') !== false) {
-						if (!cmd::byId(str_replace('#','',$cmdEnd['cmd']))){
-							$return[]= array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'],'help' => 'Action de fin','who'=>$cmdEnd['cmd']);
+					if ($cmdEnd['cmd'] != '' && strpos($cmdEnd['cmd'], '#') !== false) {
+						if (!cmd::byId(str_replace('#', '', $cmdEnd['cmd']))) {
+							$return[] = array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'], 'help' => 'Action de fin', 'who' => $cmdEnd['cmd']);
 						}
 					}
 				}
@@ -311,9 +311,9 @@ class calendarCmd extends cmd {
 		}
 		return false;
 	}
-	
+
 	public function postSave() {
-		if ($this->getLogicalId() == 'state' && ($this->execCmd() == '' || $this->execCmd() != 0) ) {
+		if ($this->getLogicalId() == 'state' && ($this->execCmd() == '' || $this->execCmd() != 0)) {
 			$this->event(1);
 		}
 	}
@@ -646,21 +646,21 @@ class calendar_event {
 									'end' => $endDate,
 								);
 							}
-						}else if ($repeat['nationalDay'] == 'onlyEven') {
-							    if ((date ('W', strtotime($startDate)) % 2) == 0) {
-							$return[] = array(
-							   'start' => $startDate,
-							   'end' => $endDate,
-							);
-						     }
-						  } else if ($repeat['nationalDay'] == 'onlyOdd') {
-						      if ((date ('W', strtotime($startDate)) % 2) == 1) {
-							$return[] = array(
-							   'start' => $startDate,
-							   'end' => $endDate,
-							);
-						     }
-						  }
+						} else if ($repeat['nationalDay'] == 'onlyEven') {
+							if ((date('W', strtotime($startDate)) % 2) == 0) {
+								$return[] = array(
+									'start' => $startDate,
+									'end' => $endDate,
+								);
+							}
+						} else if ($repeat['nationalDay'] == 'onlyOdd') {
+							if ((date('W', strtotime($startDate)) % 2) == 1) {
+								$return[] = array(
+									'start' => $startDate,
+									'end' => $endDate,
+								);
+							}
+						}
 						if (count($return) >= $_max) {
 							return $return;
 						}
