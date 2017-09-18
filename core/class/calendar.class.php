@@ -160,6 +160,18 @@ class calendar extends eqLogic {
 	}
 
 	public function postSave() {
+		$state = $this->getCmd(null, 'state');
+		if (!is_object($state)) {
+			$state = new calendarCmd();
+			$state->setIsVisible(0);
+		}
+		$state->setEqLogic_id($this->getId());
+		$state->setName(__('Statut', __FILE__));
+		$state->setType('info');
+		$state->setSubType('binary');
+		$state->setLogicalId('state');
+		$state->save();
+
 		$enable = $this->getCmd(null, 'enable');
 		if (!is_object($enable)) {
 			$enable = new calendarCmd();
@@ -171,6 +183,9 @@ class calendar extends eqLogic {
 		$enable->setSubType('other');
 		$enable->setLogicalId('enable');
 		$enable->setDisplay('icon', '<i class="fa fa-check"></i>');
+		$enable->setTemplate('dashboard', 'binaryDefault');
+		$enable->setTemplate('mobile', 'binaryDefault');
+		$enable->setValue($state->getId());
 		$enable->save();
 
 		$disable = $this->getCmd(null, 'disable');
@@ -183,7 +198,9 @@ class calendar extends eqLogic {
 		$disable->setType('action');
 		$disable->setSubType('other');
 		$disable->setLogicalId('disable');
-		$disable->setDisplay('icon', '<i class="fa fa-times"></i>');
+		$disable->setValue($state->getId());
+		$disable->setTemplate('dashboard', 'binaryDefault');
+		$disable->setTemplate('mobile', 'binaryDefault');
 		$disable->save();
 
 		$in_progress = $this->getCmd(null, 'in_progress');
@@ -197,18 +214,6 @@ class calendar extends eqLogic {
 		$in_progress->setSubType('string');
 		$in_progress->setLogicalId('in_progress');
 		$in_progress->save();
-
-		$state = $this->getCmd(null, 'state');
-		if (!is_object($state)) {
-			$state = new calendarCmd();
-			$state->setIsVisible(0);
-		}
-		$state->setEqLogic_id($this->getId());
-		$state->setName(__('Statut', __FILE__));
-		$state->setType('info');
-		$state->setSubType('binary');
-		$state->setLogicalId('state');
-		$state->save();
 
 		$this->rescheduleEvent();
 		$this->refreshWidget();
@@ -266,17 +271,6 @@ class calendar extends eqLogic {
 				$dEvent .= template_replace($replaceCmd, $tEvent);
 				$nbEvent++;
 			}
-		}
-
-		if ($this->getConfiguration('noStateDisplay') == 0) {
-			$state = $this->getCmd(null, 'state');
-			if ($this->getIsEnable() == 1 && is_object($state) && $state->execCmd() == 1) {
-				$replace['#icon#'] = '<i class="fa fa-check"></i>';
-			} else {
-				$replace['#icon#'] = '<i class="fa fa-times"></i>';
-			}
-		} else {
-			$replace['#icon#'] = '';
 		}
 		$replace['#events#'] = $dEvent;
 		$info = '';
