@@ -157,6 +157,9 @@ class calendar extends eqLogic {
 		if ($this->getConfiguration('nbWidgetDay') == '') {
 			$this->setConfiguration('nbWidgetDay', 7);
 		}
+		if ($this->getConfiguration('noStateDisplay') == '') {
+			$this->setConfiguration('noStateDisplay', 0);
+		}
 	}
 
 	public function postSave() {
