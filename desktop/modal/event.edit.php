@@ -385,7 +385,7 @@ $('#bt_chooseIcon').on('click', function () {
 });
 
 
-$("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=enable]", 'change switchChange.bootstrapSwitch').delegate('.calendarAttr[data-l1key=repeat][data-l2key=enable]','change switchChange.bootstrapSwitch', function () {
+$("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=enable]", 'change').delegate('.calendarAttr[data-l1key=repeat][data-l2key=enable]','change', function () {
   if ($(this).value() == 1) {
     $('#div_eventEdit .div_repeatOption').show();
   } else {
@@ -400,7 +400,7 @@ $("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=mode]", 'chang
 
 if (calendarEvent != null && is_array(calendarEvent)) {
   $('#div_eventEdit').setValues(calendarEvent, '.calendarAttr');
-  $(".calendarAttr[data-l1key=repeat][data-l2key=enable]").trigger('switchChange.bootstrapSwitch');
+  $(".calendarAttr[data-l1key=repeat][data-l2key=enable]").trigger('change');
   if (isset(calendarEvent.cmd_param.start)) {
     for (var i in calendarEvent.cmd_param.start) {
       addAction(calendarEvent.cmd_param.start[i], 'start', '{{Action}}');
