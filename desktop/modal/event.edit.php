@@ -103,9 +103,11 @@ if (is_object($event)) {
   <br/>
   <form class="form-horizontal" id="div_eventEdit">
     <fieldset>
+
       <legend><i class="fa fa-flag"></i>  {{Début}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
       <div id="div_start"></div>
-
+    </fieldset>
+    <fieldset>
       <legend><i class="fa fa-flag-checkered"></i>  {{Fin}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fa fa-plus-circle"></i></a></legend>
       <div id="div_end"></div>
     </fieldset>
@@ -299,7 +301,7 @@ foreach (calendar::byType('calendar') as $calendar) {
   if (!isset(_action.options)) {
     _action.options = {};
   }
-  var div = '<div class="' + _type + '" style="margin-bottom:5px">';
+  var div = '<div class="' + _type + ' row" style="margin-bottom:5px">';
   div += '<div class="col-sm-1">';
   div += '<input type="checkbox" class="expressionAttr" data-l1key="options" data-l2key="enable" checked title="{{Décocher pour desactiver l\'action}}" />';
   div += '<input type="checkbox" class="expressionAttr" data-l1key="options" data-l2key="background" title="{{Cocher pour que la commande s\'éxecute en parrallele des autres actions}}" />';
