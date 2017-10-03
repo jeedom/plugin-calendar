@@ -2,6 +2,9 @@
 
 Die Konfiguration ist sehr einfach, nach dem Herunterladen des Plugins aktivieren Sie es und das war's.
 
+[IMPORTANT]
+Si vous désactiver le plugin tous les évènements sont definitevement supprimés, il faudra les recreer. Il n'existe aucun moyen de les récuperer. Donc attention à bien faire attention avant désactiver ou supprimer le plugin
+
 == Geräte Konfiguration
 
 La configuration des équipements Agenda est accessible à partir du menu plugin puis organisation.
