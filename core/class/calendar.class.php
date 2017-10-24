@@ -156,6 +156,10 @@ class calendar extends eqLogic {
 		}
 	}
 
+	public function preInsert() {
+		$this->setIsEnable(1);
+	}
+
 	public function postSave() {
 		$state = $this->getCmd(null, 'state');
 		if (!is_object($state)) {
