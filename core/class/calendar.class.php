@@ -250,7 +250,7 @@ class calendar extends eqLogic {
 			if ($this->getConfiguration('nbWidgetMaxEvent', 0) != 0 && $this->getConfiguration('nbWidgetMaxEvent', 0) < $nbEvent) {
 				break;
 			}
-			if (strtotime($event['start']) < strtotime($startDate) || strtotime($event['start']) > strtotime($endDate)) {
+			if (strtotime($event['end']) < strtotime($startDate) || strtotime($event['start']) > strtotime($endDate)) {
 				continue;
 			}
 			if (isset($eventList[$this->getId() . '_' . $event['id'] . '_' . $event['start'] . '_' . $event['end']])) {
