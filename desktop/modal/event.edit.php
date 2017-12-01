@@ -454,11 +454,15 @@ $('#md_eventEditSave').on('click', function () {
         return;
       }
       $('#div_eventEditAlert').showAlert({message: '{{Evènement ajouté avec succès}}', level: 'success'});
-      calendar.fullCalendar('refetchEvents');
-      updateEventList();
-      $('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
-    }
-  });
+      try{
+       calendar.fullCalendar('refetchEvents');
+     }catch (e) {
+
+     }
+     updateEventList();
+     $('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
+   }
+ });
 });
 
 $('#md_eventEditDuplicate').on('click', function () {
