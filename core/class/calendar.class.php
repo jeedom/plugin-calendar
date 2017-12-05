@@ -310,6 +310,9 @@ class calendarCmd extends cmd {
 		if ($this->getLogicalId() == 'state') {
 			$this->event(1);
 		}
+		if ($this->getLogicalId() == 'in_progress') {
+			$this->event($this->execute());
+		}
 	}
 
 	public function execute($_options = null) {
@@ -855,7 +858,12 @@ class calendar_event {
 		if (is_object($cron)) {
 			$cron->remove();
 		}
-		return DB::remove($this);
+		$eqLogic = $this->getEqLogic();
+		DB::remove($this);
+		$cmd = $eqLogic->getCmd('info', 'in_progress');
+		if (is_object($cmd)) {
+			$cmd->event($cmd->execute());
+		}
 	}
 
 	public function doAction($_action = 'start') {
