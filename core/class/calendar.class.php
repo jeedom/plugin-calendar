@@ -310,6 +310,15 @@ class calendar_event {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function cleanEvents() {
+		$events = self::all();
+		foreach ($events as $event) {
+			if (!is_object($event->getEqLogic())) {
+				$event->remove();
+			}
+		}
+	}
+
 	public static function byId($_id) {
 		$values = array(
 			'id' => $_id,

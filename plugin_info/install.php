@@ -24,6 +24,7 @@ function calendar_install() {
 	foreach (calendar::byType('calendar') as $calendar) {
 		$calendar->save();
 	}
+	calendar_event::cleanEvents();
 }
 
 function calendar_update() {
@@ -53,9 +54,10 @@ function calendar_update() {
 	foreach (calendar::byType('calendar') as $calendar) {
 		$calendar->save();
 	}
+	calendar_event::cleanEvents();
 }
 
 function calendar_remove() {
-	DB::Prepare('DROP TABLE IF EXISTS `calendar_event`', array(), DB::FETCH_TYPE_ROW);
+
 }
 ?>
