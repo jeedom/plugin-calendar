@@ -128,13 +128,6 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
           <input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetMaxEvent" />
         </div>
       </div>
-      <div class="form-group">
-        <label class="col-sm-4 control-label">{{Masquer le statut et les commandes d'activation/désactivation}}</label>
-        <div class="col-sm-8">
-          <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="noStateDisplay" checked/></label>
-        </div>
-      </div>
-
     </fieldset>
   </form>
 </div>

@@ -30,8 +30,7 @@ class calendar extends eqLogic {
 		$event = calendar_event::byId($_option['event_id']);
 		if (is_object($event)) {
 			$eqLogic = $event->getEqLogic();
-			$state = $eqLogic->getCmd(null, 'state');
-			if ($eqLogic->getIsEnable() == 0 || (is_object($state) && $state->execCmd() != 1)) {
+			if ($eqLogic->getIsEnable() == 0) {
 				return;
 			}
 			$nowtime = strtotime('now');
@@ -151,9 +150,6 @@ class calendar extends eqLogic {
 		if ($this->getConfiguration('nbWidgetDay') == '') {
 			$this->setConfiguration('nbWidgetDay', 7);
 		}
-		if ($this->getConfiguration('noStateDisplay') == '') {
-			$this->setConfiguration('noStateDisplay', 0);
-		}
 	}
 
 	public function preInsert() {
@@ -162,47 +158,19 @@ class calendar extends eqLogic {
 
 	public function postSave() {
 		$state = $this->getCmd(null, 'state');
-		if (!is_object($state)) {
-			$state = new calendarCmd();
-			$state->setIsVisible(0);
+		if (is_object($state)) {
+			$state->remove();
 		}
-		$state->setEqLogic_id($this->getId());
-		$state->setName(__('Statut', __FILE__));
-		$state->setType('info');
-		$state->setSubType('binary');
-		$state->setLogicalId('state');
-		$state->save();
 
 		$enable = $this->getCmd(null, 'enable');
-		if (!is_object($enable)) {
-			$enable = new calendarCmd();
-			$enable->setIsVisible(1);
+		if (is_object($enable)) {
+			$enable->remove();
 		}
-		$enable->setEqLogic_id($this->getId());
-		$enable->setName(__('Activer', __FILE__));
-		$enable->setType('action');
-		$enable->setSubType('other');
-		$enable->setLogicalId('enable');
-		$enable->setDisplay('icon', '<i class="fa fa-check"></i>');
-		$enable->setTemplate('dashboard', 'binaryDefault');
-		$enable->setTemplate('mobile', 'binaryDefault');
-		$enable->setValue($state->getId());
-		$enable->save();
 
 		$disable = $this->getCmd(null, 'disable');
-		if (!is_object($disable)) {
-			$disable = new calendarCmd();
-			$disable->setIsVisible(1);
+		if (is_object($disable)) {
+			$disable->remove();
 		}
-		$disable->setEqLogic_id($this->getId());
-		$disable->setName(__('Désactiver', __FILE__));
-		$disable->setType('action');
-		$disable->setSubType('other');
-		$disable->setLogicalId('disable');
-		$disable->setValue($state->getId());
-		$disable->setTemplate('dashboard', 'binaryDefault');
-		$disable->setTemplate('mobile', 'binaryDefault');
-		$disable->save();
 
 		$in_progress = $this->getCmd(null, 'in_progress');
 		if (!is_object($in_progress)) {
@@ -221,8 +189,7 @@ class calendar extends eqLogic {
 	}
 
 	public function rescheduleEvent() {
-		$state = $this->getCmd(null, 'state');
-		if ($this->getIsEnable() == 0 || (is_object($state) && $state->execCmd() != 1)) {
+		if ($this->getIsEnable() == 0) {
 			return;
 		}
 		log::add('calendar', 'debug', 'Reprogrammation de tous les évènements');
@@ -273,13 +240,6 @@ class calendar extends eqLogic {
 			}
 		}
 		$replace['#events#'] = $dEvent;
-		$info = '';
-		if ($this->getConfiguration('noStateDisplay') == 0) {
-			foreach ($this->getCmd(null, null, true) as $cmd) {
-				$info .= $cmd->toHtml($_version);
-			}
-		}
-		$replace['#cmd#'] = $info;
 		return template_replace($replace, getTemplate('core', $version, 'eqLogic', 'calendar'));
 	}
 
@@ -300,16 +260,13 @@ class calendarCmd extends cmd {
 	/*     * *********************Methode d'instance************************* */
 
 	public function dontRemoveCmd() {
-		if (in_array($this->getLogicalId(), array('enable', 'disable', 'in_progress', 'state'))) {
+		if (in_array($this->getLogicalId(), array('in_progress'))) {
 			return true;
 		}
 		return false;
 	}
 
 	public function postInsert() {
-		if ($this->getLogicalId() == 'state') {
-			$this->event(1);
-		}
 		if ($this->getLogicalId() == 'in_progress') {
 			$this->event($this->execute());
 		}
@@ -317,49 +274,6 @@ class calendarCmd extends cmd {
 
 	public function execute($_options = null) {
 		$eqLogic = $this->getEqLogic();
-		if ($this->getLogicalId() == 'enable') {
-			$state = $eqLogic->getCmd(null, 'state');
-			if (is_object($state)) {
-				$state->event(1);
-			}
-			$eqLogic->refreshWidget();
-			foreach (calendar_event::getEventsByEqLogic($eqLogic->getId()) as $event) {
-				$nowtime = strtotime('now');
-				$repeat = $event->getRepeat();
-				if ($repeat['enable'] == 1) {
-					$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-				} else {
-					$startDate = null;
-					$endDate = null;
-				}
-				if (jeedom::isDateOk()) {
-					$results = $event->calculOccurence($startDate, $endDate);
-					if (count($results) == 0) {
-						return null;
-					}
-					for ($i = 0; $i < count($results); $i++) {
-						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-							$event->doAction('start');
-							break;
-						}
-						if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-							break;
-						}
-					}
-				}
-				$event->reschedule();
-			}
-			return;
-		}
-		if ($this->getLogicalId() == 'disable') {
-			$state = $eqLogic->getCmd(null, 'state');
-			if (is_object($state)) {
-				$state->event(0);
-			}
-			$eqLogic->refreshWidget();
-			return;
-		}
 		if ($this->getLogicalId() == 'in_progress') {
 			$return = '';
 			foreach ($eqLogic->getEvents() as $event) {
