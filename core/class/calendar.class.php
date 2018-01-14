@@ -41,7 +41,7 @@ class calendar extends eqLogic {
 					$endDate = date('Y-m-d H:i:s', strtotime('+6 month ' . date('Y-m-d H:i:s')));
 				} else {
 					$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+					$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 				}
 			} else {
 				$startDate = null;
@@ -460,7 +460,7 @@ class calendar_event {
 				$endDate = date('Y-m-d H:i:s', strtotime('+1 month ' . date('Y-m-d H:i:s')));
 			} else {
 				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-				$endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 			}
 		} else {
 			$startDate = null;
@@ -730,7 +730,7 @@ class calendar_event {
 		$repeat = $this->getRepeat();
 		if ($repeat['enable'] == 1) {
 			$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-			$endDate = date('Y-m-d H:i:s', strtotime('+' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+			$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
 		} else {
 			$startDate = null;
 			$endDate = null;
