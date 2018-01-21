@@ -205,7 +205,7 @@ class calendar extends eqLogic {
 		}
 		$version = jeedom::versionAlias($_version);
 
-		$startDate = date('Y-m-d H:i:s');
+		$startDate = date('Y-m-d H:i:s', strtotime('-' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')));
 		$endDate = date('Y-m-d H:i:s', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')));
 		$events = calendar_event::calculeEvents(calendar_event::getEventsByEqLogic($this->getId(), $startDate, $endDate), $startDate, $endDate);
 		usort($events, 'calendar::orderEvent');
@@ -217,7 +217,7 @@ class calendar extends eqLogic {
 			if ($this->getConfiguration('nbWidgetMaxEvent', 0) != 0 && $this->getConfiguration('nbWidgetMaxEvent', 0) < $nbEvent) {
 				break;
 			}
-			if (strtotime($event['end']) < strtotime($startDate) || strtotime($event['start']) > strtotime($endDate)) {
+			if (strtotime($event['end']) < strtotime('now') || strtotime($event['start']) > strtotime($endDate)) {
 				continue;
 			}
 			if (isset($eventList[$this->getId() . '_' . $event['id'] . '_' . $event['start'] . '_' . $event['end']])) {
