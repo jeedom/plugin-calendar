@@ -26,9 +26,7 @@ $eqLogics = calendar::byType('calendar');
 		<tr>
 			<th>{{Module}}</th>
 			<th>{{ID}}</th>
-			<th>{{Evènements}}</th>
 			<th>{{Etat}}</th>
-			<th>{{Modèle}}</th>
 			<th>{{Date création}}</th>
 		</tr>
 	</thead>
@@ -37,15 +35,13 @@ $eqLogics = calendar::byType('calendar');
 foreach ($eqLogics as $eqLogic) {
 	$eventNumber = count($eqLogic->getEvents());
 	$state = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Inactif}}</span>';
-	if ($eqLogic->getCmd(null, 'state')->execCmd() == 1 && $eqLogic->getIsEnable() == 1){
+	if ($eqLogic->getIsEnable() == 1) {
 		$state = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Actif}}</span>';
 	}
 	echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getId() . '</span></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eventNumber . '</span></td>';
 	echo '<td>' . $state . '</td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getConfiguration('addr') . '</span></td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getConfiguration('model') . '</span></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getConfiguration('createtime') . '</span></td></tr>';
 }
 ?>
