@@ -26,6 +26,7 @@ $eqLogics = calendar::byType('calendar');
 		<tr>
 			<th>{{Module}}</th>
 			<th>{{ID}}</th>
+			<th>{{Evènements}}</th>
 			<th>{{Etat}}</th>
 			<th>{{Date création}}</th>
 		</tr>
