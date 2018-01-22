@@ -6,5 +6,7 @@
 	"author" : "Loïc",
 	"require" : "3.0",
 	"category" : "organization",
-	"mobile" : "event"
+	"mobile" : "event",
+	"changelog" : "https://jeedom.github.io/plugin-calendar/#language#/changelog",
+    	"documentation" : "https://jeedom.github.io/plugin-calendar/#language#/"
 }
