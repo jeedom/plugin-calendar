@@ -1,3 +1,0 @@
-== Changelog
-
-- Suppression des commandes d'activation/désactivation de l'agenda suite à un grand nombre d'incomprehension sur le non fonctionnement de l'agenda
