@@ -15,7 +15,7 @@ plugin puis organisation.
 
 Une fois dessus vous retrouvez ici la liste de vos Agenda.
 
-Vous retrouvez ici toute la configuration de votre équipement :
+Aquí encontrará toda la configuración de su dispositivo:
 
 -   **Nom de l’équipement** : nom de votre agenda.
 

@@ -1,8 +1,7 @@
 Plugin permettant de créer un agenda et de déclencher des actions
 (commande ou scénario).
 
-Configuration du plugin 
-=======================
+== Plugin configuration
 
 La configuration est très simple, après téléchargement du plugin, il
 vous suffit de l’activer et c’est tout.
@@ -15,7 +14,7 @@ plugin puis organisation.
 
 Une fois dessus vous retrouvez ici la liste de vos Agenda.
 
-Vous retrouvez ici toute la configuration de votre équipement :
+You can find here the full configuration of your device :
 
 -   **Nom de l’équipement** : nom de votre agenda.
 
