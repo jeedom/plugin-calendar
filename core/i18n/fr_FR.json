@@ -18,7 +18,14 @@
         "Ajouter événement": "Ajouter événement",
         "Agenda": "Agenda",
         "Supprimer": "Supprimer",
-        "Sauvegarder": "Sauvegarder"
+        "Sauvegarder": "Sauvegarder",
+        "Gestion": "Gestion",
+        "Ajouter": "Ajouter",
+        "Santé": "Santé",
+        "Dupliquer": "Dupliquer",
+        "Masquer le statut et les commandes d'activation\/désactivation": "Masquer le statut et les commandes d'activation\/désactivation",
+        "Configuration avancée": "Configuration avancée",
+        "Géneral": "Géneral"
     },
     "plugins\/calendar\/desktop\/modal\/event.edit.php": {
         "Evènement": "Evènement",
@@ -92,11 +99,21 @@
         "Occurence supprimé avec success": "Occurence supprimé avec success",
         "Evénement": "Evénement",
         "Evènement supprimé avec success": "Evènement supprimé avec success",
-        "Etes-vous sûr de vouloir supprimer cette événement ?": "Etes-vous sûr de vouloir supprimer cette événement ?"
+        "Etes-vous sûr de vouloir supprimer cette événement ?": "Etes-vous sûr de vouloir supprimer cette événement ?",
+        "Masquer dans le dashboard": "Masquer dans le dashboard",
+        "Action de début": "Action de début",
+        "Action de fin": "Action de fin",
+        "Programmation": "Programmation",
+        "Toute la journée": "Toute la journée",
+        "Que les semaines paires": "Que les semaines paires",
+        "Que les semaines impaires": "Que les semaines impaires",
+        "Décocher pour desactiver l\\'action": "Décocher pour desactiver l\\'action",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Cocher pour que la commande s\\'éxecute en parrallele des autres actions"
     },
     "plugins\/calendar\/desktop\/js\/calendar.js": {
         "Ajouter évènement": "Ajouter évènement",
-        "Evènement modifié avec succès": "Evènement modifié avec succès"
+        "Evènement modifié avec succès": "Evènement modifié avec succès",
+        "Santé Agenda": "Santé Agenda"
     },
     "plugins\/calendar\/plugin_info\/info.xml": {
         "Plugin pour créer un calendrier": "Plugin pour créer un calendrier",
@@ -105,6 +122,18 @@
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Activer": "Activer",
         "Désactiver": "Désactiver",
-        "En cours": "En cours"
+        "En cours": "En cours",
+        "Statut": "Statut",
+        "Aucun": "Aucun"
+    },
+    "plugins\/calendar\/desktop\/modal\/health.php": {
+        "Module": "Module",
+        "ID": "ID",
+        "Evènements": "Evènements",
+        "Etat": "Etat",
+        "Modèle": "Modèle",
+        "Date création": "Date création",
+        "Inactif": "Inactif",
+        "Actif": "Actif"
     }
 }
