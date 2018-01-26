@@ -18,7 +18,14 @@
         "Ajouter événement": "Aggiungi evento",
         "Agenda": "Calendario",
         "Supprimer": "Elimina",
-        "Sauvegarder": "Salva"
+        "Sauvegarder": "Salva",
+        "Gestion": "Gestione",
+        "Ajouter": "Aggiungi",
+        "Santé": "Salute",
+        "Dupliquer": "Duplica",
+        "Masquer le statut et les commandes d'activation/désactivation": "Masquer le statut et les commandes d'activation/désactivation",
+        "Configuration avancée": "Configurazione avanzata",
+        "Géneral": "Géneral"
     },
     "plugins/calendar/desktop/modal/event.edit.php": {
         "Evènement": "Event",
@@ -92,11 +99,21 @@
         "Occurence supprimé avec success": "Occorrenza eliminata con successo",
         "Evénement": "Evento",
         "Evènement supprimé avec success": "Evento eliminato con successo",
-        "Etes-vous sûr de vouloir supprimer cette événement ?": "Sei sicuro di voler eliminare questo evento?"
+        "Etes-vous sûr de vouloir supprimer cette événement ?": "Sei sicuro di voler eliminare questo evento?",
+        "Masquer dans le dashboard": "Masquer dans le dashboard",
+        "Action de début": "Action de début",
+        "Action de fin": "Action de fin",
+        "Programmation": "Pianificazione",
+        "Toute la journée": "Toute la journée",
+        "Que les semaines paires": "Que les semaines paires",
+        "Que les semaines impaires": "Que les semaines impaires",
+        "Décocher pour desactiver l\\'action": "Décocher pour desactiver l\\'action",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Cocher pour que la commande s\\'éxecute en parrallele des autres actions"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Aggiungi un evento",
-        "Evènement modifié avec succès": "Evento modificato con successo"
+        "Evènement modifié avec succès": "Evento modificato con successo",
+        "Santé Agenda": "Santé Agenda"
     },
     "plugins/calendar/plugin_info/info.xml": {
         "Plugin pour créer un calendrier": "Plugin per creare un calendari",
@@ -105,6 +122,18 @@
     "plugins/calendar/core/class/calendar.class.php": {
         "Activer": "Attivare",
         "Désactiver": "Disattiva",
-        "En cours": "In corso"
+        "En cours": "In corso",
+        "Statut": "Stato",
+        "Aucun": "no"
+    },
+    "plugins/calendar/desktop/modal/health.php": {
+        "Module": "Modulo",
+        "ID": "ID",
+        "Evènements": "Evènements",
+        "Etat": "Stato",
+        "Modèle": "Modello",
+        "Date création": "data di creazione",
+        "Inactif": "Inattiva",
+        "Actif": "Attiva"
     }
 }

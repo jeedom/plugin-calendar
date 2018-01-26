@@ -18,7 +18,14 @@
         "Ajouter événement": "Olay ekle",
         "Agenda": "Ajanda",
         "Supprimer": "Sil",
-        "Sauvegarder": "Kaydet"
+        "Sauvegarder": "Kaydet",
+        "Gestion": "Yönetim",
+        "Ajouter": "Ekle",
+        "Santé": "Sağlık",
+        "Dupliquer": "Kopyala",
+        "Masquer le statut et les commandes d'activation/désactivation": "Masquer le statut et les commandes d'activation/désactivation",
+        "Configuration avancée": "Gelişmiş ayarlar",
+        "Géneral": "Géneral"
     },
     "plugins/calendar/desktop/modal/event.edit.php": {
         "Evènement": "Olay",
@@ -92,11 +99,21 @@
         "Occurence supprimé avec success": "Sıklık başarıyla silindi",
         "Evénement": "Olay",
         "Evènement supprimé avec success": "Olay başarıyla silindi",
-        "Etes-vous sûr de vouloir supprimer cette événement ?": "Bu olayı silmek istediğinizden eminmisiniz ?"
+        "Etes-vous sûr de vouloir supprimer cette événement ?": "Bu olayı silmek istediğinizden eminmisiniz ?",
+        "Masquer dans le dashboard": "Masquer dans le dashboard",
+        "Action de début": "Action de début",
+        "Action de fin": "Action de fin",
+        "Programmation": "Programlama",
+        "Toute la journée": "Toute la journée",
+        "Que les semaines paires": "Que les semaines paires",
+        "Que les semaines impaires": "Que les semaines impaires",
+        "Décocher pour desactiver l\\'action": "Décocher pour desactiver l\\'action",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Cocher pour que la commande s\\'éxecute en parrallele des autres actions"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Olay ekle",
-        "Evènement modifié avec succès": "Olay başarıyla düzenlendi"
+        "Evènement modifié avec succès": "Olay başarıyla düzenlendi",
+        "Santé Agenda": "Santé Agenda"
     },
     "plugins/calendar/plugin_info/info.xml": {
         "Plugin pour créer un calendrier": "Takvim üretmek için eklenti",
@@ -105,6 +122,18 @@
     "plugins/calendar/core/class/calendar.class.php": {
         "Activer": "Etkinleştirmek",
         "Désactiver": "Dezaktive edin",
-        "En cours": "Sürüyor"
+        "En cours": "Sürüyor",
+        "Statut": "Statü",
+        "Aucun": "Hiçbir"
+    },
+    "plugins/calendar/desktop/modal/health.php": {
+        "Module": "Modul",
+        "ID": "ID",
+        "Evènements": "Evènements",
+        "Etat": "Durum",
+        "Modèle": "Model",
+        "Date création": "Oluşturma tarihi",
+        "Inactif": "İnaktif",
+        "Actif": "Aktif"
     }
 }
