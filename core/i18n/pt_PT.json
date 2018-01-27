@@ -107,8 +107,8 @@
         "Toute la journée": "Toute la journée",
         "Que les semaines paires": "Que les semaines paires",
         "Que les semaines impaires": "Que les semaines impaires",
-        "Décocher pour desactiver l\\'action": "Décocher pour desactiver l\\'action",
-        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Cocher pour que la commande s\\'éxecute en parrallele des autres actions"
+        "Décocher pour desactiver l\\'action": "Desmarque para desativar Ação 's \\",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Verifique a ordem \\ 's executadas em paralelo com outras acções"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Adicionar evento",

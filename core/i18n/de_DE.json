@@ -19,13 +19,13 @@
         "Agenda": "Kalendar",
         "Supprimer": "Löschen",
         "Sauvegarder": "Speichern",
-        "Gestion": "Gestion",
-        "Ajouter": "Ajouter",
-        "Santé": "Santé",
-        "Dupliquer": "Dupliquer",
-        "Masquer le statut et les commandes d'activation/désactivation": "Masquer le statut et les commandes d'activation/désactivation",
-        "Configuration avancée": "Configuration avancée",
-        "Géneral": "Géneral"
+        "Gestion": "Verwaltung",
+        "Ajouter": "Hinzufügen",
+        "Santé": "Gesundheit",
+        "Dupliquer": "Kopieren",
+        "Masquer le statut et les commandes d'activation/désactivation": "Status- und Aktivierungs/Deaktivierungs Befehle ausblenden",
+        "Configuration avancée": "Erweiterte Konfiguration",
+        "Géneral": "Allgemein"
     },
     "plugins/calendar/desktop/modal/event.edit.php": {
         "Evènement": "Ereignis",
@@ -100,20 +100,20 @@
         "Evénement": "Ereignis",
         "Evènement supprimé avec success": "Ereignis gelöscht",
         "Etes-vous sûr de vouloir supprimer cette événement ?": "Dieses Ereignis wirklich löschen?",
-        "Masquer dans le dashboard": "Masquer dans le dashboard",
-        "Action de début": "Action de début",
-        "Action de fin": "Action de fin",
-        "Programmation": "Programmation",
-        "Toute la journée": "Toute la journée",
-        "Que les semaines paires": "Que les semaines paires",
-        "Que les semaines impaires": "Que les semaines impaires",
-        "Décocher pour desactiver l\\'action": "Décocher pour desactiver l\\'action",
-        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Cocher pour que la commande s\\'éxecute en parrallele des autres actions"
+        "Masquer dans le dashboard": "Im Armaturenbrett ausblenden",
+        "Action de début": "Aktion starten",
+        "Action de fin": "Aktion beenden",
+        "Programmation": "Programmierung",
+        "Toute la journée": "Den ganzen Tag",
+        "Que les semaines paires": "Die gerade Woche",
+        "Que les semaines impaires": "Die ungerade Wochen",
+        "Décocher pour desactiver l\\'action": "Deaktivieren Sie diese Option, um die Aktion zu deaktivieren",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Überprüfen Sie, ob der Befehl parallel zu den anderen Aktionen ausgeführt wird"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Ereignis hinzufügen",
         "Evènement modifié avec succès": "Ereignis erfolgreich geändert",
-        "Santé Agenda": "Santé Agenda"
+        "Santé Agenda": "Kalender Gesundheit "
     },
     "plugins/calendar/plugin_info/info.xml": {
         "Plugin pour créer un calendrier": "Plugin, um einen Kalender zu erstellen",
@@ -123,17 +123,17 @@
         "Activer": "Aktivieren",
         "Désactiver": "deaktivieren",
         "En cours": "in Bearbeitung",
-        "Statut": "Statut",
-        "Aucun": "Aucun"
+        "Statut": "Status",
+        "Aucun": "Ohne"
     },
     "plugins/calendar/desktop/modal/health.php": {
-        "Module": "Module",
+        "Module": "Modul",
         "ID": "ID",
-        "Evènements": "Evènements",
-        "Etat": "Etat",
-        "Modèle": "Modèle",
-        "Date création": "Date création",
-        "Inactif": "Inactif",
-        "Actif": "Actif"
+        "Evènements": "Ereignise",
+        "Etat": "Zustand",
+        "Modèle": "Model",
+        "Date création": "Erstellungsdatum",
+        "Inactif": "inaktiv",
+        "Actif": "Aktiv"
     }
 }
