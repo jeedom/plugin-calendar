@@ -107,8 +107,8 @@
         "Toute la journée": "Toute la journée",
         "Que les semaines paires": "Que les semaines paires",
         "Que les semaines impaires": "Que les semaines impaires",
-        "Décocher pour desactiver l\\'action": "Décocher pour desactiver l\\'action",
-        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Cocher pour que la commande s\\'éxecute en parrallele des autres actions"
+        "Décocher pour desactiver l\\'action": "\\「sのアクションを無効にするにはチェックを外し",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "他のアクションを並列に実行するための\\「sのチェック"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "イベントを追加",
