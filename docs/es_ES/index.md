@@ -7,7 +7,7 @@ configuración del plugin
 La configuration est très simple, après téléchargement du plugin, il
 vous suffit de l’activer et c’est tout.
 
-Configuration des équipements 
+Configuración del dispositivo
 =============================
 
 La configuration des équipements Agenda est accessible à partir du menu
@@ -22,8 +22,8 @@ Aquí encontrará toda la configuración de su dispositivo:
 -   **Objet parent** : indique l’objet parent auquel
     appartient l’équipement.
 
--   **Catégorie** : les catégories de l’équipement (il peut appartenir à
-    plusieurs catégories).
+-   ** ** Categoría: categorías de equipos (que pueden pertenecer a
+    la mayoría de categorías).
 
 -   **Activer** : permet de rendre votre équipement actif.
 

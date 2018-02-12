@@ -6,7 +6,7 @@ Plugin permettant de créer un agenda et de déclencher des actions
 La configuration est très simple, après téléchargement du plugin, il
 vous suffit de l’activer et c’est tout.
 
-Configuration des équipements 
+Equipment configuration
 =============================
 
 La configuration des équipements Agenda est accessible à partir du menu
@@ -21,8 +21,8 @@ You can find here the full configuration of your device :
 -   **Objet parent** : indique l’objet parent auquel
     appartient l’équipement.
 
--   **Catégorie** : les catégories de l’équipement (il peut appartenir à
-    plusieurs catégories).
+-   **Category**: categories of equipment (it may belong to
+    several categories).
 
 -   **Activer** : permet de rendre votre équipement actif.
 
