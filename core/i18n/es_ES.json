@@ -23,9 +23,9 @@
         "Ajouter": "Añadir",
         "Santé": "Salud",
         "Dupliquer": "Duplicar",
-        "Masquer le statut et les commandes d'activation/désactivation": "Masquer le statut et les commandes d'activation/désactivation",
+        "Masquer le statut et les commandes d'activation/désactivation": "Ocultar el estado y los comandos de activación/desactivación",
         "Configuration avancée": "Configuración avanzada",
-        "Géneral": "Géneral"
+        "Géneral": "General"
     },
     "plugins/calendar/desktop/modal/event.edit.php": {
         "Evènement": "Evento",
@@ -100,20 +100,20 @@
         "Evénement": "Evento",
         "Evènement supprimé avec success": "Acontecimiento suprimido con éxito",
         "Etes-vous sûr de vouloir supprimer cette événement ?": "¿Deseas eliminar este acontecimiento?",
-        "Masquer dans le dashboard": "Masquer dans le dashboard",
-        "Action de début": "Action de début",
-        "Action de fin": "Action de fin",
+        "Masquer dans le dashboard": "Ocultar en el Dashboard",
+        "Action de début": "Acción inicial",
+        "Action de fin": "Acción final",
         "Programmation": "Programación",
-        "Toute la journée": "Toute la journée",
-        "Que les semaines paires": "Que les semaines paires",
-        "Que les semaines impaires": "Que les semaines impaires",
+        "Toute la journée": "Todo el día",
+        "Que les semaines paires": "Semanas pares",
+        "Que les semaines impaires": "Semanas impares",
         "Décocher pour desactiver l\\'action": "Desactive la casilla para desactivar Acción 's \\",
         "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Compruebe que la orden \\ 's ejecutado en paralelo a otras acciones"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Añadir acontecimiento",
         "Evènement modifié avec succès": "Acontecimiento modificado con éxito",
-        "Santé Agenda": "Santé Agenda"
+        "Santé Agenda": "Salud Agenda"
     },
     "plugins/calendar/plugin_info/info.xml": {
         "Plugin pour créer un calendrier": "Plugin para crear un diario",
@@ -129,7 +129,7 @@
     "plugins/calendar/desktop/modal/health.php": {
         "Module": "Módulo",
         "ID": "ID",
-        "Evènements": "Evènements",
+        "Evènements": "Eventos",
         "Etat": "Estado",
         "Modèle": "Modelo",
         "Date création": "Fecha de creación",
