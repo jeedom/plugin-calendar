@@ -447,7 +447,7 @@ class calendar_event {
 			$cron->save();
 		} else {
 			if (is_object($cron)) {
-				$cron->remove();
+				$cron->remove(false);
 			}
 		}
 	}
