@@ -28,53 +28,54 @@ class calendar extends eqLogic {
 
 	public static function pull($_option) {
 		$event = calendar_event::byId($_option['event_id']);
-		if (is_object($event)) {
-			$eqLogic = $event->getEqLogic();
-			if ($eqLogic->getIsEnable() == 0) {
-				return;
-			}
-			$nowtime = strtotime('now');
-			$repeat = $event->getRepeat();
-			if ($repeat['enable'] == 1) {
-				if ($repeat['nationalDay'] == 'onlyNationalDay') {
-					$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
-				} else {
-					$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-				}
+		if (!is_object($event)) {
+			return;
+		}
+		$eqLogic = $event->getEqLogic();
+		if ($eqLogic->getIsEnable() == 0) {
+			return;
+		}
+		$nowtime = strtotime('now');
+		$repeat = $event->getRepeat();
+		if ($repeat['enable'] == 1) {
+			if ($repeat['nationalDay'] == 'onlyNationalDay') {
+				$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
+				$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
 			} else {
-				$startDate = null;
-				$endDate = null;
+				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 			}
-			log::add('calendar', 'debug', 'Reprogrammation');
-			$event->reschedule();
-			log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
-			try {
-				if (jeedom::isDateOk()) {
-					$results = $event->calculOccurence($startDate, $endDate);
-					if (count($results) == 0) {
-						log::add('calendar', 'debug', 'Aucune programmation trouvée, lancement des actions de fin');
-						$event->doAction('end');
-						return null;
+		} else {
+			$startDate = null;
+			$endDate = null;
+		}
+		log::add('calendar', 'debug', 'Reprogrammation');
+		$event->reschedule();
+		log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
+		try {
+			if (jeedom::isDateOk()) {
+				$results = $event->calculOccurence($startDate, $endDate);
+				if (count($results) == 0) {
+					log::add('calendar', 'debug', 'Aucune programmation trouvée, lancement des actions de fin');
+					$event->doAction('end');
+					return null;
+				}
+				log::add('calendar', 'debug', 'Recherche de l\'action à faire (start ou end)');
+				for ($i = 0; $i < count($results); $i++) {
+					if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
+						log::add('calendar', 'debug', 'Action de début');
+						$event->doAction('start');
+						break;
 					}
-					log::add('calendar', 'debug', 'Recherche de l\'action à faire (start ou end)');
-					for ($i = 0; $i < count($results); $i++) {
-						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-							log::add('calendar', 'debug', 'Action de début');
-							$event->doAction('start');
-							break;
-						}
-						if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-							log::add('calendar', 'debug', 'Action de fin');
-							$event->doAction('end');
-							break;
-						}
+					if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
+						log::add('calendar', 'debug', 'Action de fin');
+						$event->doAction('end');
+						break;
 					}
 				}
-			} catch (Exception $e) {
-
 			}
+		} catch (Exception $e) {
+
 		}
 	}
 
