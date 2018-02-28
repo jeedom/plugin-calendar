@@ -1,7 +1,8 @@
 Plugin permettant de créer un agenda et de déclencher des actions
 (commande ou scénario).
 
-== Plugin configuration
+Plugin configuration
+=======================
 
 La configuration est très simple, après téléchargement du plugin, il
 vous suffit de l’activer et c’est tout.
