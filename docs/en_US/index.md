@@ -166,11 +166,7 @@ C’est ici que se trouve toute la gestion temporelle de votre événement :
 Agenda, commandes et scénario 
 =============================
 
-Un agenda possède plusieurs commandes :
-
--   **Activer** : permet d’activer l’agenda.
-
--   **Désactiver** : permet de désactiver l’agenda.
+Un agenda possède une commande :
 
 -   **En cours** : donne la liste des événements en cours séparés par
     des virgules, pour l’utiliser dans un scénario le plus simple et
