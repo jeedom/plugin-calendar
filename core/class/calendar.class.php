@@ -745,20 +745,9 @@ class calendar_event {
 				if (count($results) != 0) {
 					for ($i = 0; $i < count($results); $i++) {
 						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-							if ($in_progress == 0) {
+							$this->setCmd_param('in_progress', 1);
+							if ($in_progress != 1) {
 								$this->doAction('start');
-								return;
-							} else {
-								$this->setCmd_param('in_progress', 1);
-							}
-							break;
-						}
-						if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-							if ($in_progress == 1) {
-								$this->doAction('end');
-								return;
-							} else {
-								$this->setCmd_param('in_progress', 0);
 							}
 							break;
 						}
@@ -769,8 +758,7 @@ class calendar_event {
 
 		}
 		DB::save($this, true);
-		$eqLogic = $this->getEqLogic();
-		$cmd = $eqLogic->getCmd('info', 'in_progress');
+		$cmd = $this->getEqLogic()->getCmd('info', 'in_progress');
 		if (is_object($cmd)) {
 			$cmd->event($cmd->execute());
 		}
