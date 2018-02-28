@@ -754,6 +754,9 @@ class calendar_event {
 					}
 				}
 			}
+			if ($this->getCmd_param('in_progress', 0) == 0 && $in_progress == 1) {
+				$this->doAction('end');
+			}
 		} catch (Exception $e) {
 
 		}
