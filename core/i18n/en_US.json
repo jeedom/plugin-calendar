@@ -23,9 +23,9 @@
         "Ajouter": "Add",
         "Santé": "Health",
         "Dupliquer": "Duplicate",
-        "Masquer le statut et les commandes d'activation/désactivation": "Masquer le statut et les commandes d'activation/désactivation",
+        "Masquer le statut et les commandes d'activation/désactivation": "Hide status and activation/deactivation commands",
         "Configuration avancée": "Advanced configuration",
-        "Géneral": "Géneral"
+        "Géneral": "General"
     },
     "plugins/calendar/desktop/modal/event.edit.php": {
         "Evènement": "Event",
@@ -100,20 +100,20 @@
         "Evénement": "Event",
         "Evènement supprimé avec success": "Event successfully deleted",
         "Etes-vous sûr de vouloir supprimer cette événement ?": "Are you sure you want to delete this event?",
-        "Masquer dans le dashboard": "Masquer dans le dashboard",
-        "Action de début": "Action de début",
-        "Action de fin": "Action de fin",
+        "Masquer dans le dashboard": "Hide in the dashboard",
+        "Action de début": "Start action",
+        "Action de fin": "End action",
         "Programmation": "Schedule",
-        "Toute la journée": "Toute la journée",
-        "Que les semaines paires": "Que les semaines paires",
-        "Que les semaines impaires": "Que les semaines impaires",
+        "Toute la journée": "All day",
+        "Que les semaines paires": "That even weeks",
+        "Que les semaines impaires": "That odd weeks",
         "Décocher pour desactiver l\\'action": "Uncheck to disable the action",
         "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Check for the order to be executed in parallel with other actions"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Add event",
         "Evènement modifié avec succès": "Event successfully changed",
-        "Santé Agenda": "Santé Agenda"
+        "Santé Agenda": "Agenda health"
     },
     "plugins/calendar/plugin_info/info.xml": {
         "Plugin pour créer un calendrier": "Plugin to create a calendar",
@@ -129,7 +129,7 @@
     "plugins/calendar/desktop/modal/health.php": {
         "Module": "Module",
         "ID": "ID",
-        "Evènements": "Evènements",
+        "Evènements": "Events",
         "Etat": "State",
         "Modèle": "Model",
         "Date création": "Creation date",
