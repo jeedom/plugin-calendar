@@ -190,9 +190,6 @@ class calendar extends eqLogic {
 	}
 
 	public function rescheduleEvent() {
-		if ($this->getIsEnable() == 0) {
-			return;
-		}
 		log::add('calendar', 'debug', 'Reprogrammation de tous les évènements');
 		foreach ($this->getEvents() as $event) {
 			$event->save();
@@ -727,6 +724,17 @@ class calendar_event {
 	}
 
 	public function postSave() {
+		log::add('calendar_test', 'debug', 'Eco je pense');
+		$eqLogic = $this->getEqLogic();
+		if ($eqLogic->getIsEnable() == 0) {
+			$this->setCmd_param('in_progress', 0);
+			DB::save($this, true);
+			$cmd = $eqLogic->getCmd('info', 'in_progress');
+			if (is_object($cmd)) {
+				$cmd->event($cmd->execute());
+			}
+			return;
+		}
 		$repeat = $this->getRepeat();
 		if ($repeat['enable'] == 1) {
 			$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
@@ -737,6 +745,7 @@ class calendar_event {
 		}
 		$this->reschedule();
 		$in_progress = $this->getCmd_param('in_progress', 0);
+		log::add('calendar_test', 'debug', '$in_progress : ' . $in_progress);
 		$this->setCmd_param('in_progress', 0);
 		$nowtime = strtotime('now');
 		try {
@@ -761,7 +770,7 @@ class calendar_event {
 
 		}
 		DB::save($this, true);
-		$cmd = $this->getEqLogic()->getCmd('info', 'in_progress');
+		$cmd = $eqLogic->getCmd('info', 'in_progress');
 		if (is_object($cmd)) {
 			$cmd->event($cmd->execute());
 		}
@@ -781,6 +790,12 @@ class calendar_event {
 	}
 
 	public function doAction($_action = 'start') {
+		$eqLogic = $this->getEqLogic();
+		if ($eqLogic->getIsEnable() == 0) {
+			$this->setCmd_param('in_progress', 0);
+			DB::save($this, true);
+			return;
+		}
 		if ($_action == 'start') {
 			$this->setCmd_param('in_progress', 1);
 			DB::save($this, true);
