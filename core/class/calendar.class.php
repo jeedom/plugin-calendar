@@ -451,6 +451,8 @@ class calendar_event {
 	}
 
 	public function nextOccurrence($_position = null, $_details = false) {
+		$startDate = null;
+		$endDate = null;
 		$repeat = $this->getRepeat();
 		if ($repeat['enable'] == 1) {
 			if ($repeat['nationalDay'] == 'onlyNationalDay') {
@@ -460,9 +462,6 @@ class calendar_event {
 				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 			}
-		} else {
-			$startDate = null;
-			$endDate = null;
 		}
 		$results = $this->calculOccurence($startDate, $endDate);
 		if (count($results) == 0) {
@@ -492,8 +491,8 @@ class calendar_event {
 			return array();
 		}
 		$_recurence++;
-		$startTime = ($_startDate != null) ? strtotime($_startDate) : 0;
-		$endTime = ($_endDate != null) ? strtotime($_endDate) : 999999999999;
+		$startTime = ($_startDate != null) ? strtotime($_startDate) : strtotime('now - 2 year');
+		$endTime = ($_endDate != null) ? strtotime($_endDate) : strtotime('now + 2 year');
 		$return = array();
 		$repeat = $this->getRepeat();
 		if ($this->getRepeat('enable') == 1) {
