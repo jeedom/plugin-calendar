@@ -745,7 +745,7 @@ class calendar_event {
 		}
 		$this->reschedule();
 		$in_progress = $this->getCmd_param('in_progress', 0);
-		log::add('calendar_test', 'debug', '$in_progress : ' . $in_progress);
+		log::add('calendar_test', 'debug', 'in_progress : ' . $in_progress);
 		$this->setCmd_param('in_progress', 0);
 		$nowtime = strtotime('now');
 		try {
