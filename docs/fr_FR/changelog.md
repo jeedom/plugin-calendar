@@ -1,6 +1,7 @@
 # 26/03/2018
 
 - Correction d'un bug sur les images de la page de configuration
+- Correction d'un bug lors du calcul de la recurrence des événements si aucune borne n'est definie.
 
 # 02/03/2018
 
