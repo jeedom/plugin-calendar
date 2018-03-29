@@ -698,15 +698,17 @@ class calendar_event {
 			$this->setRepeat('excludeDay', $repeat['excludeDay']);
 		}
 
-		if ($this->getRepeat('enable') == 1 && $this->getRepeat('mode') == 'simple') {
-			if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
-				throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
-			}
-			if ($this->getRepeat('unite') == '') {
-				throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
+		if ($this->getRepeat('enable') == 1) {
+			if ($this->getRepeat('mode') == 'simple') {
+				if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
+					throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
+				}
+				if ($this->getRepeat('unite') == '') {
+					throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
+				}
 			}
 		} else {
-			$this->setRepeat('enable', 0);
+			$this->setRepeat('freq', 0);
 			$this->setUntil('');
 		}
 		if ($this->getUntil() == '') {
