@@ -706,7 +706,7 @@ class calendar_event {
 				throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
 			}
 		} else {
-			$this->setRepeat('freq', 0);
+			$this->setRepeat('enable', 0);
 			$this->setUntil('');
 		}
 		if ($this->getUntil() == '') {
