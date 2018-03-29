@@ -1,3 +1,7 @@
+# 29/03/2018
+
+- Correction d'un bug sur le "jusqu'a" si la repetition n'est pas une répetition simple
+
 # 26/03/2018
 
 - Correction d'un bug sur les images de la page de configuration
