@@ -28,53 +28,54 @@ class calendar extends eqLogic {
 
 	public static function pull($_option) {
 		$event = calendar_event::byId($_option['event_id']);
-		if (is_object($event)) {
-			$eqLogic = $event->getEqLogic();
-			if ($eqLogic->getIsEnable() == 0) {
-				return;
-			}
-			$nowtime = strtotime('now');
-			$repeat = $event->getRepeat();
-			if ($repeat['enable'] == 1) {
-				if ($repeat['nationalDay'] == 'onlyNationalDay') {
-					$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
-				} else {
-					$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-				}
+		if (!is_object($event)) {
+			return;
+		}
+		$eqLogic = $event->getEqLogic();
+		if ($eqLogic->getIsEnable() == 0) {
+			return;
+		}
+		$nowtime = strtotime('now');
+		$repeat = $event->getRepeat();
+		if ($repeat['enable'] == 1) {
+			if ($repeat['nationalDay'] == 'onlyNationalDay') {
+				$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
+				$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
 			} else {
-				$startDate = null;
-				$endDate = null;
+				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 			}
-			log::add('calendar', 'debug', 'Reprogrammation');
-			$event->reschedule();
-			log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
-			try {
-				if (jeedom::isDateOk()) {
-					$results = $event->calculOccurence($startDate, $endDate);
-					if (count($results) == 0) {
-						log::add('calendar', 'debug', 'Aucune programmation trouvée, lancement des actions de fin');
-						$event->doAction('end');
-						return null;
+		} else {
+			$startDate = null;
+			$endDate = null;
+		}
+		log::add('calendar', 'debug', 'Reprogrammation');
+		$event->reschedule();
+		log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
+		try {
+			if (jeedom::isDateOk()) {
+				$results = $event->calculOccurence($startDate, $endDate);
+				if (count($results) == 0) {
+					log::add('calendar', 'debug', 'Aucune programmation trouvée, lancement des actions de fin');
+					$event->doAction('end');
+					return null;
+				}
+				log::add('calendar', 'debug', 'Recherche de l\'action à faire (start ou end)');
+				for ($i = 0; $i < count($results); $i++) {
+					if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
+						log::add('calendar', 'debug', 'Action de début');
+						$event->doAction('start');
+						break;
 					}
-					log::add('calendar', 'debug', 'Recherche de l\'action à faire (start ou end)');
-					for ($i = 0; $i < count($results); $i++) {
-						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-							log::add('calendar', 'debug', 'Action de début');
-							$event->doAction('start');
-							break;
-						}
-						if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-							log::add('calendar', 'debug', 'Action de fin');
-							$event->doAction('end');
-							break;
-						}
+					if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
+						log::add('calendar', 'debug', 'Action de fin');
+						$event->doAction('end');
+						break;
 					}
 				}
-			} catch (Exception $e) {
-
 			}
+		} catch (Exception $e) {
+
 		}
 	}
 
@@ -189,9 +190,6 @@ class calendar extends eqLogic {
 	}
 
 	public function rescheduleEvent() {
-		if ($this->getIsEnable() == 0) {
-			return;
-		}
 		log::add('calendar', 'debug', 'Reprogrammation de tous les évènements');
 		foreach ($this->getEvents() as $event) {
 			$event->save();
@@ -447,12 +445,14 @@ class calendar_event {
 			$cron->save();
 		} else {
 			if (is_object($cron)) {
-				$cron->remove();
+				$cron->remove(false);
 			}
 		}
 	}
 
 	public function nextOccurrence($_position = null, $_details = false) {
+		$startDate = null;
+		$endDate = null;
 		$repeat = $this->getRepeat();
 		if ($repeat['enable'] == 1) {
 			if ($repeat['nationalDay'] == 'onlyNationalDay') {
@@ -462,9 +462,6 @@ class calendar_event {
 				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 			}
-		} else {
-			$startDate = null;
-			$endDate = null;
 		}
 		$results = $this->calculOccurence($startDate, $endDate);
 		if (count($results) == 0) {
@@ -494,8 +491,8 @@ class calendar_event {
 			return array();
 		}
 		$_recurence++;
-		$startTime = ($_startDate != null) ? strtotime($_startDate) : 0;
-		$endTime = ($_endDate != null) ? strtotime($_endDate) : 999999999999;
+		$startTime = ($_startDate != null) ? strtotime($_startDate) : strtotime('now - 2 year');
+		$endTime = ($_endDate != null) ? strtotime($_endDate) : strtotime('now + 2 year');
 		$return = array();
 		$repeat = $this->getRepeat();
 		if ($this->getRepeat('enable') == 1) {
@@ -701,12 +698,14 @@ class calendar_event {
 			$this->setRepeat('excludeDay', $repeat['excludeDay']);
 		}
 
-		if ($this->getRepeat('enable') == 1 && $this->getRepeat('mode') == 'simple') {
-			if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
-				throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
-			}
-			if ($this->getRepeat('unite') == '') {
-				throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
+		if ($this->getRepeat('enable') == 1) {
+			if ($this->getRepeat('mode') == 'simple') {
+				if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
+					throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
+				}
+				if ($this->getRepeat('unite') == '') {
+					throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
+				}
 			}
 		} else {
 			$this->setRepeat('freq', 0);
@@ -726,6 +725,17 @@ class calendar_event {
 	}
 
 	public function postSave() {
+		log::add('calendar_test', 'debug', 'Eco je pense');
+		$eqLogic = $this->getEqLogic();
+		if ($eqLogic->getIsEnable() == 0) {
+			$this->setCmd_param('in_progress', 0);
+			DB::save($this, true);
+			$cmd = $eqLogic->getCmd('info', 'in_progress');
+			if (is_object($cmd)) {
+				$cmd->event($cmd->execute());
+			}
+			return;
+		}
 		$repeat = $this->getRepeat();
 		if ($repeat['enable'] == 1) {
 			$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
@@ -736,6 +746,7 @@ class calendar_event {
 		}
 		$this->reschedule();
 		$in_progress = $this->getCmd_param('in_progress', 0);
+		log::add('calendar_test', 'debug', 'in_progress : ' . $in_progress);
 		$this->setCmd_param('in_progress', 0);
 		$nowtime = strtotime('now');
 		try {
@@ -744,31 +755,22 @@ class calendar_event {
 				if (count($results) != 0) {
 					for ($i = 0; $i < count($results); $i++) {
 						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-							if ($in_progress == 0) {
+							$this->setCmd_param('in_progress', 1);
+							if ($in_progress != 1) {
 								$this->doAction('start');
-								return;
-							} else {
-								$this->setCmd_param('in_progress', 1);
-							}
-							break;
-						}
-						if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-							if ($in_progress == 1) {
-								$this->doAction('end');
-								return;
-							} else {
-								$this->setCmd_param('in_progress', 0);
 							}
 							break;
 						}
 					}
 				}
 			}
+			if ($this->getCmd_param('in_progress', 0) == 0 && $in_progress == 1) {
+				$this->doAction('end');
+			}
 		} catch (Exception $e) {
 
 		}
 		DB::save($this, true);
-		$eqLogic = $this->getEqLogic();
 		$cmd = $eqLogic->getCmd('info', 'in_progress');
 		if (is_object($cmd)) {
 			$cmd->event($cmd->execute());
@@ -789,6 +791,12 @@ class calendar_event {
 	}
 
 	public function doAction($_action = 'start') {
+		$eqLogic = $this->getEqLogic();
+		if ($eqLogic->getIsEnable() == 0) {
+			$this->setCmd_param('in_progress', 0);
+			DB::save($this, true);
+			return;
+		}
 		if ($_action == 'start') {
 			$this->setCmd_param('in_progress', 1);
 			DB::save($this, true);
@@ -810,7 +818,7 @@ class calendar_event {
 				}
 				scenarioExpression::createAndExec('action', $action['cmd'], $options);
 			} catch (Exception $e) {
-				log::add('alarm', 'error', __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
+				log::add('calendar', 'error', __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
 			}
 		}
 		return true;

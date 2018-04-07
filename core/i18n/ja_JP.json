@@ -18,7 +18,14 @@
         "Ajouter événement": "イベントを追加",
         "Agenda": "日記",
         "Supprimer": "取り除きます",
-        "Sauvegarder": "セーブ"
+        "Sauvegarder": "セーブ",
+        "Gestion": "管理",
+        "Ajouter": "加えます",
+        "Santé": "健康",
+        "Dupliquer": "複写",
+        "Masquer le statut et les commandes d'activation/désactivation": "Masquer le statut et les commandes d'activation/désactivation",
+        "Configuration avancée": "高度な設定",
+        "Géneral": "Géneral"
     },
     "plugins/calendar/desktop/modal/event.edit.php": {
         "Evènement": "イベント",
@@ -92,11 +99,21 @@
         "Occurence supprimé avec success": "出現は、成功で除去しました",
         "Evénement": "イベント",
         "Evènement supprimé avec success": "イベントの成功で除去",
-        "Etes-vous sûr de vouloir supprimer cette événement ?": "あなたは、このイベントを削除してもよろしいですか？"
+        "Etes-vous sûr de vouloir supprimer cette événement ?": "あなたは、このイベントを削除してもよろしいですか？",
+        "Masquer dans le dashboard": "Masquer dans le dashboard",
+        "Action de début": "Action de début",
+        "Action de fin": "Action de fin",
+        "Programmation": "プログラミング",
+        "Toute la journée": "Toute la journée",
+        "Que les semaines paires": "Que les semaines paires",
+        "Que les semaines impaires": "Que les semaines impaires",
+        "Décocher pour desactiver l\\'action": "\\「sのアクションを無効にするにはチェックを外し",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "他のアクションを並列に実行するための\\「sのチェック"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "イベントを追加",
-        "Evènement modifié avec succès": "イベントが正常に変更します"
+        "Evènement modifié avec succès": "イベントが正常に変更します",
+        "Santé Agenda": "Santé Agenda"
     },
     "plugins/calendar/plugin_info/info.xml": {
         "Plugin pour créer un calendrier": "カレンダーを作成するためのプラグイン",
@@ -105,6 +122,18 @@
     "plugins/calendar/core/class/calendar.class.php": {
         "Activer": "アクティブにし",
         "Désactiver": "無効化",
-        "En cours": "現在進行中"
+        "En cours": "現在進行中",
+        "Statut": "ステータス",
+        "Aucun": "いいえ"
+    },
+    "plugins/calendar/desktop/modal/health.php": {
+        "Module": "モジュール",
+        "ID": "ID",
+        "Evènements": "Evènements",
+        "Etat": "状態",
+        "Modèle": "モデル",
+        "Date création": "作成日",
+        "Inactif": "不活発",
+        "Actif": "財産"
     }
 }

@@ -18,7 +18,14 @@
         "Ajouter événement": "Menambahkan acara",
         "Agenda": "Kalender",
         "Supprimer": "Menghapus",
-        "Sauvegarder": "Menyimpan"
+        "Sauvegarder": "Menyimpan",
+        "Gestion": "Manajemen",
+        "Ajouter": "Tambahan",
+        "Santé": "Bidang Kesehatan",
+        "Dupliquer": "duplikat",
+        "Masquer le statut et les commandes d'activation/désactivation": "Masquer le statut et les commandes d'activation/désactivation",
+        "Configuration avancée": "konfigurasi lanjutan",
+        "Géneral": "Géneral"
     },
     "plugins/calendar/desktop/modal/event.edit.php": {
         "Evènement": "Peristiwa",
@@ -92,11 +99,21 @@
         "Occurence supprimé avec success": "Kejadian dihapus dengan sukses",
         "Evénement": "Peristiwa",
         "Evènement supprimé avec success": "Acara dihapus dengan sukses",
-        "Etes-vous sûr de vouloir supprimer cette événement ?": "Apakah Anda yakin ingin menghapus  peristiwa ? "
+        "Etes-vous sûr de vouloir supprimer cette événement ?": "Apakah Anda yakin ingin menghapus  peristiwa ? ",
+        "Masquer dans le dashboard": "Masquer dans le dashboard",
+        "Action de début": "Action de début",
+        "Action de fin": "Action de fin",
+        "Programmation": "pemrograman",
+        "Toute la journée": "Toute la journée",
+        "Que les semaines paires": "Que les semaines paires",
+        "Que les semaines impaires": "Que les semaines impaires",
+        "Décocher pour desactiver l\\'action": "Hapus tanda centang untuk menonaktifkan \\ 's Aksi",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Periksa untuk urutan \\ 's dieksekusi secara paralel untuk tindakan lainnya"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Menambahkan acara",
-        "Evènement modifié avec succès": "Acara berhasil diubah"
+        "Evènement modifié avec succès": "Acara berhasil diubah",
+        "Santé Agenda": "Santé Agenda"
     },
     "plugins/calendar/plugin_info/info.xml": {
         "Plugin pour créer un calendrier": "Plugin untuk membuat kalender",
@@ -105,6 +122,18 @@
     "plugins/calendar/core/class/calendar.class.php": {
         "Activer": "Mengaktifkan",
         "Désactiver": "Penonaktifan",
-        "En cours": "Sedang berlangsung"
+        "En cours": "Sedang berlangsung",
+        "Statut": "Status",
+        "Aucun": "tidak"
+    },
+    "plugins/calendar/desktop/modal/health.php": {
+        "Module": "Modul",
+        "ID": "ID",
+        "Evènements": "Evènements",
+        "Etat": "negara",
+        "Modèle": "Model",
+        "Date création": "tanggal pembuatan",
+        "Inactif": "non-aktif",
+        "Actif": "aktiva"
     }
 }
