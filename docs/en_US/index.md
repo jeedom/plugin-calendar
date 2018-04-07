@@ -1,12 +1,13 @@
 Plugin permettant de créer un agenda et de déclencher des actions
 (commande ou scénario).
 
-== Plugin configuration
+Plugin configuration
+=======================
 
 La configuration est très simple, après téléchargement du plugin, il
 vous suffit de l’activer et c’est tout.
 
-Configuration des équipements 
+Equipment configuration
 =============================
 
 La configuration des équipements Agenda est accessible à partir du menu
@@ -21,8 +22,8 @@ You can find here the full configuration of your device :
 -   **Objet parent** : indique l’objet parent auquel
     appartient l’équipement.
 
--   **Catégorie** : les catégories de l’équipement (il peut appartenir à
-    plusieurs catégories).
+-   **Category**: categories of equipment (it may belong to
+    several categories).
 
 -   **Activer** : permet de rendre votre équipement actif.
 
@@ -166,11 +167,7 @@ C’est ici que se trouve toute la gestion temporelle de votre événement :
 Agenda, commandes et scénario 
 =============================
 
-Un agenda possède plusieurs commandes :
-
--   **Activer** : permet d’activer l’agenda.
-
--   **Désactiver** : permet de désactiver l’agenda.
+Un agenda possède une commande :
 
 -   **En cours** : donne la liste des événements en cours séparés par
     des virgules, pour l’utiliser dans un scénario le plus simple et
