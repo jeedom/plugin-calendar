@@ -28,33 +28,10 @@ function calendar_install() {
 }
 
 function calendar_update() {
-	$calendar = new calendar();
-	foreach (calendar_event::all() as $event) {
-		foreach (array('start', 'end') as $_action) {
-			if ($event->getCmd_param($_action . '_type') == 'cmd') {
-				$action = array();
-				$action['cmd'] = $event->getCmd_param($_action . '_name');
-				$action['options'] = $event->getCmd_param($_action . '_options');
-				$event->setCmd_param($_action . '_type', '');
-				$event->setCmd_param($_action . '_name', '');
-				$event->setCmd_param($_action . '_options', '');
-				$event->setCmd_param($_action, array($action));
-			}
-			if ($event->getCmd_param($_action . '_type') == 'scenario') {
-				$action = array();
-				$action['cmd'] = 'scenario';
-				$action['options'] = array('scenario_id' => str_replace(array('#', 'scenario'), '', $event->getCmd_param($_action . '_scenarioName')), 'action' => $event->getCmd_param($_action . '_action'));
-				$event->setCmd_param($_action . '_type', '');
-				$event->setCmd_param($_action . '_name', '');
-				$event->setCmd_param($_action . '_options', '');
-				$event->setCmd_param($_action, array($action));
-			}
-		}
-	}
+	calendar_event::cleanEvents();
 	foreach (calendar::byType('calendar') as $calendar) {
 		$calendar->save();
 	}
-	calendar_event::cleanEvents();
 }
 
 function calendar_remove() {
