@@ -13,7 +13,7 @@
         "Visible": "Visible",
         "Widget, nombre de jours": "Widget, días",
         "Nombre d'événement maximum": "Número máximo de acontecimientos",
-        "Ne pas afficher le status et les commandes d'activation/désactivation": "No mostrar el estado y en las órdenes de activación / desactivación",
+        "Ne pas afficher le status et les commandes d'activation/désactivation": "No mostrar el estado y en las órdenes de activación/desactivación",
         "Liste des événements de l'agenda": "Lista de los acontecimientos del diario",
         "Ajouter événement": "Añadir acontecimiento",
         "Agenda": "Diario",
@@ -107,8 +107,8 @@
         "Toute la journée": "Todo el día",
         "Que les semaines paires": "Semanas pares",
         "Que les semaines impaires": "Semanas impares",
-        "Décocher pour desactiver l\\'action": "Desactive la casilla para desactivar Acción 's \\",
-        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Compruebe que la orden \\ 's ejecutado en paralelo a otras acciones"
+        "Décocher pour desactiver l\\'action": "Desactive la casilla para deshabilitar la acción",
+        "Cocher pour que la commande s\\'éxecute en parrallele des autres actions": "Compruebe que el comando se ejecuta en paralelo con las otras acciones"
     },
     "plugins/calendar/desktop/js/calendar.js": {
         "Ajouter évènement": "Añadir acontecimiento",
