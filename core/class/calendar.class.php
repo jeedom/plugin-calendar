@@ -534,7 +534,29 @@ class calendar_event {
 				}
 			}
 			$startDate = $this->getStartDate();
+			if (date('I') != date('I', strtotime($startDate))) {
+				while (date('I') != date('I', strtotime($startDate)) && strtotime('now') > strtotime($startDate)) {
+					$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
+				}
+				$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
+				if (date('I')) {
+					$startDate = date('Y-m-d H:i:s', strtotime($startDate . ' -1 hour'));
+				} else {
+					$startDate = date('Y-m-d H:i:s', strtotime($startDate . ' +1 hour'));
+				}
+			}
 			$endDate = $this->getEndDate();
+			if (date('I') != date('I', strtotime($endDate))) {
+				while (date('I') != date('I', strtotime($endDate)) && strtotime('now') > strtotime($endDate)) {
+					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+				}
+				$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+				if (date('I')) {
+					$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' -1 hour'));
+				} else {
+					$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' +1 hour'));
+				}
+			}
 			$initStartTime = date('H:i:s', strtotime($startDate));
 			$initEndTime = date('H:i:s', strtotime($endDate));
 			$first = true;
