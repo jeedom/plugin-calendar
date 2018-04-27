@@ -534,7 +534,7 @@ class calendar_event {
 				}
 			}
 			$startDate = $this->getStartDate();
-			if (date('I') != date('I', strtotime($startDate))) {
+			if (date('I') != date('I', strtotime($startDate)) && date('G', strtotime($startDate)) == 2) {
 				while (date('I') != date('I', strtotime($startDate)) && strtotime('now') > strtotime($startDate)) {
 					$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
 				}
@@ -546,7 +546,7 @@ class calendar_event {
 				}
 			}
 			$endDate = $this->getEndDate();
-			if (date('I') != date('I', strtotime($endDate))) {
+			if (date('I') != date('I', strtotime($endDate)) && date('G', strtotime($endDate)) == 2) {
 				while (date('I') != date('I', strtotime($endDate)) && strtotime('now') > strtotime($endDate)) {
 					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
 				}
