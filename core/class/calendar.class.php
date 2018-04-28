@@ -553,8 +553,6 @@ class calendar_event {
 				$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
 				if (date('I')) {
 					$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' -1 hour'));
-				} else {
-					$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' +1 hour'));
 				}
 			}
 			$initStartTime = date('H:i:s', strtotime($startDate));
