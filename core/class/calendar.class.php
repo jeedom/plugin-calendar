@@ -308,6 +308,13 @@ class calendar_event {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function sortEventDate($a, $b) {
+		if (strtotime($a['start']) == strtotime($b['start'])) {
+			return 0;
+		}
+		return (strtotime($a['start']) < strtotime($b['start'])) ? -1 : 1;
+	}
+
 	public static function cleanEvents() {
 		$events = self::all();
 		foreach ($events as $event) {
@@ -639,6 +646,7 @@ class calendar_event {
 		$initEndTime = date('H:i:s', strtotime($endDate));
 
 		$includeDate = array();
+
 		if (isset($repeat['includeDate']) && $repeat['includeDate'] != '') {
 			$includeDate_tmp = explode(',', $repeat['includeDate']);
 			foreach ($includeDate_tmp as $date) {
@@ -657,6 +665,7 @@ class calendar_event {
 				}
 			}
 		}
+
 		if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
 			$includeEvent = self::byId($repeat['includeDateFromCalendar']);
 			if (is_object($includeEvent)) {
@@ -682,6 +691,7 @@ class calendar_event {
 				'end' => $date . ' ' . $initEndTime,
 			);
 		}
+		usort($return, array('calendar_event', 'sortEventDate'));
 		return $return;
 	}
 
