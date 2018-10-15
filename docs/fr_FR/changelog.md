@@ -1,3 +1,7 @@
+# 15/10/2018
+
+- Correction d'un bug sur l'inclusion de date
+
 # 29/03/2018
 
 - Correction d'un bug sur le "jusqu'a" si la repetition n'est pas une répetition simple
