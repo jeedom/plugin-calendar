@@ -64,6 +64,7 @@ foreach ($eqLogics as $eqLogic) {
   <a class="btn btn-danger eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
   <a class="btn btn-default eqLogicAction pull-right" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a>
   <a class="btn btn-default pull-right eqLogicAction" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a>
+  <a class="btn btn-default pull-right" id="bt_addEvent"><i class="fa fa-plus-circle"></i> {{Ajouter événement}}</a>
 
   <ul class="nav nav-tabs" role="tablist">
    <li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
@@ -137,11 +138,6 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
       <legend><i class="fa fa-list"></i>  {{Liste des événements de l'agenda}}</legend>
       <div id="div_eventList"></div>
       <br/>
-      <div class="form-group">
-        <div class="col-sm-6">
-          <a class="btn btn-default" id="bt_addEvent"><i class="fa fa-plus-circle"></i> {{Ajouter événement}}</a>
-        </div>
-      </div>
     </fieldset>
   </form>
 </div>
