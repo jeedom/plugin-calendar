@@ -154,9 +154,15 @@ foreach (calendar::byType('calendar') as $calendar) {
     </div>
   </div>
   <div class="form-group">
-    <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
+    <label class="col-sm-3 control-label">{{Inclure (date sous forme 2014-04-08,2014-04-09...)}}</label>
     <div class="col-sm-3">
       <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDate" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">{{Exclure (date sous forme 2014-04-08,2014-04-09...)}}</label>
+    <div class="col-sm-3">
+      <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDate" />
     </div>
   </div>
   <div class="form-group">
@@ -271,13 +277,6 @@ foreach (calendar::byType('calendar') as $calendar) {
 </select>
 </div>
 </div>
-<div class="form-group">
-  <label class="col-sm-3 control-label">{{Exclure (date sous forme 2014-04-08,2014-04-09...), vous pouvez spécifier une plage en séparant les 2 dates (les bornes) par des ":"}}</label>
-  <div class="col-sm-3">
-    <input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDate" />
-  </div>
-</div>
-
 </div>
 </fieldset>
 </form>

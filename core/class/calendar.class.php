@@ -173,17 +173,45 @@ class calendar extends eqLogic {
 			$disable->remove();
 		}
 
-		$in_progress = $this->getCmd(null, 'in_progress');
-		if (!is_object($in_progress)) {
-			$in_progress = new calendarCmd();
-			$in_progress->setIsVisible(0);
+		$cmd = $this->getCmd(null, 'in_progress');
+		if (!is_object($cmd)) {
+			$cmd = new calendarCmd();
+			$cmd->setIsVisible(0);
 		}
-		$in_progress->setEqLogic_id($this->getId());
-		$in_progress->setName(__('En cours', __FILE__));
-		$in_progress->setType('info');
-		$in_progress->setSubType('string');
-		$in_progress->setLogicalId('in_progress');
-		$in_progress->save();
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->setName(__('En cours', __FILE__));
+		$cmd->setType('info');
+		$cmd->setSubType('string');
+		$cmd->setLogicalId('in_progress');
+		$cmd->save();
+
+		$cmd = $this->getCmd(null, 'add_include_date');
+		if (!is_object($cmd)) {
+			$cmd = new calendarCmd();
+			$cmd->setIsVisible(0);
+		}
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->setName(__('Ajouter une date', __FILE__));
+		$cmd->setType('action');
+		$cmd->setSubType('message');
+		$cmd->setLogicalId('add_include_date');
+		$cmd->setDisplay('message_placeholder', __('Date (AAAA-MM-JJ)', __FILE__));
+		$cmd->setDisplay('title_placeholder', __('Nom évènement', __FILE__));
+		$cmd->save();
+
+		$cmd = $this->getCmd(null, 'add_exclude_date');
+		if (!is_object($cmd)) {
+			$cmd = new calendarCmd();
+			$cmd->setIsVisible(0);
+		}
+		$cmd->setEqLogic_id($this->getId());
+		$cmd->setName(__('Retirer une date', __FILE__));
+		$cmd->setType('action');
+		$cmd->setSubType('message');
+		$cmd->setLogicalId('add_exclude_date');
+		$cmd->setDisplay('message_placeholder', __('Date (AAAA-MM-JJ)', __FILE__));
+		$cmd->setDisplay('title_placeholder', __('Nom évènement', __FILE__));
+		$cmd->save();
 
 		$this->rescheduleEvent();
 		$this->refreshWidget();
@@ -258,7 +286,7 @@ class calendarCmd extends cmd {
 	/*     * *********************Methode d'instance************************* */
 
 	public function dontRemoveCmd() {
-		if (in_array($this->getLogicalId(), array('in_progress'))) {
+		if (in_array($this->getLogicalId(), array('in_progress', 'add_exclude_date', 'add_include_date'))) {
 			return true;
 		}
 		return false;
@@ -288,6 +316,30 @@ class calendarCmd extends cmd {
 				$return = __('Aucun', __FILE__);
 			}
 			return $return;
+		}
+		if ($this->getLogicalId() == 'add_exclude_date') {
+			$events = $eqLogic->getEvents();
+			$toDoEvent = explode(',', $_options['title']);
+			foreach ($events as $event) {
+				if (!in_array($event->getCmd_param('eventName'), $toDoEvent)) {
+					continue;
+				}
+				$event->setRepeat('excludeDate', trim($event->getRepeat('excludeDate') . ',' . $_options['message'], ','));
+				$event->save();
+			}
+			return;
+		}
+		if ($this->getLogicalId() == 'add_include_date') {
+			$events = $eqLogic->getEvents();
+			$toDoEvent = explode(',', $_options['title']);
+			foreach ($events as $event) {
+				if (!in_array($event->getCmd_param('eventName'), $toDoEvent)) {
+					continue;
+				}
+				$event->setRepeat('includeDate', trim($event->getRepeat('includeDate') . ',' . $_options['message'], ','));
+				$event->save();
+			}
+			return;
 		}
 
 	}
@@ -656,12 +708,12 @@ class calendar_event {
 						$startDate = $expDate[0];
 						$endDate = $expDate[1];
 						while (strtotime($startDate) <= strtotime($endDate)) {
-							$includeDate[] = $startDate;
+							$includeDate[$startDate] = $startDate;
 							$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
 						}
 					}
 				} else {
-					$includeDate[] = $date;
+					$includeDate[$date] = $date;
 				}
 			}
 		}
@@ -674,10 +726,10 @@ class calendar_event {
 					$startDate = date('Y-m-d', strtotime($occurence['start']));
 					$endDate = date('Y-m-d', strtotime($occurence['end']));
 					if ($startDate == $endDate) {
-						$includeDate[] = $startDate;
+						$includeDate[$startDate] = $startDate;
 					} else {
 						while (strtotime($startDate) <= strtotime($endDate)) {
-							$includeDate[] = $startDate;
+							$includeDate[$startDate] = $startDate;
 							$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
 						}
 					}
