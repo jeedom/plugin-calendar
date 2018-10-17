@@ -167,7 +167,7 @@ C’est ici que se trouve toute la gestion temporelle de votre événement :
 Agenda, commandes et scénario 
 =============================
 
-Un agenda possède une commande :
+Un agenda possède les commandes :
 
 -   **En cours** : donne la liste des événements en cours séparés par
     des virgules, pour l’utiliser dans un scénario le plus simple et
@@ -175,6 +175,10 @@ Un agenda possède une commande :
     matches ), par exemple *\[Appartement\]\[test\]\[En cours\]* matches
     "/Anniv/", sera vrai si dans la liste des événements en cours il y a
     un "Anniv"
+
+- **Ajouter une date** : permet depuis un scénario d'ajouter une date à un évenement (attention si vous changez le nom de l'évenement il vous faudra le corriger dans le scénario aussi). Vous pouvez mettre plusieurs évenement séparé par des ,
+
+- **Retirer une date** : permet depuis un scénario d'exclure une date à un évenement (attention si vous changez le nom de l'évenement il vous faudra le corriger dans le scénario aussi). Vous pouvez mettre plusieurs évenement séparé par des ,
 
 > **Note**
 >
