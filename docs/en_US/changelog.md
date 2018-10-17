@@ -1,3 +1,8 @@
+# 16/10/2018
+
+- Correction mineur de l'interface
+- Ajout de commande pour l'inclusion/exclusion de date depuis les scénarios
+
 # 15/10/2018
 
 - Correction d'un bug sur l'inclusion de date
