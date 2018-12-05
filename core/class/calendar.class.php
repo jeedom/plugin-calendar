@@ -49,26 +49,26 @@ class calendar extends eqLogic {
 			$startDate = null;
 			$endDate = null;
 		}
-		log::add('calendar', 'debug', 'Reprogrammation');
+		log::add('calendar', 'debug', $eqLogic->getHumanName() . ' Reprogrammation');
 		$event->reschedule();
-		log::add('calendar', 'debug', 'Lancement de l\'evenement : ' . print_r($event, true));
+		log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Lancement de l\'evenement : ' . print_r($event, true));
 		try {
 			if (jeedom::isDateOk()) {
 				$results = $event->calculOccurence($startDate, $endDate);
 				if (count($results) == 0) {
-					log::add('calendar', 'debug', 'Aucune programmation trouvée, lancement des actions de fin');
+					log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Aucune programmation trouvée, lancement des actions de fin');
 					$event->doAction('end');
 					return null;
 				}
-				log::add('calendar', 'debug', 'Recherche de l\'action à faire (start ou end)');
+				log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Recherche de l\'action à faire (start ou end)');
 				for ($i = 0; $i < count($results); $i++) {
 					if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-						log::add('calendar', 'debug', 'Action de début');
+						log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Action de début');
 						$event->doAction('start');
 						break;
 					}
 					if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-						log::add('calendar', 'debug', 'Action de fin');
+						log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Action de fin');
 						$event->doAction('end');
 						break;
 					}
@@ -218,7 +218,7 @@ class calendar extends eqLogic {
 	}
 
 	public function rescheduleEvent() {
-		log::add('calendar', 'debug', 'Reprogrammation de tous les évènements');
+		log::add('calendar', 'debug', $this->getHumanName() . ' Reprogrammation de tous les évènements');
 		foreach ($this->getEvents() as $event) {
 			$event->save();
 		}
@@ -486,10 +486,10 @@ class calendar_event {
 	public function reschedule() {
 		$next = $this->nextOccurrence();
 		if ($next === null || $next === false) {
-			log::add('calendar', 'debug', 'Aucune reprogrammation à faire car aucune occurence suivante trouvée');
+			log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' Aucune reprogrammation à faire car aucune occurence suivante trouvée');
 			return;
 		}
-		log::add('calendar', 'debug', 'Reprogrammation à : ' . print_r($next, true) . ' de  : ' . print_r($this, true));
+		log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' Reprogrammation à : ' . print_r($next, true) . ' de  : ' . print_r($this, true));
 		$cron = cron::byClassAndFunction('calendar', 'pull', array('event_id' => intval($this->getId())));
 		if ($next != null) {
 			if (!is_object($cron)) {
@@ -752,14 +752,14 @@ class calendar_event {
 			throw new Exception(__('[calendar] L\'id de eqLogic ne peut être vide', __FILE__));
 		}
 		if (trim($this->getCmd_param('eventName')) == '') {
-			throw new Exception(__('[calendar] Le nom de l\'évenement ne peut etre vide', __FILE__));
+			throw new Exception(__('Le nom de l\'évenement ne peut etre vide', __FILE__));
 		}
 		$eqLogic = $this->getEqLogic();
 		if (!is_object($eqLogic)) {
-			throw new Exception(__('[calendar] Impossible de trouver eqLogic correspondante à l\'id : ', __FILE__) . $this->getEqLogic_id());
+			throw new Exception(__('Impossible de trouver eqLogic correspondante à l\'id : ', __FILE__) . $this->getEqLogic_id());
 		}
 		if ((strtotime($this->getStartDate()) + 59) >= strtotime($this->getEndDate())) {
-			throw new Exception(__('[calendar] La date de début d\'évenement ne peut être égale ou après la date de fin', __FILE__));
+			throw new Exception(__('La date de début d\'évenement ne peut être égale ou après la date de fin', __FILE__));
 		}
 		$repeat = $this->getRepeat();
 		$allEmpty = true;
@@ -898,7 +898,7 @@ class calendar_event {
 				}
 				scenarioExpression::createAndExec('action', $action['cmd'], $options);
 			} catch (Exception $e) {
-				log::add('calendar', 'error', __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
+				log::add('calendar', 'error', $eqLogic->getHumanName() . __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
 			}
 		}
 		return true;
