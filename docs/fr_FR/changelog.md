@@ -1,3 +1,7 @@
+# 12/10/2018
+
+- Ajout d'une reprogrammation de tous évènements tous les jours à 00h00
+
 # 16/10/2018
 
 - Correction mineur de l'interface

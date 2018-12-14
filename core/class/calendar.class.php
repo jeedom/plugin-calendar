@@ -91,6 +91,12 @@ class calendar extends eqLogic {
 		}
 	}
 
+	public static function cronDaily() {
+		foreach (self::byType('calendar') as $eqLogic) {
+			$eqLogic->rescheduleEvent();
+		}
+	}
+
 	public static function orderEvent($a, $b) {
 		$al = strtolower($a['start']);
 		$bl = strtolower($b['start']);
