@@ -1,3 +1,7 @@
+# 14/10/2018
+
+- Correction de bug sur les événements non répété
+
 # 12/10/2018
 
 - Ajout d'une reprogrammation de tous évènements tous les jours à 00h00
