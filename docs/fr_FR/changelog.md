@@ -1,3 +1,7 @@
+# 08/01/2018
+
+- Correction d'un bug lors de l'inclusion/exclusion de date si celle-ci sont excluse/incluse
+
 # 14/10/2018
 
 - Correction de bug sur les événements non répété
