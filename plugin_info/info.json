@@ -8,7 +8,7 @@
 	"category" : "organization",
 	"mobile" : "event",
 	"changelog" : "https://jeedom.github.io/plugin-calendar/#language#/changelog",
-    	"documentation" : "https://jeedom.github.io/plugin-calendar/#language#/",
+	"documentation" : "https://jeedom.github.io/plugin-calendar/#language#/",
 	"language" : ["fr_FR","en_US","de_DE","sp_SP","ru_RU","id_ID","it_IT"],
 	"compatibility" : ["miniplus","smart","rpi","docker","diy"]
 }
