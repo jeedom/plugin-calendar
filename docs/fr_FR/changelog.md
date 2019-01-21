@@ -1,10 +1,10 @@
 # 08/01/2018
 
-- Correction d'un bug lors de l'inclusion/exclusion de date si celle-ci sont excluse/incluse
+- Correction d'un bug lors de l'inclusion/exclusion de dates si celles-ci sont excluses/incluses
 
 # 14/10/2018
 
-- Correction de bug sur les événements non répété
+- Correction de bug sur les événements non répétés
 
 # 12/10/2018
 
@@ -21,7 +21,7 @@
 
 # 29/03/2018
 
-- Correction d'un bug sur le "jusqu'a" si la repetition n'est pas une répetition simple
+- Correction d'un bug sur le "jusqu'à" si la répétition n'est pas une répétition simple
 
 # 26/03/2018
 
