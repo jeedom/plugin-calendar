@@ -601,388 +601,388 @@ class calendar_event {
 					}
 				}
 				$startDate = $this->getStartDate();
-				if (date('I') != date('I', strtotime($startDate)) && date('G', strtotime($startDate)) == 2) {
-					while (date('I') != date('I', strtotime($startDate)) && strtotime('now') > strtotime($startDate)) {
-						$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
-					}
-					$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
-					if (date('I')) {
-						$startDate = date('Y-m-d H:i:s', strtotime($startDate . ' -1 hour'));
-					} else {
-						$startDate = date('Y-m-d H:i:s', strtotime($startDate . ' +1 hour'));
-					}
-				}
-				$endDate = $this->getEndDate();
-				if (date('I') != date('I', strtotime($endDate)) && date('G', strtotime($endDate)) == 2) {
-					while (date('I') != date('I', strtotime($endDate)) && strtotime('now') > strtotime($endDate)) {
-						$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
-					}
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
-					if (date('I')) {
-						$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' -1 hour'));
-					}
-				}
-				$initStartTime = date('H:i:s', strtotime($startDate));
-				$initEndTime = date('H:i:s', strtotime($endDate));
-				$first = true;
-				while ((strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00' || $this->getUntil() == null) && (strtotime($endDate) <= $endTime || $first)) {
-					$first = false;
-					if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
-						if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
-							if (!isset($repeat['nationalDay']) || $repeat['nationalDay'] == 'all') {
-								$return[] = array(
-									'start' => $startDate,
-									'end' => $endDate,
-								);
-							} else if ($repeat['nationalDay'] == 'exeptNationalDay') {
-								$nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
-								if (!in_array(date('Y-m-d', strtotime($startDate)), $nationalDay)) {
-									$return[] = array(
-										'start' => $startDate,
-										'end' => $endDate,
-									);
-								}
-							} else if ($repeat['nationalDay'] == 'onlyNationalDay') {
-								$nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
-								if (in_array(date('Y-m-d', strtotime($startDate)), $nationalDay)) {
-									$return[] = array(
-										'start' => $startDate,
-										'end' => $endDate,
-									);
-								}
-							} else if ($repeat['nationalDay'] == 'onlyEven') {
-								if ((date('W', strtotime($startDate)) % 2) == 0) {
-									$return[] = array(
-										'start' => $startDate,
-										'end' => $endDate,
-									);
-								}
-							} else if ($repeat['nationalDay'] == 'onlyOdd') {
-								if ((date('W', strtotime($startDate)) % 2) == 1) {
-									$return[] = array(
-										'start' => $startDate,
-										'end' => $endDate,
-									);
-								}
-							}
-							if (count($return) >= $_max) {
-								return $return;
-							}
-						}
-					}
-					$prevStartDate = $startDate;
-					if (isset($repeat['mode']) && $repeat['mode'] == 'advance') {
-						$nextMonth = date('F', strtotime('+1 month ' . $startDate));
-						$year = date('Y', strtotime('+1 month ' . $startDate));
-						$tmp_startDate = date('Y-m-d', strtotime($repeat['positionAt'] . ' ' . $repeat['day'] . ' of ' . $nextMonth . ' ' . $year));
-						if ($tmp_startDate == '1970-01-01') {
-							break;
-						}
-						$endDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($endDate));
-						$startDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($startDate));
-					} else {
-						if ($repeat['freq'] == 0) {
-							break;
-						}
-						$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
-						$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
-					}
-					if (strtotime($startDate) <= strtotime($prevStartDate)) {
-						break;
-					}
-				}
-			} else {
-				if (($endTime == null || strtotime($this->getStartDate()) <= $endTime) && ($startTime == null || strtotime($this->getStartDate()) >= $startTime)) {
+				/*if (date('I') != date('I', strtotime($startDate)) && date('G', strtotime($startDate)) == 2) {
+				
+				while (date('I') != date('I', strtotime($startDate)) && strtotime('now') > strtotime($startDate)) {
+				$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
+			}
+			$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
+			if (date('I')) {
+			$startDate = date('Y-m-d H:i:s', strtotime($startDate . ' -1 hour'));
+		} else {
+		$startDate = date('Y-m-d H:i:s', strtotime($startDate . ' +1 hour'));
+	}
+}*/
+$endDate = $this->getEndDate();
+if (date('I') != date('I', strtotime($endDate)) && date('G', strtotime($endDate)) == 2) {
+	while (date('I') != date('I', strtotime($endDate)) && strtotime('now') > strtotime($endDate)) {
+		$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+	}
+	$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+	if (date('I')) {
+		$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' -1 hour'));
+	}
+}
+$initStartTime = date('H:i:s', strtotime($startDate));
+$initEndTime = date('H:i:s', strtotime($endDate));
+$first = true;
+while ((strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00' || $this->getUntil() == null) && (strtotime($endDate) <= $endTime || $first)) {
+	$first = false;
+	if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
+		if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
+			if (!isset($repeat['nationalDay']) || $repeat['nationalDay'] == 'all') {
+				$return[] = array(
+					'start' => $startDate,
+					'end' => $endDate,
+				);
+			} else if ($repeat['nationalDay'] == 'exeptNationalDay') {
+				$nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
+				if (!in_array(date('Y-m-d', strtotime($startDate)), $nationalDay)) {
 					$return[] = array(
-						'start' => $this->getStartDate(),
-						'end' => $this->getEndDate(),
+						'start' => $startDate,
+						'end' => $endDate,
+					);
+				}
+			} else if ($repeat['nationalDay'] == 'onlyNationalDay') {
+				$nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
+				if (in_array(date('Y-m-d', strtotime($startDate)), $nationalDay)) {
+					$return[] = array(
+						'start' => $startDate,
+						'end' => $endDate,
+					);
+				}
+			} else if ($repeat['nationalDay'] == 'onlyEven') {
+				if ((date('W', strtotime($startDate)) % 2) == 0) {
+					$return[] = array(
+						'start' => $startDate,
+						'end' => $endDate,
+					);
+				}
+			} else if ($repeat['nationalDay'] == 'onlyOdd') {
+				if ((date('W', strtotime($startDate)) % 2) == 1) {
+					$return[] = array(
+						'start' => $startDate,
+						'end' => $endDate,
 					);
 				}
 			}
-			
-			$startDate = $this->getStartDate();
-			$endDate = $this->getEndDate();
-			$initStartTime = date('H:i:s', strtotime($startDate));
-			$initEndTime = date('H:i:s', strtotime($endDate));
-			
-			$includeDate = array();
-			
-			if (isset($repeat['includeDate']) && $repeat['includeDate'] != '') {
-				$includeDate_tmp = explode(',', $repeat['includeDate']);
-				foreach ($includeDate_tmp as $date) {
-					if (strpos($date, ':') !== false) {
-						$expDate = explode(':', $date);
-						if (count($expDate) == 2) {
-							$startDate = $expDate[0];
-							$endDate = $expDate[1];
-							while (strtotime($startDate) <= strtotime($endDate)) {
-								$includeDate[$startDate] = $startDate;
-								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
-							}
-						}
-					} else {
-						$includeDate[$date] = $date;
-					}
-				}
+			if (count($return) >= $_max) {
+				return $return;
 			}
-			
-			if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
-				$includeEvent = self::byId($repeat['includeDateFromCalendar']);
-				if (is_object($includeEvent)) {
-					$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
-					foreach ($includeEventOccurence as $occurence) {
-						$startDate = date('Y-m-d', strtotime($occurence['start']));
-						$endDate = date('Y-m-d', strtotime($occurence['end']));
-						if ($startDate == $endDate) {
-							$includeDate[$startDate] = $startDate;
-						} else {
-							while (strtotime($startDate) <= strtotime($endDate)) {
-								$includeDate[$startDate] = $startDate;
-								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
-							}
-						}
-					}
-				}
-			}
-			
-			foreach ($includeDate as $date) {
-				$return[] = array(
-					'start' => $date . ' ' . $initStartTime,
-					'end' => $date . ' ' . $initEndTime,
-				);
-			}
-			usort($return, array('calendar_event', 'sortEventDate'));
-			return $return;
 		}
-		
-		public function preSave() {
-			if ($this->getEqLogic_id() == '') {
-				throw new Exception(__('[calendar] L\'id de eqLogic ne peut être vide', __FILE__));
-			}
-			if (trim($this->getCmd_param('eventName')) == '') {
-				throw new Exception(__('Le nom de l\'évenement ne peut etre vide', __FILE__));
-			}
-			$eqLogic = $this->getEqLogic();
-			if (!is_object($eqLogic)) {
-				throw new Exception(__('Impossible de trouver eqLogic correspondante à l\'id : ', __FILE__) . $this->getEqLogic_id());
-			}
-			if ((strtotime($this->getStartDate()) + 59) >= strtotime($this->getEndDate())) {
-				throw new Exception(__('La date de début d\'évenement ne peut être égale ou après la date de fin', __FILE__));
-			}
-			$repeat = $this->getRepeat();
-			$allEmpty = true;
-			foreach ($repeat['excludeDay'] as $day) {
-				if ($day == 1) {
-					$allEmpty = false;
-					break;
+	}
+	$prevStartDate = $startDate;
+	if (isset($repeat['mode']) && $repeat['mode'] == 'advance') {
+		$nextMonth = date('F', strtotime('+1 month ' . $startDate));
+		$year = date('Y', strtotime('+1 month ' . $startDate));
+		$tmp_startDate = date('Y-m-d', strtotime($repeat['positionAt'] . ' ' . $repeat['day'] . ' of ' . $nextMonth . ' ' . $year));
+		if ($tmp_startDate == '1970-01-01') {
+			break;
+		}
+		$endDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($endDate));
+		$startDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($startDate));
+	} else {
+		if ($repeat['freq'] == 0) {
+			break;
+		}
+		$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
+		$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+	}
+	if (strtotime($startDate) <= strtotime($prevStartDate)) {
+		break;
+	}
+}
+} else {
+	if (($endTime == null || strtotime($this->getStartDate()) <= $endTime) && ($startTime == null || strtotime($this->getStartDate()) >= $startTime)) {
+		$return[] = array(
+			'start' => $this->getStartDate(),
+			'end' => $this->getEndDate(),
+		);
+	}
+}
+
+$startDate = $this->getStartDate();
+$endDate = $this->getEndDate();
+$initStartTime = date('H:i:s', strtotime($startDate));
+$initEndTime = date('H:i:s', strtotime($endDate));
+
+$includeDate = array();
+
+if (isset($repeat['includeDate']) && $repeat['includeDate'] != '') {
+	$includeDate_tmp = explode(',', $repeat['includeDate']);
+	foreach ($includeDate_tmp as $date) {
+		if (strpos($date, ':') !== false) {
+			$expDate = explode(':', $date);
+			if (count($expDate) == 2) {
+				$startDate = $expDate[0];
+				$endDate = $expDate[1];
+				while (strtotime($startDate) <= strtotime($endDate)) {
+					$includeDate[$startDate] = $startDate;
+					$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
 				}
 			}
-			if ($allEmpty) {
-				$repeat['excludeDay'][1] = 1;
-				$repeat['excludeDay'][2] = 1;
-				$repeat['excludeDay'][3] = 1;
-				$repeat['excludeDay'][4] = 1;
-				$repeat['excludeDay'][5] = 1;
-				$repeat['excludeDay'][6] = 1;
-				$repeat['excludeDay'][7] = 1;
-				$this->setRepeat('excludeDay', $repeat['excludeDay']);
-			}
-			
-			if ($this->getRepeat('enable') == 1) {
-				if ($this->getRepeat('mode') == 'simple') {
-					if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
-						throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
-					}
-					if ($this->getRepeat('unite') == '') {
-						throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
-					}
-				}
+		} else {
+			$includeDate[$date] = $date;
+		}
+	}
+}
+
+if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
+	$includeEvent = self::byId($repeat['includeDateFromCalendar']);
+	if (is_object($includeEvent)) {
+		$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
+		foreach ($includeEventOccurence as $occurence) {
+			$startDate = date('Y-m-d', strtotime($occurence['start']));
+			$endDate = date('Y-m-d', strtotime($occurence['end']));
+			if ($startDate == $endDate) {
+				$includeDate[$startDate] = $startDate;
 			} else {
-				$this->setRepeat('freq', 0);
-				$this->setUntil('');
-			}
-			if ($this->getUntil() == '') {
-				$this->setUntil(null);
-			}
-		}
-		
-		public function save() {
-			return DB::save($this);
-		}
-		
-		public function dontRemoveCmd() {
-			return true;
-		}
-		
-		public function postSave() {
-			$eqLogic = $this->getEqLogic();
-			if ($eqLogic->getIsEnable() == 0) {
-				$this->setCmd_param('in_progress', 0);
-				DB::save($this, true);
-				$cmd = $eqLogic->getCmd('info', 'in_progress');
-				if (is_object($cmd)) {
-					$cmd->event($cmd->execute());
-				}
-				return;
-			}
-			$repeat = $this->getRepeat();
-			if ($repeat['enable'] == 1) {
-				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-			} else {
-				$startDate = null;
-				$endDate = null;
-			}
-			$this->reschedule();
-			$in_progress = $this->getCmd_param('in_progress', 0);
-			$this->setCmd_param('in_progress', 0);
-			$nowtime = strtotime('now');
-			try {
-				if (jeedom::isDateOk()) {
-					$results = $this->calculOccurence($startDate, $endDate);
-					if (count($results) != 0) {
-						for ($i = 0; $i < count($results); $i++) {
-							if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-								$this->setCmd_param('in_progress', 1);
-								if ($in_progress != 1) {
-									$this->doAction('start');
-								}
-								break;
-							}
-						}
-					}
-				}
-				if ($this->getCmd_param('in_progress', 0) == 0 && $in_progress == 1) {
-					$this->doAction('end');
-				}
-			} catch (Exception $e) {
-				
-			}
-			DB::save($this, true);
-			$cmd = $eqLogic->getCmd('info', 'in_progress');
-			if (is_object($cmd)) {
-				$cmd->event($cmd->execute());
-			}
-		}
-		
-		public function remove() {
-			$cron = cron::byClassAndFunction('calendar', 'pull', array('event_id' => intval($this->getId())));
-			if (is_object($cron)) {
-				$cron->remove();
-			}
-			$eqLogic = $this->getEqLogic();
-			DB::remove($this);
-			$cmd = $eqLogic->getCmd('info', 'in_progress');
-			if (is_object($cmd)) {
-				$cmd->event($cmd->execute());
-			}
-		}
-		
-		public function doAction($_action = 'start') {
-			$eqLogic = $this->getEqLogic();
-			if ($eqLogic->getIsEnable() == 0) {
-				$this->setCmd_param('in_progress', 0);
-				DB::save($this, true);
-				return;
-			}
-			if ($_action == 'start') {
-				$this->setCmd_param('in_progress', 1);
-				DB::save($this, true);
-			}
-			if ($_action == 'end') {
-				$this->setCmd_param('in_progress', 0);
-				DB::save($this, true);
-			}
-			$eqLogic = $this->getEqLogic();
-			$cmd = $eqLogic->getCmd('info', 'in_progress');
-			if (is_object($cmd)) {
-				$cmd->event($cmd->execute());
-			}
-			foreach ($this->getCmd_param($_action) as $action) {
-				try {
-					$options = array();
-					if (isset($action['options'])) {
-						$options = $action['options'];
-					}
-					scenarioExpression::createAndExec('action', $action['cmd'], $options);
-				} catch (Exception $e) {
-					log::add('calendar', 'error', $eqLogic->getHumanName() . __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
+				while (strtotime($startDate) <= strtotime($endDate)) {
+					$includeDate[$startDate] = $startDate;
+					$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
 				}
 			}
-			return true;
 		}
-		
-		public function getName() {
-			if ($this->getCmd_param('eventName') != '') {
-				return $this->getCmd_param('eventName');
-			} else {
-				return $this->getCmd_param('name');
-			}
+	}
+}
+
+foreach ($includeDate as $date) {
+	$return[] = array(
+		'start' => $date . ' ' . $initStartTime,
+		'end' => $date . ' ' . $initEndTime,
+	);
+}
+usort($return, array('calendar_event', 'sortEventDate'));
+return $return;
+}
+
+public function preSave() {
+	if ($this->getEqLogic_id() == '') {
+		throw new Exception(__('[calendar] L\'id de eqLogic ne peut être vide', __FILE__));
+	}
+	if (trim($this->getCmd_param('eventName')) == '') {
+		throw new Exception(__('Le nom de l\'évenement ne peut etre vide', __FILE__));
+	}
+	$eqLogic = $this->getEqLogic();
+	if (!is_object($eqLogic)) {
+		throw new Exception(__('Impossible de trouver eqLogic correspondante à l\'id : ', __FILE__) . $this->getEqLogic_id());
+	}
+	if ((strtotime($this->getStartDate()) + 59) >= strtotime($this->getEndDate())) {
+		throw new Exception(__('La date de début d\'évenement ne peut être égale ou après la date de fin', __FILE__));
+	}
+	$repeat = $this->getRepeat();
+	$allEmpty = true;
+	foreach ($repeat['excludeDay'] as $day) {
+		if ($day == 1) {
+			$allEmpty = false;
+			break;
 		}
-		
-		/*     * **********************Getteur Setteur*************************** */
-		
-		public function getId() {
-			return $this->id;
-		}
-		
-		public function getStartDate() {
-			return $this->startDate;
-		}
-		
-		public function getEndDate() {
-			return $this->endDate;
-		}
-		
-		public function setId($id) {
-			$this->id = $id;
-		}
-		
-		public function setStartDate($startDate) {
-			$this->startDate = $startDate;
-		}
-		
-		public function setEndDate($endDate) {
-			$this->endDate = $endDate;
-		}
-		
-		public function getEqLogic_id() {
-			return $this->eqLogic_id;
-		}
-		
-		public function getEqLogic() {
-			return calendar::byId($this->eqLogic_id);
-		}
-		
-		public function setEqLogic_id($eqLogic_id) {
-			$this->eqLogic_id = $eqLogic_id;
-		}
-		
-		public function getRepeat($_key = '', $_default = '') {
-			return utils::getJsonAttr($this->repeat, $_key, $_default);
-		}
-		
-		public function setRepeat($_key, $_value) {
-			$this->repeat = utils::setJsonAttr($this->repeat, $_key, $_value);
-		}
-		
-		public function getUntil() {
-			return $this->until;
-		}
-		
-		public function setUntil($until) {
-			$this->until = $until;
-		}
-		
-		public function getCmd_param($_key = '', $_default = '') {
-			return utils::getJsonAttr($this->cmd_param, $_key, $_default);
-		}
-		
-		public function setCmd_param($_key, $_value) {
-			$this->cmd_param = utils::setJsonAttr($this->cmd_param, $_key, $_value);
-		}
-		
+	}
+	if ($allEmpty) {
+		$repeat['excludeDay'][1] = 1;
+		$repeat['excludeDay'][2] = 1;
+		$repeat['excludeDay'][3] = 1;
+		$repeat['excludeDay'][4] = 1;
+		$repeat['excludeDay'][5] = 1;
+		$repeat['excludeDay'][6] = 1;
+		$repeat['excludeDay'][7] = 1;
+		$this->setRepeat('excludeDay', $repeat['excludeDay']);
 	}
 	
-	?>
-	
+	if ($this->getRepeat('enable') == 1) {
+		if ($this->getRepeat('mode') == 'simple') {
+			if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
+				throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
+			}
+			if ($this->getRepeat('unite') == '') {
+				throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
+			}
+		}
+	} else {
+		$this->setRepeat('freq', 0);
+		$this->setUntil('');
+	}
+	if ($this->getUntil() == '') {
+		$this->setUntil(null);
+	}
+}
+
+public function save() {
+	return DB::save($this);
+}
+
+public function dontRemoveCmd() {
+	return true;
+}
+
+public function postSave() {
+	$eqLogic = $this->getEqLogic();
+	if ($eqLogic->getIsEnable() == 0) {
+		$this->setCmd_param('in_progress', 0);
+		DB::save($this, true);
+		$cmd = $eqLogic->getCmd('info', 'in_progress');
+		if (is_object($cmd)) {
+			$cmd->event($cmd->execute());
+		}
+		return;
+	}
+	$repeat = $this->getRepeat();
+	if ($repeat['enable'] == 1) {
+		$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+		$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+	} else {
+		$startDate = null;
+		$endDate = null;
+	}
+	$this->reschedule();
+	$in_progress = $this->getCmd_param('in_progress', 0);
+	$this->setCmd_param('in_progress', 0);
+	$nowtime = strtotime('now');
+	try {
+		if (jeedom::isDateOk()) {
+			$results = $this->calculOccurence($startDate, $endDate);
+			if (count($results) != 0) {
+				for ($i = 0; $i < count($results); $i++) {
+					if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
+						$this->setCmd_param('in_progress', 1);
+						if ($in_progress != 1) {
+							$this->doAction('start');
+						}
+						break;
+					}
+				}
+			}
+		}
+		if ($this->getCmd_param('in_progress', 0) == 0 && $in_progress == 1) {
+			$this->doAction('end');
+		}
+	} catch (Exception $e) {
+		
+	}
+	DB::save($this, true);
+	$cmd = $eqLogic->getCmd('info', 'in_progress');
+	if (is_object($cmd)) {
+		$cmd->event($cmd->execute());
+	}
+}
+
+public function remove() {
+	$cron = cron::byClassAndFunction('calendar', 'pull', array('event_id' => intval($this->getId())));
+	if (is_object($cron)) {
+		$cron->remove();
+	}
+	$eqLogic = $this->getEqLogic();
+	DB::remove($this);
+	$cmd = $eqLogic->getCmd('info', 'in_progress');
+	if (is_object($cmd)) {
+		$cmd->event($cmd->execute());
+	}
+}
+
+public function doAction($_action = 'start') {
+	$eqLogic = $this->getEqLogic();
+	if ($eqLogic->getIsEnable() == 0) {
+		$this->setCmd_param('in_progress', 0);
+		DB::save($this, true);
+		return;
+	}
+	if ($_action == 'start') {
+		$this->setCmd_param('in_progress', 1);
+		DB::save($this, true);
+	}
+	if ($_action == 'end') {
+		$this->setCmd_param('in_progress', 0);
+		DB::save($this, true);
+	}
+	$eqLogic = $this->getEqLogic();
+	$cmd = $eqLogic->getCmd('info', 'in_progress');
+	if (is_object($cmd)) {
+		$cmd->event($cmd->execute());
+	}
+	foreach ($this->getCmd_param($_action) as $action) {
+		try {
+			$options = array();
+			if (isset($action['options'])) {
+				$options = $action['options'];
+			}
+			scenarioExpression::createAndExec('action', $action['cmd'], $options);
+		} catch (Exception $e) {
+			log::add('calendar', 'error', $eqLogic->getHumanName() . __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
+		}
+	}
+	return true;
+}
+
+public function getName() {
+	if ($this->getCmd_param('eventName') != '') {
+		return $this->getCmd_param('eventName');
+	} else {
+		return $this->getCmd_param('name');
+	}
+}
+
+/*     * **********************Getteur Setteur*************************** */
+
+public function getId() {
+	return $this->id;
+}
+
+public function getStartDate() {
+	return $this->startDate;
+}
+
+public function getEndDate() {
+	return $this->endDate;
+}
+
+public function setId($id) {
+	$this->id = $id;
+}
+
+public function setStartDate($startDate) {
+	$this->startDate = $startDate;
+}
+
+public function setEndDate($endDate) {
+	$this->endDate = $endDate;
+}
+
+public function getEqLogic_id() {
+	return $this->eqLogic_id;
+}
+
+public function getEqLogic() {
+	return calendar::byId($this->eqLogic_id);
+}
+
+public function setEqLogic_id($eqLogic_id) {
+	$this->eqLogic_id = $eqLogic_id;
+}
+
+public function getRepeat($_key = '', $_default = '') {
+	return utils::getJsonAttr($this->repeat, $_key, $_default);
+}
+
+public function setRepeat($_key, $_value) {
+	$this->repeat = utils::setJsonAttr($this->repeat, $_key, $_value);
+}
+
+public function getUntil() {
+	return $this->until;
+}
+
+public function setUntil($until) {
+	$this->until = $until;
+}
+
+public function getCmd_param($_key = '', $_default = '') {
+	return utils::getJsonAttr($this->cmd_param, $_key, $_default);
+}
+
+public function setCmd_param($_key, $_value) {
+	$this->cmd_param = utils::setJsonAttr($this->cmd_param, $_key, $_value);
+}
+
+}
+
+?>
