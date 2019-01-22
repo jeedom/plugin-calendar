@@ -11,9 +11,9 @@ Equipment configuration
 =============================
 
 La configuration des équipements Agenda est accessible à partir du menu
-plugin puis organisation.
+Plugins puis Organisation.
 
-Une fois dessus vous retrouvez ici la liste de vos Agenda.
+Une fois dessus vous retrouvez alors la liste de vos Agenda.
 
 You can find here the full configuration of your device :
 
@@ -78,12 +78,12 @@ Ici vous retrouvez :
 Action de début 
 ---------------
 
-Permet de choisir la ou les action(s) à faire lors du lancement de
+Permet de choisir la ou les actions à faire lors du lancement de
 l’événement.
 
 Pour ajouter une action il suffit de cliquer sur le bouton + au bout de
 la ligne puis vous allez avoir un bouton pour chercher une commande une
-fois celle-ci trouvé vous aurez le choix des options si elle en a. VOus
+fois celle-ci trouvée vous aurez le choix des options si elle en a. Vous
 pouvez ajouter autant d’action que vous le voulez.
 
 > **Tip**
@@ -94,7 +94,7 @@ pouvez ajouter autant d’action que vous le voulez.
 Action de fin 
 -------------
 
-Idem à l’action de début mais cette fois si c’est la ou les action(s) à
+Idem à l’action de début mais cette fois ci c’est la ou les action(s) à
 effectuer à la fin de l’événement.
 
 Programmation 
