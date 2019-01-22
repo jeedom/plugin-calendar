@@ -365,6 +365,7 @@ class calendar_event {
 	private $endDate;
 	private $repeat;
 	private $until = null;
+	private $_changed = false;
 	
 	/*     * ***********************Methode static*************************** */
 	
@@ -935,16 +936,19 @@ public function getEndDate() {
 	return $this->endDate;
 }
 
-public function setId($id) {
-	$this->id = $id;
+public function setId($_id) {
+	$this->_changed = utils::attrChanged($this->_changed,$this->id,$_id);
+	$this->id = $_id;
 }
 
-public function setStartDate($startDate) {
-	$this->startDate = $startDate;
+public function setStartDate($_startDate) {
+	$this->_changed = utils::attrChanged($this->_changed,$this->startDate,$_startDate);
+	$this->startDate = $_startDate;
 }
 
-public function setEndDate($endDate) {
-	$this->endDate = $endDate;
+public function setEndDate($_endDate) {
+	$this->_changed = utils::attrChanged($this->_changed,$this->endDate,$_endDate);
+	$this->endDate = $_endDate;
 }
 
 public function getEqLogic_id() {
@@ -955,8 +959,9 @@ public function getEqLogic() {
 	return calendar::byId($this->eqLogic_id);
 }
 
-public function setEqLogic_id($eqLogic_id) {
-	$this->eqLogic_id = $eqLogic_id;
+public function setEqLogic_id($_eqLogic_id) {
+	$this->_changed = utils::attrChanged($this->_changed,$this->eqLogic_id,$_eqLogic_id);
+	$this->eqLogic_id = $_eqLogic_id;
 }
 
 public function getRepeat($_key = '', $_default = '') {
@@ -964,15 +969,18 @@ public function getRepeat($_key = '', $_default = '') {
 }
 
 public function setRepeat($_key, $_value) {
-	$this->repeat = utils::setJsonAttr($this->repeat, $_key, $_value);
+	$repeat = utils::setJsonAttr($this->repeat, $_key, $_value);
+	$this->_changed = utils::attrChanged($this->_changed,$this->repeat,$repeat);
+	$this->repeat = $repeat;
 }
 
 public function getUntil() {
 	return $this->until;
 }
 
-public function setUntil($until) {
-	$this->until = $until;
+public function setUntil($_until) {
+	$this->_changed = utils::attrChanged($this->_changed,$this->until,$_until);
+	$this->until = $_until;
 }
 
 public function getCmd_param($_key = '', $_default = '') {
@@ -980,7 +988,18 @@ public function getCmd_param($_key = '', $_default = '') {
 }
 
 public function setCmd_param($_key, $_value) {
-	$this->cmd_param = utils::setJsonAttr($this->cmd_param, $_key, $_value);
+	$cmd_param = utils::setJsonAttr($this->cmd_param, $_key, $_value);
+	$this->_changed = utils::attrChanged($this->_changed,$this->cmd_param,$cmd_param);
+	$this->cmd_param = $cmd_param;
+}
+
+public function getChanged() {
+	return $this->_changed;
+}
+
+public function setChanged($_changed) {
+	$this->_changed = $_changed;
+	return $this;
 }
 
 }
