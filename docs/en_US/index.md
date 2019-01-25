@@ -1,17 +1,15 @@
-Plugin permettant de créer un agenda et de déclencher des actions
-(commande ou scénario).
+Plugin for creating a calendar and triggering actions
+(command or scenario).
 
 Plugin configuration
 =======================
 
-La configuration est très simple, après téléchargement du plugin, il
-vous suffit de l’activer et c’est tout.
+The configuration is very simple, after downloading the plugin, you just have to activate it and that's it.
 
 Equipment configuration
 =============================
 
-La configuration des équipements Agenda est accessible à partir du menu
-Plugins puis Organisation.
+Calendar device configuration is accessible from the menu Plugins then Organization.
 
 Une fois dessus vous retrouvez alors la liste de vos Agenda.
 
@@ -27,7 +25,7 @@ You can find here the full configuration of your device :
 
 -   **Activer** : permet de rendre votre équipement actif.
 
--   **Visible** : le rend visible sur le dashboard.
+-   **Visible**: makes it visible on the dashboard.
 
 -   **Widget, nombre de jours** : définit le nombre de jours
     d’événements à afficher sur le widget.
@@ -56,7 +54,7 @@ Edition d’un événement
 Partie la plus importante du plugin, c’est ici que vous allez pouvoir
 configurer votre événement.
 
-Evènement 
+Event
 ---------
 
 Ici vous retrouvez :
