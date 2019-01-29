@@ -1,3 +1,5 @@
+- Lors de la supression d'un évènement les actions de fin ne sont plus éxecutées
+
 # 08/01/2018
 
 - Correction d'un bug lors de l'inclusion/exclusion de dates si celles-ci sont excluses/incluses
