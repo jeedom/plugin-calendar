@@ -331,8 +331,10 @@ class calendarCmd extends cmd {
 					continue;
 				}
 				$event->setRepeat('includeDate', str_replace($_options['message'],'',$event->getRepeat('includeDate')));
+				$event->setRepeat('excludeDate', str_replace($_options['message'],'',$event->getRepeat('excludeDate')));
 				$event->setRepeat('excludeDate', trim($event->getRepeat('excludeDate') . ',' . $_options['message'], ','));
 				$event->save();
+				$eqLogic->refreshWidget();
 			}
 			return;
 		}
@@ -344,8 +346,10 @@ class calendarCmd extends cmd {
 					continue;
 				}
 				$event->setRepeat('excludeDate', str_replace($_options['message'],'',$event->getRepeat('excludeDate')));
+				$event->setRepeat('includeDate', str_replace($_options['message'],'',$event->getRepeat('includeDate')));
 				$event->setRepeat('includeDate', trim($event->getRepeat('includeDate') . ',' . $_options['message'], ','));
 				$event->save();
+				$eqLogic->refreshWidget();
 			}
 			return;
 		}
