@@ -11,7 +11,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 <div class="row row-overflow">
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
 		<div class="eqLogicThumbnailContainer">
-			<legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
+			<legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
 			<div class="cursor eqLogicAction logoPrimary" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
 				<center>
 					<i class="fas fa-plus-circle" style="font-size : 6em;color:#94ca02;"></i>
@@ -20,7 +20,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			</div>
 			<div class="cursor" id="bt_healthcalendar" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
 				<center>
-					<i class="fa fa-medkit" style="font-size : 6em;color:#767676;"></i>
+					<i class="fas fa-medkit" style="font-size : 6em;color:#767676;"></i>
 				</center>
 				<span ><center>{{Santé}}</center></span>
 			</div>
@@ -45,13 +45,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	<div class="col-xs-12 eqLogic" style="display: none;">
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
-				<a class="btn btn-default btn-sm roundedLeft" id="bt_addEvent"><i class="fas fa-plus-circle"></i> {{Ajouter événement}}</a><a class="btn btn-default eqLogicAction btn-sm" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a><a class="btn btn-default btn-sm eqLogicAction" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a><a class="btn btn-success eqLogicAction btn-sm" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a><a class="btn btn-danger eqLogicAction btn-sm roundedRight" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
+				<a class="btn btn-default btn-sm roundedLeft" id="bt_addEvent"><i class="fas fa-plus-circle"></i> {{Ajouter événement}}</a><a class="btn btn-default eqLogicAction btn-sm" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a><a class="btn btn-default btn-sm eqLogicAction" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a><a class="btn btn-success eqLogicAction btn-sm" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}</a><a class="btn btn-danger eqLogicAction btn-sm roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>
 			</span>
 		</div>
 		
 		<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
-			<li role="presentation" class="active"><a href="#generaltab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Géneral}}</a></li>
+			<li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
+			<li role="presentation" class="active"><a href="#generaltab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Géneral}}</a></li>
 			<li role="presentation"><a id="bt_calendartab" href="#calendartab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-calendar"></i> {{Agenda}}</a></li>
 		</ul>
 		
