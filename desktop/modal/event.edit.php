@@ -40,11 +40,11 @@ if (init('id') != '') {
 ?>
 <div id='div_eventEditAlert' style="display: none;"></div>
 
-<a class="btn btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fa fa-check-circle"></i> {{Enregistrer}}</a>
+<a class="btn btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fas fa-check-circle"></i> {{Enregistrer}}</a>
 <?php
 if (is_object($event)) {
 	echo '<a class="btn btn-warning pull-right" id="md_eventEditDuplicate" style="color: white;"><i class="fa fa-files-o"></i> {{Duplication}}</a>';
-	echo '<a class="btn btn-danger pull-right" id="md_eventEditRemove" style="color: white;"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>';
+	echo '<a class="btn btn-danger pull-right" id="md_eventEditRemove" style="color: white;"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>';
 }
 ?>
 
@@ -308,11 +308,11 @@ if (is_object($event)) {
 			div += '<div class="col-sm-4">';
 			div += '<div class="input-group">';
 			div += '<span class="input-group-btn">';
-			div += '<a class="btn btn-default btn-sm bt_removeAction" data-type="' + _type + '"><i class="fa fa-minus-circle"></i></a>';
+			div += '<a class="btn btn-default btn-sm bt_removeAction" data-type="' + _type + '"><i class="fas fa-minus-circle"></i></a>';
 			div += '</span>';
 			div += '<input class="expressionAttr form-control input-sm cmdAction" data-l1key="cmd" data-type="' + _type + '" />';
 			div += '<span class="input-group-btn">';
-			div += '<a class="btn btn-default btn-sm listCmdAction" data-type="' + _type + '"><i class="fa fa-list-alt"></i></a>';
+			div += '<a class="btn btn-default btn-sm listCmdAction" data-type="' + _type + '"><i class="fas fa-list-alt"></i></a>';
 			div += '</span>';
 			div += '</div>';
 			div += '</div>';
