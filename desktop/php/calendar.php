@@ -14,7 +14,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
 			<div class="cursor eqLogicAction logoPrimary" data-action="add" style="background-color : #ffffff; height : 120px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
 				<center>
-					<i class="fa fa-plus-circle" style="font-size : 6em;color:#94ca02;"></i>
+					<i class="fas fa-plus-circle" style="font-size : 6em;color:#94ca02;"></i>
 				</center>
 				<span><center>{{Ajouter}}</center></span>
 			</div>
@@ -45,7 +45,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	<div class="col-xs-12 eqLogic" style="display: none;">
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
-				<a class="btn btn-default btn-sm roundedLeft" id="bt_addEvent"><i class="fa fa-plus-circle"></i> {{Ajouter événement}}</a><a class="btn btn-default eqLogicAction btn-sm" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a><a class="btn btn-default btn-sm eqLogicAction" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a><a class="btn btn-success eqLogicAction btn-sm" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a><a class="btn btn-danger eqLogicAction btn-sm roundedRight" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
+				<a class="btn btn-default btn-sm roundedLeft" id="bt_addEvent"><i class="fas fa-plus-circle"></i> {{Ajouter événement}}</a><a class="btn btn-default eqLogicAction btn-sm" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a><a class="btn btn-default btn-sm eqLogicAction" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a><a class="btn btn-success eqLogicAction btn-sm" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a><a class="btn btn-danger eqLogicAction btn-sm roundedRight" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
 			</span>
 		</div>
 		
