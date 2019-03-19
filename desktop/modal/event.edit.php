@@ -104,11 +104,11 @@ if (is_object($event)) {
 				<form class="form-horizontal" id="div_eventEdit">
 					<fieldset>
 						
-						<legend><i class="fa fa-flag"></i>  {{Début}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fa fa-plus-circle"></i></a></legend>
+						<legend><i class="fa fa-flag"></i>  {{Début}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="start"><i class="fas fa-plus-circle"></i></a></legend>
 						<div id="div_start"></div>
 					</fieldset>
 					<fieldset>
-						<legend><i class="fa fa-flag-checkered"></i>  {{Fin}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fa fa-plus-circle"></i></a></legend>
+						<legend><i class="fa fa-flag-checkered"></i>  {{Fin}} <a class="btn btn-xs btn-success bt_addAction pull-right" data-type="end"><i class="fas fa-plus-circle"></i></a></legend>
 						<div id="div_end"></div>
 					</fieldset>
 				</form>
