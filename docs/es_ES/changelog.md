@@ -1,4 +1,8 @@
+# 18/03/2019
+
 - Lors de la supression d'un évènement les actions de fin ne sont plus éxecutées
+- Amélioration de l'interface
+- Corrección de errores
 
 # 08/01/2018
 
