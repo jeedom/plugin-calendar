@@ -12,17 +12,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
 		<div class="eqLogicThumbnailContainer">
 			<legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
-			<div class="cursor eqLogicAction logoPrimary" data-action="add"  >
-				<center>
-					<i class="fas fa-plus-circle" style="font-size : 6em;color:#94ca02;"></i>
-				</center>
-				<span><center>{{Ajouter}}</center></span>
+			<div class="cursor eqLogicAction logoPrimary" data-action="add">
+				<i class="fas fa-plus-circle"></i>
+				<br/>
+				<span>{{Ajouter}}</span>
 			</div>
-			<div class="cursor" id="bt_healthcalendar"  >
-				<center>
-					<i class="fas fa-medkit" style="font-size : 6em;color:#767676;"></i>
-				</center>
-				<span ><center>{{Santé}}</center></span>
+			<div class="cursor logoSecondary" id="bt_healthcalendar">
+				<i class="fas fa-medkit"></i>
+				<br/>
+				<span>{{Santé}}</span>
 			</div>
 		</div>
 		<legend><i class="fa fa-calendar"></i> {{Mes agendas}}</legend>
@@ -31,11 +29,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<?php
 			foreach ($eqLogics as $eqLogic) {
 				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-				echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-				echo "<center>";
+				echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '">';
 				echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
-				echo "</center>";
-				echo '<span class="name"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
+				echo "<br/>";
+				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 				echo '</div>';
 			}
 			?>
