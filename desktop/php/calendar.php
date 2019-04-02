@@ -20,7 +20,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<div class="cursor logoSecondary" id="bt_healthcalendar">
 				<i class="fas fa-medkit"></i>
 				<br/>
-				<span>{{Santé}}</span>
+				<span class="text-cursor">{{Santé}}</span>
 			</div>
 		</div>
 		<legend><i class="fa fa-calendar"></i> {{Mes agendas}}</legend>
