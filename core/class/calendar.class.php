@@ -330,8 +330,8 @@ class calendarCmd extends cmd {
 				if (!in_array($event->getCmd_param('eventName'), $toDoEvent)) {
 					continue;
 				}
-				$event->setRepeat('includeDate', str_replace($_options['message'],'',$event->getRepeat('includeDate')));
-				$event->setRepeat('excludeDate', str_replace($_options['message'],'',$event->getRepeat('excludeDate')));
+				$event->setRepeat('includeDate', trim(str_replace($_options['message'],'',$event->getRepeat('includeDate')),','));
+				$event->setRepeat('excludeDate', trim(str_replace($_options['message'],'',$event->getRepeat('excludeDate')), ','));
 				$event->setRepeat('excludeDate', trim($event->getRepeat('excludeDate') . ',' . $_options['message'], ','));
 				$event->save();
 				$eqLogic->refreshWidget();
@@ -345,8 +345,8 @@ class calendarCmd extends cmd {
 				if (!in_array($event->getCmd_param('eventName'), $toDoEvent)) {
 					continue;
 				}
-				$event->setRepeat('excludeDate', str_replace($_options['message'],'',$event->getRepeat('excludeDate')));
-				$event->setRepeat('includeDate', str_replace($_options['message'],'',$event->getRepeat('includeDate')));
+				$event->setRepeat('excludeDate', trim(str_replace($_options['message'],'',$event->getRepeat('excludeDate')),','));
+				$event->setRepeat('includeDate', trim(str_replace($_options['message'],'',$event->getRepeat('includeDate')),','));
 				$event->setRepeat('includeDate', trim($event->getRepeat('includeDate') . ',' . $_options['message'], ','));
 				$event->save();
 				$eqLogic->refreshWidget();
