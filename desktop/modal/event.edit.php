@@ -43,15 +43,15 @@ if (init('id') != '') {
 <a class="btn btn-success pull-right" id="md_eventEditSave" style="color: white;"><i class="fas fa-check-circle"></i> {{Enregistrer}}</a>
 <?php
 if (is_object($event)) {
-	echo '<a class="btn btn-warning pull-right" id="md_eventEditDuplicate" style="color: white;"><i class="fa fa-files-o"></i> {{Duplication}}</a>';
+	echo '<a class="btn btn-warning pull-right" id="md_eventEditDuplicate" style="color: white;"><i class="far fa-clone"></i> {{Duplication}}</a>';
 	echo '<a class="btn btn-danger pull-right" id="md_eventEditRemove" style="color: white;"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>';
 }
 ?>
 
 <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#eventtab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-list"></i>  {{Evènement}}</a></li>
+	<li role="presentation" class="active"><a href="#eventtab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-list"></i> {{Evènement}}</a></li>
 	<li role="presentation"><a id="bt_calendartab" href="#actiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-calendar"></i> {{Action}}</a></li>
-	<li role="presentation"><a id="bt_calendartab" href="#programmingtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-gears"></i>  {{Programmation}}</a></li>
+	<li role="presentation"><a id="bt_calendartab" href="#programmingtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-cogs"></i> {{Programmation}}</a></li>
 </ul>
 
 <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;" id="div_eventEdit">
