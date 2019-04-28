@@ -191,6 +191,15 @@ class calendar extends eqLogic {
 		$cmd->setLogicalId('in_progress');
 		$cmd->save();
 		
+		
+		$events_name = array();
+		$events = $this->getEvents();
+		if(count($events) > 0){
+			foreach ($events as $event) {
+				$events_name[] = $event->getName();
+			}
+		}
+		
 		$cmd = $this->getCmd(null, 'add_include_date');
 		if (!is_object($cmd)) {
 			$cmd = new calendarCmd();
@@ -203,6 +212,7 @@ class calendar extends eqLogic {
 		$cmd->setLogicalId('add_include_date');
 		$cmd->setDisplay('message_placeholder', __('Date (AAAA-MM-JJ)', __FILE__));
 		$cmd->setDisplay('title_placeholder', __('Nom évènement', __FILE__));
+		$cmd->setDisplay('title_possibility_list', json_encode($events_name));
 		$cmd->save();
 		
 		$cmd = $this->getCmd(null, 'add_exclude_date');
@@ -217,6 +227,7 @@ class calendar extends eqLogic {
 		$cmd->setLogicalId('add_exclude_date');
 		$cmd->setDisplay('message_placeholder', __('Date (AAAA-MM-JJ)', __FILE__));
 		$cmd->setDisplay('title_placeholder', __('Nom évènement', __FILE__));
+		$cmd->setDisplay('title_possibility_list', json_encode($events_name));
 		$cmd->save();
 		
 		$this->rescheduleEvent();
