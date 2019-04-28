@@ -104,7 +104,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Nombre d'événement maximum}}</label>
+								<label class="col-sm-4 control-label">{{Nombre d'évènements maximum}}</label>
 								<div class="col-sm-2">
 									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetMaxEvent" />
 								</div>
@@ -115,7 +115,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<div class="col-sm-6">
 					<form class="form-horizontal">
 						<fieldset>
-							<legend><i class="fa fa-list"></i>  {{Liste des événements de l'agenda}}</legend>
+							<legend><i class="fa fa-list"></i>  {{Liste des évènements de l'agenda}}</legend>
 							<div id="div_eventList"></div>
 							<br/>
 						</fieldset>
