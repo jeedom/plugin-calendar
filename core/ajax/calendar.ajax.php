@@ -1,42 +1,42 @@
 <?php
 
 /* This file is part of Jeedom.
- *
- * Jeedom is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jeedom is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
- */
+*
+* Jeedom is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Jeedom is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 try {
 	require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 	include_file('core', 'authentification', 'php');
 	include_file('core', 'calendar', 'class', 'calendar');
-
+	
 	if (!isConnect()) {
 		throw new Exception(__('401 - Accès non autorisé', __FILE__));
 	}
-
+	
 	if (init('action') == 'getEvents') {
 		echo json_encode(calendar_event::calculeEvents(calendar_event::getEventsByEqLogic(init('eqLogic_id'), init('start'), init('end')), init('start'), init('end')), JSON_UNESCAPED_UNICODE);
 		die();
 	}
-
+	
 	if (init('action') == 'getAllEvents') {
 		if (!isConnect('admin')) {
 			throw new Exception(__('401 - Accès non autorisé', __FILE__));
 		}
 		ajax::success(utils::o2a(calendar_event::getEventsByEqLogic(init('eqLogic_id'))));
 	}
-
+	
 	if (init('action') == 'getAllCalendarAndEvents') {
 		$return = array();
 		foreach (calendar::byType('calendar') as $calendar) {
@@ -46,29 +46,24 @@ try {
 		}
 		ajax::success($return);
 	}
-
+	
 	if (init('action') == 'addIncludeDateToEvent') {
 		$event = calendar_event::byId(init('id'));
 		if (!is_object($event)) {
 			throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
 		}
 		if (init('startDate') == '') {
-                throw new Exception(__("La date de début ne peut être vide",__FILE__));
+			throw new Exception(__("La date de début ne peut être vide",__FILE__));
 		}
-		$includeDate = $event->getRepeat('includeDate');
-		if ($includeDate != '') {
-			$includeDate .= ',';
+		$cmd = $event->getEqLogic()->getCmd('action','add_include_date');
+		if(!is_object($cmd)){
+			throw new Exception(__('Impossible de trouver la commande d\'exclusion', __FILE__));
 		}
-		if (init('endDate') != '' && init('endDate') != init('startDate')) {
-			$includeDate .= init('startDate') . ':' . init('endDate');
-		} else {
-			$includeDate .= init('startDate');
-		}
-		$event->setRepeat('includeDate', $includeDate);
-		$event->save();
+		$date = (init('endDate') != '' && init('endDate') != init('startDate')) ? init('startDate') . ':' . init('endDate') : init('startDate');
+		$cmd->execCmd(array('title' => $event->getName(),'message' => $date));
 		ajax::success();
 	}
-
+	
 	if (init('action') == 'saveEvent') {
 		if (!isConnect('admin')) {
 			throw new Exception(__('401 - Accès non autorisé', __FILE__));
@@ -85,7 +80,7 @@ try {
 		$event->save();
 		ajax::success();
 	}
-
+	
 	if (init('action') == 'removeEvent') {
 		if (!isConnect('admin')) {
 			throw new Exception(__('401 - Accès non autorisé', __FILE__));
@@ -97,7 +92,7 @@ try {
 		$event->remove();
 		ajax::success();
 	}
-
+	
 	if (init('action') == 'removeOccurence') {
 		if (!isConnect('admin')) {
 			throw new Exception(__('401 - Accès non autorisé', __FILE__));
@@ -109,14 +104,16 @@ try {
 		if (init('date') == '') {
 			throw new Exception(__('La date de l\'occurence ne peut etre vide : ', __FILE__) . init('date'));
 		}
-		$date = date('Y-m-d', strtotime(init('date')));
-		$event->setRepeat('excludeDate', trim($event->getRepeat('excludeDate') . ',' . $date, ','));
-		$event->save();
+		$cmd = $event->getEqLogic()->getCmd('action','add_exclude_date');
+		if(!is_object($cmd)){
+			throw new Exception(__('Impossible de trouver la commande d\'exclusion', __FILE__));
+		}
+		$cmd->execCmd(array('title' => $event->getName(),'message' => date('Y-m-d', strtotime(init('date')))));
 		ajax::success();
 	}
-
+	
 	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
-/*     * *********Catch exeption*************** */
+	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
 	ajax::error(displayExeption($e), $e->getCode());
 }
