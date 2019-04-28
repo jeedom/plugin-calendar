@@ -60,7 +60,7 @@ if (is_object($event)) {
 		<form class="form-horizontal">
 			<fieldset>
 				<div class="form-group">
-					<label class="col-sm-3 control-label">{{Nom de l'évenement}}</label>
+					<label class="col-sm-3 control-label">{{Nom de l'évènement}}</label>
 					<div class="col-sm-3">
 						<input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName' />
 					</div>
@@ -177,8 +177,8 @@ if (is_object($event)) {
 								<label class="col-sm-3 control-label">{{Mode de répétition}}</label>
 								<div class="col-sm-3">
 									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
-										<option value="simple">{{Repetition simple}}</option>
-										<option value="advance">{{Repetition le premier,deuxieme...}}</option>
+										<option value="simple">{{Répétition simple}}</option>
+										<option value="advance">{{Répétition le premier,deuxieme...}}</option>
 									</select>
 								</div>
 							</div>
