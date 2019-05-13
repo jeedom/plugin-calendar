@@ -1,3 +1,7 @@
+# 13/05/2019
+
+- Correction de bugs
+
 # 09/05/2019
 
 - Correction de bugs
