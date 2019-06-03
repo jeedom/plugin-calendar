@@ -703,7 +703,7 @@ class calendar_event {
 						'start' => $this->getStartDate(),
 						'end' => $this->getEndDate(),
 					);
-				}elseif(strtotime($this->getStartDate()) <= $endTime && strtotime($this->getEndDate()) >= $starTime){
+				}elseif(strtotime($this->getStartDate()) <= $endTime && strtotime($this->getEndDate()) >= $startTime){
 					$return[] = array(
 						'start' => $this->getStartDate(),
 						'end' => $this->getEndDate(),
