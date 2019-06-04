@@ -1,3 +1,7 @@
+# 03/06/2019
+
+- Corrección de errores
+
 # 13/05/2019
 
 - Corrección de errores
