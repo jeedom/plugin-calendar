@@ -414,161 +414,164 @@ if (is_object($event)) {
 			}
 		}
 		
-		$('.datetimepicker').datetimepicker({lang: 'fr',
-		i18n: {
-			fr: {
-				months: [
-					'Janvier', 'Février', 'Mars', 'Avril',
-					'Mai', 'Juin', 'Juillet', 'Aout',
-					'Septembre', 'Octobre', 'Novembre', 'Décembre',
-				],
-				dayOfWeek: [
-					"Di", "Lu", "Ma", "Me",
-					"Je", "Ve", "Sa",
-				]
-			}
-		},
-		format: 'Y-m-d H:i:00',
-		step: 15
-	});
-	$('#md_eventEditSave').on('click', function () {
-		var calendarEvent = $('#div_eventEdit').getValues('.calendarAttr');
-		calendarEvent = calendarEvent[0];
-		calendarEvent.cmd_param.start = $('#div_start .start').getValues('.expressionAttr');
-		calendarEvent.cmd_param.end = $('#div_end .end').getValues('.expressionAttr');
-		$.ajax({
-			type: 'POST',
-			url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-			data: {
-				action: 'saveEvent',
-				event: json_encode(calendarEvent)
-			},
-			dataType: 'json',
-			error: function (request, status, error) {
-				handleAjaxError(request, status, error, $('#div_eventEditAlert'));
-			},
-			success: function (data) {
-				if (data.state != 'ok') {
-					$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
-					return;
+		$('.datetimepicker').datetimepicker({
+			lang: 'fr',
+			dayOfWeekStart : 1,
+			i18n: {
+				fr: {
+					months: [
+						'Janvier', 'Février', 'Mars', 'Avril',
+						'Mai', 'Juin', 'Juillet', 'Aout',
+						'Septembre', 'Octobre', 'Novembre', 'Décembre',
+					],
+					dayOfWeek: [
+						"Di", "Lu", "Ma", "Me",
+						"Je", "Ve", "Sa",
+					]
 				}
-				$('#div_eventEditAlert').showAlert({message: '{{Evènement ajouté avec succès}}', level: 'success'});
-				try{
-					calendar.fullCalendar('refetchEvents');
-				}catch (e) {
-					
+			},
+			format: 'Y-m-d H:i:00',
+			step: 15
+		});
+		$('#md_eventEditSave').on('click', function () {
+			var calendarEvent = $('#div_eventEdit').getValues('.calendarAttr');
+			calendarEvent = calendarEvent[0];
+			calendarEvent.cmd_param.start = $('#div_start .start').getValues('.expressionAttr');
+			calendarEvent.cmd_param.end = $('#div_end .end').getValues('.expressionAttr');
+			$.ajax({
+				type: 'POST',
+				url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+				data: {
+					action: 'saveEvent',
+					event: json_encode(calendarEvent)
+				},
+				dataType: 'json',
+				error: function (request, status, error) {
+					handleAjaxError(request, status, error, $('#div_eventEditAlert'));
+				},
+				success: function (data) {
+					if (data.state != 'ok') {
+						$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					$('#div_eventEditAlert').showAlert({message: '{{Evènement ajouté avec succès}}', level: 'success'});
+					try{
+						calendar.fullCalendar('refetchEvents');
+					}catch (e) {
+						
+					}
+					updateEventList();
+					$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
 				}
-				updateEventList();
-				$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
+			});
+		});
+		
+		$('#md_eventEditDuplicate').on('click', function () {
+			$('.calendarAttr[data-l1key=id]').value('');
+			$('#md_eventEditRemove').hide();
+			$(this).hide();
+		});
+		
+		$('#md_eventEditRemove').on('click', function () {
+			if (calendarEvent != null && is_array(calendarEvent) && calendarEvent.repeat.enable == 1 && dateEvent != null && dateEvent != '') {
+				bootbox.dialog({
+					message: "{{Voulez vous supprimer cette occurence ou l\'evenement ?}}",
+					title: "Suppression",
+					buttons: {
+						cancel: {
+							label: "{{Annuler}}",
+							className: "btn-default",
+							callback: function () {
+								
+							}
+						},
+						success: {
+							label: "{{Occurence}}",
+							className: "btn-success",
+							callback: function () {
+								$.ajax({
+									type: 'POST',
+									url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+									data: {
+										action: 'removeOccurence',
+										id: $('.calendarAttr[data-l1key=id]').value(),
+										date: dateEvent
+									},
+									dataType: 'json',
+									error: function (request, status, error) {
+										handleAjaxError(request, status, error, $('#div_eventEditAlert'));
+									},
+									success: function (data) {
+										if (data.state != 'ok') {
+											$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
+											return;
+										}
+										$('#div_eventEditAlert').showAlert({message: '{{Occurence supprimé avec success}}', level: 'success'});
+										calendar.fullCalendar('refetchEvents');
+										updateEventList();
+										$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
+									}
+								});
+							}
+						},
+						danger: {
+							label: "{{Evénement}}",
+							className: "btn-danger",
+							callback: function () {
+								$.ajax({
+									type: 'POST',
+									url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+									data: {
+										action: 'removeEvent',
+										id: $('.calendarAttr[data-l1key=id]').value()
+									},
+									dataType: 'json',
+									error: function (request, status, error) {
+										handleAjaxError(request, status, error, $('#div_eventEditAlert'));
+									},
+									success: function (data) {
+										if (data.state != 'ok') {
+											$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
+											return;
+										}
+										$('#div_eventEditAlert').showAlert({message: '{{Evènement supprimé avec success}}', level: 'success'});
+										calendar.fullCalendar('refetchEvents');
+										updateEventList();
+										$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
+									}
+								});
+							}
+						},
+					}
+				});
+			} else {
+				bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cette événement ?}}', function (result) {
+					if (result) {
+						$.ajax({
+							type: 'POST',
+							url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+							data: {
+								action: 'removeEvent',
+								id: $('.calendarAttr[data-l1key=id]').value()
+							},
+							dataType: 'json',
+							error: function (request, status, error) {
+								handleAjaxError(request, status, error, $('#div_eventEditAlert'));
+							},
+							success: function (data) {
+								if (data.state != 'ok') {
+									$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
+									return;
+								}
+								$('#div_eventEditAlert').showAlert({message: '{{Evènement supprimé avec success}}', level: 'success'});
+								calendar.fullCalendar('refetchEvents');
+								updateEventList();
+								$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
+							}
+						});
+					}
+				});
 			}
 		});
-	});
+	</script>
 	
-	$('#md_eventEditDuplicate').on('click', function () {
-		$('.calendarAttr[data-l1key=id]').value('');
-		$('#md_eventEditRemove').hide();
-		$(this).hide();
-	});
-	
-	$('#md_eventEditRemove').on('click', function () {
-		if (calendarEvent != null && is_array(calendarEvent) && calendarEvent.repeat.enable == 1 && dateEvent != null && dateEvent != '') {
-			bootbox.dialog({
-				message: "{{Voulez vous supprimer cette occurence ou l\'evenement ?}}",
-				title: "Suppression",
-				buttons: {
-					cancel: {
-						label: "{{Annuler}}",
-						className: "btn-default",
-						callback: function () {
-							
-						}
-					},
-					success: {
-						label: "{{Occurence}}",
-						className: "btn-success",
-						callback: function () {
-							$.ajax({
-								type: 'POST',
-								url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-								data: {
-									action: 'removeOccurence',
-									id: $('.calendarAttr[data-l1key=id]').value(),
-									date: dateEvent
-								},
-								dataType: 'json',
-								error: function (request, status, error) {
-									handleAjaxError(request, status, error, $('#div_eventEditAlert'));
-								},
-								success: function (data) {
-									if (data.state != 'ok') {
-										$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
-										return;
-									}
-									$('#div_eventEditAlert').showAlert({message: '{{Occurence supprimé avec success}}', level: 'success'});
-									calendar.fullCalendar('refetchEvents');
-									updateEventList();
-									$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
-								}
-							});
-						}
-					},
-					danger: {
-						label: "{{Evénement}}",
-						className: "btn-danger",
-						callback: function () {
-							$.ajax({
-								type: 'POST',
-								url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-								data: {
-									action: 'removeEvent',
-									id: $('.calendarAttr[data-l1key=id]').value()
-								},
-								dataType: 'json',
-								error: function (request, status, error) {
-									handleAjaxError(request, status, error, $('#div_eventEditAlert'));
-								},
-								success: function (data) {
-									if (data.state != 'ok') {
-										$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
-										return;
-									}
-									$('#div_eventEditAlert').showAlert({message: '{{Evènement supprimé avec success}}', level: 'success'});
-									calendar.fullCalendar('refetchEvents');
-									updateEventList();
-									$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
-								}
-							});
-						}
-					},
-				}
-			});
-		} else {
-			bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cette événement ?}}', function (result) {
-				if (result) {
-					$.ajax({
-						type: 'POST',
-						url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-						data: {
-							action: 'removeEvent',
-							id: $('.calendarAttr[data-l1key=id]').value()
-						},
-						dataType: 'json',
-						error: function (request, status, error) {
-							handleAjaxError(request, status, error, $('#div_eventEditAlert'));
-						},
-						success: function (data) {
-							if (data.state != 'ok') {
-								$('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
-								return;
-							}
-							$('#div_eventEditAlert').showAlert({message: '{{Evènement supprimé avec success}}', level: 'success'});
-							calendar.fullCalendar('refetchEvents');
-							updateEventList();
-							$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
-						}
-					});
-				}
-			});
-		}
-	});
-</script>
