@@ -357,7 +357,7 @@ if (init('id') != '') {
 					});
 				});
 				
-				$("body").off('click',".listCmdAction").delegate('click',".listCmdAction", function () {
+				$("body").off('click',".listCmdAction").on('click',".listCmdAction", function () {
 					var type = $(this).attr('data-type');
 					var el = $(this).closest('.' + type).find('.expressionAttr[data-l1key=cmd]');
 					jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {
