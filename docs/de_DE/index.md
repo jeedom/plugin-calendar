@@ -1,13 +1,13 @@
 Plugin permettant de créer un agenda et de déclencher des actions
 (commande ou scénario).
 
-Plugin-Konfiguration
+Configuration du plugin
 =======================
 
 La configuration est très simple, après téléchargement du plugin, il
 vous suffit de l’activer et c’est tout.
 
-Gerätekonfiguration
+Configuration des équipements
 =============================
 
 La configuration des équipements Agenda est accessible à partir du menu
@@ -50,13 +50,13 @@ Sie werden hier alle die Konfiguration Ihrer Geräte finden:
     par semaine ou jour, déplacer des événements (glisser/déposer) et un
     clic sur un événement vous ouvrira sa fenêtre d’édition.
 
-Edition d’un événement 
+Edition d’un événement
 ======================
 
 Partie la plus importante du plugin, c’est ici que vous allez pouvoir
 configurer votre événement.
 
-Evènement 
+Evènement
 ---------
 
 Ici vous retrouvez :
@@ -75,7 +75,7 @@ Ici vous retrouvez :
 -   **Ne pas afficher dans le dashboard** : permet de ne pas afficher
     cet événement sur le widget.
 
-Action de début 
+Action de début
 ---------------
 
 Permet de choisir la ou les actions à faire lors du lancement de
@@ -91,13 +91,18 @@ pouvez ajouter autant d’action que vous le voulez.
 > Il est possible de modifier l’ordre des actions en maintenant/glissant
 > celle-ci
 
-Action de fin 
+
+> **Tip**
+>
+>Il est possible de faire les memes action que dans les scénarios (voir [ici](https://jeedom.github.io/core/fr_FR/scenario))
+
+Action de fin
 -------------
 
 Idem à l’action de début mais cette fois ci c’est la ou les action(s) à
 effectuer à la fin de l’événement.
 
-Programmation 
+Programmation
 -------------
 
 C’est ici que se trouve toute la gestion temporelle de votre événement :
@@ -164,7 +169,7 @@ C’est ici que se trouve toute la gestion temporelle de votre événement :
 > puissiez changer le nom par exemple.Il ne faut donc pas oublier de
 > sauvegarder suite à un clic sur le bouton dupliquer
 
-Agenda, commandes et scénario 
+Agenda, commandes et scénario
 =============================
 
 Un agenda possède les commandes :
