@@ -334,7 +334,7 @@ if (init('id') != '') {
 				
 				$("#div_end").sortable({axis: "y", cursor: "move", items: ".end", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 				
-				$('body').undelegate(".cmdAction.expressionAttr[data-l1key=cmd]", 'focusout').delegate('.cmdAction.expressionAttr[data-l1key=cmd]', 'focusout', function (event) {
+				$('body').off('focusout',".cmdAction.expressionAttr[data-l1key=cmd]").on('focusout','.cmdAction.expressionAttr[data-l1key=cmd]',function (event) {
 					var type = $(this).attr('data-type')
 					var expression = $(this).closest('.' + type).getValues('.expressionAttr');
 					var el = $(this);
@@ -369,7 +369,7 @@ if (init('id') != '') {
 					});
 				});
 				
-				$("body").undelegate('.bt_removeAction', 'click').delegate('.bt_removeAction', 'click', function () {
+				$("body").off('click','.bt_removeAction').on('click','.bt_removeAction',  function () {
 					var type = $(this).attr('data-type');
 					$(this).closest('.' + type).remove();
 				});
@@ -404,8 +404,7 @@ if (init('id') != '') {
 					});
 				});
 				
-				
-				$("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=enable]", 'change').delegate('.calendarAttr[data-l1key=repeat][data-l2key=enable]','change', function () {
+				$("body").off( 'change',".calendarAttr[data-l1key=repeat][data-l2key=enable]").on('change','.calendarAttr[data-l1key=repeat][data-l2key=enable]', function () {
 					if ($(this).value() == 1) {
 						$('#div_eventEdit .div_repeatOption').show();
 					} else {
@@ -413,7 +412,7 @@ if (init('id') != '') {
 					}
 				});
 				
-				$("body").undelegate(".calendarAttr[data-l1key=repeat][data-l2key=mode]", 'change').delegate('.calendarAttr[data-l1key=repeat][data-l2key=mode]','change', function () {
+				$("body").off('change',".calendarAttr[data-l1key=repeat][data-l2key=mode]").on('change','.calendarAttr[data-l1key=repeat][data-l2key=mode]', function () {
 					$('#div_eventEdit .repeatMode').hide();
 					$('#div_eventEdit .repeatMode.'+$(this).value()).show();
 				});
