@@ -1,3 +1,7 @@
+# 14/10/2019
+
+- Amélioration de l'interface
+
 # 03/06/2019
 
 - Corrección de errores
