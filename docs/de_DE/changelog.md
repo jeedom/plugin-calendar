@@ -1,3 +1,8 @@
+# 14/10/2019
+
+- Verbesserung der Schnittstelle
+        
+
 # 03/06/2019
 
 - Fehlerbehebungen
