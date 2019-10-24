@@ -1,3 +1,7 @@
+# 23/10/2019
+
+- Amélioration du widget
+
 # 14/10/2019
 
 - Verbesserung der Schnittstelle
