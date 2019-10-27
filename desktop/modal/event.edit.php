@@ -217,7 +217,7 @@ if (init('id') != '') {
 										<div class="form-group">
 											<label class="col-sm-3 control-label">{{Répéter tous les}}</label>
 											<div class="col-sm-1">
-												<input class="calendarAttr form-control" data-l1key="repeat" data-l2key="freq" />
+												<input type="number" class="calendarAttr form-control" data-l1key="repeat" data-l2key="freq" />
 											</div>
 											<div class="col-sm-2">
 												<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="unite" >
