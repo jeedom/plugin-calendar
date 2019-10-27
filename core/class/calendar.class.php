@@ -542,8 +542,8 @@ class calendar_event {
 					$startDate = date('Y-m-d H:i:s', strtotime('-1 month ' . date('Y-m-d H:i:s')));
 					$endDate = date('Y-m-d H:i:s', strtotime('+1 month ' . date('Y-m-d H:i:s')));
 				} else {
-					$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+					$startDate = date('Y-m-d H:i:s', strtotime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+					$endDate = date('Y-m-d H:i:s', strtotime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 				}
 			}
 			$results = $this->calculOccurence($startDate, $endDate);
@@ -838,8 +838,8 @@ class calendar_event {
 			}
 			$repeat = $this->getRepeat();
 			if ($repeat['enable'] == 1) {
-				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+				$startDate = date('Y-m-d H:i:s', strtotime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+				$endDate = date('Y-m-d H:i:s', strtotime('+' .(99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
 			} else {
 				$startDate = null;
 				$endDate = null;
