@@ -757,6 +757,11 @@ class calendar_event {
 			}
 			
 			foreach ($includeDate as $date) {
+				foreach ($return as $value) {
+					if($value['start'] == $date . ' ' . $initStartTime && $value['end'] == $date . ' ' . $initEndTime){
+						continue(2);
+					}
+				}
 				$return[] = array(
 					'start' => $date . ' ' . $initStartTime,
 					'end' => $date . ' ' . $initEndTime,
