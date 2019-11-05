@@ -171,7 +171,7 @@ if (init('id') != '') {
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 control-label">{{Répété}}</label>
+									<label class="col-sm-3 control-label">{{Répéter}}</label>
 									<div class="col-sm-3">
 										<input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="enable"/>
 									</div>
