@@ -755,17 +755,24 @@ class calendar_event {
 					}
 				}
 			}
-			
+			$diff_day = floor((strtotime($this->getEndDate()) - strtotime($this->getStartDate()))/86400);
 			foreach ($includeDate as $date) {
 				foreach ($return as $value) {
 					if($value['start'] == $date . ' ' . $initStartTime && $value['end'] == $date . ' ' . $initEndTime){
 						continue(2);
 					}
 				}
-				$return[] = array(
-					'start' => $date . ' ' . $initStartTime,
-					'end' => $date . ' ' . $initEndTime,
-				);
+				if($diff_day > 0){
+					$return[] = array(
+						'start' => $date . ' ' . $initStartTime,
+						'end' => date('Y-m-d H:i:s',strtotime($date . ' ' . $initEndTime) + ($diff_day * 86400)),
+					);
+				}else{
+					$return[] = array(
+						'start' => $date . ' ' . $initStartTime,
+						'end' => $date . ' ' . $initEndTime,
+					);
+				}
 			}
 			usort($return, array('calendar_event', 'sortEventDate'));
 			return $return;
