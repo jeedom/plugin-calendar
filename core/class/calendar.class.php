@@ -719,7 +719,7 @@ class calendar_event {
 			$includeDate = array();
 			
 			if (isset($repeat['includeDate']) && $repeat['includeDate'] != '') {
-				$includeDate_tmp = explode(',', $repeat['includeDate']);
+				$includeDate_tmp = explode(',', trim($repeat['includeDate'],','));
 				foreach ($includeDate_tmp as $date) {
 					if (strpos($date, ':') !== false) {
 						$expDate = explode(':', $date);
@@ -1024,5 +1024,4 @@ class calendar_event {
 	}
 	
 	?>
-	
 	
