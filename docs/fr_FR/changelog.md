@@ -1,3 +1,7 @@
+# 15/11/2019
+
+- Correction de bugs
+
 # 23/10/2019
 
 - Amélioration du widget
