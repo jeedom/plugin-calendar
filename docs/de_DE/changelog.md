@@ -1,4 +1,4 @@
-# 15/11/2019
+# 2019.11.15
 
 - Fehlerbehebungen
 
@@ -6,10 +6,9 @@
 
 - Amélioration du widget
 
-# 14/10/2019
+# 2019.10.14
 
-- Verbesserung der Schnittstelle
-        
+- Amélioration de l'interface
 
 # 03/06/2019
 
@@ -30,14 +29,12 @@
 # 08/04/2019
 
 - Fehlerbehebungen
-- Verbesserung der Schnittstelle
-        
+- Amélioration de l'interface
 
 # 18/03/2019
 
 - Lors de la supression d'un évènement les actions de fin ne sont plus éxecutées
-- Verbesserung der Schnittstelle
-        
+- Amélioration de l'interface
 - Fehlerbehebungen
 
 # 08/01/2018
@@ -76,4 +73,4 @@
 
 # 27/02/2018
 
--   Suppression des commandes d'activations/désactivations (pour désactiver un agenda dans un scénario il faut maintenant utiliser la fonction de désactivation d'équipment)
+-	Suppression des commandes d'activations/désactivations (pour désactiver un agenda dans un scénario il faut maintenant utiliser la fonction de désactivation d'équipment)
