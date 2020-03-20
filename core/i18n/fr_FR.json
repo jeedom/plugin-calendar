@@ -1,5 +1,14 @@
 {
-    "desktop\/modal\/event.edit.php": {
+    "plugins\/calendar\/desktop\/modal\/health.php": {
+        "Module": "Module",
+        "ID": "ID",
+        "Evènements": "Evènements",
+        "Etat": "Etat",
+        "Date création": "Date création",
+        "Inactif": "Inactif",
+        "Actif": "Actif"
+    },
+    "plugins\/calendar\/desktop\/modal\/event.edit.php": {
         "L\\'id de l\\'équipement ne peut etre vide : ": "L\\'id de l\\'équipement ne peut etre vide : ",
         "Aucun équipement associé à l\\'id : ": "Aucun équipement associé à l\\'id : ",
         "Event id non trouvé : ": "Event id non trouvé : ",
@@ -75,22 +84,7 @@
         "Evènement supprimé avec success": "Evènement supprimé avec success",
         "Etes-vous sûr de vouloir supprimer cette événement ?": "Etes-vous sûr de vouloir supprimer cette événement ?"
     },
-    "desktop\/modal\/health.php": {
-        "Module": "Module",
-        "ID": "ID",
-        "Evènements": "Evènements",
-        "Etat": "Etat",
-        "Date création": "Date création",
-        "Inactif": "Inactif",
-        "Actif": "Actif"
-    },
-    "desktop\/js\/calendar.js": {
-        "Santé Agenda": "Santé Agenda",
-        "Ajouter\/Modifier évènement": "Ajouter\/Modifier évènement",
-        "Ajouter évènement": "Ajouter évènement",
-        "Evènement modifié avec succès": "Evènement modifié avec succès"
-    },
-    "desktop\/php\/calendar.php": {
+    "plugins\/calendar\/desktop\/php\/calendar.php": {
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
         "Santé": "Santé",
@@ -114,7 +108,13 @@
         "Nombre d'évènements maximum": "Nombre d'évènements maximum",
         "Liste des évènements de l'agenda": "Liste des évènements de l'agenda"
     },
-    "core\/ajax\/calendar.ajax.php": {
+    "plugins\/calendar\/desktop\/js\/calendar.js": {
+        "Santé Agenda": "Santé Agenda",
+        "Ajouter\/Modifier évènement": "Ajouter\/Modifier évènement",
+        "Ajouter évènement": "Ajouter évènement",
+        "Evènement modifié avec succès": "Evènement modifié avec succès"
+    },
+    "plugins\/calendar\/core\/ajax\/calendar.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Aucun évènement correspondant à : ": "Aucun évènement correspondant à : ",
         "La date de début ne peut être vide": "La date de début ne peut être vide",
@@ -122,7 +122,7 @@
         "La date de l\\'occurence ne peut etre vide : ": "La date de l\\'occurence ne peut etre vide : ",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/class\/calendar.class.php": {
+    "plugins\/calendar\/core\/class\/calendar.class.php": {
         "En cours": "En cours",
         "Ajouter une date": "Ajouter une date",
         "Date (AAAA-MM-JJ)": "Date (AAAA-MM-JJ)",
@@ -133,7 +133,7 @@
         "Le nom de l\\'évenement ne peut etre vide": "Le nom de l\\'évenement ne peut etre vide",
         "Impossible de trouver eqLogic correspondante à l\\'id : ": "Impossible de trouver eqLogic correspondante à l\\'id : ",
         "La date de début d\\'évenement ne peut être égale ou après la date de fin": "La date de début d\\'évenement ne peut être égale ou après la date de fin",
-        "La fréquence de répétition ne peut etre vide": "La fréquence de répétition ne peut etre vide",
+        "La fréquence de répétition ne peut etre vide, nulle ou négative": "La fréquence de répétition ne peut etre vide, nulle ou négative",
         "L\\'unité de répétition ne peut etre vide": "L\\'unité de répétition ne peut etre vide",
         "Erreur lors de l\\'éxecution de ": "Erreur lors de l\\'éxecution de ",
         ". Détails : ": ". Détails : "
