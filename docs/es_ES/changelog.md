@@ -1,3 +1,7 @@
+# 20/03/2020
+
+- Correction de bug en espagnol
+
 # 11/15/2019
 
 - Correcciones de errores
