@@ -38,7 +38,7 @@ class calendar extends eqLogic {
 		$nowtime = strtotime('now');
 		$repeat = $event->getRepeat();
 		if ($repeat['enable'] == 1) {
-			if ($repeat['nationalDay'] == 'onlyNationalDay') {
+			if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq']) || $repeat['freq'] == '') {
 				$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
 				$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
 			} else {
@@ -538,9 +538,9 @@ class calendar_event {
 			$endDate = null;
 			$repeat = $this->getRepeat();
 			if ($repeat['enable'] == 1) {
-				if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq'])) {
-					$startDate = date('Y-m-d H:i:s', strtotime('-6 month ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+6 month ' . date('Y-m-d H:i:s')));
+				if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq']) || $repeat['freq'] == '') {
+					$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
+					$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
 				} else {
 					$startDate = date('Y-m-d H:i:s', strtotime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
 					$endDate = date('Y-m-d H:i:s', strtotime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
