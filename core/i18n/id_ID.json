@@ -1,10 +1,10 @@
 {
     "plugins\/calendar\/desktop\/modal\/health.php": {
-        "Module": "",
+        "Module": "Modul",
         "ID": "",
         "Evènements": "",
         "Etat": "Negara",
-        "Date création": "",
+        "Date création": "Tanggal pembuatan",
         "Inactif": "Non-aktif",
         "Actif": "Aktiva"
     },
