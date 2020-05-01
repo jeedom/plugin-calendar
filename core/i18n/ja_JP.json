@@ -1,10 +1,10 @@
 {
     "plugins\/calendar\/desktop\/modal\/health.php": {
-        "Module": "",
+        "Module": "モジュール",
         "ID": "",
         "Evènements": "",
         "Etat": "状態",
-        "Date création": "",
+        "Date création": "作成日",
         "Inactif": "不活発",
         "Actif": "財産"
     },

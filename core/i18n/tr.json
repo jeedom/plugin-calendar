@@ -1,10 +1,10 @@
 {
     "plugins\/calendar\/desktop\/modal\/health.php": {
-        "Module": "",
+        "Module": "Modul",
         "ID": "Kimlik",
         "Evènements": "",
         "Etat": "Durum",
-        "Date création": "",
+        "Date création": "Oluşturma tarihi",
         "Inactif": "Pasif",
         "Actif": "Varlıklar"
     },

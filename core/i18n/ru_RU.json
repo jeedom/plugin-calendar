@@ -1,10 +1,10 @@
 {
     "plugins\/calendar\/desktop\/modal\/health.php": {
-        "Module": "",
+        "Module": "Модуль",
         "ID": "Идентификатор",
         "Evènements": "",
         "Etat": "состояние",
-        "Date création": "",
+        "Date création": "дата создания",
         "Inactif": "неактивный",
         "Actif": "активы"
     },
