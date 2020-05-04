@@ -89,7 +89,7 @@ pode adicionar quantas ações você quiser.
 > **Tip**
 >
 > É possível modificar a ordem das ações mantendo / arrastando
-> esse aqui
+> celle-ci
 
 
 > **Tip**
