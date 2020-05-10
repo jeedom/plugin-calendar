@@ -1,3 +1,7 @@
+>**IMPORTANT**
+>
+>Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto.
+
 # 20/03/2020
 
 - Correção de bug em espanhol
