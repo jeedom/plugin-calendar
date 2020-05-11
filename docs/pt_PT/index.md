@@ -1,4 +1,4 @@
-# Agenda
+# Plug-in do calendário
 
 Plug-in para criar uma agenda e acionar ações (comando ou cenário).
 

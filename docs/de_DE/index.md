@@ -1,4 +1,4 @@
-# Agenda
+# Kalender-Plugin
 
 Plugin zum Erstellen einer Agenda und Auslösen von Aktionen (Befehl oder Szenario).
 
