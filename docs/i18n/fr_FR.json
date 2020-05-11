@@ -39,7 +39,7 @@
         "Suppression des commandes d'activations\/désactivations (pour désactiver un agenda dans un scénario il faut maintenant utiliser la fonction de désactivation d'équipment)": "Suppression des commandes d'activations\/désactivations (pour désactiver un agenda dans un scénario il faut maintenant utiliser la fonction de désactivation d'équipment)"
     },
     "index.md": {
-        "Agenda": "Agenda",
+        "Plugin Agenda": "Plugin Agenda",
         "Plugin permettant de créer un agenda et de déclencher des actions (commande ou scénario)": "Plugin permettant de créer un agenda et de déclencher des actions (commande ou scénario)",
         "Configuration du plugin": "Configuration du plugin",
         "La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout": "La configuration est très simple, après téléchargement du plugin, il vous suffit de l'activer et c'est tout",
@@ -67,6 +67,7 @@
         "affichage en dessous de la liste de tous les événements de l'agenda (un clic dessus permet d'éditer l'événement directement)": "affichage en dessous de la liste de tous les événements de l'agenda (un clic dessus permet d'éditer l'événement directement)",
         "Ajouter événement": "Ajouter événement",
         "permet d'ajouter un événement à l'agenda": "permet d'ajouter un événement à l'agenda",
+        "Agenda": "Agenda",
         "Affichage d'une vue type agenda avec tous les événements vous pouvez vous déplacer dedans, choisir de l'afficher par semaine ou jour, déplacer des événements (glisser\/déposer) et un clic sur un événement vous ouvrira sa fenêtre d'édition": "Affichage d'une vue type agenda avec tous les événements vous pouvez vous déplacer dedans, choisir de l'afficher par semaine ou jour, déplacer des événements (glisser\/déposer) et un clic sur un événement vous ouvrira sa fenêtre d'édition",
         "Edition d'un événement": "Edition d'un événement",
         "Partie la plus importante du plugin, c'est ici que vous allez pouvoir configurer votre événement": "Partie la plus importante du plugin, c'est ici que vous allez pouvoir configurer votre événement",

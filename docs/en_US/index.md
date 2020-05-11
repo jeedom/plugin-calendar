@@ -1,4 +1,4 @@
-# Agenda
+# Calendar plugin
 
 Plugin for creating an agenda and triggering actions (command or scenario).
 

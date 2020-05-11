@@ -1,4 +1,4 @@
-# Agenda
+# Complemento de calendario
 
 Complemento para crear una agenda y activar acciones (comando o escenario).
 
