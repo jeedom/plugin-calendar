@@ -35,9 +35,9 @@ Der wichtigste Teil des Plugins ist, dass Sie hier Ihre Veranstaltung konfigurie
 Hier finden Sie :
 
 -   **Name der Veranstaltung** : Name Ihrer Veranstaltung.
--   **Symbol** : Mit dieser Option können Sie ein Symbol vor dem Namen Ihres Geräts einfügen (klicken Sie dazu auf "Symbol auswählen")..
--   **Farbe** : Mit dieser Option können Sie die Farbe Ihrer Veranstaltung auswählen (mit einem Häkchen können Sie sie auch transparent machen)..
--   **Textfarbe** : Mit dieser Option können Sie die Farbe Ihres Veranstaltungstextes auswählen.
+-   **Symbol** : Mit dieser Option können Sie ein Symbol vor dem Namen Ihres Geräts einfügen (klicken Sie dazu auf "Symbol auswählen").
+-   **Farbe** : Mit dieser Option können Sie die Farbe Ihrer Veranstaltung auswählen (mit einem Häkchen können Sie sie auch transparent machen).
+-   **Farbe du texte** : Mit dieser Option können Sie die Farbe Ihres Veranstaltungstextes auswählen.
 -   **Nicht im Dashboard anzeigen** : erlaubt, dieses Ereignis nicht im Widget anzuzeigen.
 
 ## Aktion starten
@@ -59,14 +59,14 @@ Um eine Aktion hinzuzufügen, klicken Sie einfach auf die Schaltfläche + am End
 
 Wie die Startaktion, diesmal jedoch die Aktion (en), die am Ende des Ereignisses ausgeführt werden sollen.
 
-## Programmierung
+## Programmation
 
 Hier befindet sich das gesamte Zeitmanagement Ihrer Veranstaltung :
 
 -   **Anfang** : Startdatum des Ereignisses.
 -   **Ende** : Ereignisenddatum.
 -   **Den ganzen Tag** : ermöglicht es, das Ereignis über den ganzen Tag zu definieren.
--   **In einen anderen Kalender aufnehmen** : Ermöglicht es Ihnen, ein anderes Ereignis in Ihr aktuelles Ereignis aufzunehmen. Wenn Sie beispielsweise ein Ereignis A jeden Montag wiederholen lassen und dieses Ereignis A in Ihr aktuelles Ereignis aufnehmen, wird dieses Ereignis automatisch jeden Montag wiederholt.
+-   **Einschließen par un autre agenda** : Ermöglicht es Ihnen, ein anderes Ereignis in Ihr aktuelles Ereignis aufzunehmen. Wenn Sie beispielsweise ein Ereignis A jeden Montag wiederholen lassen und dieses Ereignis A in Ihr aktuelles Ereignis aufnehmen, wird dieses Ereignis automatisch jeden Montag wiederholt.
 -   **Einschließen** : Ermöglicht das Erzwingen eines Auftrittsdatums. Sie können mehrere setzen, indem Sie sie durch (Kommas) trennen. Sie können auch einen Bereich mit definieren : (zwei Punkte).
 -   **Wiederholt** : Nehmen wir an, Ihr Ereignis wird wiederholt (wenn dieses Kontrollkästchen nicht aktiviert ist, haben Sie nicht die folgenden Optionen).
 -   **Wiederholungsmodus** : ermöglicht die Angabe des Wiederholungsmodus, entweder einfach : jeden Tag, alle X Tage ... oder Wiederholung jeden 1., 2. ... um ein Ereignis beispielsweise jeden 3. Montag im Monat zu wiederholen (die folgenden Optionen können je nach Auswahl unterschiedlich sein).
@@ -75,7 +75,7 @@ Hier befindet sich das gesamte Zeitmanagement Ihrer Veranstaltung :
 -   **Nur die** : Mit dieser Option können Sie die Wiederholung auf bestimmte Wochentage beschränken.
 -   **Einschränkung** : erlaubt es, die Veranstaltung nur an Feiertagen einzuschränken oder Feiertage auszuschließen.
 -   **Bis zu** : gibt das Enddatum des Auftretens des Ereignisses an.
--   **Durch einen anderen Kalender ausschließen** : ermöglicht es, dieses Ereignis nach einem anderen Kalender auszuschließen (um beispielsweise zu vermeiden, dass sich zwei widersprüchliche Ereignisse treffen).
+-   **Ausschließen par un autre agenda** : ermöglicht es, dieses Ereignis nach einem anderen Kalender auszuschließen (um beispielsweise zu vermeiden, dass sich zwei widersprüchliche Ereignisse treffen).
 -   **Ausschließen** : wie "Einschließen", diesmal jedoch, um Daten auszuschließen.
 
 > **Notiz**
@@ -91,8 +91,8 @@ Hier befindet sich das gesamte Zeitmanagement Ihrer Veranstaltung :
 Eine Agenda hat Kontrollen :
 
 -   **In Bearbeitung** : gibt eine Liste von aktuellen Ereignissen an, die durch Kommas getrennt sind, um sie im einfachsten Szenario zu verwenden und um den Operator zu verwenden, der beispielsweise enthält (Übereinstimmungen) oder nicht enthält (keine Übereinstimmungen) *\ [Wohnung \] \ [Test \] \ [In Bearbeitung \]* entspricht "/ Anniv /", ist wahr, wenn in der Liste der aktuellen Ereignisse ein "Anniv"
-- **Fügen Sie ein Datum hinzu** : Ermöglicht es einem Szenario, einem Ereignis ein Datum hinzuzufügen (seien Sie vorsichtig, wenn Sie den Namen des Ereignisses ändern, müssen Sie ihn auch im Szenario korrigieren).. Sie können mehrere Ereignisse getrennt durch setzen ,
-- **Entfernen Sie ein Datum** : Ermöglicht es einem Szenario, ein Datum von einem Ereignis auszuschließen (seien Sie vorsichtig, wenn Sie den Namen des Ereignisses ändern, müssen Sie ihn auch im Szenario korrigieren).. Sie können mehrere Ereignisse getrennt durch setzen ,
+- **Fügen Sie ein Datum hinzu** : Ermöglicht es einem Szenario, einem Ereignis ein Datum hinzuzufügen (seien Sie vorsichtig, wenn Sie den Namen des Ereignisses ändern, müssen Sie ihn auch im Szenario korrigieren). Sie können mehrere Ereignisse getrennt durch setzen ,
+- **Entfernen Sie ein Datum** : Ermöglicht es einem Szenario, ein Datum von einem Ereignis auszuschließen (seien Sie vorsichtig, wenn Sie den Namen des Ereignisses ändern, müssen Sie ihn auch im Szenario korrigieren). Sie können mehrere Ereignisse getrennt durch setzen ,
 
 > **Notiz**
 >

@@ -1,6 +1,6 @@
 >**Importante**
 >
->Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto.
+>Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
 # 20/03/2020
 
@@ -64,7 +64,7 @@
 
 # 15/10/2018
 
-- Corrección de un error en la inclusión de la fecha.
+- Corrección de un error en la inclusión de la fecha
 
 # 29/03/2018
 
@@ -72,7 +72,7 @@
 
 # 26/03/2018
 
-- Corrección de un error en las imágenes de la página de configuración.
+- Corrección de un error en las imágenes de la página de configuración
 - Corrección de un error durante el cálculo de la recurrencia de eventos si no se define ningún límite.
 
 # 02/03/2018
