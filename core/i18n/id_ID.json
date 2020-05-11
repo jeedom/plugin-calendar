@@ -120,7 +120,7 @@
         "La date de début ne peut être vide": "",
         "Impossible de trouver la commande d\\'exclusion": "",
         "La date de l\\'occurence ne peut etre vide : ": "",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "En cours": "Sedang berlangsung",
