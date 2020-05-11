@@ -17,7 +17,7 @@ Here you find all the configuration of your equipment :
 -   **Name of equipment** : name of your calendar.
 -   **Parent object** : indicates the parent object to which the equipment belongs.
 -   **Category** : equipment categories (it can belong to several categories).
--   **Activer** : makes your equipment active.
+-   **Activate** : makes your equipment active.
 -   **Visible** : makes it visible on the dashboard.
 -   **Widget, number of days** : sets the number of event days to display on the widget.
 -   **Maximum number of events** : defines the maximum number of events to display on the dashboard.
@@ -36,7 +36,7 @@ Here you find :
 
 -   **Name of the event** : Name of your event.
 -   **Icon** : allows you to add an icon in front of the name of your equipment (to do this, click on "Choose an icon").
--   **Couleur** : allows you to choose the color of your event (a check mark also allows you to make it transparent).
+-   **Color** : allows you to choose the color of your event (a check mark also allows you to make it transparent).
 -   **Text color** : allows you to choose the color of your event text.
 -   **Do not show in the dashboard** : allows not to display this event on the widget.
 
@@ -59,30 +59,30 @@ To add an action just click on the + button at the end of the line then you will
 
 Same as the start action but this time it is the action (s) to perform at the end of the event.
 
-## Programmation
+## Programming
 
 This is where all the time management of your event is located :
 
 -   **Start** : Event start date.
--   **Fin** : Event end date.
+-   **End** : Event end date.
 -   **All day** : allows to define the event over the whole day.
 -   **Include by another calendar** : Allows you to include another event in your current event. For example, if you have an event A repeated every Monday, and you include this event A in your current event, then this event will be automatically repeated every Monday.
--   **Inclure** : allows to force an occurrence date, you can put several by separating them with, (commas), you can also define a range with : (two points).
+-   **Include** : allows to force an occurrence date, you can put several by separating them with, (commas), you can also define a range with : (two points).
 -   **Say again** : lets say that your event is repeated (if this box is not checked you will not have the following options).
 -   **Repeat mode** : allows to specify the repeat mode, either simple : every day, every X days ... or repetition every 1st, 2nd ... to repeat an event every 3rd Monday of the month for example (the following options may be different depending on this choice).
 -   **Repeat every** : \ [simple repeat mode only \] allows you to define the frequency of repetition of the event (eg every 3 days or every 2 months…).
--   **Le** : \ [repeat mode the first, the second… only \] allows you to choose a repeat every 2nd Monday of the month for example.
+-   **The** : \ [repeat mode the first, the second… only \] allows you to choose a repeat every 2nd Monday of the month for example.
 -   **Only the** : allows you to restrict repetition to certain days of the week.
 -   **Restriction** : allows to restrict the event only on public holidays or to exclude public holidays.
--   **Jusqu'à** : gives the end date of occurrence of the event.
+-   **Until** : gives the end date of occurrence of the event.
 -   **Exclude by another calendar** : allows to exclude this event according to another calendar (to avoid for example that 2 contradictory events meet together).
--   **Exclure** : same as "Include" but this time to exclude dates.
+-   **Exclude** : same as "Include" but this time to exclude dates.
 
-> **Note**
+> **NOTE**
 >
 > Public holidays are French and only French this does not work for other countries
 
-> **Note**
+> **NOTE**
 >
 > At the top right you have 3 buttons, one to delete, one to save and one to duplicate. When clicking on this last jeedom displays the event resulting from the duplication so that you can change the name for example.So don't forget to save following a click on the duplicate button
 
@@ -94,6 +94,6 @@ An agenda has controls :
 - **Add a date** : allows from a scenario to add a date to an event (be careful if you change the name of the event you will have to correct it in the scenario too). You can put several events separated by ,
 - **Remove a date** : allows from a scenario to exclude a date from an event (be careful if you change the name of the event you will have to correct it in the scenario too). You can put several events separated by ,
 
-> **Note**
+> **NOTE**
 >
 > It is possible to use the "In progress" command as a trigger in a scenario, each update of the information will trigger the execution of the scenario. However, it is preferable to use this command in a programmed scenario with a test on the value.
