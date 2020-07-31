@@ -137,5 +137,8 @@
         "L\\'unité de répétition ne peut etre vide": "Wiederholungseinheit darf nicht leer sein",
         "Erreur lors de l\\'éxecution de ": "Fehler beim Ausführen",
         ". Détails : ": "Details:"
+    },
+    "info.json": {
+        "Plugin pour créer un calendrier": "Plugin zum Erstellen eines Kalenders"
     }
 }
