@@ -137,5 +137,8 @@
         "L\\'unité de répétition ne peut etre vide": "La unidad de repetición no puede estar vacía",
         "Erreur lors de l\\'éxecution de ": "Error al ejecutar",
         ". Détails : ": "Detalles:"
+    },
+    "info.json": {
+        "Plugin pour créer un calendrier": "Complemento para crear un calendario"
     }
 }

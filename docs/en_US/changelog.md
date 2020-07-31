@@ -83,4 +83,4 @@
 
 # 02/27/2018
 
--	Deletion of activation / deactivation commands (to deactivate an agenda in a scenario you must now use the equipment deactivation function)
+-	Removal of activation / deactivation commands (to deactivate an agenda in a scenario you must now use the equipment deactivation function)

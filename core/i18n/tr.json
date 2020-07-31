@@ -137,5 +137,8 @@
         "L\\'unité de répétition ne peut etre vide": "",
         "Erreur lors de l\\'éxecution de ": "Yürütülürken hata oluştu",
         ". Détails : ": "Detaylar:"
+    },
+    "info.json": {
+        "Plugin pour créer un calendrier": ""
     }
 }
