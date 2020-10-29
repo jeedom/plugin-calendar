@@ -18,7 +18,7 @@
         "Evènement": "Evento",
         "Action": "Acción",
         "Programmation": "Programación",
-        "Nom de l'évènement": "Nombre del evento.",
+        "Nom de l'évènement": "Nombre del evento",
         "Icône": "Icono",
         "Choisir une icône": "Elija el icono",
         "Couleur": "Color",
@@ -35,7 +35,7 @@
         "Répéter": "Repetición",
         "Mode de répétition": "Modo de repetición",
         "Répétition simple": "Repetición única",
-        "Répétition le premier,deuxieme...": "Ensayo el primero, segundo ...",
+        "Répétition le premier,deuxieme...": "Ensayo el primero, segundo",
         "Le": "El",
         "Premier": "Primero",
         "Deuxième": "En segundo",
@@ -106,7 +106,7 @@
         "Visible": "Visible",
         "Widget, nombre de jours": "Widget, número de días",
         "Nombre d'évènements maximum": "Numero maximo de eventos",
-        "Liste des évènements de l'agenda": "Lista de eventos del calendario."
+        "Liste des évènements de l'agenda": "Lista de eventos del calendario"
     },
     "plugins\/calendar\/desktop\/js\/calendar.js": {
         "Santé Agenda": "Agenda de salud",
@@ -130,12 +130,15 @@
         "Retirer une date": "Eliminar una fecha",
         "Aucun": "Ninguna",
         "[calendar] L\\'id de eqLogic ne peut être vide": "[calendar] la identificación de eqLogic no puede estar vacía",
-        "Le nom de l\\'évenement ne peut etre vide": "El nombre del evento no puede estar vacío.",
+        "Le nom de l\\'évenement ne peut etre vide": "El nombre del evento no puede estar vacío",
         "Impossible de trouver eqLogic correspondante à l\\'id : ": "No se puede encontrar eqLogic correspondiente a id:",
         "La date de début d\\'évenement ne peut être égale ou après la date de fin": "La fecha de inicio del evento no puede ser igual o posterior a la fecha de finalización",
-        "La fréquence de répétition ne peut etre vide, nulle ou négative": "La frecuencia de repetición no puede ser vacía, cero o negativa.",
-        "L\\'unité de répétition ne peut etre vide": "La unidad de repetición no puede estar vacía.",
+        "La fréquence de répétition ne peut etre vide, nulle ou négative": "La frecuencia de repetición no puede ser vacía, cero o negativa",
+        "L\\'unité de répétition ne peut etre vide": "La unidad de repetición no puede estar vacía",
         "Erreur lors de l\\'éxecution de ": "Error al ejecutar",
-        ". Détails : ": ". Detalles:"
+        ". Détails : ": "Detalles:"
+    },
+    "info.json": {
+        "Plugin pour créer un calendrier": "Complemento para crear un calendario"
     }
 }

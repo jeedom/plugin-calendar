@@ -35,7 +35,7 @@
         "Répéter": "Repeat",
         "Mode de répétition": "Repeat mode",
         "Répétition simple": "Single repeat",
-        "Répétition le premier,deuxieme...": "Rehearsal the first, second ...",
+        "Répétition le premier,deuxieme...": "Rehearsal the first, second",
         "Le": "The",
         "Premier": "First",
         "Deuxième": "Second",
@@ -136,6 +136,9 @@
         "La fréquence de répétition ne peut etre vide, nulle ou négative": "The repetition frequency cannot be empty, zero or negative",
         "L\\'unité de répétition ne peut etre vide": "Repeat unit cannot be empty",
         "Erreur lors de l\\'éxecution de ": "Error while executing",
-        ". Détails : ": ". Details:"
+        ". Détails : ": "Details:"
+    },
+    "info.json": {
+        "Plugin pour créer un calendrier": "Plugin to create a calendar"
     }
 }

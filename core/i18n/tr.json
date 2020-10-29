@@ -136,6 +136,9 @@
         "La fréquence de répétition ne peut etre vide, nulle ou négative": "",
         "L\\'unité de répétition ne peut etre vide": "",
         "Erreur lors de l\\'éxecution de ": "Yürütülürken hata oluştu",
-        ". Détails : ": ". Detaylar:"
+        ". Détails : ": "Detaylar:"
+    },
+    "info.json": {
+        "Plugin pour créer un calendrier": ""
     }
 }
