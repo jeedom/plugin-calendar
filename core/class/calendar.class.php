@@ -39,11 +39,11 @@ class calendar extends eqLogic {
 		$repeat = $event->getRepeat();
 		if ($repeat['enable'] == 1) {
 			if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq']) || $repeat['freq'] == '') {
-				$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
-				$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
+				$startDate = (new DateTime('-12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
+				$endDate = (new DateTime('+12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 			} else {
-				$startDate = date('Y-m-d H:i:s', strtotime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-				$endDate = date('Y-m-d H:i:s', strtotime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+				$startDate = (new DateTime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
+				$endDate = (new DateTime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 			}
 		} else {
 			$startDate = null;
@@ -248,8 +248,8 @@ class calendar extends eqLogic {
 		}
 		$version = jeedom::versionAlias($_version);
 		
-		$startDate = date('Y-m-d H:i:s', strtotime('-' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')));
-		$endDate = date('Y-m-d H:i:s', strtotime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')));
+		$startDate = (new DateTime('-' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
+		$endDate = (new DateTime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 		$events = calendar_event::calculeEvents(calendar_event::getEventsByEqLogic($this->getId(), $startDate, $endDate), $startDate, $endDate);
 		usort($events, 'calendar::orderEvent');
 		$tEvent = getTemplate('core', $version, 'event', 'calendar');
@@ -539,11 +539,11 @@ class calendar_event {
 			$repeat = $this->getRepeat();
 			if ($repeat['enable'] == 1) {
 				if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq']) || $repeat['freq'] == '') {
-					$startDate = date('Y-m-d H:i:s', strtotime('-12 month ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+12 month ' . date('Y-m-d H:i:s')));
+					$startDate = (new DateTime('-12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
+					$endDate = (new DateTime('+12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 				} else {
-					$startDate = date('Y-m-d H:i:s', strtotime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')));
+					$startDate = (new DateTime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
+					$endDate = (new DateTime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 				}
 			}
 			$results = $this->calculOccurence($startDate, $endDate);
@@ -574,8 +574,8 @@ class calendar_event {
 				return array();
 			}
 			$_recurence++;
-			$startTime = ($_startDate != null) ? strtotime($_startDate) : strtotime('now - 2 year');
-			$endTime = ($_endDate != null) ? strtotime($_endDate) : strtotime('now + 2 year');
+			$startTime = ($_startDate != null) ? (new DateTime($_startDate))->format('U') : strtotime('now - 2 year');
+			$endTime = ($_endDate != null) ? (new DateTime($_endDate))->format('U') : strtotime('now + 2 year');
 			$return = array();
 			$repeat = $this->getRepeat();
 			if ($this->getRepeat('enable') == 1) {
@@ -852,8 +852,8 @@ class calendar_event {
 			}
 			$repeat = $this->getRepeat();
 			if ($repeat['enable'] == 1) {
-				$startDate = date('Y-m-d H:i:s', strtotime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
-				$endDate = date('Y-m-d H:i:s', strtotime('+' .(99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')));
+				$startDate = (new DateTime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
+				$endDate = (new DateTime('+' .(99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
 			} else {
 				$startDate = null;
 				$endDate = null;
