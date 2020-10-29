@@ -1,4 +1,4 @@
-# Agenda
+# Plugin Agenda
 
 Plugin permettant de créer un agenda et de déclencher des actions (commande ou scénario).
 

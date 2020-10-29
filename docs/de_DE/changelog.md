@@ -1,3 +1,9 @@
+# Changelog Agenda
+
+>**Wichtig**
+>
+>Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
+
 # 20.03.2020
 
 - Fehlerbehebung in Spanisch
@@ -77,4 +83,4 @@
 
 # 27.02.2008
 
--	Löschen von Aktivierungs- / Deaktivierungsbefehlen (um eine Agenda in einem Szenario zu deaktivieren, müssen Sie jetzt die Gerätedeaktivierungsfunktion verwenden)
+-	Entfernen von Aktivierungs- / Deaktivierungsbefehlen (um eine Agenda in einem Szenario zu deaktivieren, müssen Sie jetzt die Deaktivierungsfunktion des Geräts verwenden)

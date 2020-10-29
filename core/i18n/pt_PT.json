@@ -35,7 +35,7 @@
         "Répéter": "Repetir",
         "Mode de répétition": "Modo de repetição",
         "Répétition simple": "Repetição simples",
-        "Répétition le premier,deuxieme...": "Ensaio o primeiro, segundo ...",
+        "Répétition le premier,deuxieme...": "Ensaio o primeiro, segundo",
         "Le": "O",
         "Premier": "Primeiro",
         "Deuxième": "Segundo",
@@ -120,7 +120,7 @@
         "La date de début ne peut être vide": "A data de início não pode estar vazia",
         "Impossible de trouver la commande d\\'exclusion": "Não foi possível encontrar o comando de exclusão",
         "La date de l\\'occurence ne peut etre vide : ": "A data da ocorrência não pode estar vazia:",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "En cours": "Contínuo",
@@ -136,6 +136,9 @@
         "La fréquence de répétition ne peut etre vide, nulle ou négative": "A frequência de repetição não pode estar vazia, zero ou negativa",
         "L\\'unité de répétition ne peut etre vide": "A unidade de repetição não pode estar vazia",
         "Erreur lors de l\\'éxecution de ": "Erro ao executar",
-        ". Détails : ": ". Detalhes:"
+        ". Détails : ": "Detalhes:"
+    },
+    "info.json": {
+        "Plugin pour créer un calendrier": "Plug-in para criar um calendário"
     }
 }
