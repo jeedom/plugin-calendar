@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Agenda": "Changelog Agenda",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text",
+        "29\/10\/2020": "10\/29\/2020",
+        "Correction d'un bug sur les repetition annuelle et les OS 32bits": "Fixed a bug on annual repetitions and 32bits OS",
         "20\/03\/2020": "03\/20\/2020",
         "Correction de bug en espagnol": "Bug fix in Spanish",
         "15\/11\/2019": "11\/15\/2019",
