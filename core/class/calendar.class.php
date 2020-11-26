@@ -732,7 +732,9 @@ class calendar_event {
 							}
 						}
 					} else {
-						$includeDate[$date] = $date;
+						if (strtotime($date) >= strtotime($startDate) && strtotime($date) <= strtotime($endDate)){
+							$includeDate[$date] = $date;
+						}
 					}
 				}
 			}
