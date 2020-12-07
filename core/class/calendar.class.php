@@ -452,11 +452,11 @@ class calendar_event {
 				foreach ($event->calculOccurence($_startDate, $_endDate) as $info_event) {
 					$info_event['id'] = $event->getId();
 					if ($event->getCmd_param('transparent', 0) == 1) {
-						$info_event['color'] = 'transparent';
+						$info_event['color'] = 'transparent !important';
 					} else {
-						$info_event['color'] = $event->getCmd_param('color', '#2980b9');
+						$info_event['color'] = $event->getCmd_param('color', '#2980b9').' !important';
 					}
-					$info_event['textColor'] = $event->getCmd_param('text_color', 'black');
+					$info_event['textColor'] = $event->getCmd_param('text_color', 'black').' !important';
 					$info_event['noDisplayOnDashboard'] = $event->getCmd_param('noDisplayOnDashboard');
 					if ($event->getCmd_param('eventName') != '') {
 						$info_event['title'] = $event->getCmd_param('icon') . ' ' . $event->getCmd_param('eventName');
