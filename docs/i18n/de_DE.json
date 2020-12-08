@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Agenda": "Changelog Agenda",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
+        "07\/12\/2020": "07\/12\/2020",
+        "Correction d'un bug sur la couleur des evenements dans l'agenda en V4": "Ein Fehler in der Farbe der Ereignisse in der Agenda in V4 wurde behoben",
         "29\/10\/2020": "29.10.2020",
         "Correction d'un bug sur les repetition annuelle et les OS 32bits": "Ein Fehler bei jährlichen Wiederholungen und 32-Bit-Betriebssystemen wurde behoben",
         "20\/03\/2020": "20.03.2020",
