@@ -4,6 +4,10 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 12/11/2020
+
+- Update of the calendar display library (corrects a display bug in week mode)
+
 # 07/12/2020
 
 - Fixed a bug on the color of events in the agenda in V4
