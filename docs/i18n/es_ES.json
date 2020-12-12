@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Agenda": "Agenda de cambios",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto",
+        "11\/12\/2020": "12\/11\/2020",
+        "Mise à jour de la librairie d'affichage de l'agenda (corrige un bug d'affichage en mode semaine": "Actualización de la biblioteca de visualización del calendario (corrige un error de visualización en el modo de semana",
         "07\/12\/2020": "12\/07\/2020",
         "Correction d'un bug sur la couleur des evenements dans l'agenda en V4": "Se corrigió un error en el color de los eventos en la agenda en V4",
         "29\/10\/2020": "29\/10\/2020",

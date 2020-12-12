@@ -4,6 +4,10 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 11/12/2020
+
+- Atualização da biblioteca de exibição do calendário (corrige um bug de exibição no modo semanal)
+
 # 12/07/2020
 
 - Corrigido um bug na cor dos eventos na agenda no V4
