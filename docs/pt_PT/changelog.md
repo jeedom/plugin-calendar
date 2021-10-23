@@ -4,9 +4,13 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 21/10/2021
+
+- Acréscimo do layout do equipamento em modo mesa
+
 # 11/12/2020
 
-- Atualização da biblioteca de exibição do calendário (corrige um bug de exibição no modo semanal)
+- Atualização da biblioteca de exibição de calendário *(consertar um bug de exibição no modo semana)*
 
 # 12/07/2020
 
@@ -73,7 +77,7 @@
 
 # 16/10/2018
 
-- Correção menor da interface
+- Pequena correção de interface
 - Adição de ordem para inclusão / exclusão de data dos cenários
 
 # 15/10/2018
@@ -91,8 +95,8 @@
 
 # 02/02/2018
 
-- Ao reativar a agenda, se você estiver em um evento, as ações iniciais são iniciadas
+- Se um evento estiver em andamento quando a agenda for reativada, as ações de início são lançadas
 
 # 27/02/2018
 
--	Remoção de comandos de ativação / desativação (para desativar uma agenda em um cenário, você deve agora usar a função de desativação de equipamento)
+-	Remoção de comandos de ativação / desativação *(para desativar uma agenda de um cenário, você deve agora usar a função de desativação de equipamento)*
