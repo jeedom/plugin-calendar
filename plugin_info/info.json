@@ -6,7 +6,12 @@
         "en_US": "Plugin to create a calendar",
         "es_ES": "Complemento para crear un calendario",
         "de_DE": "Plugin zum Erstellen eines Kalenders",
-        "pt_PT": "Plug-in para criar um calendário"
+        "pt_PT": "Plug-in para criar um calendário",
+        "ru_RU": "Plugin pour créer un calendrier",
+        "id_ID": "Plugin pour créer un calendrier",
+        "it_IT": "Plugin pour créer un calendrier",
+        "ja_JP": "Plugin pour créer un calendrier",
+        "tr": "Plugin pour créer un calendrier"
     },
     "licence": "AGPL",
     "author": "Jeedom SAS",
@@ -20,7 +25,12 @@
         "en_US",
         "es_ES",
         "de_DE",
-        "pt_PT"
+        "ru_RU",
+        "id_ID",
+        "it_IT",
+        "ja_JP",
+        "pt_PT",
+        "tr"
     ],
     "compatibility": [
         "miniplus",
@@ -29,5 +39,7 @@
         "docker",
         "diy",
         "v4"
-    ]
+    ],
+    "changelog_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/organization\/calendar\/beta\/changelog",
+    "documentation_beta": "https:\/\/doc.jeedom.com\/#language#\/plugins\/organization\/calendar\/beta"
 }
