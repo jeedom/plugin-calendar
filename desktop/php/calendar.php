@@ -23,51 +23,65 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<span>{{Santé}}</span>
 			</div>
 		</div>
-		<legend><i class="fa fa-calendar"></i> {{Mes agendas}}</legend>
-		<input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
-		<div class="eqLogicThumbnailContainer">
-			<?php
+		<legend><i class="fas fa-calendar-alt"></i> {{Mes agendas}}</legend>
+		<?php
+		if (count($eqLogics) == 0) {
+			echo '<br/><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun Agenda trouvé, cliquer sur "Ajouter" pour commencer}}</div>';
+		} else {
+			echo '<div class="input-group" style="margin:5px;">';
+			echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic"/>';
+			echo '<div class="input-group-btn">';
+			echo '<a id="bt_resetSearch" class="btn" style="width:30px"><i class="fas fa-times"></i></a>';
+			echo '<a class="btn roundedRight hidden" id="bt_pluginDisplayAsTable" data-coreSupport="1" data-state="0"><i class="fas fa-grip-lines"></i></a>';
+			echo '</div>';
+			echo '</div>';
+			echo '<div class="eqLogicThumbnailContainer">';
 			foreach ($eqLogics as $eqLogic) {
 				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
 				echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
 				echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
-				echo '<br/>';
+				echo '<br>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 				echo '</div>';
 			}
-			?>
-		</div>
+			echo '</div>';
+		}
+		?>
 	</div>
-	
+
 	<div class="col-xs-12 eqLogic" style="display: none;">
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
-				<a class="btn btn-default btn-sm roundedLeft" id="bt_addEvent"><i class="fas fa-plus-circle"></i> {{Ajouter événement}}</a><a class="btn btn-default eqLogicAction btn-sm" data-action="configure"><i class="fas fa-cogs"></i> {{Configuration avancée}}</a><a class="btn btn-default btn-sm eqLogicAction" data-action="copy"><i class="fas fa-copy"></i> {{Dupliquer}}</a><a class="btn btn-success eqLogicAction btn-sm" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}</a><a class="btn btn-danger eqLogicAction btn-sm roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>
+				<a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fas fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
+				</a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs">  {{Dupliquer}}</span>
+				</a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
+				</a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
+				</a>
 			</span>
 		</div>
-		
+
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#generaltab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Géneral}}</a></li>
-			<li role="presentation"><a id="bt_calendartab" href="#calendartab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-calendar"></i> {{Agenda}}</a></li>
+			<li role="presentation"><a id="bt_calendartab" href="#calendartab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-calendar"></i> {{Agenda}}</a></li>
 		</ul>
-		
-		<div class="tab-content" style="overflow:auto;overflow-x: hidden;">
+
+		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="generaltab">
-				<br/>
-				<div class="col-sm-6">
-					<form class="form-horizontal">
-						<fieldset>
+				<form class="form-horizontal">
+					<fieldset>
+						<div class="col-lg-6">
+							<legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Nom de l'agenda}}</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">{{Nom de l'agenda}}</label>
+								<div class="col-sm-7">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
 									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement gCalendar}}"/>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label" >{{Objet parent}}</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label" >{{Objet parent}}</label>
+								<div class="col-sm-7">
 									<select class="eqLogicAttr form-control" data-l1key="object_id">
 										<option value="">{{Aucun}}</option>
 										<?php
@@ -81,8 +95,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Catégorie}}</label>
-								<div class="col-sm-8">
+								<label class="col-sm-3 control-label">{{Catégorie}}</label>
+								<div class="col-sm-7">
 									<?php
 									foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 										echo '<label class="checkbox-inline">';
@@ -93,50 +107,55 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label"></label>
-								<div class="col-sm-8">
+								<label class="col-sm-3 control-label">{{Options}}</label>
+								<div class="col-sm-7">
 									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
 									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 								</div>
 							</div>
+
+							<legend><i class="fas fa-list"></i> {{Widget}}</legend>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Widget, nombre de jours}}</label>
-								<div class="col-sm-2">
+								<label class="col-sm-3 control-label">{{Nombre de jours}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Nombre de jours maximum à afficher sur le widget}}"></i></sup>
+								</label>
+								<div class="col-sm-7">
 									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetDay" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Nombre d'évènements maximum}}</label>
-								<div class="col-sm-2">
+								<label class="col-sm-3 control-label">{{Nombre d'évènements}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Nombre d'évènements maximum à afficher sur le widget}}"></i></sup>
+								</label>
+								<div class="col-sm-7">
 									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetMaxEvent" />
 								</div>
 							</div>
-						</fieldset>
-					</form>
-				</div>
-				<div class="col-sm-6">
-					<form class="form-horizontal">
-						<fieldset>
-							<legend><i class="fa fa-list"></i>  {{Liste des évènements de l'agenda}}</legend>
+						</div>
+
+						<div class="col-lg-6">
+							<legend><i class="far fa-calendar-check"></i>  {{Liste des évènements de l'agenda}}</legend>
 							<div id="div_eventList"></div>
 							<br/>
-						</fieldset>
-					</form>
-				</div>
+						</div>
+					</fieldset>
+				</form>
+				<hr>
 			</div>
-			
+
 			<div role="tabpanel" class="tab-pane" id="calendartab">
 				<br/>
 				<div id="div_calendar"></div>
 			</div>
 		</div>
-		
-		<?php
-		include_file('3rdparty', 'fullcalendar/lib/moment.min', 'js', 'calendar');
-		include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js', 'calendar');
-		include_file('3rdparty', 'fullcalendar/fullcalendar.min', 'js', 'calendar');
-		include_file('3rdparty', 'fullcalendar/locale/fr', 'js', 'calendar');
-		include_file('desktop', 'calendar', 'js', 'calendar');
-		include_file('core', 'plugin.template', 'js');
-		?>
-		
+	</div>
+</div>
+
+<?php
+include_file('3rdparty', 'fullcalendar/lib/moment.min', 'js', 'calendar');
+include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js', 'calendar');
+include_file('3rdparty', 'fullcalendar/fullcalendar.min', 'js', 'calendar');
+include_file('3rdparty', 'fullcalendar/locale/fr', 'js', 'calendar');
+include_file('desktop', 'calendar', 'js', 'calendar');
+include_file('core', 'plugin.template', 'js');
+?>
