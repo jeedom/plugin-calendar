@@ -1,5 +1,4 @@
 <?php
-
 /* This file is part of Jeedom.
 *
 * Jeedom is free software: you can redistribute it and/or modify
@@ -21,11 +20,11 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class calendar extends eqLogic {
 	/*     * *************************Attributs****************************** */
-	
+
 	public static $_widgetPossibility = array('custom' => true, 'custom::layout' => false);
-	
+
 	/*     * ***********************Methode static*************************** */
-	
+
 	public static function pull($_option) {
 		$event = calendar_event::byId($_option['event_id']);
 		if (!is_object($event)) {
@@ -49,54 +48,54 @@ class calendar extends eqLogic {
 			$startDate = null;
 			$endDate = null;
 		}
-		log::add('calendar', 'debug', $eqLogic->getHumanName() . ' Reprogrammation');
+		log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Reprogrammation',__FILE__));
 		$event->reschedule();
-		log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Lancement de l\'evenement : ' . print_r($event, true));
+		log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Exécution de l\'évènement',__FILE__) . ' : ' . print_r($event, true));
 		try {
 			if (jeedom::isDateOk()) {
 				$results = $event->calculOccurence($startDate, $endDate);
 				if (count($results) == 0) {
-					log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Aucune programmation trouvée, lancement des actions de fin');
+					log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Aucune programmation trouvée, exécution des actions de fin',__FILE__));
 					$event->doAction('end');
 					return null;
 				}
-				log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Recherche de l\'action à faire (start ou end)');
+				log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Recherche de l\'action à exécuter (début ou fin)',__FILE__));
 				for ($i = 0; $i < count($results); $i++) {
 					if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
-						log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Action de début');
+						log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Action de début',__FILE__));
 						$event->doAction('start');
 						break;
 					}
 					if (strtotime($results[$i]['end']) <= $nowtime && (!isset($results[$i + 1]) || strtotime($results[$i + 1]['start']) > $nowtime)) {
-						log::add('calendar', 'debug', $eqLogic->getHumanName() . 'Action de fin');
+						log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Action de fin',__FILE__));
 						$event->doAction('end');
 						break;
 					}
 				}
 			}
 		} catch (Exception $e) {
-			
+
 		}
 	}
-	
+
 	public static function start() {
-		foreach (self::byType('calendar') as $eqLogic) {
+		foreach (self::byType(__CLASS__) as $eqLogic) {
 			$eqLogic->rescheduleEvent();
 		}
 	}
-	
+
 	public static function restore() {
-		foreach (self::byType('calendar') as $eqLogic) {
+		foreach (self::byType(__CLASS__) as $eqLogic) {
 			$eqLogic->rescheduleEvent();
 		}
 	}
-	
+
 	public static function cronDaily() {
-		foreach (self::byType('calendar') as $eqLogic) {
+		foreach (self::byType(__CLASS__) as $eqLogic) {
 			$eqLogic->rescheduleEvent();
 		}
 	}
-	
+
 	public static function orderEvent($a, $b) {
 		$al = strtolower($a['start']);
 		$bl = strtolower($b['start']);
@@ -105,22 +104,22 @@ class calendar extends eqLogic {
 		}
 		return ($al > $bl) ? +1 : -1;
 	}
-	
+
 	public static function deadCmd() {
 		$return = array();
-		foreach (eqLogic::byType('calendar') as $calendar) {
+		foreach (eqLogic::byType(__CLASS__) as $calendar) {
 			foreach (calendar_event::getEventsByEqLogic($calendar->getId()) as $events) {
 				foreach ($events->getCmd_param()['start'] as $cmdStart) {
 					if ($cmdStart['cmd'] != '' && strpos($cmdStart['cmd'], '#') !== false) {
 						if (!cmd::byId(str_replace('#', '', $cmdStart['cmd']))) {
-							$return[] = array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'], 'help' => 'Action de début', 'who' => $cmdStart['cmd']);
+							$return[] = array('detail' => __('Calendrier',__FILE__) .' '.$calendar->getHumanName().' ' . __('dans l\'évènement',__FILE__).' ' . $events->getCmd_param()['eventName'], 'help' => __('Action de début',__FILE__), 'who' => $cmdStart['cmd']);
 						}
 					}
 				}
 				foreach ($events->getCmd_param()['end'] as $cmdEnd) {
 					if ($cmdEnd['cmd'] != '' && strpos($cmdEnd['cmd'], '#') !== false) {
 						if (!cmd::byId(str_replace('#', '', $cmdEnd['cmd']))) {
-							$return[] = array('detail' => 'Calendrier ' . $calendar->getHumanName() . ' dans l\'évènement ' . $events->getCmd_param()['eventName'], 'help' => 'Action de fin', 'who' => $cmdEnd['cmd']);
+							$return[] = array('detail' => __('Calendrier',__FILE__) .' '.$calendar->getHumanName().' ' . __('dans l\'évènement',__FILE__).' ' . $events->getCmd_param()['eventName'], 'help' => __('Action de fin',__FILE__), 'who' => $cmdEnd['cmd']);
 						}
 					}
 				}
@@ -128,11 +127,9 @@ class calendar extends eqLogic {
 		}
 		return $return;
 	}
-	
-	/*     * ***********************Methode static*************************** */
-	
+
 	/*     * *********************Methode d'instance************************* */
-	
+
 	public function copy($_name) {
 		$eqLogicCopy = clone $this;
 		$eqLogicCopy->setName($_name);
@@ -146,39 +143,39 @@ class calendar extends eqLogic {
 		}
 		return $eqLogicCopy;
 	}
-	
+
 	public function preRemove() {
 		foreach ($this->getEvents() as $event) {
 			$event->remove();
 		}
 	}
-	
+
 	public function preSave() {
 		if ($this->getConfiguration('nbWidgetDay') == '') {
 			$this->setConfiguration('nbWidgetDay', 7);
 		}
 	}
-	
+
 	public function preInsert() {
 		$this->setIsEnable(1);
 	}
-	
+
 	public function postSave() {
 		$state = $this->getCmd(null, 'state');
 		if (is_object($state)) {
 			$state->remove();
 		}
-		
+
 		$enable = $this->getCmd(null, 'enable');
 		if (is_object($enable)) {
 			$enable->remove();
 		}
-		
+
 		$disable = $this->getCmd(null, 'disable');
 		if (is_object($disable)) {
 			$disable->remove();
 		}
-		
+
 		$cmd = $this->getCmd(null, 'in_progress');
 		if (!is_object($cmd)) {
 			$cmd = new calendarCmd();
@@ -190,8 +187,7 @@ class calendar extends eqLogic {
 		$cmd->setSubType('string');
 		$cmd->setLogicalId('in_progress');
 		$cmd->save();
-		
-		
+
 		$events_name = array();
 		$events = $this->getEvents();
 		if(count($events) > 0){
@@ -199,7 +195,7 @@ class calendar extends eqLogic {
 				$events_name[] = $event->getName();
 			}
 		}
-		
+
 		$cmd = $this->getCmd(null, 'add_include_date');
 		if (!is_object($cmd)) {
 			$cmd = new calendarCmd();
@@ -214,7 +210,7 @@ class calendar extends eqLogic {
 		$cmd->setDisplay('title_placeholder', __('Nom évènement', __FILE__));
 		$cmd->setDisplay('title_possibility_list', json_encode($events_name));
 		$cmd->save();
-		
+
 		$cmd = $this->getCmd(null, 'add_exclude_date');
 		if (!is_object($cmd)) {
 			$cmd = new calendarCmd();
@@ -229,30 +225,30 @@ class calendar extends eqLogic {
 		$cmd->setDisplay('title_placeholder', __('Nom évènement', __FILE__));
 		$cmd->setDisplay('title_possibility_list', json_encode($events_name));
 		$cmd->save();
-		
+
 		$this->rescheduleEvent();
 		$this->refreshWidget();
 	}
-	
+
 	public function rescheduleEvent() {
-		log::add('calendar', 'debug', $this->getHumanName() . ' Reprogrammation de tous les évènements');
+		log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Reprogrammation de tous les évènements', __FILE__));
 		foreach ($this->getEvents() as $event) {
 			$event->save();
 		}
 	}
-	
+
 	public function toHtml($_version = 'dashboard') {
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
 			return $replace;
 		}
 		$version = jeedom::versionAlias($_version);
-		
+
 		$startDate = (new DateTime('-' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 		$endDate = (new DateTime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 		$events = calendar_event::calculeEvents(calendar_event::getEventsByEqLogic($this->getId(), $startDate, $endDate), $startDate, $endDate);
 		usort($events, 'calendar::orderEvent');
-		$tEvent = getTemplate('core', $version, 'event', 'calendar');
+		$tEvent = getTemplate('core', $version, 'event', __CLASS__);
 		$dEvent = '';
 		$nbEvent = 1;
 		$eventList = array();
@@ -283,11 +279,11 @@ class calendar extends eqLogic {
 			}
 		}
 		$replace['#events#'] = $dEvent;
-		return template_replace($replace, getTemplate('core', $version, 'eqLogic', 'calendar'));
+		return template_replace($replace, getTemplate('core', $version, 'eqLogic', __CLASS__));
 	}
-	
+
 	/*     * **********************Getteur Setteur*************************** */
-	
+
 	public function getEvents() {
 		return calendar_event::getEventsByEqLogic($this->getId());
 	}
@@ -295,26 +291,24 @@ class calendar extends eqLogic {
 
 class calendarCmd extends cmd {
 	/*     * *************************Attributs****************************** */
-	
+
 	public static $_widgetPossibility = array('custom' => false);
-	
-	/*     * ***********************Methode static*************************** */
-	
+
 	/*     * *********************Methode d'instance************************* */
-	
+
 	public function dontRemoveCmd() {
 		if (in_array($this->getLogicalId(), array('in_progress', 'add_exclude_date', 'add_include_date'))) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public function postInsert() {
 		if ($this->getLogicalId() == 'in_progress') {
 			$this->event($this->execute());
 		}
 	}
-	
+
 	public function execute($_options = null) {
 		$eqLogic = $this->getEqLogic();
 		if ($this->getLogicalId() == 'in_progress') {
@@ -364,15 +358,13 @@ class calendarCmd extends cmd {
 			}
 			return;
 		}
-		
 	}
-	
-	/*     * **********************Getteur Setteur*************************** */
+
 }
 
 class calendar_event {
 	/*     * *************************Attributs****************************** */
-	
+
 	private $id;
 	private $eqLogic_id;
 	private $cmd_param;
@@ -381,25 +373,37 @@ class calendar_event {
 	private $repeat;
 	private $until = null;
 	private $_changed = false;
-	
+
 	/*     * ***********************Methode static*************************** */
-	
+
 	public static function sortEventDate($a, $b) {
 		if (strtotime($a['start']) == strtotime($b['start'])) {
 			return 0;
 		}
 		return (strtotime($a['start']) < strtotime($b['start'])) ? -1 : 1;
 	}
-	
+
 	public static function cleanEvents() {
 		$events = self::all();
 		foreach ($events as $event) {
 			if (!is_object($event->getEqLogic())) {
 				$event->remove();
+				continue;
+			}
+			$repeat = $event->getRepeat();
+			if ($repeat['includeDateFromCalendar'] != '' && $repeat['includeDateFromEvent'] == '') {
+				$event->setRepeat('includeDateFromEvent', $repeat['includeDateFromCalendar']);
+				$event->setRepeat('includeDateFromCalendar', self::byId($repeat['includeDateFromCalendar'])->getEqLogic_id());
+				$event->save();
+			}
+			if ($repeat['excludeDateFromCalendar'] != '' && $repeat['excludeDateFromEvent'] == '') {
+				$event->setRepeat('excludeDateFromEvent', $repeat['excludeDateFromCalendar']);
+				$event->setRepeat('excludeDateFromCalendar', self::byId($repeat['excludeDateFromCalendar'])->getEqLogic_id());
+				$event->save();
 			}
 		}
 	}
-	
+
 	public static function byId($_id) {
 		$values = array(
 			'id' => $_id,
@@ -409,7 +413,7 @@ class calendar_event {
 		WHERE id=:id';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
 	}
-	
+
 	public static function searchByCmd($_cmd_id) {
 		$values = array(
 			'cmd_param' => '%"cmd":"#' . $_cmd_id . '#"%',
@@ -419,13 +423,13 @@ class calendar_event {
 		WHERE cmd_param LIKE :cmd_param';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
-	
+
 	public static function all() {
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
 		FROM calendar_event';
 		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
-	
+
 	public static function getEventsByEqLogic($_eqLogic_id, $_startDate = null, $_endDate = null) {
 		$values = array(
 			'eqLogic_id' => $_eqLogic_id,
@@ -445,7 +449,7 @@ class calendar_event {
 			$sql .= ' ORDER BY startDate';
 			return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 		}
-		
+
 		public static function calculeEvents($_events, $_startDate = null, $_endDate = null) {
 			$return = array();
 			foreach ($_events as $event) {
@@ -468,7 +472,7 @@ class calendar_event {
 			}
 			return $return;
 		}
-		
+
 		public static function getNationalDay($year = null) {
 			if ($year === null) {
 				$year = intval(date('Y'));
@@ -491,7 +495,7 @@ class calendar_event {
 				date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 1, $easterYear)),
 				date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 39, $easterYear)),
 				date('Y-m-d', mktime(0, 0, 0, $easterMonth, $easterDay + 50, $easterYear)),
-				
+
 				date('Y-m-d', mktime(0, 0, 0, 1, 1, $year + 1)), // 1er janvier
 				date('Y-m-d', mktime(0, 0, 0, 5, 1, $year + 1)), // Fête du travail
 				date('Y-m-d', mktime(0, 0, 0, 5, 8, $year + 1)), // Victoire des alliés
@@ -504,16 +508,16 @@ class calendar_event {
 			sort($holidays);
 			return $holidays;
 		}
-		
+
 		/*     * *********************Methode d'instance************************* */
-		
+
 		public function reschedule() {
 			$next = $this->nextOccurrence();
 			if ($next === null || $next === false) {
-				log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' Aucune reprogrammation à faire car aucune occurence suivante trouvée');
+				log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' ' . __('Aucune reprogrammation car aucune occurence suivante trouvée', __FILE__));
 				return;
 			}
-			log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' Reprogrammation à : ' . print_r($next, true) . ' de  : ' . print_r($this, true));
+			log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' ' . __('Reprogrammation à',__FILE__) . ' : ' . print_r($next, true) . ' '.__('de',__FILE__).' : ' . print_r($this, true));
 			$cron = cron::byClassAndFunction('calendar', 'pull', array('event_id' => intval($this->getId())));
 			if ($next != null) {
 				if (!is_object($cron)) {
@@ -532,7 +536,7 @@ class calendar_event {
 				}
 			}
 		}
-		
+
 		public function nextOccurrence($_position = null, $_details = false) {
 			$startDate = null;
 			$endDate = null;
@@ -568,7 +572,7 @@ class calendar_event {
 			}
 			return null;
 		}
-		
+
 		public function calculOccurence($_startDate, $_endDate, $_max = 9999999999, $_recurence = 0) {
 			if ($_recurence > 5) {
 				return array();
@@ -578,7 +582,7 @@ class calendar_event {
 			$endTime = ($_endDate != null) ? (new DateTime($_endDate))->format('U') : strtotime('now + 2 year');
 			$return = array();
 			$repeat = $this->getRepeat();
-			if ($this->getRepeat('enable') == 1) {
+			if ($repeat['enable'] == 1) {
 				$excludeDate = array();
 				if (isset($repeat['excludeDate']) && $repeat['excludeDate'] != '') {
 					$excludeDate_tmp = explode(',', $repeat['excludeDate']);
@@ -599,18 +603,29 @@ class calendar_event {
 					}
 				}
 				if (isset($repeat['excludeDateFromCalendar']) && $repeat['excludeDateFromCalendar'] != '') {
-					$excludeEvent = self::byId($repeat['excludeDateFromCalendar']);
-					if (is_object($excludeEvent)) {
-						$excludeEventOccurence = $excludeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
-						foreach ($excludeEventOccurence as $occurence) {
-							$startDate = date('Y-m-d', strtotime($occurence['start']));
-							$endDate = date('Y-m-d', strtotime($occurence['end']));
-							if ($startDate == $endDate) {
-								$excludeDate[] = $startDate;
-							} else {
-								while (strtotime($startDate) <= strtotime($endDate)) {
-									$excludeDate[] = $startDate;
-									$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+					$excludeCalendar = calendar::byId($repeat['excludeDateFromCalendar']);
+					if (is_object($excludeCalendar)) {
+						$excludeEvents = array();
+						if ($repeat['excludeDateFromEvent'] == 'all') {
+							$excludeEvents = self::getEventsByEqLogic($excludeCalendar->getId());
+						}
+						else {
+							$excludeEvents[] = self::byId($repeat['excludeDateFromEvent']);
+						}
+						foreach ($excludeEvents as $excludeEvent) {
+							if (is_object($excludeEvent) && $excludeEvent->getId() != $this->getId()) {
+								$excludeEventOccurence = $excludeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
+								foreach ($excludeEventOccurence as $occurence) {
+									$startDate = date('Y-m-d', strtotime($occurence['start']));
+									$endDate = date('Y-m-d', strtotime($occurence['end']));
+									if ($startDate == $endDate) {
+										$excludeDate[] = $startDate;
+									} else {
+										while (strtotime($startDate) <= strtotime($endDate)) {
+											$excludeDate[] = $startDate;
+											$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+										}
+									}
 								}
 							}
 						}
@@ -627,8 +642,8 @@ class calendar_event {
 						$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' -1 hour'));
 					}
 				}
-				$initStartTime = date('H:i:s', strtotime($startDate));
-				$initEndTime = date('H:i:s', strtotime($endDate));
+				// $initStartTime = date('H:i:s', strtotime($startDate));
+				// $initEndTime = date('H:i:s', strtotime($endDate));
 				while (strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00' || $this->getUntil() == null) {
 					if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
 						if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
@@ -710,14 +725,13 @@ class calendar_event {
 					);
 				}
 			}
-			
+
 			$startDate = $this->getStartDate();
 			$endDate = $this->getEndDate();
 			$initStartTime = date('H:i:s', strtotime($startDate));
 			$initEndTime = date('H:i:s', strtotime($endDate));
-			
+
 			$includeDate = array();
-			
 			if (isset($repeat['includeDate']) && $repeat['includeDate'] != '') {
 				$includeDate_tmp = explode(',', trim($repeat['includeDate'],','));
 				foreach ($includeDate_tmp as $date) {
@@ -738,25 +752,36 @@ class calendar_event {
 					}
 				}
 			}
-			
 			if (isset($repeat['includeDateFromCalendar']) && $repeat['includeDateFromCalendar'] != '') {
-				$includeEvent = self::byId($repeat['includeDateFromCalendar']);
-				if (is_object($includeEvent)) {
-					$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
-					foreach ($includeEventOccurence as $occurence) {
-						$startDate = date('Y-m-d', strtotime($occurence['start']));
-						$endDate = date('Y-m-d', strtotime($occurence['end']));
-						if ($startDate == $endDate) {
-							$includeDate[$startDate] = $startDate;
-						} else {
-							while (strtotime($startDate) <= strtotime($endDate)) {
-								$includeDate[$startDate] = $startDate;
-								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+				$includeCalendar = calendar::byId($repeat['includeDateFromCalendar']);
+				if (is_object($includeCalendar)) {
+					$includeEvents = array();
+					if ($repeat['includeDateFromEvent'] == 'all') {
+						$includeEvents = self::getEventsByEqLogic($includeCalendar->getId());
+					}
+					else {
+						$includeEvents[] = self::byId($repeat['includeDateFromEvent']);
+					}
+					foreach ($includeEvents as $includeEvent) {
+						if (is_object($includeEvent) && $includeEvent->getId() != $this->getId()) {
+							$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
+							foreach ($includeEventOccurence as $occurence) {
+								$startDate = date('Y-m-d', strtotime($occurence['start']));
+								$endDate = date('Y-m-d', strtotime($occurence['end']));
+								if ($startDate == $endDate) {
+									$includeDate[$startDate] = $startDate;
+								} else {
+									while (strtotime($startDate) <= strtotime($endDate)) {
+										$includeDate[$startDate] = $startDate;
+										$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
+									}
+								}
 							}
 						}
 					}
 				}
 			}
+
 			$startdatetime = strtotime(date('Y-m-d 00:00:00',strtotime($this->getStartDate())));
 			$enddatetime = strtotime(date('Y-m-d 00:00:00',strtotime($this->getEndDate())));
 			$diff_day = floor(($enddatetime - $startdatetime)/86400);
@@ -781,20 +806,20 @@ class calendar_event {
 			usort($return, array('calendar_event', 'sortEventDate'));
 			return $return;
 		}
-		
+
 		public function preSave() {
 			if ($this->getEqLogic_id() == '') {
-				throw new Exception(__('[calendar] L\'id de eqLogic ne peut être vide', __FILE__));
+				throw new Exception(__('L\'id de l\'équipement ne peut être vide', __FILE__));
 			}
 			if (trim($this->getCmd_param('eventName')) == '') {
-				throw new Exception(__('Le nom de l\'évenement ne peut etre vide', __FILE__));
+				throw new Exception(__('Le nom de l\'évènement ne peut être vide', __FILE__));
 			}
 			$eqLogic = $this->getEqLogic();
 			if (!is_object($eqLogic)) {
-				throw new Exception(__('Impossible de trouver eqLogic correspondante à l\'id : ', __FILE__) . $this->getEqLogic_id());
+				throw new Exception(__('Impossible de trouver l\'équipement correspondant à l\'id', __FILE__).' : ' . $this->getEqLogic_id());
 			}
 			if ((strtotime($this->getStartDate()) + 59) >= strtotime($this->getEndDate())) {
-				throw new Exception(__('La date de début d\'évenement ne peut être égale ou après la date de fin', __FILE__));
+				throw new Exception(__('La date de début d\'évènement ne peut être postérieure ou égale à la date de fin', __FILE__));
 			}
 			$repeat = $this->getRepeat();
 			$allEmpty = true;
@@ -814,14 +839,14 @@ class calendar_event {
 				$repeat['excludeDay'][7] = 1;
 				$this->setRepeat('excludeDay', $repeat['excludeDay']);
 			}
-			
+
 			if ($this->getRepeat('enable') == 1) {
 				if ($this->getRepeat('mode') == 'simple') {
 					if (!is_numeric($this->getRepeat('freq')) || $this->getRepeat('freq') == '' || $this->getRepeat('freq') <= 0) {
-						throw new Exception(__('La fréquence de répétition ne peut etre vide, nulle ou négative', __FILE__));
+						throw new Exception(__('La fréquence de répétition ne peut être vide, nulle ou négative', __FILE__));
 					}
 					if ($this->getRepeat('unite') == '') {
-						throw new Exception(__('L\'unité de répétition ne peut etre vide', __FILE__));
+						throw new Exception(__('L\'unité de répétition ne peut être vide', __FILE__));
 					}
 				}
 			} else {
@@ -832,15 +857,15 @@ class calendar_event {
 				$this->setUntil(null);
 			}
 		}
-		
+
 		public function save() {
 			return DB::save($this);
 		}
-		
+
 		public function dontRemoveCmd() {
 			return true;
 		}
-		
+
 		public function postSave() {
 			$eqLogic = $this->getEqLogic();
 			if ($eqLogic->getIsEnable() == 0) {
@@ -883,7 +908,7 @@ class calendar_event {
 					$this->doAction('end');
 				}
 			} catch (Exception $e) {
-				
+
 			}
 			DB::save($this, true);
 			$cmd = $eqLogic->getCmd('info', 'in_progress');
@@ -891,7 +916,7 @@ class calendar_event {
 				$cmd->event($cmd->execute());
 			}
 		}
-		
+
 		public function remove() {
 			$cron = cron::byClassAndFunction('calendar', 'pull', array('event_id' => intval($this->getId())));
 			if (is_object($cron)) {
@@ -900,7 +925,7 @@ class calendar_event {
 			$eqLogic = $this->getEqLogic();
 			DB::remove($this);
 		}
-		
+
 		public function doAction($_action = 'start') {
 			$eqLogic = $this->getEqLogic();
 			if ($eqLogic->getIsEnable() == 0) {
@@ -929,12 +954,12 @@ class calendar_event {
 					}
 					scenarioExpression::createAndExec('action', $action['cmd'], $options);
 				} catch (Exception $e) {
-					log::add('calendar', 'error', $eqLogic->getHumanName() . __('Erreur lors de l\'éxecution de ', __FILE__) . $action['cmd'] . __('. Détails : ', __FILE__) . $e->getMessage());
+					log::add('calendar', 'error', $eqLogic->getHumanName() . __('Erreur lors de l\'exécution de', __FILE__) .' '. $action['cmd'] .'. '. __('Détails', __FILE__).' : ' . $e->getMessage());
 				}
 			}
 			return true;
 		}
-		
+
 		public function getName() {
 			if ($this->getCmd_param('eventName') != '') {
 				return $this->getCmd_param('eventName');
@@ -942,88 +967,85 @@ class calendar_event {
 				return $this->getCmd_param('name');
 			}
 		}
-		
+
 		/*     * **********************Getteur Setteur*************************** */
-		
+
 		public function getId() {
 			return $this->id;
 		}
-		
+
 		public function getStartDate() {
 			return $this->startDate;
 		}
-		
+
 		public function getEndDate() {
 			return $this->endDate;
 		}
-		
+
 		public function setId($_id) {
 			$this->_changed = utils::attrChanged($this->_changed,$this->id,$_id);
 			$this->id = $_id;
 		}
-		
+
 		public function setStartDate($_startDate) {
 			$this->_changed = utils::attrChanged($this->_changed,$this->startDate,$_startDate);
 			$this->startDate = $_startDate;
 		}
-		
+
 		public function setEndDate($_endDate) {
 			$this->_changed = utils::attrChanged($this->_changed,$this->endDate,$_endDate);
 			$this->endDate = $_endDate;
 		}
-		
+
 		public function getEqLogic_id() {
 			return $this->eqLogic_id;
 		}
-		
+
 		public function getEqLogic() {
 			return calendar::byId($this->eqLogic_id);
 		}
-		
+
 		public function setEqLogic_id($_eqLogic_id) {
 			$this->_changed = utils::attrChanged($this->_changed,$this->eqLogic_id,$_eqLogic_id);
 			$this->eqLogic_id = $_eqLogic_id;
 		}
-		
+
 		public function getRepeat($_key = '', $_default = '') {
 			return utils::getJsonAttr($this->repeat, $_key, $_default);
 		}
-		
+
 		public function setRepeat($_key, $_value) {
 			$repeat = utils::setJsonAttr($this->repeat, $_key, $_value);
 			$this->_changed = utils::attrChanged($this->_changed,$this->repeat,$repeat);
 			$this->repeat = $repeat;
 		}
-		
+
 		public function getUntil() {
 			return $this->until;
 		}
-		
+
 		public function setUntil($_until) {
 			$this->_changed = utils::attrChanged($this->_changed,$this->until,$_until);
 			$this->until = $_until;
 		}
-		
+
 		public function getCmd_param($_key = '', $_default = '') {
 			return utils::getJsonAttr($this->cmd_param, $_key, $_default);
 		}
-		
+
 		public function setCmd_param($_key, $_value) {
 			$cmd_param = utils::setJsonAttr($this->cmd_param, $_key, $_value);
 			$this->_changed = utils::attrChanged($this->_changed,$this->cmd_param,$cmd_param);
 			$this->cmd_param = $cmd_param;
 		}
-		
+
 		public function getChanged() {
 			return $this->_changed;
 		}
-		
+
 		public function setChanged($_changed) {
 			$this->_changed = $_changed;
 			return $this;
 		}
-		
+
 	}
-	
-	?>
-	

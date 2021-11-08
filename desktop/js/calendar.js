@@ -19,22 +19,22 @@ $('#bt_healthcalendar').on('click', function () {
   $('#md_modal').dialog({title: "{{Santé Agenda}}"});
   $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open');
 });
+
 $('#bt_addEvent').on('click', function () {
   $('#bt_calendartab').trigger('click');
-  $('#md_modal').dialog({title: "{{Ajouter/Modifier évènement}}"});
+  $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
   $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open');
 });
 
 $('#div_eventList').delegate('.editEvent', 'click', function () {
   $('#bt_calendartab').trigger('click');
-  $('#md_modal').dialog({title: "{{Ajouter/Modifier évènement}}"});
+  $('#md_modal').dialog({title: "{{Modifier évènement}}"});
   $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open');
 });
 
 $('#bt_calendartab').on('click',function(){
   setTimeout(function(){ $('#div_calendar').fullCalendar('render'); }, 100);
 });
-
 
 if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
   setTimeout(function(){
@@ -57,7 +57,7 @@ function printEqLogic() {
     height: 600,
     events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + $('.eqLogicAttr[data-l1key=id]').value(),
     eventClick: function (calEvent) {
-      $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
+      $('#md_modal').dialog({title: "{{Modifier évènement}}"});
       $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + calEvent.id + '&date=' + encodeURI(calEvent.start._i)).dialog('open');
     },
     editable: true,
@@ -111,8 +111,8 @@ function updateEventList() {
         if(data.result[i].cmd_param.transparent == 1){
           color = 'transparent';
         }
-        
-        html += '<span class="label editEvent cursor" data-event_id="' + data.result[i].id + '" style="background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;font-size:1em;display:inline-block;">';
+
+        html += '<span class="label editEvent" data-event_id="' + data.result[i].id + '" style="cursor:pointer!important;background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;padding:8px;font-weight:bold;">';
         if (data.result[i].cmd_param.eventName != '') {
           html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName;
         } else {

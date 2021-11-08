@@ -37,6 +37,7 @@ if (init('id') != '') {
 	sendVarToJS('calendarEvent', null);
 	sendVarToJS('dateEvent', null);
 }
+$calendars = calendar::byType('calendar');
 ?>
 <div id='div_eventEditAlert' style="display: none;"></div>
 <div class="input-group pull-right" style="display:inline-flex">
@@ -141,19 +142,19 @@ if (init('id') != '') {
 			<div role="tabpanel" class="tab-pane" id="programmingtab">
 				<form class="form-horizontal">
 					<fieldset>
-						<div>
+						<div class="col-lg-6">
 							<legend><i class="fas fa-calendar-week"></i> {{Définition de l'évènement}}</legend>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Début}}</label>
-								<div class="col-sm-2">
+								<div class="col-sm-3">
 									<input type="text" class="calendarAttr form-control datetimepicker" data-l1key="startDate" />
 								</div>
 								<label class="col-sm-1 control-label">{{Fin}}</label>
-								<div class="col-sm-2">
-									<input type="text" class="calendarAttr form-control datetimepicker" data-l1key="endDate" />
-								</div>
-								<div class="col-sm-1">
-									<a class="btn btn-default calendarAction" data-action="allDay"><i class="fas fa-history"></i> {{Toute la journée}}</a>
+								<div class="col-sm-4 input-group">
+									<input type="text" class="calendarAttr form-control datetimepicker roundedLeft" data-l1key="endDate" />
+									<span class="input-group-btn">
+										<a class="btn btn-default calendarAction roundedRight" data-action="allDay" title="{{Toute la journée}}"><i class="fas fa-history"></i></a>
+									</span>
 								</div>
 							</div>
 
@@ -161,73 +162,95 @@ if (init('id') != '') {
 								<label class="col-sm-3 control-label">{{Inclure par date}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{dates sous forme}} AAAA-MM-JJ,AAAA-MM-JJ {{ou plage de dates}} AAAA-MM-JJ:AAAA-MM-JJ"></i></sup>
 								</label>
-								<div class="col-sm-3">
+								<div class="col-sm-8">
 									<input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDate" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Inclure par agenda}}
-									<sup><i class="fas fa-question-circle tooltips" title="{{Inclure des dates selon l'évènement d'un autre agenda}}"></i></sup>
+									<sup><i class="fas fa-question-circle tooltips" title="{{Inclure des dates selon les évènements d'un agenda}}"></i></sup>
 								</label>
-								<div class="col-sm-3">
+								<div class="col-sm-4">
 									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDateFromCalendar">
 										<option value="">{{Aucun}}</option>
 										<?php
-										foreach (calendar::byType('calendar') as $calendar) {
-											foreach ($calendar->getEvents() as $eventCalendar) {
-												if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
-													if ($eventCalendar->getCmd_param('eventName') != '') {
-														echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('eventName') . '</option>';
-													} else {
-														echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('name') . '</option>';
-													}
-												}
-											}
+										foreach ($calendars as $calendar) {
+											echo '<option value="' . $calendar->getId() . '">' . $calendar->getName() . '</option>';
 										}
 										?>
 									</select>
 								</div>
+								<?php
+								foreach ($calendars as $calendar) {
+									echo '<div class="col-sm-4 hidden" data-calendar_id="'.$calendar->getId().'">';
+									echo '<select class="calendarAttr form-control">';
+									echo '<option value="all">{{Tous}}</option>';
+									foreach ($calendar->getEvents() as $eventCalendar) {
+										if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
+											if ($eventCalendar->getCmd_param('eventName') != '') {
+												echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('eventName') . '</option>';
+											} else {
+												echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('name') . '</option>';
+											}
+										}
+									}
+									echo '</select>';
+									echo '</div>';
+								}
+								?>
 							</div>
-							<div class="div_repeatOption" style="display : none;">
+							<div class="div_repeatOption" style="display:none;">
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Exclure par date}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{dates sous forme}} AAAA-MM-JJ,AAAA-MM-JJ {{ou plage de dates}} AAAA-MM-JJ:AAAA-MM-JJ"></i></sup>
 									</label>
-									<div class="col-sm-3">
+									<div class="col-sm-8">
 										<input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDate" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Exclure par agenda}}
-										<sup><i class="fas fa-question-circle tooltips" title="{{Exclure des dates selon l'évènement d'un autre agenda}}"></i></sup>
+										<sup><i class="fas fa-question-circle tooltips" title="{{Exclure des dates selon les évènements d'un agenda}}"></i></sup>
 									</label>
-									<div class="col-sm-3">
+									<div class="col-sm-4">
 										<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDateFromCalendar">
 											<option value="">{{Aucun}}</option>
 											<?php
-											foreach (calendar::byType('calendar') as $calendar) {
-												foreach ($calendar->getEvents() as $eventCalendar) {
-													if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
-														if ($eventCalendar->getCmd_param('eventName') != '') {
-															echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('eventName') . '</option>';
-														} else {
-															echo '<option value="' . $eventCalendar->getId() . '">' . $calendar->getName() . ' - ' . $eventCalendar->getCmd_param('name') . '</option>';
-														}
-													}
-												}
+											foreach ($calendars as $calendar) {
+												echo '<option value="' . $calendar->getId() . '">' . $calendar->getName() . '</option>';
 											}
 											?>
 										</select>
 									</div>
+									<?php
+									foreach ($calendars as $calendar) {
+										echo '<div class="col-sm-4 hidden" data-calendar_id="'.$calendar->getId().'">';
+										echo '<select class="calendarAttr form-control">';
+										echo '<option value="all">{{Tous}}</option>';
+										foreach ($calendar->getEvents() as $eventCalendar) {
+											if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
+												if ($eventCalendar->getCmd_param('eventName') != '') {
+													echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('eventName') . '</option>';
+												} else {
+													echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('name') . '</option>';
+												}
+											}
+										}
+										echo '</select>';
+										echo '</div>';
+									}
+									?>
 								</div>
 							</div>
+						</div>
 
+						<div class="col-lg-6">
 							<legend><i class="fas fa-redo-alt"></i> {{Répétition de l'évènement}}</legend>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Activer}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour activer les options de répétition de l'évènement}}"></i></sup>
 								</label>
-								<div class="col-sm-3">
+								<div class="col-sm-8">
 									<input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="enable"/>
 								</div>
 							</div>
@@ -235,7 +258,7 @@ if (init('id') != '') {
 							<div class="div_repeatOption" style="display : none;">
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Mode de répétition}}</label>
-									<div class="col-sm-3">
+									<div class="col-sm-8">
 										<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode" >
 											<option value="simple">{{Répétition simple}}</option>
 											<option value="advance">{{Répétition avancée}}</option>
@@ -245,7 +268,7 @@ if (init('id') != '') {
 								<div class="repeatMode advance" style="display : none;">
 									<div class="form-group">
 										<label class="col-sm-3 control-label">{{Le}}</label>
-										<div class="col-sm-2">
+										<div class="col-sm-3">
 											<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
 												<option value="first">{{Premier}}</option>
 												<option value="second">{{Deuxième}}</option>
@@ -254,7 +277,7 @@ if (init('id') != '') {
 												<option value="last">{{Dernier}}</option>
 											</select>
 										</div>
-										<div class="col-sm-2">
+										<div class="col-sm-3">
 											<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
 												<option value="monday">{{Lundi}}</option>
 												<option value="tuesday">{{Mardi}}</option>
@@ -265,16 +288,16 @@ if (init('id') != '') {
 												<option value="sunday">{{Dimanche}}</option>
 											</select>
 										</div>
-										<label class="col-sm-1 control-label">{{du mois}}</label>
+										<label class="col-sm-2">{{du mois}}</label>
 									</div>
 								</div>
 								<div class="repeatMode simple">
 									<div class="form-group">
 										<label class="col-sm-3 control-label">{{Répéter tous les}}</label>
-										<div class="col-sm-1">
+										<div class="col-sm-3">
 											<input type="number" class="calendarAttr form-control" data-l1key="repeat" data-l2key="freq">
 										</div>
-										<div class="col-sm-2">
+										<div class="col-sm-5">
 											<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="unite" >
 												<option value="minutes">{{Minute(s)}}</option>
 												<option value="hours">{{Heure(s)}}</option>
@@ -301,13 +324,13 @@ if (init('id') != '') {
 
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Jusqu'à}}</label>
-									<div class="col-sm-3">
+									<div class="col-sm-8">
 										<input type="text" class="calendarAttr form-control datetimepicker" data-l1key="until" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{Restriction}}</label>
-									<div class="col-sm-3">
+									<div class="col-sm-8">
 										<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="nationalDay" >
 											<option value="all">{{Aucune}}</option>
 											<option value="exeptNationalDay">{{Tous sauf les jours fériés}}</option>
@@ -325,6 +348,12 @@ if (init('id') != '') {
 		</div>
 
 		<script>
+		$(function() {
+			$('.calendarAttr').on('change', function() {
+				modifyWithoutSave = true
+			})
+		})
+
 		function addAction(_action, _type) {
 			if (!isset(_action)) {
 				_action = {};
@@ -442,6 +471,13 @@ if (init('id') != '') {
 			$('#div_eventEdit .repeatMode.'+$(this).value()).show();
 		});
 
+		$(".calendarAttr[data-l1key=repeat][data-l2key=includeDateFromCalendar], .calendarAttr[data-l1key=repeat][data-l2key=excludeDateFromCalendar]").on('change', function () {
+			$(this).parent().siblings('div').addClass('hidden').find('select').removeAttr('data-l1key').removeAttr('data-l2key')
+			if ($(this).value() != '') {
+				$(this).parent().siblings('div[data-calendar_id='+$(this).value()+']').removeClass('hidden').find('select').attr({'data-l1key': 'repeat', 'data-l2key': $(this).attr('data-l2key').replace('Calendar', 'Event')})
+			}
+		})
+
 		if (calendarEvent != null && is_array(calendarEvent)) {
 			$('#div_eventEdit').setValues(calendarEvent, '.calendarAttr');
 			$(".calendarAttr[data-l1key=repeat][data-l2key=enable]").trigger('change');
@@ -504,6 +540,7 @@ if (init('id') != '') {
 
 					}
 					updateEventList();
+					modifyWithoutSave = false
 					$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close");
 				}
 			});
