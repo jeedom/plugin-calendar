@@ -2,7 +2,7 @@
     "id": "calendar",
     "name": "Agenda",
     "description": {
-        "fr_FR": "Plugin pour créer un calendrier",
+        "fr_FR": "Plugin permettant de gérer des calendriers et d'effectuer des actions automatiquement au début et/ou à la fin d'un évènement.",
         "en_US": "Plugin to create a calendar",
         "es_ES": "Complemento para crear un calendario",
         "de_DE": "Plugin zum Erstellen eines Kalenders",
@@ -15,7 +15,7 @@
     },
     "licence": "AGPL",
     "author": "Jeedom SAS",
-    "require": "3.3",
+    "require": "3.3.39",
     "category": "organization",
     "mobile": "event",
     "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/organization\/calendar\/changelog",
@@ -35,6 +35,7 @@
     "compatibility": [
         "miniplus",
         "smart",
+        "atlas",
         "rpi",
         "docker",
         "diy",
