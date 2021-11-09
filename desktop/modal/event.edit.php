@@ -264,7 +264,7 @@ $calendars = calendar::byType('calendar');
 						<div class="repeatMode advance" style="display:none;">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Fréquence}}</label>
-								<div class="col-sm-4 input-group" style="float:left!important;">
+								<div class="col-sm-8 input-group">
 									<span class="input-group-addon roundedLeft">{{le}}</span>
 									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt" >
 										<option value="first">{{Premier}}</option>
@@ -273,8 +273,7 @@ $calendars = calendar::byType('calendar');
 										<option value="fourth">{{Quatrième}}</option>
 										<option value="last">{{Dernier}}</option>
 									</select>
-								</div>
-								<div class="col-sm-4 input-group" style="float:left!important;">
+									<span class="input-group-addon"></span>
 									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day" >
 										<option value="monday">{{Lundi}}</option>
 										<option value="tuesday">{{Mardi}}</option>
