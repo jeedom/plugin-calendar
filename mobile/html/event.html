@@ -1,21 +1,22 @@
+<div class="col-xs-12">
+	<div id="div_calendarEvent"></div>
 
-<div id="div_calendarEvent"></div>
-
-<div id="div_addIncludeDate" style="display :none;">
-	<input style="display : none;" id="in_event_id" />
-	<label>Du :</label>
-	<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
-		<input type="date" id="in_startdate" />
+	<div id="div_addIncludeDate" style="display:none;">
+		<legend>{{Ajouter une date}}</legend>
+		<label>{{Du}} :</label>
+		<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+			<input type="date" id="in_startdate">
+		</div>
+		<label>{{Au}} :</label>
+		<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+			<input type="date" id="in_enddate">
+		</div>
+		<div style="display:flex;justify-content:center;">
+			<a data-inline="true" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" id='bt_validateIncludeDate'><i class="lIcon fas fa-check"></i> {{Valider}}</a>
+			<a data-inline="true" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" id='bt_cancelIncludeDate'><i class="lIcon fas fa-times"></i> {{Annuler}}</a>
+		</div>
+		<input style="display:none;" id="in_event_id">
 	</div>
-	<label>Au :</label>
-	<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
-		<input type="date" id="in_enddate" />
-	</div>
-
-	<center>
-		<a data-inline="true" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" id='bt_validateIncludeDate'><i class="lIcon fas fa-check"></i>Valider</a>
-		<a data-inline="true" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" id='bt_cancelIncludeDate'><i class="lIcon fas fa-times"></i>Annuler</a>
-	</center>
 </div>
 
 <script>
