@@ -1,4 +1,11 @@
 {
+    "plugins\/calendar\/mobile\/html\/event.html": {
+        "Ajouter une date": "Ajouter une date",
+        "Du": "Du",
+        "Au": "Au",
+        "Valider": "Valider",
+        "Annuler": "Annuler"
+    },
     "plugins\/calendar\/desktop\/modal\/health.php": {
         "Module": "Modulo",
         "ID": "ID",
@@ -36,11 +43,13 @@
         "Action(s) de début": "Action(s) de début",
         "Action(s) de fin": "Action(s) de fin",
         "Définition de l'évènement": "Définition de l'évènement",
+        "Dates": "Dates",
+        "Renseigner les dates de début et de fin de l'évènement": "Renseigner les dates de début et de fin de l'évènement",
         "Début": "Inizi",
         "Fin": "Fine",
         "Toute la journée": "Toute la journée",
         "Inclure par date": "Inclure par date",
-        "dates sous forme": "dates sous forme",
+        "Dates sous forme": "Dates sous forme",
         "ou plage de dates": "ou plage de dates",
         "Inclure par agenda": "Inclure par agenda",
         "Inclure des dates selon les évènements d'un agenda": "Inclure des dates selon les évènements d'un agenda",
@@ -52,10 +61,11 @@
         "Répétition de l'évènement": "Répétition de l'évènement",
         "Activer": "Activer",
         "Cocher la case pour activer les options de répétition de l'évènement": "Cocher la case pour activer les options de répétition de l'évènement",
-        "Mode de répétition": "Mode de répétition",
+        "Mode": "Mode",
         "Répétition simple": "Répétition simple",
         "Répétition avancée": "Répétition avancée",
-        "Le": "Il",
+        "Fréquence": "Fréquence",
+        "le": "Il",
         "Premier": "Premier",
         "Deuxième": "Deuxième",
         "Troisième": "Troisième",
@@ -98,7 +108,6 @@
         "Annuler": "Cancella",
         "Occurence": "Occurence",
         "Occurence supprimée avec succès": "Occurence supprimée avec succès",
-        "Evénement": "Evento",
         "Evènement supprimé avec succès": "Evènement supprimé avec succès",
         "Etes-vous sûr de vouloir supprimer cet évènement ?": "Etes-vous sûr de vouloir supprimer cet évènement ?"
     },
