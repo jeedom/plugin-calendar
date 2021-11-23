@@ -554,7 +554,7 @@ class calendar_event {
 				'height' => 40,
 				'texty' => -14,
 				'textx' => 0,
-				'title' => $this->getCmd_param('name'),
+				'title' => $this->getName(),
 				'url' => 'index.php?v=d&p=calendar&m=calendar',
 			);
 		}
