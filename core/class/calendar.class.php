@@ -127,6 +127,20 @@ class calendar extends eqLogic {
 		}
 		return $return;
 	}
+	
+	public static function customUsedBy($_type, $_id) {
+		if ($_type == 'cmd') {
+			return calendar_event::searchByCmd_param('#' . $_id . '#');
+		}
+		if ($_type == 'eqLogic') {
+			return array_merge(calendar_event::searchByCmd_param('#eqLogic' . $_id . '#'), calendar_event::searchByCmd_param('"eqLogic":"' . $_id . '"'));
+		}
+		if ($_type == 'scenario') {
+			return array_merge(calendar_event::searchByCmd_param('#scenario' . $_id . '#'), calendar_event::searchByCmd_param('"scenario_id":"' . $_id . '"'));
+		}
+	}
+	
+	
 
 	/*     * *********************Methode d'instance************************* */
 
@@ -429,6 +443,16 @@ class calendar_event {
 		FROM calendar_event';
 		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
+	
+	public static function searchByCmd_param($_search) {
+		$value = array(
+			'search' => '%' . $_search . '%',
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		FROM calendar_event
+		WHERE cmd_param LIKE :search';
+		return DB::Prepare($sql, $value, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
 
 	public static function getEventsByEqLogic($_eqLogic_id, $_startDate = null, $_endDate = null) {
 		$values = array(
@@ -510,6 +534,30 @@ class calendar_event {
 		}
 
 		/*     * *********************Methode d'instance************************* */
+	
+		public function getLinkData(&$_data = array('node' => array(), 'link' => array()), $_level = 0, $_drill = 3) {
+			if (isset($_data['node']['calendar' . $this->getId()])) {
+				return;
+			}
+			$_level++;
+			if ($_level > $_drill) {
+				return $_data;
+			}
+			$_data['node']['calendar' . $this->getId()] = array(
+				'id' => 'calendar' . $this->getId(),
+				'type' => __('Agenda', __FILE__),
+				'name' => __('Agenda', __FILE__),
+				'image' => 'plugins/calendar/plugin_info/calendar_icon.png',
+				'fontsize' => '1.5em',
+				'fontweight' => ($_level == 1) ? 'bold' : 'normal',
+				'width' => 40,
+				'height' => 40,
+				'texty' => -14,
+				'textx' => 0,
+				'title' => $this->getCmd_param('name'),
+				'url' => 'index.php?v=d&p=calendar&m=calendar',
+			);
+		}
 
 		public function reschedule() {
 			$next = $this->nextOccurrence();
