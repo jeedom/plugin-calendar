@@ -6,7 +6,7 @@
 
 # 02/12/2021
 
-- Correction de bug
+- Correction de bugs
 - Preparation pour Jeedom 4.2
 
 # 08/11/2021
