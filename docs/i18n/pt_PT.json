@@ -2,6 +2,9 @@
     "changelog.md": {
         "Changelog Agenda": "Agenda do Changelog",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto",
+        "02\/12\/2021": "02\/12\/2021",
+        "Correction de bugs": "Correções de bugs",
+        "Preparation pour Jeedom 4.2": "Preparação para Jeedom 4.2",
         "08\/11\/2021": "11\/08\/2021",
         "Possibilité d'inclure\/exclure des dates en fonction de l'ensemble des évènements d'un agenda": "Possibilidade de incluir \/ excluir datas de acordo com todos os eventos de um diário",
         "21\/10\/2021": "21\/10\/2021",
@@ -16,7 +19,6 @@
         "20\/03\/2020": "20\/03\/2020",
         "Correction de bug en espagnol": "Correção de bug em espanhol",
         "15\/11\/2019": "15\/11\/2019",
-        "Correction de bugs": "Correções de bugs",
         "23\/10\/2019": "23\/10\/2019",
         "Amélioration du widget": "Melhoria de widget",
         "14\/10\/2019": "14\/10\/2019",
