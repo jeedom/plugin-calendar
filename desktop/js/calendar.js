@@ -1,4 +1,3 @@
-
 /* This file is part of Jeedom.
 *
 * Jeedom is free software: you can redistribute it and/or modify
@@ -14,38 +13,39 @@
 * You should have received a copy of the GNU General Public License
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
-calendar = null;
+
+calendar = null
 $('#bt_healthcalendar').on('click', function () {
-  $('#md_modal').dialog({title: "{{Santé Agenda}}"});
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open');
-});
+  $('#md_modal').dialog({title: "{{Santé Agenda}}"})
+  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open')
+})
 
 $('#bt_addEvent').on('click', function () {
-  $('#bt_calendartab').trigger('click');
-  $('#md_modal').dialog({title: "{{Ajouter évènement}}"});
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open');
-});
+  $('#bt_calendartab').trigger('click')
+  $('#md_modal').dialog({title: "{{Ajouter un évènement}}"})
+  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open')
+})
 
 $('#div_eventList').delegate('.editEvent', 'click', function () {
-  $('#bt_calendartab').trigger('click');
-  $('#md_modal').dialog({title: "{{Modifier évènement}}"});
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open');
-});
+  $('#bt_calendartab').trigger('click')
+  $('#md_modal').dialog({title: "{{Modifier un évènement}}"})
+  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open')
+})
 
 $('#bt_calendartab').on('click',function(){
-  setTimeout(function(){ $('#div_calendar').fullCalendar('render'); }, 100);
-});
+  setTimeout(function(){ $('#div_calendar').fullCalendar('render') }, 100)
+})
 
 if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
   setTimeout(function(){
-    $('#md_modal').dialog({title: "{{Ajouter/Modifier évènement}}"});
-    $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open');
-  }, 1000);
+    $('#md_modal').dialog({title: "{{Ajouter/Modifier un évènement}}"})
+    $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open')
+  }, 1000)
 }
 
 function printEqLogic() {
   if (calendar !== null) {
-    calendar.fullCalendar('destroy');
+    calendar.fullCalendar('destroy')
   }
   calendar = $('#div_calendar').fullCalendar({
     lang: jeedom_langage.substr(0, 2),
@@ -57,8 +57,8 @@ function printEqLogic() {
     height: 600,
     events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + $('.eqLogicAttr[data-l1key=id]').value(),
     eventClick: function (calEvent) {
-      $('#md_modal').dialog({title: "{{Modifier évènement}}"});
-      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + calEvent.id + '&date=' + encodeURI(calEvent.start._i)).dialog('open');
+      $('#md_modal').dialog({title: "{{Modifier un évènement}}"})
+      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + calEvent.id + '&date=' + encodeURI(calEvent.start._i)).dialog('open')
     },
     editable: true,
     defaultView: 'month',
@@ -69,23 +69,23 @@ function printEqLogic() {
         id: event.id,
         startDate: event.start.format(),
         endDate: event.end.format()
-      };
-      updateCalendarEvent(eventSave);
+      }
+      updateCalendarEvent(eventSave)
     },
     eventRender: function (event, element) {
-      element.find('.fc-title').html(event.title);
+      element.find('.fc-title').html(event.title)
     },
     eventResize: function (event, revertFunc) {
       var eventSave = {
         id: event.id,
         startDate: event.start.format(),
         endDate: event.end.format()
-      };
-      updateCalendarEvent(eventSave);
+      }
+      updateCalendarEvent(eventSave)
     }
-  });
-  updateEventList();
-  $('#div_calendar').fullCalendar('render');
+  })
+  updateEventList()
+  $('#div_calendar').fullCalendar('render')
 }
 
 function updateEventList() {
@@ -98,31 +98,46 @@ function updateEventList() {
     },
     dataType: 'json',
     error: function (request, status, error) {
-      handleAjaxError(request, status, error);
+      handleAjaxError(request, status, error)
     },
     success: function (data) {
       if (data.state != 'ok') {
-        $('#div_alert').showAlert({message: data.result, level: 'danger'});
-        return;
+        $('#div_alert').showAlert({message: data.result, level: 'danger'})
+        return
       }
-      var html = '';
+      var html = ''
       for (var i in data.result) {
-        var color = init(data.result[i].cmd_param.color, '#2980b9');
-        if(data.result[i].cmd_param.transparent == 1){
-          color = 'transparent';
+        var color = init(data.result[i].cmd_param.color, '#2980b9')
+        if (data.result[i].cmd_param.transparent == 1) {
+          color = 'transparent'
         }
-
-        html += '<span class="label editEvent" data-event_id="' + data.result[i].id + '" style="cursor:pointer!important;background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;padding:8px;font-weight:bold;">';
+        html += '<span class="label editEvent" data-event_id="' + data.result[i].id + '" style="cursor:pointer!important;background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;padding:8px;font-weight:bold;">'
         if (data.result[i].cmd_param.eventName != '') {
-          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName;
-        } else {
-          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name;
+          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName
         }
-        html += '</span><br\>';
+        else {
+          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name
+        }
+        html += '</a></span>'
+        if (data.result[i].repeat.enable == 0) {
+          html += ' {{Le}} ' + new Date(data.result[i].startDate).toLocaleString().substr(0,10)
+        }
+        else if (data.result[i].repeat.mode == 'simple') {
+          html += ' {{Répétition simple}}'
+        }
+        else {
+          html += ' {{Répétition avancée}}'
+        }
+        if (data.result[i].startDate.substr(11,5) == '00:00' && data.result[i].endDate.substr(11,5) == '23:59') {
+          html += ' {{toute la journée}}<br><br>'
+        }
+        else {
+          html += ' {{de}} ' + data.result[i].startDate.substr(11,5) + ' {{à}} ' + data.result[i].endDate.substr(11,5)+'<br><br>'
+        }
       }
-      $('#div_eventList').empty().append(html);
+      $('#div_eventList').empty().append(html)
     }
-  });
+  })
 }
 
 function updateCalendarEvent(_event) {
@@ -135,15 +150,15 @@ function updateCalendarEvent(_event) {
     },
     dataType: 'json',
     error: function (request, status, error) {
-      handleAjaxError(request, status, error);
+      handleAjaxError(request, status, error)
     },
     success: function (data) {
       if (data.state != 'ok') {
-        $('#div_alert').showAlert({message: data.result, level: 'danger'});
-        return;
+        $('#div_alert').showAlert({message: data.result, level: 'danger'})
+        return
       }
-      $('#div_alert').showAlert({message: '{{Evènement modifié avec succès}}', level: 'success'});
-      calendar.fullCalendar('refetchEvents');
+      $('#div_alert').showAlert({message: '{{Evènement modifié avec succès}}', level: 'success'})
+      calendar.fullCalendar('refetchEvents')
     }
-  });
+  })
 }
