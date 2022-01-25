@@ -42,6 +42,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				echo '<img src="' . $plugin->getPathImgIcon() . '"/>';
 				echo '<br>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
+				echo '<span class="hiddenAsCard displayTableRight hidden">';
+				echo '<span>'.count($eqLogic->getEvents()).' {{évènements}}</span>';
+				echo ($eqLogic->getIsVisible() == 1) ? '<i class="fas fa-eye" title="{{Equipement visible}}"></i>' : '<i class="fas fa-eye-slash" title="{{Equipement non visible}}"></i>';
+				echo '</span>';
 				echo '</div>';
 			}
 			echo '</div>';
@@ -74,15 +78,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<div class="col-lg-6">
 							<legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Nom de l'agenda}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label">{{Nom de l'agenda}}</label>
+								<div class="col-sm-6">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
 									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement gCalendar}}"/>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label" >{{Objet parent}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label" >{{Objet parent}}</label>
+								<div class="col-sm-6">
 									<select class="eqLogicAttr form-control" data-l1key="object_id">
 										<option value="">{{Aucun}}</option>
 										<?php
@@ -96,8 +100,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Catégorie}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label">{{Catégorie}}</label>
+								<div class="col-sm-6">
 									<?php
 									foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 										echo '<label class="checkbox-inline">';
@@ -108,8 +112,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Options}}</label>
-								<div class="col-sm-7">
+								<label class="col-sm-4 control-label">{{Options}}</label>
+								<div class="col-sm-6">
 									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
 									<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 								</div>
@@ -117,18 +121,18 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 							<legend><i class="fas fa-list"></i> {{Widget}}</legend>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Nombre de jours}}
+								<label class="col-sm-4 control-label">{{Nombre de jours}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Nombre de jours maximum à afficher sur le widget}}"></i></sup>
 								</label>
-								<div class="col-sm-7">
+								<div class="col-sm-6">
 									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetDay" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Nombre d'évènements}}
+								<label class="col-sm-4 control-label">{{Nombre d'évènements}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Nombre d'évènements maximum à afficher sur le widget}}"></i></sup>
 								</label>
-								<div class="col-sm-7">
+								<div class="col-sm-6">
 									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="nbWidgetMaxEvent" />
 								</div>
 							</div>
@@ -137,11 +141,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<div class="col-lg-6">
 							<legend><i class="far fa-calendar-check"></i>  {{Liste des évènements de l'agenda}}</legend>
 							<div id="div_eventList"></div>
-							<br/>
 						</div>
 					</fieldset>
 				</form>
-				<hr>
 			</div>
 
 			<div role="tabpanel" class="tab-pane" id="calendartab">
