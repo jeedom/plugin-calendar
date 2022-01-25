@@ -127,7 +127,7 @@ class calendar extends eqLogic {
 		}
 		return $return;
 	}
-	
+
 	public static function customUsedBy($_type, $_id) {
 		if ($_type == 'cmd') {
 			return calendar_event::searchByCmd_param('#' . $_id . '#');
@@ -139,8 +139,8 @@ class calendar extends eqLogic {
 			return array_merge(calendar_event::searchByCmd_param('#scenario' . $_id . '#'), calendar_event::searchByCmd_param('"scenario_id":"' . $_id . '"'));
 		}
 	}
-	
-	
+
+
 
 	/*     * *********************Methode d'instance************************* */
 
@@ -443,7 +443,7 @@ class calendar_event {
 		FROM calendar_event';
 		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
-	
+
 	public static function searchByCmd_param($_search) {
 		$value = array(
 			'search' => '%' . $_search . '%',
@@ -534,7 +534,7 @@ class calendar_event {
 		}
 
 		/*     * *********************Methode d'instance************************* */
-	
+
 		public function getLinkData(&$_data = array('node' => array(), 'link' => array()), $_level = 0, $_drill = 3) {
 			if (isset($_data['node']['calendar' . $this->getId()])) {
 				return;
@@ -681,17 +681,17 @@ class calendar_event {
 				}
 				$startDate = $this->getStartDate();
 				$endDate = $this->getEndDate();
-				if (date('I') != date('I', strtotime($endDate)) && date('G', strtotime($endDate)) == 2) {
-					while (date('I') != date('I', strtotime($endDate)) && strtotime('now') > strtotime($endDate)) {
-						$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
-					}
-					$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
-					if (date('I')) {
-						$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' -1 hour'));
-					}
-				}
-				// $initStartTime = date('H:i:s', strtotime($startDate));
-				// $initEndTime = date('H:i:s', strtotime($endDate));
+				// if (date('I') != date('I', strtotime($endDate)) && date('G', strtotime($endDate)) == 2) {
+				// 	while (date('I') != date('I', strtotime($endDate)) && strtotime('now') > strtotime($endDate)) {
+				// 		$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+				// 	}
+				// 	$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+				// 	if (date('I')) {
+				// 		$endDate = date('Y-m-d H:i:s', strtotime($endDate . ' -1 hour'));
+				// 	}
+				// }
+				$initStartTime = date('H:i:s', strtotime($startDate));
+				$initEndTime = date('H:i:s', strtotime($endDate));
 				while (strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00' || $this->getUntil() == null) {
 					if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
 						if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
@@ -744,14 +744,14 @@ class calendar_event {
 						if ($tmp_startDate == '1970-01-01') {
 							break;
 						}
-						$endDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($endDate));
-						$startDate = $tmp_startDate . ' ' . date('H:i:s', strtotime($startDate));
+						$endDate = date('Y-m-d H:i:s', strtotime($tmp_startDate . ' ' . $initEndTime));
+						$startDate = date('Y-m-d H:i:s', strtotime($tmp_startDate . ' ' . $initStartTime));
 					} else {
 						if ($repeat['freq'] == 0) {
 							break;
 						}
-						$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
-						$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+						$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d', strtotime($startDate)) . ' ' . $initStartTime));
+						$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d', strtotime($endDate)) . ' ' . $initEndTime));
 					}
 					if (strtotime($startDate) <= strtotime($prevStartDate)) {
 						break;
@@ -761,12 +761,12 @@ class calendar_event {
 					}
 				}
 			} else {
-				if($endTime == null && $startTime == null){
+				if ($endTime == null && $startTime == null) {
 					$return[] = array(
 						'start' => $this->getStartDate(),
 						'end' => $this->getEndDate(),
 					);
-				}elseif(strtotime($this->getStartDate()) <= $endTime && strtotime($this->getEndDate()) >= $startTime){
+				} elseif(strtotime($this->getStartDate()) <= $endTime && strtotime($this->getEndDate()) >= $startTime){
 					$return[] = array(
 						'start' => $this->getStartDate(),
 						'end' => $this->getEndDate(),
