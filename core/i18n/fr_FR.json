@@ -118,6 +118,9 @@
         "Mes agendas": "Mes agendas",
         "Aucun Agenda trouvé, cliquer sur \"Ajouter\" pour commencer": "Aucun Agenda trouvé, cliquer sur \"Ajouter\" pour commencer",
         "Rechercher": "Rechercher",
+        "évènements": "évènements",
+        "Equipement visible": "Equipement visible",
+        "Equipement non visible": "Equipement non visible",
         "Ajouter évènement": "Ajouter évènement",
         "Configuration avancée": "Configuration avancée",
         "Dupliquer": "Dupliquer",
@@ -143,9 +146,15 @@
     },
     "plugins\/calendar\/desktop\/js\/calendar.js": {
         "Santé Agenda": "Santé Agenda",
-        "Ajouter évènement": "Ajouter évènement",
-        "Modifier évènement": "Modifier évènement",
-        "Ajouter\/Modifier évènement": "Ajouter\/Modifier évènement",
+        "Ajouter un évènement": "Ajouter un évènement",
+        "Modifier un évènement": "Modifier un évènement",
+        "Ajouter\/Modifier un évènement": "Ajouter\/Modifier un évènement",
+        "Le": "Le",
+        "Répétition simple": "Répétition simple",
+        "Répétition avancée": "Répétition avancée",
+        "toute la journée": "toute la journée",
+        "de": "de",
+        "à": "à",
         "Evènement modifié avec succès": "Evènement modifié avec succès"
     },
     "plugins\/calendar\/core\/ajax\/calendar.ajax.php": {
