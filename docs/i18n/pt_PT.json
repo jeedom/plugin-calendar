@@ -180,6 +180,8 @@
         "Vous pouvez retirer plusieurs dates en les séparant par des virgules": "Você pode remover várias datas, separando-as com vírgulas",
         "Il est possible d'utiliser la commande \"En cours\" comme déclencheur de scénario": "É possível usar o comando \"Em andamento\" como um gatilho de cenário",
         "Chaque mise à jour de l'information déclenchera l'exécution du scénario, il est donc préférable d'utiliser cette commande dans un scénario programmé avec un test sur la valeur": "Cada atualização de informação irá disparar a execução do cenário, por isso é preferível usar este comando em um cenário programado com um teste no valor",
+        "Attention il ne faut surtout pas faire d'evenement à répétition qui se chevauge lui meme, ce genre de cas n'est pas géré par le plugin": "Atenção é importante não fazer eventos repetidos que se sobrepõem, esse tipo de caso não é gerenciado pelo plugin",
+        "Exemple un evenement qui dure 48h et qui se répéte tous les jours": "Exemplo um evento que dura 48 horas e se repete todos os dias",
         " Agenda.": " Agenda.",
         " Agenda?": " Agenda?",
         "Agenda ": "Agenda ",
@@ -326,6 +328,13 @@
         " ou]": " Onde]",
         "[ou]": "[Onde]",
         "*ou*": "*Onde*",
-        " ou*": " Onde*"
+        " ou*": " Onde*",
+        " IMPORTANT.": " IMPORTANTE.",
+        " IMPORTANT?": " IMPORTANTE?",
+        "IMPORTANT ": "IMPORTANTE ",
+        " IMPORTANT]": " IMPORTANTE]",
+        "[IMPORTANT]": "[IMPORTANTE]",
+        "*IMPORTANT*": "*IMPORTANTE*",
+        " IMPORTANT*": " IMPORTANTE*"
     }
 }

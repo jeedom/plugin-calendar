@@ -54,13 +54,13 @@
         "27\/02\/2018": "27\/02\/2018",
         "pour désactiver un agenda depuis un scénario il faut maintenant utiliser la fonction de désactivation d'équipement": "para desactivar una agenda de un escenario, ahora debes usar la función de desactivación de equipos",
         "Suppression des commandes d'activation\/désactivation": "Eliminación de comandos de activación \/ desactivación",
-        " IMPORTANT.": " Importante.",
-        " IMPORTANT?": " Importante?",
-        "IMPORTANT ": "Importante ",
-        " IMPORTANT]": " Importante]",
-        "[IMPORTANT]": "[Importante]",
-        "*IMPORTANT*": "*Importante*",
-        " IMPORTANT*": " Importante*"
+        " IMPORTANT.": " IMPORTANTE.",
+        " IMPORTANT?": " IMPORTANTE?",
+        "IMPORTANT ": "IMPORTANTE ",
+        " IMPORTANT]": " IMPORTANTE]",
+        "[IMPORTANT]": "[IMPORTANTE]",
+        "*IMPORTANT*": "*IMPORTANTE*",
+        " IMPORTANT*": " IMPORTANTE*"
     },
     "index.md": {
         "Plugin Agenda": "Complemento de calendario",
@@ -180,6 +180,8 @@
         "Vous pouvez retirer plusieurs dates en les séparant par des virgules": "Puede eliminar varias fechas separándolas con comas",
         "Il est possible d'utiliser la commande \"En cours\" comme déclencheur de scénario": "Es posible utilizar el comando \"En curso\" como desencadenante de escenario",
         "Chaque mise à jour de l'information déclenchera l'exécution du scénario, il est donc préférable d'utiliser cette commande dans un scénario programmé avec un test sur la valeur": "Cada actualización de información desencadenará la ejecución del escenario, por lo que es preferible utilizar este comando en un escenario programado con una prueba sobre el valor",
+        "Attention il ne faut surtout pas faire d'evenement à répétition qui se chevauge lui meme, ce genre de cas n'est pas géré par le plugin": "Atención, es importante no hacer eventos repetidos que se superponen a sí mismos, este tipo de casos no son administrados por el complemento",
+        "Exemple un evenement qui dure 48h et qui se répéte tous les jours": "Ejemplo un evento que dura 48 horas y se repite todos los días",
         " Agenda.": " Calendario.",
         " Agenda?": " Calendario?",
         "Agenda ": "Calendario ",
@@ -326,6 +328,13 @@
         " ou]": " Dónde]",
         "[ou]": "[Dónde]",
         "*ou*": "*Dónde*",
-        " ou*": " Dónde*"
+        " ou*": " Dónde*",
+        " IMPORTANT.": " IMPORTANTE.",
+        " IMPORTANT?": " IMPORTANTE?",
+        "IMPORTANT ": "IMPORTANTE ",
+        " IMPORTANT]": " IMPORTANTE]",
+        "[IMPORTANT]": "[IMPORTANTE]",
+        "*IMPORTANT*": "*IMPORTANTE*",
+        " IMPORTANT*": " IMPORTANTE*"
     }
 }

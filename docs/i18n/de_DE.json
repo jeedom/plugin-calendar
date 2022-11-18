@@ -54,13 +54,13 @@
         "27\/02\/2018": "27.02.2008",
         "pour désactiver un agenda depuis un scénario il faut maintenant utiliser la fonction de désactivation d'équipement": "Um eine Agenda aus einem Szenario zu deaktivieren, müssen Sie jetzt die Funktion zur Gerätedeaktivierung verwenden",
         "Suppression des commandes d'activation\/désactivation": "Entfernen von Aktivierungs-\/Deaktivierungsbefehlen",
-        " IMPORTANT.": " Wichtig.",
-        " IMPORTANT?": " Wichtig?",
-        "IMPORTANT ": "Wichtig ",
-        " IMPORTANT]": " Wichtig]",
-        "[IMPORTANT]": "[Wichtig]",
-        "*IMPORTANT*": "*Wichtig*",
-        " IMPORTANT*": " Wichtig*"
+        " IMPORTANT.": " WICHTIG.",
+        " IMPORTANT?": " WICHTIG?",
+        "IMPORTANT ": "WICHTIG ",
+        " IMPORTANT]": " WICHTIG]",
+        "[IMPORTANT]": "[WICHTIG]",
+        "*IMPORTANT*": "*WICHTIG*",
+        " IMPORTANT*": " WICHTIG*"
     },
     "index.md": {
         "Plugin Agenda": "Kalender-Plugin",
@@ -180,6 +180,8 @@
         "Vous pouvez retirer plusieurs dates en les séparant par des virgules": "Sie können mehrere Datumsangaben entfernen, indem Sie sie durch Kommas trennen",
         "Il est possible d'utiliser la commande \"En cours\" comme déclencheur de scénario": "Es ist möglich, den Befehl \"In Bearbeitung\" als Szenario-Trigger zu verwenden",
         "Chaque mise à jour de l'information déclenchera l'exécution du scénario, il est donc préférable d'utiliser cette commande dans un scénario programmé avec un test sur la valeur": "Jede Informationsaktualisierung löst die Ausführung des Szenarios aus, daher ist es vorzuziehen, diesen Befehl in einem Szenario zu verwenden, das mit einem Test auf den Wert programmiert ist",
+        "Attention il ne faut surtout pas faire d'evenement à répétition qui se chevauge lui meme, ce genre de cas n'est pas géré par le plugin": "Achtung, es ist wichtig, keine wiederholten Ereignisse zu erstellen, die sich überschneiden, diese Art von Fall wird nicht vom Plugin verwaltet",
+        "Exemple un evenement qui dure 48h et qui se répéte tous les jours": "Beispiel ein Ereignis, das 48 Stunden dauert und sich jeden Tag wiederholt",
         " Agenda.": " Agenda.",
         " Agenda?": " Agenda?",
         "Agenda ": "Agenda ",
@@ -326,6 +328,13 @@
         " ou]": " Woher]",
         "[ou]": "[Woher]",
         "*ou*": "*Woher*",
-        " ou*": " Woher*"
+        " ou*": " Woher*",
+        " IMPORTANT.": " WICHTIG.",
+        " IMPORTANT?": " WICHTIG?",
+        "IMPORTANT ": "WICHTIG ",
+        " IMPORTANT]": " WICHTIG]",
+        "[IMPORTANT]": "[WICHTIG]",
+        "*IMPORTANT*": "*WICHTIG*",
+        " IMPORTANT*": " WICHTIG*"
     }
 }
