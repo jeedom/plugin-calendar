@@ -7,6 +7,7 @@
 # 22/12/2022
 
 - Mise à jour de la librairie `fullcalendar` de 3.10.5 vers 6.0.1
+- Ajout d'une vue **Planning** listant tous les évènements de la semaine
 - Version minimale du core Jeedom requise : 4.2
 
 # 25/01/2022
