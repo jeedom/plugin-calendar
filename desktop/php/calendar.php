@@ -13,6 +13,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		--fc-button-hover-bg-color: var(--btn-default-color);
 		--fc-button-active-bg-color: var(--sc-formTxt-color);
 		--fc-list-event-hover-bg-color: var(--el-defaultColor);
+		--fc-page-bg-color: transparent;
 		--fc-button-border-color: transparent;
 		--fc-border-color: transparent;
 	}
