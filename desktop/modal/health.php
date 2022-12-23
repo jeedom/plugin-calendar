@@ -16,7 +16,7 @@
  */
 
 if (!isConnect('admin')) {
-	throw new Exception('401 Unauthorized');
+	throw new Exception('401 - {{Accès non autorisé}}');
 }
 $eqLogics = calendar::byType('calendar');
 ?>
@@ -32,19 +32,19 @@ $eqLogics = calendar::byType('calendar');
 		</tr>
 	</thead>
 	<tbody>
-	 <?php
-foreach ($eqLogics as $eqLogic) {
-	$eventNumber = count($eqLogic->getEvents());
-	$state = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Inactif}}</span>';
-	if ($eqLogic->getIsEnable() == 1) {
-		$state = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Actif}}</span>';
-	}
-	echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getId() . '</span></td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eventNumber . '</span></td>';
-	echo '<td>' . $state . '</td>';
-	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getConfiguration('createtime') . '</span></td></tr>';
-}
-?>
+		<?php
+		foreach ($eqLogics as $eqLogic) {
+			$eventNumber = count($eqLogic->getEvents());
+			$state = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Inactif}}</span>';
+			if ($eqLogic->getIsEnable() == 1) {
+				$state = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Actif}}</span>';
+			}
+			echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getId() . '</span></td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;">' . $eventNumber . '</span></td>';
+			echo '<td>' . $state . '</td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getConfiguration('createtime') . '</span></td></tr>';
+		}
+		?>
 	</tbody>
 </table>

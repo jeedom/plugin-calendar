@@ -21,7 +21,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 class calendar extends eqLogic {
 	/*     * *************************Attributs****************************** */
 
-	public static $_widgetPossibility = array('custom' => true, 'custom::layout' => false);
+	public static $_widgetPossibility = array('custom' => true, 'custom::graph' => false, 'custom::layout' => false);
 
 	/*     * ***********************Methode static*************************** */
 
@@ -478,11 +478,11 @@ class calendar_event {
 			foreach ($event->calculOccurence($_startDate, $_endDate) as $info_event) {
 				$info_event['id'] = $event->getId();
 				if ($event->getCmd_param('transparent', 0) == 1) {
-					$info_event['color'] = 'transparent !important';
+					$info_event['color'] = 'transparent';
 				} else {
-					$info_event['color'] = $event->getCmd_param('color', '#2980b9') . ' !important';
+					$info_event['color'] = $event->getCmd_param('color', '#2980b9');
 				}
-				$info_event['textColor'] = $event->getCmd_param('text_color', 'black') . ' !important';
+				$info_event['textColor'] = $event->getCmd_param('text_color', 'white');
 				$info_event['noDisplayOnDashboard'] = $event->getCmd_param('noDisplayOnDashboard');
 				if ($event->getCmd_param('eventName') != '') {
 					$info_event['title'] = $event->getCmd_param('icon') . ' ' . $event->getCmd_param('eventName');
@@ -853,17 +853,17 @@ class calendar_event {
 
 	public function preSave() {
 		if ($this->getEqLogic_id() == '') {
-			throw new Exception(__('L\'id de l\'équipement ne peut être vide', __FILE__));
+			throw new Exception(__("L'id de l'équipement ne peut être vide", __FILE__));
 		}
 		if (trim($this->getCmd_param('eventName')) == '') {
-			throw new Exception(__('Le nom de l\'évènement ne peut être vide', __FILE__));
+			throw new Exception(__("Le nom de l'évènement ne peut être vide", __FILE__));
 		}
 		$eqLogic = $this->getEqLogic();
 		if (!is_object($eqLogic)) {
-			throw new Exception(__('Impossible de trouver l\'équipement correspondant à l\'id', __FILE__) . ' : ' . $this->getEqLogic_id());
+			throw new Exception(__("Impossible de trouver l'équipement correspondant à l'id", __FILE__) . ' : ' . $this->getEqLogic_id());
 		}
 		if ((strtotime($this->getStartDate()) + 59) >= strtotime($this->getEndDate())) {
-			throw new Exception(__('La date de début d\'évènement ne peut être postérieure ou égale à la date de fin', __FILE__));
+			throw new Exception(__("La date de début d'évènement ne peut être postérieure ou égale à la date de fin", __FILE__));
 		}
 		$repeat = $this->getRepeat();
 		$allEmpty = true;
@@ -890,7 +890,7 @@ class calendar_event {
 					throw new Exception(__('La fréquence de répétition ne peut être vide, nulle ou négative', __FILE__));
 				}
 				if ($this->getRepeat('unite') == '') {
-					throw new Exception(__('L\'unité de répétition ne peut être vide', __FILE__));
+					throw new Exception(__("L'unité de répétition ne peut être vide", __FILE__));
 				}
 			}
 		} else {
@@ -997,7 +997,7 @@ class calendar_event {
 				}
 				scenarioExpression::createAndExec('action', $action['cmd'], $options);
 			} catch (Exception $e) {
-				log::add('calendar', 'error', $eqLogic->getHumanName() . __('Erreur lors de l\'exécution de', __FILE__) . ' ' . $action['cmd'] . '. ' . __('Détails', __FILE__) . ' : ' . $e->getMessage());
+				log::add('calendar', 'error', $eqLogic->getHumanName() . __("Erreur lors de l'exécution de", __FILE__) . ' ' . $action['cmd'] . '. ' . __('Détails', __FILE__) . ' : ' . $e->getMessage());
 			}
 		}
 		return true;
@@ -1010,8 +1010,6 @@ class calendar_event {
 			return $this->getCmd_param('name');
 		}
 	}
-
-	/*     * **********************Getteur Setteur*************************** */
 
 	public function getId() {
 		return $this->id;
