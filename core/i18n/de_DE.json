@@ -7,6 +7,7 @@
         "Annuler": "Abbrechen"
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
+        "Accès non autorisé": "Unautorisierter Zugriff",
         "Module": "Modul",
         "ID": "Identifikation",
         "Evènements": "Geschehen",
@@ -16,6 +17,7 @@
         "Actif": "Aktiva"
     },
     "plugins\/calendar\/desktop\/modal\/event.edit.php": {
+        "Accès non autorisé": "Unautorisierter Zugriff",
         "L\\'id de l\\'équipement ne peut être vide": "Geräte-ID darf nicht leer sein",
         "Aucun équipement associé à l\\'id": "Keine Ausrüstung mit der ID verknüpft",
         "Event id non trouvé": "Ereignis-ID nicht gefunden",
@@ -103,6 +105,7 @@
         "Décocher la case pour désactiver l\\'action": "Deaktivieren Sie das Kontrollkästchen, um die Aktion zu deaktivieren",
         "Cocher la case pour que la commande s\\'exécute en parallèle des autres actions": "Aktivieren Sie das Kontrollkästchen, damit der Befehl parallel zu den anderen Aktionen ausgeführt wird",
         "Sélectionner un mot-clé": "Schlüsselwort auswählen",
+        "Evènement modifié avec succès": "Ereignis erfolgreich geändert",
         "Evènement ajouté avec succès": "Ereignis erfolgreich hinzugefügt",
         "Voulez vous supprimer cette occurence ou l'évènement ?": "Möchten Sie dieses Ereignis oder das Ereignis löschen?",
         "Annuler": "Abbrechen",
@@ -112,6 +115,7 @@
         "Etes-vous sûr de vouloir supprimer cet évènement ?": "Möchten Sie diese Veranstaltung wirklich löschen?"
     },
     "plugins\/calendar\/desktop\/php\/calendar.php": {
+        "Accès non autorisé": "Unautorisierter Zugriff",
         "Gestion": "Verwaltung",
         "Ajouter": "Hinzufügen",
         "Santé": "Gesundheit",
@@ -154,16 +158,16 @@
         "Répétition avancée": "Fortgeschrittene Wiederholung",
         "toute la journée": "den ganzen Tag",
         "de": "von",
-        "à": "beim",
-        "Evènement modifié avec succès": "Ereignis erfolgreich geändert"
+        "à": "beim"
     },
     "plugins\/calendar\/core\/ajax\/calendar.ajax.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
-        "Aucun évènement correspondant à : ": "Kein Ereignis entsprechend:",
+        "Aucun évènement correspondant à": "Keine entsprechenden Veranstaltungen",
         "La date de début ne peut être vide": "Das Startdatum darf nicht leer sein",
-        "Impossible de trouver la commande d\\'exclusion": "Der Ausschlussbefehl konnte nicht gefunden werden",
-        "La date de l\\'occurence ne peut etre vide : ": "Das Datum des Auftretens darf nicht leer sein:",
-        "Aucune methode correspondante à : ": "Keine Methode entsprechend:"
+        "Impossible de trouver la commande d'exclusion": "Der Exclude-Befehl kann nicht gefunden werden",
+        "Aucun évènement correspondant à : ": "Kein Ereignis entsprechend:",
+        "La date de l'occurence ne peut être vide": "Das Datum des Auftretens darf nicht leer sein",
+        "Aucune methode correspondante à": "Keine entsprechende Methode"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Umprogrammierung",
@@ -185,13 +189,13 @@
         "Aucune reprogrammation car aucune occurence suivante trouvée": "Keine Neuprogrammierung, da kein nächstes Vorkommen gefunden",
         "Reprogrammation à": "Umprogrammierung auf",
         "de": "von",
-        "L\\'id de l\\'équipement ne peut être vide": "Geräte-ID darf nicht leer sein",
-        "Le nom de l\\'évènement ne peut être vide": "Der Name des Ereignisses darf nicht leer sein",
-        "Impossible de trouver l\\'équipement correspondant à l\\'id": "Die der ID entsprechende Ausrüstung kann nicht gefunden werden",
-        "La date de début d\\'évènement ne peut être postérieure ou égale à la date de fin": "Das Startdatum der Veranstaltung darf nicht nach oder gleich dem Enddatum liegen",
+        "L'id de l'équipement ne peut être vide": "Geräte-ID darf nicht leer sein",
+        "Le nom de l'évènement ne peut être vide": "Der Ereignisname darf nicht leer sein",
+        "Impossible de trouver l'équipement correspondant à l'id": "Das der ID entsprechende Gerät kann nicht gefunden werden",
+        "La date de début d'évènement ne peut être postérieure ou égale à la date de fin": "Das Startdatum des Ereignisses darf nicht nach oder gleich dem Enddatum liegen",
         "La fréquence de répétition ne peut être vide, nulle ou négative": "Die Wiederholungsfrequenz kann nicht leer, null oder negativ sein",
-        "L\\'unité de répétition ne peut être vide": "Wiederholungseinheit darf nicht leer sein",
-        "Erreur lors de l\\'exécution de": "Fehler beim Ausführen",
+        "L'unité de répétition ne peut être vide": "Wiederholungseinheit darf nicht leer sein",
+        "Erreur lors de l'exécution de": "Fehler beim Ausführen",
         "Détails": "Einzelheiten"
     },
     "info.json": {

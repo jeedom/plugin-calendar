@@ -7,6 +7,7 @@
         "Annuler": "Annuler"
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
+        "Accès non autorisé": "Accès non autorisé",
         "Module": "Module",
         "ID": "ID",
         "Evènements": "Evènements",
@@ -16,6 +17,7 @@
         "Actif": "Actif"
     },
     "plugins\/calendar\/desktop\/modal\/event.edit.php": {
+        "Accès non autorisé": "Accès non autorisé",
         "L\\'id de l\\'équipement ne peut être vide": "L\\'id de l\\'équipement ne peut être vide",
         "Aucun équipement associé à l\\'id": "Aucun équipement associé à l\\'id",
         "Event id non trouvé": "Event id non trouvé",
@@ -103,6 +105,7 @@
         "Décocher la case pour désactiver l\\'action": "Décocher la case pour désactiver l\\'action",
         "Cocher la case pour que la commande s\\'exécute en parallèle des autres actions": "Cocher la case pour que la commande s\\'exécute en parallèle des autres actions",
         "Sélectionner un mot-clé": "Sélectionner un mot-clé",
+        "Evènement modifié avec succès": "Evènement modifié avec succès",
         "Evènement ajouté avec succès": "Evènement ajouté avec succès",
         "Voulez vous supprimer cette occurence ou l'évènement ?": "Voulez vous supprimer cette occurence ou l'évènement ?",
         "Annuler": "Annuler",
@@ -112,6 +115,7 @@
         "Etes-vous sûr de vouloir supprimer cet évènement ?": "Etes-vous sûr de vouloir supprimer cet évènement ?"
     },
     "plugins\/calendar\/desktop\/php\/calendar.php": {
+        "Accès non autorisé": "Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
         "Santé": "Santé",
@@ -154,16 +158,16 @@
         "Répétition avancée": "Répétition avancée",
         "toute la journée": "toute la journée",
         "de": "de",
-        "à": "à",
-        "Evènement modifié avec succès": "Evènement modifié avec succès"
+        "à": "à"
     },
     "plugins\/calendar\/core\/ajax\/calendar.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Aucun évènement correspondant à : ": "Aucun évènement correspondant à : ",
+        "Aucun évènement correspondant à": "Aucun évènement correspondant à",
         "La date de début ne peut être vide": "La date de début ne peut être vide",
-        "Impossible de trouver la commande d\\'exclusion": "Impossible de trouver la commande d\\'exclusion",
-        "La date de l\\'occurence ne peut etre vide : ": "La date de l\\'occurence ne peut etre vide : ",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+        "Impossible de trouver la commande d'exclusion": "Impossible de trouver la commande d'exclusion",
+        "Aucun évènement correspondant à : ": "Aucun évènement correspondant à : ",
+        "La date de l'occurence ne peut être vide": "La date de l'occurence ne peut être vide",
+        "Aucune methode correspondante à": "Aucune methode correspondante à"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Reprogrammation",
@@ -185,13 +189,13 @@
         "Aucune reprogrammation car aucune occurence suivante trouvée": "Aucune reprogrammation car aucune occurence suivante trouvée",
         "Reprogrammation à": "Reprogrammation à",
         "de": "de",
-        "L\\'id de l\\'équipement ne peut être vide": "L\\'id de l\\'équipement ne peut être vide",
-        "Le nom de l\\'évènement ne peut être vide": "Le nom de l\\'évènement ne peut être vide",
-        "Impossible de trouver l\\'équipement correspondant à l\\'id": "Impossible de trouver l\\'équipement correspondant à l\\'id",
-        "La date de début d\\'évènement ne peut être postérieure ou égale à la date de fin": "La date de début d\\'évènement ne peut être postérieure ou égale à la date de fin",
+        "L'id de l'équipement ne peut être vide": "L'id de l'équipement ne peut être vide",
+        "Le nom de l'évènement ne peut être vide": "Le nom de l'évènement ne peut être vide",
+        "Impossible de trouver l'équipement correspondant à l'id": "Impossible de trouver l'équipement correspondant à l'id",
+        "La date de début d'évènement ne peut être postérieure ou égale à la date de fin": "La date de début d'évènement ne peut être postérieure ou égale à la date de fin",
         "La fréquence de répétition ne peut être vide, nulle ou négative": "La fréquence de répétition ne peut être vide, nulle ou négative",
-        "L\\'unité de répétition ne peut être vide": "L\\'unité de répétition ne peut être vide",
-        "Erreur lors de l\\'exécution de": "Erreur lors de l\\'exécution de",
+        "L'unité de répétition ne peut être vide": "L'unité de répétition ne peut être vide",
+        "Erreur lors de l'exécution de": "Erreur lors de l'exécution de",
         "Détails": "Détails"
     },
     "info.json": {

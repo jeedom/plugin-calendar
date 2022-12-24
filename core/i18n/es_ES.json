@@ -7,6 +7,7 @@
         "Annuler": "Anular"
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
+        "Accès non autorisé": "Acceso no autorizado",
         "Module": "Modulo",
         "ID": "Identificación",
         "Evènements": "Eventos",
@@ -16,6 +17,7 @@
         "Actif": "Activo"
     },
     "plugins\/calendar\/desktop\/modal\/event.edit.php": {
+        "Accès non autorisé": "Acceso no autorizado",
         "L\\'id de l\\'équipement ne peut être vide": "La identificación del equipo no puede estar vacía",
         "Aucun équipement associé à l\\'id": "Ningún equipo asociado con la identificación",
         "Event id non trouvé": "ID de evento no encontrado",
@@ -103,6 +105,7 @@
         "Décocher la case pour désactiver l\\'action": "Desmarque la casilla para deshabilitar la acción",
         "Cocher la case pour que la commande s\\'exécute en parallèle des autres actions": "Marque la casilla para que el comando se ejecute en paralelo con las otras acciones",
         "Sélectionner un mot-clé": "Seleccionar una palabra clave",
+        "Evènement modifié avec succès": "Evento modificado con éxito",
         "Evènement ajouté avec succès": "Evento agregado con éxito",
         "Voulez vous supprimer cette occurence ou l'évènement ?": "¿Quieres eliminar esta ocurrencia o el evento?",
         "Annuler": "Cancelar",
@@ -112,6 +115,7 @@
         "Etes-vous sûr de vouloir supprimer cet évènement ?": "¿Estás seguro de que deseas eliminar este evento?"
     },
     "plugins\/calendar\/desktop\/php\/calendar.php": {
+        "Accès non autorisé": "Acceso no autorizado",
         "Gestion": "Gestión",
         "Ajouter": "Añadir",
         "Santé": "Salud",
@@ -154,16 +158,16 @@
         "Répétition avancée": "Repetición avanzada",
         "toute la journée": "todo el día",
         "de": "de",
-        "à": "en",
-        "Evènement modifié avec succès": "Evento modificado con éxito"
+        "à": "en"
     },
     "plugins\/calendar\/core\/ajax\/calendar.ajax.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Aucun évènement correspondant à : ": "Ningún evento correspondiente a:",
+        "Aucun évènement correspondant à": "No hay eventos correspondientes a",
         "La date de début ne peut être vide": "La fecha de inicio no puede estar vacía",
-        "Impossible de trouver la commande d\\'exclusion": "No se puede encontrar el comando de exclusión",
-        "La date de l\\'occurence ne peut etre vide : ": "La fecha de ocurrencia no puede estar vacía:",
-        "Aucune methode correspondante à : ": "Ningún método correspondiente a:"
+        "Impossible de trouver la commande d'exclusion": "No se puede encontrar el comando de exclusión",
+        "Aucun évènement correspondant à : ": "Ningún evento correspondiente a:",
+        "La date de l'occurence ne peut être vide": "La fecha de ocurrencia no puede estar vacía",
+        "Aucune methode correspondante à": "Ningún método correspondiente a"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Reprogramación",
@@ -185,13 +189,13 @@
         "Aucune reprogrammation car aucune occurence suivante trouvée": "Sin reprogramación porque no se encontró la siguiente ocurrencia",
         "Reprogrammation à": "Reprogramando a",
         "de": "de",
-        "L\\'id de l\\'équipement ne peut être vide": "La identificación del equipo no puede estar vacía",
-        "Le nom de l\\'évènement ne peut être vide": "El nombre del evento no puede estar vacío",
-        "Impossible de trouver l\\'équipement correspondant à l\\'id": "No se pudo encontrar el equipo correspondiente al id",
-        "La date de début d\\'évènement ne peut être postérieure ou égale à la date de fin": "La fecha de inicio del evento no puede ser posterior o igual a la fecha de finalización",
+        "L'id de l'équipement ne peut être vide": "El ID del equipo no puede estar vacío",
+        "Le nom de l'évènement ne peut être vide": "El nombre del evento no puede estar vacío",
+        "Impossible de trouver l'équipement correspondant à l'id": "No se puede encontrar el equipo correspondiente a la identificación",
+        "La date de début d'évènement ne peut être postérieure ou égale à la date de fin": "La fecha de inicio del evento no puede ser posterior o igual a la fecha de finalización",
         "La fréquence de répétition ne peut être vide, nulle ou négative": "La frecuencia de repetición no puede ser vacía, cero o negativa",
-        "L\\'unité de répétition ne peut être vide": "La unidad de repetición no puede estar vacía",
-        "Erreur lors de l\\'exécution de": "Error al ejecutar",
+        "L'unité de répétition ne peut être vide": "La unidad de repetición no puede estar vacía",
+        "Erreur lors de l'exécution de": "Error al ejecutar",
         "Détails": "Detalles"
     },
     "info.json": {
