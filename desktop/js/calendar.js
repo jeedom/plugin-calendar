@@ -53,6 +53,7 @@ function printEqLogic() {
     height: "auto",
     nextDayThreshold: '12:00:00',
     stickyHeaderDates: false,
+    allDaySlot: false,
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
