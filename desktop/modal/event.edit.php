@@ -148,9 +148,9 @@ $calendars = calendar::byType('calendar');
 						</label>
 						<div class="col-sm-8 input-group">
 							<span class="input-group-addon roundedLeft">{{Début}}</span>
-							<input type="text" class="calendarAttr form-control datetimepicker" data-l1key="startDate">
+							<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="startDate">
 							<span class="input-group-addon">{{Fin}}</span>
-							<input type="text" class="calendarAttr form-control datetimepicker roundedLeft" data-l1key="endDate">
+							<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="endDate">
 							<span class="input-group-btn">
 								<a class="btn btn-default calendarAction roundedRight" data-action="allDay" title="{{Toute la journée}}"><i class="fas fa-history"></i></a>
 							</span>
@@ -318,7 +318,7 @@ $calendars = calendar::byType('calendar');
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Jusqu'à}}</label>
 							<div class="col-sm-8">
-								<input type="text" class="calendarAttr form-control datetimepicker" data-l1key="until">
+								<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="until">
 							</div>
 						</div>
 						<div class="form-group">
@@ -342,6 +342,17 @@ $calendars = calendar::byType('calendar');
 
 <script>
 	$(function() {
+		if (_jeedom4_4) {
+			jeedomUtils.datePickerInit('Y-m-d H:i')
+		} else {
+			$.datetimepicker.setLocale(jeedom_langage.substring(0, 2));
+			$('.in_datepicker').datetimepicker({
+				dayOfWeekStart: 1,
+				format: 'Y-m-d H:i:00',
+				step: 15
+			})
+		}
+
 		$('.calendarAttr').on('change', function() {
 			modifyWithoutSave = true
 		})
@@ -510,13 +521,6 @@ $calendars = calendar::byType('calendar');
 			}
 		}
 	}
-
-	$.datetimepicker.setLocale(jeedom_langage.substring(0, 2));
-	$('.datetimepicker').datetimepicker({
-		dayOfWeekStart: 1,
-		format: 'Y-m-d H:i:00',
-		step: 15
-	})
 
 	$('#md_eventEditSave').on('click', function() {
 		var calendarEvent = $('#div_eventEdit').getValues('.calendarAttr')

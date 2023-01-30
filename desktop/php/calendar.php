@@ -2,9 +2,12 @@
 if (!isConnect('admin')) {
 	throw new Exception('401 - {{Accès non autorisé}}');
 }
-include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'css');
+$jeedom4_4 = version_compare(config::byKey('version'), '4.4', '>=');
+if (!$jeedom4_4) {
+	include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'css');
+}
 $plugin = plugin::byId('calendar');
-sendVarToJS('eqType', $plugin->getId());
+sendVarToJS(['eqType' => $plugin->getId(), '_jeedom4_4' => $jeedom4_4]);
 $eqLogics = eqLogic::byType($plugin->getId());
 ?>
 <style>
@@ -188,7 +191,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 </div>
 
 <?php
-include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js');
+if (!$jeedom4_4) {
+	include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js');
+}
 include_file('3rdparty', 'fullcalendar/index.global.min', 'js', 'calendar');
 include_file('3rdparty', 'fullcalendar/locales-all.global.min', 'js', 'calendar');
 include_file('desktop', 'calendar', 'js', 'calendar');
