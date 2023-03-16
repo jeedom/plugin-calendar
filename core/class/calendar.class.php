@@ -862,7 +862,7 @@ class calendar_event {
 		if (!is_object($eqLogic)) {
 			throw new Exception(__("Impossible de trouver l'équipement correspondant à l'id", __FILE__) . ' : ' . $this->getEqLogic_id());
 		}
-		if ((strtotime($this->getStartDate()) + 59) >= strtotime($this->getEndDate())) {
+		if ((strtotime($this->getStartDate()) + 15) >= strtotime($this->getEndDate())) {
 			throw new Exception(__("La date de début d'évènement ne peut être postérieure ou égale à la date de fin", __FILE__));
 		}
 		$repeat = $this->getRepeat();
