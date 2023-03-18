@@ -198,6 +198,12 @@
         "Erreur lors de l'exécution de": "Erreur lors de l'exécution de",
         "Détails": "Détails"
     },
+    "plugins\/calendar\/core\/api\/calendar.api.php": {
+        "JSONRPC object not defined": "JSONRPC object not defined",
+        "Aucun calendrier correspondant à": "Aucun calendrier correspondant à",
+        "Aucun évènement correspondant à": "Aucun évènement correspondant à",
+        "Erreur de methode": "Erreur de methode"
+    },
     "info.json": {
         "Plugin permettant de gérer des calendriers et d'effectuer des actions automatiquement au début et\/ou à la fin d'un évènement.": "Plugin permettant de gérer des calendriers et d'effectuer des actions automatiquement au début et\/ou à la fin d'un évènement."
     }
