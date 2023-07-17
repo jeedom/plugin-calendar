@@ -34,7 +34,7 @@ $('#div_eventList').delegate('.editEvent', 'click', function() {
 })
 
 $('#bt_calendartab').on('click', function() {
-  setTimeout(function() { calendar.render() }, 100)
+  setTimeout(function() { calendar.render() }, 600)
 })
 
 if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
