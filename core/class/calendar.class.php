@@ -967,6 +967,11 @@ class calendar_event {
 		}
 		$eqLogic = $this->getEqLogic();
 		DB::remove($this);
+
+		$cmd = $eqLogic->getCmd('info', 'in_progress');
+		if (is_object($cmd)) {
+			$cmd->event($cmd->execute());
+		}
 	}
 
 	public function doAction($_action = 'start') {
