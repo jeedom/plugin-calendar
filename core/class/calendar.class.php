@@ -38,8 +38,8 @@ class calendar extends eqLogic {
 		$repeat = $event->getRepeat();
 		if ($repeat['enable'] == 1) {
 			if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq']) || $repeat['freq'] == '') {
-				$startDate = (new DateTime('-12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
-				$endDate = (new DateTime('+12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
+				$startDate = (new DateTime('-11 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
+				$endDate = (new DateTime('+11 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 			} else {
 				$startDate = (new DateTime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 				$endDate = (new DateTime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
