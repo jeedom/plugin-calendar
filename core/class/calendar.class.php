@@ -50,7 +50,7 @@ class calendar extends eqLogic {
 		}
 		log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Reprogrammation', __FILE__));
 		$event->reschedule();
-		log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Exécution de l\'évènement', __FILE__) . ' : ' . print_r($event, true));
+		log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Analyse de l\'évènement', __FILE__) . ' : ' . print_r($event, true));
 		try {
 			if (jeedom::isDateOk()) {
 				$results = $event->calculOccurence($startDate, $endDate);
