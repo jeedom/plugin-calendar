@@ -171,7 +171,7 @@
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Umprogrammierung",
-        "Exécution de l\\'évènement": "Durchführung der Veranstaltung",
+        "Analyse de l\\'évènement": "Analyse des Ereignisses",
         "Aucune programmation trouvée, exécution des actions de fin": "Keine Programmierung gefunden, Ausführung von Endaktionen",
         "Recherche de l\\'action à exécuter (début ou fin)": "Suchen der auszuführenden Aktion (Start oder Ende)",
         "Action de début": "Aktion starten",
