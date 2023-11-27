@@ -24,9 +24,10 @@ $eqLogics = calendar::byType('calendar');
 <table class="table table-condensed tablesorter" id="table_healthmpower">
 	<thead>
 		<tr>
-			<th>{{Module}}</th>
+			<th>{{Nom}}</th>
 			<th>{{ID}}</th>
 			<th>{{Evènements}}</th>
+			<th>{{En cours}}</th>
 			<th>{{Etat}}</th>
 			<th>{{Date création}}</th>
 		</tr>
@@ -42,6 +43,7 @@ $eqLogics = calendar::byType('calendar');
 			echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
 			echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getId() . '</span></td>';
 			echo '<td><span class="label label-info" style="font-size : 1em;">' . $eventNumber . '</span></td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getCmd('info', 'in_progress')->execCmd() . '</span></td>';
 			echo '<td>' . $state . '</td>';
 			echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getConfiguration('createtime') . '</span></td></tr>';
 		}

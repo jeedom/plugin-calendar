@@ -36,6 +36,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		box-shadow: none;
 	}
 
+	.fc-event {
+		overflow: hidden;
+	}
+
 	.fc-event-main {
 		margin-left: 2px;
 	}
@@ -117,7 +121,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<label class="col-sm-4 control-label">{{Nom de l'agenda}}</label>
 								<div class="col-sm-6">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;">
-									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement gCalendar}}">
+									<input type="text" class="eqLogicAttr form-control" data-l1key="display" data-l2key="defaultView" style="display : none;">
+									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'agenda}}">
 								</div>
 							</div>
 							<div class="form-group">
