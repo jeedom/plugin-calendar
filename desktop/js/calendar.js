@@ -44,7 +44,7 @@ if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
   }, 1000)
 }
 
-function printEqLogic() {
+function printEqLogic(_eqLogic) {
   if (calendar !== undefined) {
     calendar.destroy()
   }
@@ -57,7 +57,7 @@ function printEqLogic() {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + $('.eqLogicAttr[data-l1key=id]').value(),
     eventClick: function(info) {
@@ -69,6 +69,10 @@ function printEqLogic() {
       minute: '2-digit',
       meridiem: false
     },
+    datesSet: function(dateInfo) {
+      document.querySelector('.eqLogicAttr[data-l2key="defaultView"]').value = dateInfo.view.type
+    },
+    initialView: _eqLogic.display.defaultView,
     eventDisplay: 'block',
     eventContent: function(info) {
       return { html: info.timeText + ' ' + info.event.title }

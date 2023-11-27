@@ -57,7 +57,7 @@ try {
 		}
 		$cmd = $event->getEqLogic()->getCmd('action', 'add_include_date');
 		if (!is_object($cmd)) {
-			throw new Exception(__("Impossible de trouver la commande d'exclusion", __FILE__));
+			throw new Exception(__("Impossible de trouver la commande : Ajouter une date", __FILE__));
 		}
 		$date = (init('endDate') != '' && init('endDate') != init('startDate')) ? init('startDate') . ':' . init('endDate') : init('startDate');
 		$cmd->execCmd(array('title' => $event->getName(), 'message' => $date));
@@ -99,20 +99,20 @@ try {
 		}
 		$event = calendar_event::byId(init('id'));
 		if (!is_object($event)) {
-			throw new Exception(__('Aucun évènement correspondant à : ', __FILE__) . init('id'));
+			throw new Exception(__('Aucun évènement correspondant à', __FILE__) . ' : ' . init('id'));
 		}
 		if (init('date') == '') {
 			throw new Exception(__("La date de l'occurence ne peut être vide", __FILE__) . ' : ' . init('date'));
 		}
 		$cmd = $event->getEqLogic()->getCmd('action', 'add_exclude_date');
 		if (!is_object($cmd)) {
-			throw new Exception(__("Impossible de trouver la commande d'exclusion", __FILE__));
+			throw new Exception(__("Impossible de trouver la commande : Retirer une date", __FILE__));
 		}
 		$cmd->execCmd(array('title' => $event->getName(), 'message' => date('Y-m-d', strtotime(init('date')))));
 		ajax::success();
 	}
 
-	throw new Exception(__('Aucune methode correspondante à', __FILE__) . ' : ' . init('action'));
+	throw new Exception(__('Aucune méthode correspondante à', __FILE__) . ' : ' . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {
 	ajax::error(displayException($e), $e->getCode());
