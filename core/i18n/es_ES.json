@@ -8,9 +8,10 @@
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
         "Accès non autorisé": "Acceso no autorizado",
-        "Module": "Modulo",
+        "Nom": "Apellido",
         "ID": "Identificación",
         "Evènements": "Eventos",
+        "En cours": "En curso",
         "Etat": "Estado",
         "Date création": "Fecha de creación",
         "Inactif": "Inactivo",
@@ -134,7 +135,6 @@
         "Agenda": "Calendario",
         "Paramètres généraux": "Configuración general",
         "Nom de l'agenda": "Nombre del calendario",
-        "Nom de l'équipement gCalendar": "Nombre del equipo gCalendar",
         "Objet parent": "Objeto padre",
         "Aucun": "Ninguna",
         "Catégorie": "Categoría",
@@ -164,10 +164,10 @@
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Aucun évènement correspondant à": "No hay eventos correspondientes a",
         "La date de début ne peut être vide": "La fecha de inicio no puede estar vacía",
-        "Impossible de trouver la commande d'exclusion": "No se puede encontrar el comando de exclusión",
-        "Aucun évènement correspondant à : ": "Ningún evento correspondiente a:",
+        "Impossible de trouver la commande : Ajouter une date": "No se puede encontrar el pedido: agregar fecha",
         "La date de l'occurence ne peut être vide": "La fecha de ocurrencia no puede estar vacía",
-        "Aucune methode correspondante à": "Ningún método correspondiente a"
+        "Impossible de trouver la commande : Retirer une date": "No se puede encontrar el pedido: eliminar una fecha",
+        "Aucune méthode correspondante à": "Ningún método correspondiente a"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Reprogramación",

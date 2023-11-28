@@ -8,9 +8,10 @@
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
         "Accès non autorisé": "Unautorisierter Zugriff",
-        "Module": "Modul",
+        "Nom": "Name",
         "ID": "Identifikation",
         "Evènements": "Geschehen",
+        "En cours": "Im Gange",
         "Etat": "Zustand",
         "Date création": "Erstellungsdatum",
         "Inactif": "Inaktiv",
@@ -134,7 +135,6 @@
         "Agenda": "Agenda",
         "Paramètres généraux": "Allgemeine Einstellungen",
         "Nom de l'agenda": "Kalendername",
-        "Nom de l'équipement gCalendar": "Gerätename gCalendar",
         "Objet parent": "Übergeordnetes Objekt",
         "Aucun": "Ohne",
         "Catégorie": "Kategorie",
@@ -164,10 +164,10 @@
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Aucun évènement correspondant à": "Keine entsprechenden Veranstaltungen",
         "La date de début ne peut être vide": "Das Startdatum darf nicht leer sein",
-        "Impossible de trouver la commande d'exclusion": "Der Exclude-Befehl kann nicht gefunden werden",
-        "Aucun évènement correspondant à : ": "Kein Ereignis entsprechend:",
+        "Impossible de trouver la commande : Ajouter une date": "Bestellung konnte nicht gefunden werden: Datum hinzufügen",
         "La date de l'occurence ne peut être vide": "Das Datum des Auftretens darf nicht leer sein",
-        "Aucune methode correspondante à": "Keine entsprechende Methode"
+        "Impossible de trouver la commande : Retirer une date": "Bestellung konnte nicht gefunden werden: Entfernen Sie ein Datum",
+        "Aucune méthode correspondante à": "Keine entsprechende Methode"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Umprogrammierung",
@@ -178,7 +178,7 @@
         "Action de fin": "Aktion beenden",
         "Calendrier": "Kalender",
         "dans l\\'évènement": "in der veranstaltung",
-        "En cours": "In Bearbeitung",
+        "En cours": "Im Gange",
         "Ajouter une date": "Fügen Sie ein Datum hinzu",
         "Date (AAAA-MM-JJ)": "Datum (JJJJ-MM-TT)",
         "Nom évènement": "Ereignisname",

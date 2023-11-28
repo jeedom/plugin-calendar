@@ -8,9 +8,10 @@
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
         "Accès non autorisé": "Accès non autorisé",
-        "Module": "Modul",
+        "Nom": "Nom",
         "ID": "ID",
         "Evènements": "Evènements",
+        "En cours": "En cours",
         "Etat": "Negara",
         "Date création": "Tanggal pembuatan",
         "Inactif": "Non-aktif",
@@ -134,7 +135,6 @@
         "Agenda": "Agenda",
         "Paramètres généraux": "Paramètres généraux",
         "Nom de l'agenda": "Nom de l'agenda",
-        "Nom de l'équipement gCalendar": "Nom de l'équipement gCalendar",
         "Objet parent": "Objek induk",
         "Aucun": "Tak ada",
         "Catégorie": "Kategori",
@@ -164,10 +164,10 @@
         "401 - Accès non autorisé": "401 - Akses tidak sah",
         "Aucun évènement correspondant à": "Aucun évènement correspondant à",
         "La date de début ne peut être vide": "La date de début ne peut être vide",
-        "Impossible de trouver la commande d'exclusion": "Impossible de trouver la commande d'exclusion",
-        "Aucun évènement correspondant à : ": "Aucun évènement correspondant à :",
+        "Impossible de trouver la commande : Ajouter une date": "Impossible de trouver la commande : Ajouter une date",
         "La date de l'occurence ne peut être vide": "La date de l'occurence ne peut être vide",
-        "Aucune methode correspondante à": "Aucune methode correspondante à"
+        "Impossible de trouver la commande : Retirer une date": "Impossible de trouver la commande : Retirer une date",
+        "Aucune méthode correspondante à": "Aucune methode correspondante à"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Reprogrammation",
