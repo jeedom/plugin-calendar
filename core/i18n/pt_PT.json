@@ -8,9 +8,10 @@
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
         "Accès non autorisé": "Acesso não autorizado",
-        "Module": "Módulo",
+        "Nom": "Nome",
         "ID": "ID",
         "Evènements": "Eventos",
+        "En cours": "Em andamento",
         "Etat": "Estado",
         "Date création": "Data de criação",
         "Inactif": "Inativo",
@@ -134,7 +135,6 @@
         "Agenda": "Calendário",
         "Paramètres généraux": "Configurações Gerais",
         "Nom de l'agenda": "Nome do calendário",
-        "Nom de l'équipement gCalendar": "Nome do equipamento gCalendar",
         "Objet parent": "Objeto pai",
         "Aucun": "Nenhum",
         "Catégorie": "Categoria",
@@ -164,10 +164,10 @@
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
         "Aucun évènement correspondant à": "Nenhum evento correspondente a",
         "La date de début ne peut être vide": "A data de início não pode estar vazia",
-        "Impossible de trouver la commande d'exclusion": "Não é possível encontrar o comando de exclusão",
-        "Aucun évènement correspondant à : ": "Nenhum evento correspondente a:",
+        "Impossible de trouver la commande : Ajouter une date": "Não foi possível encontrar o pedido: adicionar data",
         "La date de l'occurence ne peut être vide": "A data da ocorrência não pode ficar em branco",
-        "Aucune methode correspondante à": "Nenhum método correspondente a"
+        "Impossible de trouver la commande : Retirer une date": "Não foi possível encontrar o pedido: remover uma data",
+        "Aucune méthode correspondante à": "Nenhum método correspondente a"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Reprogramando",
@@ -178,7 +178,7 @@
         "Action de fin": "Fim da ação",
         "Calendrier": "Calendário",
         "dans l\\'évènement": "no evento",
-        "En cours": "Contínuo",
+        "En cours": "Em andamento",
         "Ajouter une date": "Adicionar uma data",
         "Date (AAAA-MM-JJ)": "Data (AAAA-MM-DD)",
         "Nom évènement": "Nome do evento",

@@ -8,9 +8,10 @@
     },
     "plugins\/calendar\/desktop\/modal\/health.php": {
         "Accès non autorisé": "Unauthorized access",
-        "Module": "Module",
+        "Nom": "Name",
         "ID": "Id",
         "Evènements": "Events",
+        "En cours": "In progress",
         "Etat": "State",
         "Date création": "Creation Date",
         "Inactif": "Inactive",
@@ -134,7 +135,6 @@
         "Agenda": "Calendar",
         "Paramètres généraux": "General settings",
         "Nom de l'agenda": "Calendar name",
-        "Nom de l'équipement gCalendar": "GCalendar equipment name",
         "Objet parent": "Parent object",
         "Aucun": "None",
         "Catégorie": "Category",
@@ -164,10 +164,10 @@
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Aucun évènement correspondant à": "No events corresponding to",
         "La date de début ne peut être vide": "Start date cannot be empty",
-        "Impossible de trouver la commande d'exclusion": "Unable to find the exclude command",
-        "Aucun évènement correspondant à : ": "No event corresponding to:",
+        "Impossible de trouver la commande : Ajouter une date": "Unable to find order: Add date",
         "La date de l'occurence ne peut être vide": "Occurrence date cannot be empty",
-        "Aucune methode correspondante à": "No method corresponding to"
+        "Impossible de trouver la commande : Retirer une date": "Unable to find order: Remove a date",
+        "Aucune méthode correspondante à": "No method corresponding to"
     },
     "plugins\/calendar\/core\/class\/calendar.class.php": {
         "Reprogrammation": "Reprogramming",
@@ -178,7 +178,7 @@
         "Action de fin": "End action",
         "Calendrier": "Calendar",
         "dans l\\'évènement": "in the event",
-        "En cours": "Running",
+        "En cours": "In progress",
         "Ajouter une date": "Add a date",
         "Date (AAAA-MM-JJ)": "Date (YYYY-MM-DD)",
         "Nom évènement": "Event name",
