@@ -61,7 +61,7 @@ class calendar extends eqLogic {
 				}
 				log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Recherche de l\'action à exécuter (début ou fin)', __FILE__));
 				for ($i = 0; $i < count($results); $i++) {
-					if ((strtotime($results[$i]['end'])+300) <= $nowtime){
+					if ((strtotime($results[$i]['end']) + 300) <= $nowtime) {
 						continue;
 					}
 					if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
@@ -639,15 +639,15 @@ class calendar_event {
 					if (strpos($date, ':') !== false) {
 						$expDate = explode(':', $date);
 						if (count($expDate) == 2) {
-							$startDate = $expDate[0];
-							$endDate = $expDate[1];
+							$startDate = date('Y-m-d', strtotime($expDate[0]));
+							$endDate = date('Y-m-d', strtotime($expDate[1]));
 							while (strtotime($startDate) <= strtotime($endDate)) {
 								$excludeDate[] = $startDate;
 								$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
 							}
 						}
 					} else {
-						$excludeDate[] = $date;
+						$excludeDate[] = date('Y-m-d', strtotime($date));
 					}
 				}
 			}
@@ -786,8 +786,8 @@ class calendar_event {
 				if (strpos($date, ':') !== false) {
 					$expDate = explode(':', $date);
 					if (count($expDate) == 2) {
-						$startDate = $expDate[0];
-						$endDate = $expDate[1];
+						$startDate = date('Y-m-d', strtotime($expDate[0]));
+						$endDate = date('Y-m-d', strtotime($expDate[1]));
 						while (strtotime($startDate) <= strtotime($endDate)) {
 							$includeDate[$startDate] = $startDate;
 							$startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
@@ -795,7 +795,7 @@ class calendar_event {
 					}
 				} else {
 					if (strtotime($date) >= $startTime && strtotime($date) <= $endTime) {
-						$includeDate[$date] = $date;
+						$includeDate[$date] = date('Y-m-d', strtotime($date));
 					}
 				}
 			}
