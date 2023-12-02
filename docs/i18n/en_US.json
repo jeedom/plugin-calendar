@@ -2,6 +2,9 @@
     "changelog.md": {
         "Changelog Agenda": "Changelog Agenda",
         "S'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "If there is no information on the update, it means that it concerns only the update of documentation, translation or text",
+        "01\/12\/2023": "01\/12\/2023",
+        "Inclure\/Exclure par date": "Include\/Exclude by date",
+        "Optimisation du calcul des occurences": "Optimization of occurrence calculation",
         "27\/11\/2023": "11\/27\/2023",
         "Mise à jour de la librairie `fullcalendar` de 6.0": "Updated the `fullcalendar` library to 6.0",
         "1 vers 6.1.9": "1 to 6.1.9",
