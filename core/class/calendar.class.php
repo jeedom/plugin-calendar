@@ -1011,6 +1011,10 @@ class calendar_event {
 		return true;
 	}
 
+	public function hasRight($_right, $_user = null){
+		return this->getEqLogic()->hasRight($_right, $_user);
+	}
+
 	public function getName() {
 		if ($this->getCmd_param('eventName') != '') {
 			return $this->getCmd_param('eventName');
