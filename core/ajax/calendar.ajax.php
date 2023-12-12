@@ -82,24 +82,24 @@ try {
 	}
 
 	if (init('action') == 'removeEvent') {
-		if (!isConnect('admin')) {
-			throw new Exception(__('401 - Accès non autorisé', __FILE__));
-		}
 		$event = calendar_event::byId(init('id'));
 		if (!is_object($event)) {
 			throw new Exception(__('Aucun évènement correspondant à', __FILE__) . ' : ' . init('id'));
+		}
+		if(!$event->hasRight('w')){
+			throw new Exception(__('401 - Accès non autorisé', __FILE__));
 		}
 		$event->remove();
 		ajax::success();
 	}
 
 	if (init('action') == 'removeOccurence') {
-		if (!isConnect('admin')) {
-			throw new Exception(__('401 - Accès non autorisé', __FILE__));
-		}
 		$event = calendar_event::byId(init('id'));
 		if (!is_object($event)) {
 			throw new Exception(__('Aucun évènement correspondant à', __FILE__) . ' : ' . init('id'));
+		}
+		if(!$event->hasRight('w')){
+			throw new Exception(__('401 - Accès non autorisé', __FILE__));
 		}
 		if (init('date') == '') {
 			throw new Exception(__("La date de l'occurence ne peut être vide", __FILE__) . ' : ' . init('date'));
