@@ -1012,7 +1012,7 @@ class calendar_event {
 	}
 
 	public function hasRight($_right, $_user = null){
-		return this->getEqLogic()->hasRight($_right, $_user);
+		return $this->getEqLogic()->hasRight($_right, $_user);
 	}
 
 	public function getName() {
