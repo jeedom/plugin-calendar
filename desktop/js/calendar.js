@@ -49,7 +49,7 @@ function printEqLogic(_eqLogic) {
     calendar.destroy()
   }
   calendar = new FullCalendar.Calendar(document.getElementById('div_calendar'), {
-    locale: jeedom_langage.substring(0, 2),
+    locale: jeeFrontEnd.language.substring(0, 2),
     height: "auto",
     nextDayThreshold: '12:00:00',
     stickyHeaderDates: false,
