@@ -1011,7 +1011,7 @@ class calendar_event {
 		return true;
 	}
 
-	public function hasRight($_right, $_user = null){
+	public function hasRight($_right, $_user = null) {
 		return $this->getEqLogic()->hasRight($_right, $_user);
 	}
 
@@ -1038,16 +1038,19 @@ class calendar_event {
 	public function setId($_id) {
 		$this->_changed = utils::attrChanged($this->_changed, $this->id, $_id);
 		$this->id = $_id;
+		return $this;
 	}
 
 	public function setStartDate($_startDate) {
 		$this->_changed = utils::attrChanged($this->_changed, $this->startDate, $_startDate);
 		$this->startDate = $_startDate;
+		return $this;
 	}
 
 	public function setEndDate($_endDate) {
 		$this->_changed = utils::attrChanged($this->_changed, $this->endDate, $_endDate);
 		$this->endDate = $_endDate;
+		return $this;
 	}
 
 	public function getEqLogic_id() {
@@ -1061,6 +1064,7 @@ class calendar_event {
 	public function setEqLogic_id($_eqLogic_id) {
 		$this->_changed = utils::attrChanged($this->_changed, $this->eqLogic_id, $_eqLogic_id);
 		$this->eqLogic_id = $_eqLogic_id;
+		return $this;
 	}
 
 	public function getRepeat($_key = '', $_default = '') {
@@ -1071,6 +1075,7 @@ class calendar_event {
 		$repeat = utils::setJsonAttr($this->repeat, $_key, $_value);
 		$this->_changed = utils::attrChanged($this->_changed, $this->repeat, $repeat);
 		$this->repeat = $repeat;
+		return $this;
 	}
 
 	public function getUntil() {
@@ -1080,6 +1085,7 @@ class calendar_event {
 	public function setUntil($_until) {
 		$this->_changed = utils::attrChanged($this->_changed, $this->until, $_until);
 		$this->until = $_until;
+		return $this;
 	}
 
 	public function getCmd_param($_key = '', $_default = '') {
@@ -1090,6 +1096,7 @@ class calendar_event {
 		$cmd_param = utils::setJsonAttr($this->cmd_param, $_key, $_value);
 		$this->_changed = utils::attrChanged($this->_changed, $this->cmd_param, $cmd_param);
 		$this->cmd_param = $cmd_param;
+		return $this;
 	}
 
 	public function getChanged() {
