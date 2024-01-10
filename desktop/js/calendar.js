@@ -16,29 +16,29 @@
 
 var calendar = undefined
 
-$('#bt_healthcalendar').on('click', function() {
+$('#bt_healthcalendar').on('click', function () {
   $('#md_modal').dialog({ title: "{{Santé Agenda}}" })
   $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open')
 })
 
-$('#bt_addEvent').on('click', function() {
+$('#bt_addEvent').on('click', function () {
   $('#bt_calendartab').trigger('click')
   $('#md_modal').dialog({ title: "{{Ajouter un évènement}}" })
   $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open')
 })
 
-$('#div_eventList').delegate('.editEvent', 'click', function() {
+$('#div_eventList').delegate('.editEvent', 'click', function () {
   $('#bt_calendartab').trigger('click')
   $('#md_modal').dialog({ title: "{{Modifier un évènement}}" })
   $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open')
 })
 
-$('#bt_calendartab').on('click', function() {
-  setTimeout(function() { calendar.render() }, 600)
+$('#bt_calendartab').on('click', function () {
+  setTimeout(function () { calendar.render() }, 600)
 })
 
 if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
-  setTimeout(function() {
+  setTimeout(function () {
     $('#md_modal').dialog({ title: "{{Ajouter/Modifier un évènement}}" })
     $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open')
   }, 1000)
@@ -60,21 +60,21 @@ function printEqLogic(_eqLogic) {
       right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + $('.eqLogicAttr[data-l1key=id]').value(),
-    eventClick: function(info) {
+    eventClick: function (info) {
       $('#md_modal').dialog({ title: "{{Modifier un évènement}}" })
-      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start)).dialog('open')
+      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start.toLocaleDateString("en-US"))).dialog('open')
     },
     eventTimeFormat: {
       hour: 'numeric',
       minute: '2-digit',
       meridiem: false
     },
-    datesSet: function(dateInfo) {
+    datesSet: function (dateInfo) {
       document.querySelector('.eqLogicAttr[data-l2key="defaultView"]').value = dateInfo.view.type
     },
     initialView: _eqLogic.display.defaultView,
     eventDisplay: 'block',
-    eventContent: function(info) {
+    eventContent: function (info) {
       return { html: info.timeText + ' ' + info.event.title }
     }
   })
@@ -91,10 +91,10 @@ function updateEventList() {
       eqLogic_id: $('.eqLogicAttr[data-l1key=id]').value()
     },
     dataType: 'json',
-    error: function(error) {
+    error: function (error) {
       $.fn.showAlert({ message: error.message, level: 'danger' })
     },
-    success: function(data) {
+    success: function (data) {
       if (data.state != 'ok') {
         $('#div_alert').showAlert({ message: data.result, level: 'danger' })
         return
