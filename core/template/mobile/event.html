@@ -1,23 +1,26 @@
-<div style="background-color: #background_color#;color: #text_color#; margin-top : 2px; -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px;margin-right : 10px;margin-left : 10px;">
-    <i class="fas fa-times pull-left cursor removeEvent" data-uid="#uid#" style="margin-top : 3px;margin-left: 4px;"></i><span style="font-size : 0.9em;">#start# - #end#</span> <span style="font-weight: bold;">#name#</span>   
+<div
+    style="background-color: #background_color#;color: #text_color#; margin-top : 2px; -moz-border-radius: 5px;-webkit-border-radius: 5px; border-radius: 5px;margin-right : 10px;margin-left : 10px;">
+    <i class="fas fa-times pull-left cursor removeEvent" data-uid="#uid#"
+        style="margin-top : 3px;margin-left: 4px;"></i><span style="font-size : 0.9em;">#start# - #end#</span> <span
+        style="font-weight: bold;">#name#</span>
     <script>
-        $('.removeEvent[data-uid=#uid#]').on('click', function() {
-            if (confirm("Etês vous sur de vouloir supprimer cette occurence ?") == true) {
+        $('.removeEvent[data-uid=#uid#]').on('click', function () {
+            if (confirm("Etês vous sur de vouloir supprimer cette occurrence ?") == true) {
                 $.ajax({
                     type: 'POST',
                     url: 'plugins/calendar/core/ajax/calendar.ajax.php',
                     data: {
-                        action: 'removeOccurence',
+                        action: 'removeOccurrence',
                         id: '#event_id#',
                         date: '#date#'
                     },
                     dataType: 'json',
-                    error: function(request, status, error) {
+                    error: function (request, status, error) {
                         handleAjaxError(request, status, error, $('#div_eventEditAlert'));
                     },
-                    success: function(data) {
+                    success: function (data) {
                         if (data.state != 'ok') {
-                            $('#div_eventEditAlert').showAlert({message: data.result, level: 'danger'});
+                            $('#div_eventEditAlert').showAlert({ message: data.result, level: 'danger' });
                             return;
                         }
                         $('.removeEvent[data-uid=#uid#]').parent().remove();
@@ -27,5 +30,3 @@
         });
     </script>
 </div>
-
-

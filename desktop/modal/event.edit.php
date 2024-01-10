@@ -574,7 +574,7 @@ $calendars = calendar::byType('calendar');
 	$('#md_eventEditRemove').on('click', function() {
 		if (calendarEvent != null && is_array(calendarEvent) && calendarEvent.repeat.enable == 1 && dateEvent != null && dateEvent != '') {
 			bootbox.dialog({
-				message: "{{Voulez vous supprimer cette occurence ou l'évènement ?}}",
+				message: "{{Voulez vous supprimer cette occurrence ou l'évènement ?}}",
 				title: "Suppression",
 				buttons: {
 					cancel: {
@@ -585,14 +585,14 @@ $calendars = calendar::byType('calendar');
 						}
 					},
 					success: {
-						label: "{{Occurence}}",
+						label: "{{occurrence}}",
 						className: "btn-success",
 						callback: function() {
 							$.ajax({
 								type: 'POST',
 								url: 'plugins/calendar/core/ajax/calendar.ajax.php',
 								data: {
-									action: 'removeOccurence',
+									action: 'removeOccurrence',
 									id: $('.calendarAttr[data-l1key=id]').value(),
 									date: dateEvent
 								},
@@ -612,7 +612,7 @@ $calendars = calendar::byType('calendar');
 										return
 									}
 									$('#div_Alert').showAlert({
-										message: '{{Occurence supprimée avec succès}}',
+										message: '{{occurrence supprimée avec succès}}',
 										level: 'success'
 									})
 									calendar.refetchEvents()

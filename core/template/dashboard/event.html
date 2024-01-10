@@ -1,24 +1,25 @@
-<div style="background-color:#background_color#;color:#text_color#; margin-top:2px;border-radius:5px;margin-right:5px;margin-left:5px;">
+<div
+  style="background-color:#background_color#;color:#text_color#; margin-top:2px;border-radius:5px;margin-right:5px;margin-left:5px;">
   <i class="fas fa-times pull-left cursor removeEvent" data-uid="#uid#" style="margin-top:12px;margin-left:2px;"></i>
   <div style="font-weight: bold;">#name#</div>
   <div style="font-size:0.7em;">#start# - #end#</div>
   <script>
-    $('.removeEvent[data-uid=#uid#]').on('click', function() {
-      bootbox.confirm('Etes-vous sûr de vouloir supprimer cet événement ?', function(result) {
+    $('.removeEvent[data-uid=#uid#]').on('click', function () {
+      bootbox.confirm('Etes-vous sûr de vouloir supprimer cet événement ?', function (result) {
         if (result) {
           $.ajax({
             type: 'POST',
             url: 'plugins/calendar/core/ajax/calendar.ajax.php',
             data: {
-              action: 'removeOccurence',
+              action: 'removeOccurrence',
               id: '#event_id#',
               date: '#date#'
             },
             dataType: 'json',
-            error: function(error) {
+            error: function (error) {
               $.fn.showAlert({ message: error.message, level: 'danger' })
             },
-            success: function(data) {
+            success: function (data) {
               if (data.state != 'ok') {
                 $.fn.showAlert({ message: data.result, level: 'danger' })
                 return

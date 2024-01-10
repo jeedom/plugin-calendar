@@ -53,7 +53,7 @@ class calendar extends eqLogic {
 		log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Analyse de l\'évènement', __FILE__) . ' : ' . print_r($event, true));
 		try {
 			if (jeedom::isDateOk()) {
-				$results = $event->calculOccurence($startDate, $endDate);
+				$results = $event->calculOccurrence($startDate, $endDate);
 				if (count($results) == 0) {
 					log::add(__CLASS__, 'debug', $eqLogic->getHumanName() . ' ' . __('Aucune programmation trouvée, exécution des actions de fin', __FILE__));
 					$event->doAction('end');
@@ -478,7 +478,7 @@ class calendar_event {
 	public static function calculeEvents($_events, $_startDate = null, $_endDate = null) {
 		$return = array();
 		foreach ($_events as $event) {
-			foreach ($event->calculOccurence($_startDate, $_endDate) as $info_event) {
+			foreach ($event->calculOccurrence($_startDate, $_endDate) as $info_event) {
 				$info_event['id'] = $event->getId();
 				if ($event->getCmd_param('transparent', 0) == 1) {
 					$info_event['color'] = 'transparent';
@@ -563,7 +563,7 @@ class calendar_event {
 	public function reschedule() {
 		$next = $this->nextOccurrence();
 		if ($next === null || $next === false) {
-			log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' ' . __('Aucune reprogrammation car aucune occurence suivante trouvée', __FILE__));
+			log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' ' . __('Aucune reprogrammation car aucune occurrence suivante trouvée', __FILE__));
 			return;
 		}
 		log::add('calendar', 'debug', $this->getEqLogic()->getHumanName() . ' ' . __('Reprogrammation à', __FILE__) . ' : ' . print_r($next, true) . ' ' . __('de', __FILE__) . ' : ' . print_r($this, true));
@@ -599,7 +599,7 @@ class calendar_event {
 				$endDate = (new DateTime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 			}
 		}
-		$results = $this->calculOccurence($startDate, $endDate);
+		$results = $this->calculOccurrence($startDate, $endDate);
 		if (count($results) == 0) {
 			return null;
 		}
@@ -622,7 +622,7 @@ class calendar_event {
 		return null;
 	}
 
-	public function calculOccurence($_startDate, $_endDate, $_max = 9999999999, $_recurence = 0) {
+	public function calculOccurrence($_startDate, $_endDate, $_max = 9999999999, $_recurence = 0) {
 		if ($_recurence > 5) {
 			return array();
 		}
@@ -662,10 +662,10 @@ class calendar_event {
 					}
 					foreach ($excludeEvents as $excludeEvent) {
 						if (is_object($excludeEvent) && $excludeEvent->getId() != $this->getId()) {
-							$excludeEventOccurence = $excludeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
-							foreach ($excludeEventOccurence as $occurence) {
-								$startDate = date('Y-m-d', strtotime($occurence['start']));
-								$endDate = date('Y-m-d', strtotime($occurence['end']));
+							$excludeEventOccurrence = $excludeEvent->calculOccurrence($_startDate, $_endDate, $_max, $_recurence);
+							foreach ($excludeEventOccurrence as $occurrence) {
+								$startDate = date('Y-m-d', strtotime($occurrence['start']));
+								$endDate = date('Y-m-d', strtotime($occurrence['end']));
 								if ($startDate == $endDate) {
 									$excludeDate[] = $startDate;
 								} else {
@@ -811,10 +811,10 @@ class calendar_event {
 				}
 				foreach ($includeEvents as $includeEvent) {
 					if (is_object($includeEvent) && $includeEvent->getId() != $this->getId()) {
-						$includeEventOccurence = $includeEvent->calculOccurence($_startDate, $_endDate, $_max, $_recurence);
-						foreach ($includeEventOccurence as $occurence) {
-							$startDate = date('Y-m-d', strtotime($occurence['start']));
-							$endDate = date('Y-m-d', strtotime($occurence['end']));
+						$includeEventOccurrence = $includeEvent->calculOccurrence($_startDate, $_endDate, $_max, $_recurence);
+						foreach ($includeEventOccurrence as $occurrence) {
+							$startDate = date('Y-m-d', strtotime($occurrence['start']));
+							$endDate = date('Y-m-d', strtotime($occurrence['end']));
 							if ($startDate == $endDate) {
 								$includeDate[$startDate] = $startDate;
 							} else {
@@ -938,7 +938,7 @@ class calendar_event {
 		$nowtime = strtotime('now');
 		try {
 			if (jeedom::isDateOk()) {
-				$results = $this->calculOccurence($startDate, $endDate);
+				$results = $this->calculOccurrence($startDate, $endDate);
 				if (count($results) != 0) {
 					for ($i = 0; $i < count($results); $i++) {
 						if (strtotime($results[$i]['start']) <= $nowtime && strtotime($results[$i]['end']) > $nowtime) {
