@@ -62,7 +62,7 @@ function printEqLogic(_eqLogic) {
     events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + $('.eqLogicAttr[data-l1key=id]').value(),
     eventClick: function (info) {
       $('#md_modal').dialog({ title: "{{Modifier un évènement}}" })
-      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start.toLocaleDateString("en-US"))).dialog('open')
+      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start.toUTCString())).dialog('open')
     },
     eventTimeFormat: {
       hour: 'numeric',
