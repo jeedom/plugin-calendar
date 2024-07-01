@@ -151,7 +151,7 @@ class calendar extends eqLogic {
 
 	/*     * *********************Methode d'instance************************* */
 
-	public function copy($_name) {
+	public function copy($_name, $_logicalId = NULL) {
 		$eqLogicCopy = clone $this;
 		$eqLogicCopy->setName($_name);
 		$eqLogicCopy->setId('');
