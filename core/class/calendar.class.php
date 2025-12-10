@@ -595,7 +595,7 @@ class calendar_event {
 		$startDate = null;
 		$endDate = null;
 		$repeat = $this->getRepeat();
-		if ($repeat['enable'] == 1) {
+		if (isset($repeat['enable']) && $repeat['enable'] == 1) {
 			if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq']) || $repeat['freq'] == '' || $repeat['unite'] == '') {
 				$startDate = (new DateTime('-12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 				$endDate = (new DateTime('+12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
@@ -880,10 +880,12 @@ class calendar_event {
 		}
 		$repeat = $this->getRepeat();
 		$allEmpty = true;
-		foreach ($repeat['excludeDay'] as $day) {
-			if ($day == 1) {
-				$allEmpty = false;
-				break;
+		if(isset($repeat['excludeDay']) && is_array($repeat['excludeDay'])){
+			foreach ($repeat['excludeDay'] as $day) {
+				if ($day == 1) {
+					$allEmpty = false;
+					break;
+				}
 			}
 		}
 		if ($allEmpty) {
@@ -935,7 +937,7 @@ class calendar_event {
 			return;
 		}
 		$repeat = $this->getRepeat();
-		if ($repeat['enable'] == 1) {
+		if (isset($repeat['enable']) && $repeat['enable'] == 1) {
 			$startDate = (new DateTime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
 			$endDate = (new DateTime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
 		} else {
@@ -1007,15 +1009,18 @@ class calendar_event {
 		if (is_object($cmd)) {
 			$cmd->event($cmd->execute());
 		}
-		foreach ($this->getCmd_param($_action) as $action) {
-			try {
-				$options = array();
-				if (isset($action['options'])) {
-					$options = $action['options'];
+		$actions = $this->getCmd_param($_action);
+		if(is_array($actions)){
+			foreach ($actions as $action) {
+				try {
+					$options = array();
+					if (isset($action['options'])) {
+						$options = $action['options'];
+					}
+					scenarioExpression::createAndExec('action', $action['cmd'], $options);
+				} catch (Exception $e) {
+					log::add('calendar', 'error', $eqLogic->getHumanName() . __("Erreur lors de l'exécution de", __FILE__) . ' ' . $action['cmd'] . '. ' . __('Détails', __FILE__) . ' : ' . $e->getMessage());
 				}
-				scenarioExpression::createAndExec('action', $action['cmd'], $options);
-			} catch (Exception $e) {
-				log::add('calendar', 'error', $eqLogic->getHumanName() . __("Erreur lors de l'exécution de", __FILE__) . ' ' . $action['cmd'] . '. ' . __('Détails', __FILE__) . ' : ' . $e->getMessage());
 			}
 		}
 		return true;
