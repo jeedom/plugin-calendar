@@ -636,7 +636,7 @@ class calendar_event {
 		$endTime = ($_endDate != null) ? (new DateTime($_endDate))->format('U') : strtotime('now + 2 year');
 		$return = array();
 		$repeat = $this->getRepeat();
-		if (issset($repeat['enable']) && $repeat['enable'] == 1) {
+		if (isset($repeat['enable']) && $repeat['enable'] == 1) {
 			$excludeDate = array();
 			if (isset($repeat['excludeDate']) && $repeat['excludeDate'] != '') {
 				$excludeDate_tmp = explode(',', $repeat['excludeDate']);
