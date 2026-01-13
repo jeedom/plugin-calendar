@@ -39,176 +39,134 @@ if (init('id') != '') {
 }
 $calendars = calendar::byType('calendar');
 ?>
-<div id='div_eventEditAlert' style="display: none;"></div>
-<div class="input-group pull-right" style="display:inline-flex">
-	<span class="input-group-btn">
-		<?php if (is_object($event)) { ?>
-			<a class="btn btn-sm btn-default roundedLeft" id="md_eventEditDuplicate"><i class="far fa-clone"></i> {{Dupliquer}}
+<div id="md_eventEdit" data-modalType="md_eventEdit">
+	<div class="input-group pull-right" style="display:inline-flex">
+		<span class="input-group-btn">
+			<a class="btn btn-sm btn-default roundedLeft" id="md_eventEditDuplicate" style="display: none;"><i class="far fa-clone"></i> {{Dupliquer}}
 			</a><a class="btn btn-sm btn-success" id="md_eventEditSave"><i class="fas fa-check-circle"></i> {{Enregistrer}}
-			</a><a class="btn btn-sm btn-danger roundedRight" id="md_eventEditRemove"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>
-		<?php	} else {
-			echo '<a class="btn btn-sm btn-success" id="md_eventEditSave"><i class="fas fa-check-circle"></i> {{Enregistrer}}</a>';
-		} ?>
-	</span>
-</div>
-<ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#eventtab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-calendar-day"></i> {{Evènement}}</a></li>
-	<li role="presentation"><a id="bt_calendartab" href="#actiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-hand-sparkles"></i> {{Actions}}</a></li>
-	<li role="presentation"><a id="bt_calendartab" href="#programmingtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-tools"></i> {{Programmation}}</a></li>
-</ul>
-
-<div class="tab-content" id="div_eventEdit">
-	<div role="tabpanel" class="tab-pane active" id="eventtab">
-		<form class="form-horizontal">
-			<fieldset>
-				<div class="col-lg-6">
-					<legend><i class="fas fa-cogs"></i> {{Paramètres}}</legend>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">{{Nom de l'évènement}}</label>
-						<div class="col-sm-6">
-							<input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName'>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-4 checkbox-inline control-label">{{Masquer sur le widget}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que cet évènement ne soit pas visible sur le widget}}"></i></sup>
-						</label>
-						<div class="col-sm-6">
-							<input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard'>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-6">
-					<legend><i class="fas fa-desktop"></i> {{Affichage}}</legend>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">{{Icône}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Choisir l'icône de l'évènement}}"></i></sup>
-						</label>
-						<div class="col-sm-6">
-							<input type="text" class="calendarAttr form-control" data-l1key="eqLogic_id" style="display: none;" value="<?php echo init('eqLogic_id') ?>">
-							<input type="text" class="calendarAttr form-control" data-l1key="id" style="display: none;">
-							<span class="calendarAttr" data-l1key="cmd_param" data-l2key="icon"></span>
-							<a class="btn btn-default btn-sm" id="bt_chooseIcon"><i class="fas fa-icons"></i> {{Choisir une icône}}</a>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">{{Couleur de fond}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Choisir la couleur de fond de l'évènement}}"></i></sup>
-						</label>
-						<div class="col-sm-6">
-							<input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='color' value='#2980b9'>
-							<label class="checkbox-inline">
-								<input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='transparent'>
-								{{Transparent}}
-							</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">{{Couleur du texte}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Choisir la couleur du texte de l'évènement}}"></i></sup>
-						</label>
-						<div class="col-sm-6">
-							<input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='text_color' value='#FFFFFF'>
-						</div>
-					</div>
-				</div>
-			</fieldset>
-		</form>
+			</a><a class="btn btn-sm btn-danger roundedRight" id="md_eventEditRemove" style="display: none;"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>
+		</span>
 	</div>
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#eventtab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-calendar-day"></i> {{Evènement}}</a></li>
+		<li role="presentation"><a id="bt_calendartab" href="#actiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-hand-sparkles"></i> {{Actions}}</a></li>
+		<li role="presentation"><a id="bt_calendartab" href="#programmingtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-tools"></i> {{Programmation}}</a></li>
+	</ul>
 
-	<div role="tabpanel" class="tab-pane" id="actiontab">
-		<div class="input-group pull-right" style="display:inline-flex">
-			<span class="input-group-btn"></span>
-			<a class="btn btn-xs btn-info bt_addAction roundedLeft" data-type="start"><i class="fas fa-plus-circle"></i> {{Action de début}}</a>
-			<a class="btn btn-xs btn-warning bt_addAction roundedRight" data-type="end"><i class="fas fa-plus-circle"></i> {{Action de fin}}</a>
-		</div>
-		<br>
-		<br>
-		<form class="form-horizontal">
-			<fieldset>
-				<div id="div_start" class="col-xs-12" style="padding-bottom:10px;margin-bottom:15px;background-color:rgb(var(--bg-color));">
-					<legend><i class="fas fa-flag icon_blue"></i> {{Action(s) de début}}</legend>
-				</div>
-				<div id="div_end" class="col-xs-12" style="padding-bottom:10px;margin-bottom:15px;background-color:rgb(var(--bg-color));">
-					<legend><i class="fas fa-flag-checkered icon_orange"></i> {{Action(s) de fin}}</legend>
-				</div>
-			</fieldset>
-		</form>
-	</div>
-
-	<div role="tabpanel" class="tab-pane" id="programmingtab">
-		<form class="form-horizontal">
-			<fieldset>
-				<div class="col-lg-6">
-					<legend><i class="fas fa-calendar-week"></i> {{Définition de l'évènement}}</legend>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">{{Dates}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Renseigner les dates de début et de fin de l'évènement}}"></i></sup>
-						</label>
-						<div class="col-sm-8 input-group">
-							<span class="input-group-addon roundedLeft">{{Début}}</span>
-							<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="startDate">
-							<span class="input-group-addon">{{Fin}}</span>
-							<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="endDate">
-							<span class="input-group-btn">
-								<a class="btn btn-default calendarAction roundedRight" data-action="allDay" title="{{Toute la journée}}"><i class="fas fa-history"></i></a>
-							</span>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-sm-3 control-label">{{Inclure par date}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Dates sous forme}} AAAA-MM-JJ,AAAA-MM-JJ {{ou plage de dates}} AAAA-MM-JJ:AAAA-MM-JJ"></i></sup>
-						</label>
-						<div class="col-sm-8">
-							<input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDate">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">{{Inclure par agenda}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Inclure des dates selon les évènements d'un agenda}}"></i></sup>
-						</label>
-						<div class="col-sm-4">
-							<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDateFromCalendar">
-								<option value="">{{Aucun}}</option>
-								<?php foreach ($calendars as $calendar) {
-									echo '<option value="' . $calendar->getId() . '">' . $calendar->getName() . '</option>';
-								} ?>
-							</select>
-						</div>
-						<?php foreach ($calendars as $calendar) {
-							echo '<div class="col-sm-4 hidden" data-calendar_id="' . $calendar->getId() . '">';
-							echo '<select class="calendarAttr form-control">';
-							echo '<option value="all">{{Tous}}</option>';
-							foreach ($calendar->getEvents() as $eventCalendar) {
-								if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
-									if ($eventCalendar->getCmd_param('eventName') != '') {
-										echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('eventName') . '</option>';
-									} else {
-										echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('name') . '</option>';
-									}
-								}
-							}
-							echo '</select>';
-							echo '</div>';
-						} ?>
-					</div>
-					<div class="div_repeatOption" style="display:none;">
+	<div class="tab-content" id="div_eventEdit">
+		<div role="tabpanel" class="tab-pane active" id="eventtab">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="col-lg-6">
+						<legend><i class="fas fa-cogs"></i> {{Paramètres}}</legend>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Exclure par date}}
-								<sup><i class="fas fa-question-circle tooltips" title="{{Dates sous forme}} AAAA-MM-JJ,AAAA-MM-JJ {{ou plage de dates}} AAAA-MM-JJ:AAAA-MM-JJ"></i></sup>
-							</label>
-							<div class="col-sm-8">
-								<input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDate">
+							<label class="col-sm-4 control-label">{{Nom de l'évènement}}</label>
+							<div class="col-sm-6">
+								<input type="text" class="calendarAttr form-control" data-l1key="cmd_param" data-l2key='eventName'>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Exclure par agenda}}
-								<sup><i class="fas fa-question-circle tooltips" title="{{Exclure des dates selon les évènements d'un agenda}}"></i></sup>
+							<label class="col-sm-4 checkbox-inline control-label">{{Masquer sur le widget}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que cet évènement ne soit pas visible sur le widget}}"></i></sup>
+							</label>
+							<div class="col-sm-6">
+								<input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='noDisplayOnDashboard'>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<legend><i class="fas fa-desktop"></i> {{Affichage}}</legend>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">{{Icône}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Choisir l'icône de l'évènement}}"></i></sup>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" class="calendarAttr form-control" data-l1key="eqLogic_id" style="display: none;" value="<?php echo init('eqLogic_id') ?>">
+								<input type="text" class="calendarAttr form-control" data-l1key="id" style="display: none;">
+								<span class="calendarAttr" data-l1key="cmd_param" data-l2key="icon"></span>
+								<a class="btn btn-default btn-sm" id="bt_chooseIcon"><i class="fas fa-icons"></i> {{Choisir une icône}}</a>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">{{Couleur de fond}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Choisir la couleur de fond de l'évènement}}"></i></sup>
+							</label>
+							<div class="col-sm-6">
+								<input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='color' value='#2980b9'>
+								<label class="checkbox-inline">
+									<input type="checkbox" class="calendarAttr" data-l1key="cmd_param" data-l2key='transparent'>
+									{{Transparent}}
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">{{Couleur du texte}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Choisir la couleur du texte de l'évènement}}"></i></sup>
+							</label>
+							<div class="col-sm-6">
+								<input type="color" class="calendarAttr" data-l1key="cmd_param" data-l2key='text_color' value='#FFFFFF'>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+		<div role="tabpanel" class="tab-pane" id="actiontab">
+			<div class="input-group pull-right" style="display:inline-flex">
+				<span class="input-group-btn"></span>
+				<a class="btn btn-xs btn-info bt_addAction roundedLeft" data-type="start"><i class="fas fa-plus-circle"></i> {{Action de début}}</a>
+				<a class="btn btn-xs btn-warning bt_addAction roundedRight" data-type="end"><i class="fas fa-plus-circle"></i> {{Action de fin}}</a>
+			</div>
+			<br>
+			<br>
+			<form class="form-horizontal">
+				<fieldset>
+					<div id="div_start" class="col-xs-12" style="padding-bottom:10px;margin-bottom:15px;background-color:rgb(var(--bg-color));">
+						<legend><i class="fas fa-flag icon_blue"></i> {{Action(s) de début}}</legend>
+					</div>
+					<div id="div_end" class="col-xs-12" style="padding-bottom:10px;margin-bottom:15px;background-color:rgb(var(--bg-color));">
+						<legend><i class="fas fa-flag-checkered icon_orange"></i> {{Action(s) de fin}}</legend>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+		<div role="tabpanel" class="tab-pane" id="programmingtab">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="col-lg-6">
+						<legend><i class="fas fa-calendar-week"></i> {{Définition de l'évènement}}</legend>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Dates}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Renseigner les dates de début et de fin de l'évènement}}"></i></sup>
+							</label>
+							<div class="col-sm-8 input-group">
+								<span class="input-group-addon roundedLeft">{{Début}}</span>
+								<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="startDate">
+								<span class="input-group-addon">{{Fin}}</span>
+								<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="endDate">
+								<span class="input-group-btn">
+									<a class="btn btn-default calendarAction roundedRight" data-action="allDay" title="{{Toute la journée}}"><i class="fas fa-history"></i></a>
+								</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Inclure par date}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Dates sous forme}} AAAA-MM-JJ,AAAA-MM-JJ {{ou plage de dates}} AAAA-MM-JJ:AAAA-MM-JJ"></i></sup>
+							</label>
+							<div class="col-sm-8">
+								<input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDate">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Inclure par agenda}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Inclure des dates selon les évènements d'un agenda}}"></i></sup>
 							</label>
 							<div class="col-sm-4">
-								<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDateFromCalendar">
+								<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="includeDateFromCalendar">
 									<option value="">{{Aucun}}</option>
 									<?php foreach ($calendars as $calendar) {
 										echo '<option value="' . $calendar->getId() . '">' . $calendar->getName() . '</option>';
@@ -232,131 +190,161 @@ $calendars = calendar::byType('calendar');
 								echo '</div>';
 							} ?>
 						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-6">
-					<legend><i class="fas fa-redo-alt"></i> {{Répétition de l'évènement}}</legend>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">{{Activer}}
-							<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour activer les options de répétition de l'évènement}}"></i></sup>
-						</label>
-						<div class="col-sm-8">
-							<input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="enable">
-						</div>
-					</div>
-					<br>
-
-					<div class="div_repeatOption" style="display:none;">
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Mode}}</label>
-							<div class="col-sm-8">
-								<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode">
-									<option value="simple">{{Répétition simple}}</option>
-									<option value="advance">{{Répétition avancée}}</option>
-								</select>
-							</div>
-						</div>
-						<div class="repeatMode advance" style="display:none;">
+						<div class="div_repeatOption" style="display:none;">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Fréquence}}</label>
-								<div class="col-sm-8 input-group">
-									<span class="input-group-addon roundedLeft">{{le}}</span>
-									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt">
-										<option value="first">{{Premier}}</option>
-										<option value="second">{{Deuxième}}</option>
-										<option value="third">{{Troisième}}</option>
-										<option value="fourth">{{Quatrième}}</option>
-										<option value="last">{{Dernier}}</option>
-									</select>
-									<span class="input-group-addon"></span>
-									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day">
-										<option value="monday">{{Lundi}}</option>
-										<option value="tuesday">{{Mardi}}</option>
-										<option value="wednesday">{{Mercredi}}</option>
-										<option value="thursday">{{Jeudi}}</option>
-										<option value="friday">{{Vendredi}}</option>
-										<option value="saturday">{{Samedi}}</option>
-										<option value="sunday">{{Dimanche}}</option>
-									</select>
-									<span class="input-group-addon roundedRight">{{du mois}}</span>
-								</div>
-							</div>
-						</div>
-
-						<div class="repeatMode simple">
-							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Répéter tous les}}</label>
-								<div class="col-sm-3">
-									<input type="number" class="calendarAttr form-control" data-l1key="repeat" data-l2key="freq">
-								</div>
-								<div class="col-sm-5">
-									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="unite">
-										<option value="minutes">{{Minute(s)}}</option>
-										<option value="hours">{{Heure(s)}}</option>
-										<option value="days" selected>{{Jour(s)}}</option>
-										<option value="month">{{Mois}}</option>
-										<option value="years">{{Année(s)}}</option>
-									</select>
+								<label class="col-sm-3 control-label">{{Exclure par date}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Dates sous forme}} AAAA-MM-JJ,AAAA-MM-JJ {{ou plage de dates}} AAAA-MM-JJ:AAAA-MM-JJ"></i></sup>
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDate">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Uniquement les}}</label>
-								<div class="col-sm-9">
-									<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='1' checked>{{Lundis}}</label>
-									<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='2' checked>{{Mardis}}</label>
-									<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='3' checked>{{Mercredis}}</label>
-									<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='4' checked>{{Jeudis}}</label>
-									<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='5' checked>{{Vendredis}}</label>
-									<br>
-									<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='6' checked>{{Samedis}}</label>
-									<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='7' checked>{{Dimanches}}</label>
+								<label class="col-sm-3 control-label">{{Exclure par agenda}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Exclure des dates selon les évènements d'un agenda}}"></i></sup>
+								</label>
+								<div class="col-sm-4">
+									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="excludeDateFromCalendar">
+										<option value="">{{Aucun}}</option>
+										<?php foreach ($calendars as $calendar) {
+											echo '<option value="' . $calendar->getId() . '">' . $calendar->getName() . '</option>';
+										} ?>
+									</select>
 								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Jusqu'à}}</label>
-							<div class="col-sm-8">
-								<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="until">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Restriction}}</label>
-							<div class="col-sm-8">
-								<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="nationalDay">
-									<option value="all">{{Aucune}}</option>
-									<option value="exeptNationalDay">{{Tous sauf les jours fériés}}</option>
-									<option value="onlyNationalDay">{{Uniquement les jours fériés}}</option>
-									<option value="onlyEven">{{Uniquement les semaines paires}}</option>
-									<option value="onlyOdd">{{Uniquement les semaines impaires}}</option>
-								</select>
+								<?php foreach ($calendars as $calendar) {
+									echo '<div class="col-sm-4 hidden" data-calendar_id="' . $calendar->getId() . '">';
+									echo '<select class="calendarAttr form-control">';
+									echo '<option value="all">{{Tous}}</option>';
+									foreach ($calendar->getEvents() as $eventCalendar) {
+										if (!is_object($event) || $event->getId() != $eventCalendar->getId()) {
+											if ($eventCalendar->getCmd_param('eventName') != '') {
+												echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('eventName') . '</option>';
+											} else {
+												echo '<option value="' . $eventCalendar->getId() . '">' . $eventCalendar->getCmd_param('name') . '</option>';
+											}
+										}
+									}
+									echo '</select>';
+									echo '</div>';
+								} ?>
 							</div>
 						</div>
 					</div>
-				</div>
-			</fieldset>
-		</form>
+
+					<div class="col-lg-6">
+						<legend><i class="fas fa-redo-alt"></i> {{Répétition de l'évènement}}</legend>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Activer}}
+								<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour activer les options de répétition de l'évènement}}"></i></sup>
+							</label>
+							<div class="col-sm-8">
+								<input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="enable">
+							</div>
+						</div>
+						<br>
+
+						<div class="div_repeatOption" style="display:none;">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Mode}}</label>
+								<div class="col-sm-8">
+									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="mode">
+										<option value="simple">{{Répétition simple}}</option>
+										<option value="advance">{{Répétition avancée}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="repeatMode advance" style="display:none;">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">{{Fréquence}}</label>
+									<div class="col-sm-8 input-group">
+										<span class="input-group-addon roundedLeft">{{le}}</span>
+										<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="positionAt">
+											<option value="first">{{Premier}}</option>
+											<option value="second">{{Deuxième}}</option>
+											<option value="third">{{Troisième}}</option>
+											<option value="fourth">{{Quatrième}}</option>
+											<option value="last">{{Dernier}}</option>
+										</select>
+										<span class="input-group-addon"></span>
+										<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="day">
+											<option value="monday">{{Lundi}}</option>
+											<option value="tuesday">{{Mardi}}</option>
+											<option value="wednesday">{{Mercredi}}</option>
+											<option value="thursday">{{Jeudi}}</option>
+											<option value="friday">{{Vendredi}}</option>
+											<option value="saturday">{{Samedi}}</option>
+											<option value="sunday">{{Dimanche}}</option>
+										</select>
+										<span class="input-group-addon roundedRight">{{du mois}}</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="repeatMode simple">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">{{Répéter tous les}}</label>
+									<div class="col-sm-3">
+										<input type="number" class="calendarAttr form-control" data-l1key="repeat" data-l2key="freq">
+									</div>
+									<div class="col-sm-5">
+										<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="unite">
+											<option value="minutes">{{Minute(s)}}</option>
+											<option value="hours">{{Heure(s)}}</option>
+											<option value="days" selected>{{Jour(s)}}</option>
+											<option value="month">{{Mois}}</option>
+											<option value="years">{{Année(s)}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">{{Uniquement les}}</label>
+									<div class="col-sm-9">
+										<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='1' checked>{{Lundis}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='2' checked>{{Mardis}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='3' checked>{{Mercredis}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='4' checked>{{Jeudis}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='5' checked>{{Vendredis}}</label>
+										<br>
+										<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='6' checked>{{Samedis}}</label>
+										<label class="checkbox-inline"><input type="checkbox" class="calendarAttr" data-l1key="repeat" data-l2key="excludeDay" data-l3key='7' checked>{{Dimanches}}</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Jusqu'à}}</label>
+								<div class="col-sm-8">
+									<input type="text" class="calendarAttr form-control in_datepicker" data-l1key="until">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Restriction}}</label>
+								<div class="col-sm-8">
+									<select class="calendarAttr form-control" data-l1key="repeat" data-l2key="nationalDay">
+										<option value="all">{{Aucune}}</option>
+										<option value="exeptNationalDay">{{Tous sauf les jours fériés}}</option>
+										<option value="onlyNationalDay">{{Uniquement les jours fériés}}</option>
+										<option value="onlyEven">{{Uniquement les semaines paires}}</option>
+										<option value="onlyOdd">{{Uniquement les semaines impaires}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
 	</div>
 </div>
-
 <script>
-	$(function() {
-		if (_jeedom4_4) {
-			jeedomUtils.datePickerInit('Y-m-d H:i')
-		} else {
-			$.datetimepicker.setLocale(jeedom_langage.substring(0, 2));
-			$('.in_datepicker').datetimepicker({
-				dayOfWeekStart: 1,
-				format: 'Y-m-d H:i:00',
-				step: 15
+	setTimeout(function() {
+		jeedomUtils.datePickerInit('Y-m-d H:i')
+		document.querySelectorAll('.calendarAttr').forEach(_el => {
+			_el.addEventListener('change', function() {
+				jeeFrontEnd.modifyWithoutSave = true
 			})
-		}
-
-		$('.calendarAttr').on('change', function() {
-			modifyWithoutSave = true
 		})
-	})
+  	}, 250)
 
 	function addAction(_action, _type) {
 		if (!isset(_action)) {
@@ -382,134 +370,159 @@ $calendars = calendar::byType('calendar');
 		div += '</span>'
 		div += '</div>'
 		div += '</div>'
-		div += '<div class="col-sm-7 actionOptions">'
-		div += jeedom.cmd.displayActionOption(init(_action.cmd, ''), _action.options)
+		var actionOption_id = jeedomUtils.uniqId()
+		div += '<div class="col-sm-7 actionOptions" id="' + actionOption_id + '">'
 		div += '</div>'
-		$('#div_' + _type).append(div)
-		$('#div_' + _type + ' .' + _type + '').last().setValues(_action, '.expressionAttr')
-		jeedomUtils.taAutosize()
+		div += '</div>'
+		document.getElementById('div_' + _type).insertAdjacentHTML('beforeend', div)
+		let currentAction = document.querySelectorAll('.' + _type).last()
+		currentAction.setJeeValues(_action, '.expressionAttr')
+		currentAction.querySelector('.expressionAttr[data-l1key="cmd"]').jeeComplete({
+			source: jeedom.scenario.autoCompleteAction,
+			forceSingle: true
+		})
+		if (is_array(actionOptions)) {
+			actionOptions.push({
+				expression: init(_action.cmd),
+				options: _action.options,
+				id: actionOption_id
+			})
+		}
 	}
 
-	$("#div_start").sortable({
-		axis: "y",
-		cursor: "move",
-		items: ".start",
-		placeholder: "ui-state-highlight",
-		tolerance: "intersect",
-		forcePlaceholderSize: true
+	new Sortable(document.getElementById('div_start'), {
+		delay: 50,
+		delayOnTouchOnly: true,
+		draggable: '.start',
+		filter: '.expressionAttr, .btn',
+		preventOnFilter: false,
+		direction: 'vertical',
+		chosenClass: 'dragSelected',
+		onUpdate: function(evt) {
+			jeeFrontEnd.modifyWithoutSave = true
+		}
 	})
-	$("#div_end").sortable({
-		axis: "y",
-		cursor: "move",
-		items: ".end",
-		placeholder: "ui-state-highlight",
-		tolerance: "intersect",
-		forcePlaceholderSize: true
-	})
-
-	$('body').off('focusout', ".cmdAction.expressionAttr[data-l1key=cmd]").on('focusout', '.cmdAction.expressionAttr[data-l1key=cmd]', function(event) {
-		var type = $(this).attr('data-type')
-		var expression = $(this).closest('.' + type).getValues('.expressionAttr')
-		var el = $(this)
-		jeedom.cmd.displayActionOption($(this).value(), init(expression[0].options), function(html) {
-			el.closest('.' + type).find('.actionOptions').html(html)
-			jeedomUtils.taAutosize()
-		})
+	new Sortable(document.getElementById('div_end'), {
+		delay: 50,
+		delayOnTouchOnly: true,
+		draggable: '.end',
+		filter: '.expressionAttr, .btn',
+		preventOnFilter: false,
+		direction: 'vertical',
+		chosenClass: 'dragSelected',
+		onUpdate: function(evt) {
+			jeeFrontEnd.modifyWithoutSave = true
+		}
 	})
 
-	$("body").off('click', ".listAction").on('click', ".listAction", function() {
-		var type = $(this).attr('data-type')
-		var el = $(this).closest('.' + type).find('.expressionAttr[data-l1key=cmd]')
-		jeedom.getSelectActionModal({}, function(result) {
-			el.value(result.human)
-			jeedom.cmd.displayActionOption(el.value(), '', function(html) {
-				el.closest('.' + type).find('.actionOptions').html(html)
+	document.getElementById('actiontab').addEventListener('focusout', function(event) {
+		if (_target = event.target.closest('.cmdAction.expressionAttr[data-l1key="cmd"]')) {
+			var type = _target.getAttribute('data-type')
+			var expression = _target.closest('.' + type).getJeeValues('.expressionAttr')
+			jeedom.cmd.displayActionOption(_target.jeeValue(), init(expression[0].options), function(html) {
+				_target.closest('.' + type).querySelector('.actionOptions').html(html)
 				jeedomUtils.taAutosize()
 			})
-		})
-	})
+		}
+    })
 
-	$("body").off('click', ".listCmdAction").on('click', ".listCmdAction", function() {
-		var type = $(this).attr('data-type')
-		var el = $(this).closest('.' + type).find('.expressionAttr[data-l1key=cmd]')
-		jeedom.cmd.getSelectModal({
-			cmd: {
-				type: 'action'
-			}
-		}, function(result) {
-			el.value(result.human)
-			jeedom.cmd.displayActionOption(el.value(), '', function(html) {
-				el.closest('.' + type).find('.actionOptions').html(html)
-				jeedomUtils.taAutosize()
+	document.getElementById('actiontab').addEventListener('click', function(event) {
+		var _target = null
+		if (_target = event.target.closest('.listAction')) {
+			var type = _target.getAttribute('data-type')
+			var el = _target.closest('.' + type).querySelector('.expressionAttr[data-l1key="cmd"]')
+			jeedom.getSelectActionModal({}, function(result) {
+				el.jeeValue(result.human)
+				jeedom.cmd.displayActionOption(el.jeeValue(), '', function(html) {
+					el.closest('.' + type).querySelector('.actionOptions').html(html)
+					jeedomUtils.taAutosize()
+				})
 			})
-		})
-	})
+			return
+		}
+		if (_target = event.target.closest('.listCmdAction')) {
+			var type = _target.getAttribute('data-type')
+			var el = _target.closest('.' + type).querySelector('.expressionAttr[data-l1key="cmd"]')
+			jeedom.cmd.getSelectModal({ cmd: { type: 'action' } }, function(result) {
+				el.jeeValue(result.human)
+				jeedom.cmd.displayActionOption(el.jeeValue(), '', function(html) {
+					el.closest('.' + type).querySelector('.actionOptions').html(html)
+					jeedomUtils.taAutosize()
+				})
+			})
+			return
+		}
+		if (_target = event.target.closest('.bt_removeAction')) {
+			var type = _target.getAttribute('data-type')
+			_target.closest('.' + type).remove()
+			jeeFrontEnd.modifyWithoutSave = true
+			return
+		}
+		if (_target = event.target.closest('.bt_addAction')) {
+			var type = _target.getAttribute('data-type')
+			addAction({}, type)
+			return
+		}
+    })
 
-	$("body").off('click', '.bt_removeAction').on('click', '.bt_removeAction', function() {
-		var type = $(this).attr('data-type')
-		$(this).closest('.' + type).remove()
-	})
-
-	$('.bt_addAction').off('click').on('click', function() {
-		addAction({}, $(this).attr('data-type'))
-	})
-
-	$('.calendarAction[data-action=allDay]').off('click').on('click', function() {
-		var startDate = $('.calendarAttr[data-l1key=startDate]').value().substr(0, 10)
+	document.querySelector('.calendarAction[data-action=allDay]').addEventListener('click', function() {
+		var startDate = document.querySelector('.calendarAttr[data-l1key=startDate]').jeeValue().substr(0, 10)
 		if (startDate == '') {
 			var startDate = new Date()
 			var y = startDate.getFullYear()
 			var m = startDate.getMonth() + 1
 			var d = startDate.getDate()
 			m = (m < 10) ? "0" + m : m
+			d = (d < 10) ? "0" + d : d
 			startDate = y + '-' + m + '-' + d
 		}
-		$('.calendarAttr[data-l1key=startDate]').value(startDate + ' 00:00:00')
-		var endDate = new Date(startDate)
-		endDate.setDate(endDate.getDate() + 1)
-		var y = endDate.getFullYear()
-		var m = endDate.getMonth() + 1
-		m = (m < 10) ? "0" + m : m
-		var d = endDate.getDate()
-		$('.calendarAttr[data-l1key=endDate]').value(startDate + ' 23:59:00')
-	})
+		document.querySelector('.calendarAttr[data-l1key=startDate]').jeeValue(startDate + ' 00:00:00')
+		document.querySelector('.calendarAttr[data-l1key=endDate]').jeeValue(startDate + ' 23:59:00')
+    });
 
 	document.getElementById('bt_chooseIcon').addEventListener('click', function() {
 		jeedomUtils.chooseIcon(function(_icon) {
 			document.querySelector('.calendarAttr[data-l1key=cmd_param][data-l2key=icon]').innerHTML = _icon
 		})
-	})
+	});
 
 	document.querySelector('.calendarAttr[data-l1key=cmd_param][data-l2key=icon]').addEventListener('dblclick', function() {
 		this.innerHTML = ''
-	})
+	});
 
-	$("body").off('change', ".calendarAttr[data-l1key=repeat][data-l2key=enable]").on('change', '.calendarAttr[data-l1key=repeat][data-l2key=enable]', function() {
-		if ($(this).value() == 1) {
-			$('#div_eventEdit .div_repeatOption').show()
+	document.querySelector('.calendarAttr[data-l1key=repeat][data-l2key=enable]').addEventListener('change', function(event) {
+		if (event.target.jeeValue() == 1) {
+			document.querySelectorAll('#div_eventEdit .div_repeatOption').seen()
 		} else {
-			$('#div_eventEdit .div_repeatOption').hide()
+			document.querySelectorAll('#div_eventEdit .div_repeatOption').unseen()
 		}
-	})
+	});
 
-	$("body").off('change', ".calendarAttr[data-l1key=repeat][data-l2key=mode]").on('change', '.calendarAttr[data-l1key=repeat][data-l2key=mode]', function() {
-		$('#div_eventEdit .repeatMode').hide()
-		$('#div_eventEdit .repeatMode.' + $(this).value()).show()
-	})
-
-	$(".calendarAttr[data-l1key=repeat][data-l2key=includeDateFromCalendar], .calendarAttr[data-l1key=repeat][data-l2key=excludeDateFromCalendar]").on('change', function() {
-		$(this).parent().siblings('div').addClass('hidden').find('select').removeAttr('data-l1key').removeAttr('data-l2key')
-		if ($(this).value() != '') {
-			$(this).parent().siblings('div[data-calendar_id=' + $(this).value() + ']').removeClass('hidden').find('select').attr({
-				'data-l1key': 'repeat',
-				'data-l2key': $(this).attr('data-l2key').replace('Calendar', 'Event')
+	document.querySelector('.calendarAttr[data-l1key=repeat][data-l2key=mode]').addEventListener('change', function(event) {
+		document.querySelectorAll('#div_eventEdit .repeatMode').unseen()
+		document.querySelectorAll('#div_eventEdit .repeatMode.' + this.jeeValue()).seen()
+	});
+      
+	[".calendarAttr[data-l1key=repeat][data-l2key=includeDateFromCalendar]", ".calendarAttr[data-l1key=repeat][data-l2key=excludeDateFromCalendar]"].forEach((_selector) => {
+		document.querySelector(_selector).addEventListener('change', function(event) {
+			let formGroup = this.parentNode.parentNode
+			formGroup.querySelectorAll('div[data-calendar_id]').addClass('hidden')
+			formGroup.querySelectorAll('div[data-calendar_id] select').forEach(_select => {
+				_select.removeAttribute('data-l1key')
+				_select.removeAttribute('data-l2key')
 			})
-		}
-	})
+			if (this.jeeValue() != '') {
+				formGroup.querySelector('div[data-calendar_id="' + this.jeeValue() + '"]').removeClass('hidden')
+				formGroup.querySelector('div[data-calendar_id="' + this.jeeValue() + '"] select').setAttribute('data-l1key', 'repeat')
+				formGroup.querySelector('div[data-calendar_id="' + this.jeeValue() + '"] select').setAttribute('data-l2key', this.getAttribute('data-l2key').replace('Calendar', 'Event'))
+			}
+		})
+	});
 
 	if (calendarEvent != null && is_array(calendarEvent)) {
-		$('#div_eventEdit').setValues(calendarEvent, '.calendarAttr')
-		$(".calendarAttr[data-l1key=repeat][data-l2key=enable]").trigger('change')
+		document.getElementById('div_eventEdit').setJeeValues(calendarEvent, '.calendarAttr')
+		document.querySelector('.calendarAttr[data-l1key=repeat][data-l2key=enable]').triggerEvent('change')
+		actionOptions = []
 		if (isset(calendarEvent.cmd_param.start)) {
 			for (var i in calendarEvent.cmd_param.start) {
 				addAction(calendarEvent.cmd_param.start[i], 'start')
@@ -520,14 +533,33 @@ $calendars = calendar::byType('calendar');
 				addAction(calendarEvent.cmd_param.end[i], 'end')
 			}
 		}
+		jeedom.cmd.displayActionsOption({
+			params: actionOptions,
+			async: false,
+			error: function(error) {
+				jeedomUtils.showAlert({
+					message: error.message,
+					level: 'danger'
+				})
+			},
+      		success: function(data) {
+				for (var i in data) {
+					document.getElementById(data[i].id).html(data[i].html.html, true)
+				}
+				jeedomUtils.taAutosize()
+			}
+		})
+		actionOptions = null
+		document.getElementById('md_eventEditRemove').seen()
+		document.getElementById('md_eventEditDuplicate').seen()
 	}
 
-	$('#md_eventEditSave').on('click', function() {
-		var calendarEvent = $('#div_eventEdit').getValues('.calendarAttr')
+	document.getElementById('md_eventEditSave').addEventListener('click', function() {
+		var calendarEvent = document.getElementById('div_eventEdit').getJeeValues('.calendarAttr')
 		calendarEvent = calendarEvent[0]
-		calendarEvent.cmd_param.start = $('#div_start .start').getValues('.expressionAttr')
-		calendarEvent.cmd_param.end = $('#div_end .end').getValues('.expressionAttr')
-		$.ajax({
+		calendarEvent.cmd_param.start = document.querySelectorAll('#div_start .start').getJeeValues('.expressionAttr')
+		calendarEvent.cmd_param.end = document.querySelectorAll('#div_end .end').getJeeValues('.expressionAttr')
+		domUtils.ajax({
 			type: 'POST',
 			url: 'plugins/calendar/core/ajax/calendar.ajax.php',
 			data: {
@@ -535,170 +567,178 @@ $calendars = calendar::byType('calendar');
 				event: json_encode(calendarEvent)
 			},
 			dataType: 'json',
-			error: function(error) {
-				$('#div_eventEditAlert').showAlert({
-					message: error.message,
-					level: 'danger'
-				})
+			error: function (request, status, error) {
+				domUtils.handleAjaxError(request, status, error) // no attachTo with handleAjaxError
 			},
 			success: function(data) {
-				if (data.state != 'ok') {
-					$('#div_eventEditAlert').showAlert({
+				if (data.state != "ok") {
+					jeedomUtils.showAlert({
 						message: data.result,
-						level: 'danger'
+						level: "danger",
+						attachTo: jeeDialog.get('#md_eventEdit', 'dialog'),
 					})
 					return
 				}
-				$('#div_Alert').showAlert({
-					message: (calendarEvent['id'] != '') ? '{{Evènement modifié avec succès}}' : '{{Evènement ajouté avec succès}}',
-					level: 'success'
+				jeedomUtils.showAlert({ 
+					message: (calendarEvent['id'] != '') ? '{{Evènement modifié avec succès}}' : '{{Evènement ajouté avec succès}}', 
+					level: "success",
 				})
 				try {
 					calendar.refetchEvents()
-				} catch (e) {
-
-				}
+				} catch (e) {}
 				updateEventList()
-				modifyWithoutSave = false
-				$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close")
+				jeeFrontEnd.modifyWithoutSave = false
+				jeeDialog.get('#md_eventEdit').destroy()
 			}
 		})
 	})
 
-	$('#md_eventEditDuplicate').on('click', function() {
-		$('.calendarAttr[data-l1key=id]').value('')
-		$('#md_eventEditRemove').hide()
-		$(this).hide()
+	document.getElementById('md_eventEditDuplicate')?.addEventListener('click', function() {
+		document.querySelector('.calendarAttr[data-l1key=id]').jeeValue('')
+		document.getElementById('md_eventEditRemove').unseen()
+		this.unseen()
 	})
 
-	$('#md_eventEditRemove').on('click', function() {
+	document.getElementById('md_eventEditRemove')?.addEventListener('click', function() {
+		var eventId = document.querySelector('.calendarAttr[data-l1key=id]').jeeValue()
 		if (calendarEvent != null && is_array(calendarEvent) && calendarEvent.repeat.enable == 1 && dateEvent != null && dateEvent != '') {
-			bootbox.dialog({
+			jeeDialog.confirm({
+				title: "{{Suppression}}",
 				message: "{{Voulez vous supprimer cette occurrence ou l'évènement ?}}",
-				title: "Suppression",
+				defaultButtons: {},
 				buttons: {
 					cancel: {
 						label: "{{Annuler}}",
 						className: "btn-default",
-						callback: function() {
-
-						}
+						callback: {
+							click: function(event) {
+								var dialog = event.target.closest('div.jeeDialog')
+								dialog._jeeDialog.close(dialog)
+							}
+						},
 					},
 					success: {
-						label: "{{occurrence}}",
-						className: "btn-success",
-						callback: function() {
-							$.ajax({
-								type: 'POST',
-								url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-								data: {
-									action: 'removeOccurrence',
-									id: $('.calendarAttr[data-l1key=id]').value(),
-									date: dateEvent
-								},
-								dataType: 'json',
-								error: function(error) {
-									$('#div_eventEditAlert').showAlert({
-										message: error.message,
-										level: 'danger'
-									})
-								},
-								success: function(data) {
-									if (data.state != 'ok') {
-										$('#div_eventEditAlert').showAlert({
-											message: data.result,
-											level: 'danger'
+						label: "{{Occurrence}}",
+						className: "success",
+						callback: {
+							click: function(event) {
+								domUtils.ajax({
+									type: 'POST',
+									url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+									data: {
+										action: 'removeOccurrence',
+										id: eventId,
+										date: dateEvent
+									},
+									dataType: 'json',
+									error: function (request, status, error) {
+										domUtils.handleAjaxError(request, status, error) // no attachTo with handleAjaxError
+									},
+									success: function(data) {
+										if (data.state != 'ok') {
+											jeedomUtils.showAlert({
+												message: data.result,
+												level: "danger",
+												attachTo: jeeDialog.get('#md_eventEdit', 'dialog')
+											})
+											return
+										}
+										jeedomUtils.showAlert({
+											message: '{{Occurrence supprimée avec succès}}',
+											level: 'success',
 										})
-										return
+										calendar.refetchEvents()
+										updateEventList()
+										var dialog = event.target.closest('div.jeeDialog')
+										dialog._jeeDialog.close(dialog)
+										jeeDialog.get('#md_eventEdit').destroy()
 									}
-									$('#div_Alert').showAlert({
-										message: '{{occurrence supprimée avec succès}}',
-										level: 'success'
-									})
-									calendar.refetchEvents()
-									updateEventList()
-									$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close")
-								}
-							})
+								})
+							} 
 						}
 					},
 					danger: {
 						label: "{{Evènement}}",
-						className: "btn-danger",
-						callback: function() {
-							$.ajax({
-								type: 'POST',
-								url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-								data: {
-									action: 'removeEvent',
-									id: $('.calendarAttr[data-l1key=id]').value()
-								},
-								dataType: 'json',
-								error: function(error) {
-									$('#div_eventEditAlert').showAlert({
-										message: error.message,
-										level: 'danger'
-									})
-								},
-								success: function(data) {
-									if (data.state != 'ok') {
-										$('#div_eventEditAlert').showAlert({
-											message: data.result,
-											level: 'danger'
+						className: "danger",
+						callback: {
+							click: function(event) {
+								domUtils.ajax({
+									type: 'POST',
+									url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+									data: {
+										action: 'removeEvent',
+										id: eventId
+									},
+									dataType: 'json',
+									error: function (request, status, error) {
+										domUtils.handleAjaxError(request, status, error) // no attachTo with handleAjaxError
+									},
+									success: function(data) {
+										if (data.state != 'ok') {
+											jeedomUtils.showAlert({
+												message: data.result,
+												level: "danger",
+												attachTo: jeeDialog.get('#md_eventEdit', 'dialog')
+											})
+											return
+										}
+										jeedomUtils.showAlert({
+											message: '{{Evènement supprimé avec succès}}',
+											level: 'success',
 										})
-										return
+										calendar.refetchEvents()
+										updateEventList()
+										jeeFrontEnd.modifyWithoutSave = false
+										var dialog = event.target.closest('div.jeeDialog')
+										dialog._jeeDialog.close(dialog)
+										jeeDialog.get('#md_eventEdit').destroy()
 									}
-									$('#div_Alert').showAlert({
-										message: '{{Evènement supprimé avec succès}}',
-										level: 'success'
-									})
-									calendar.refetchEvents()
-									updateEventList()
-									modifyWithoutSave = false
-									$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close")
-								}
-							})
+								})
+							}
 						}
-					},
+					}
 				}
 			})
 		} else {
-			bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cet évènement ?}}', function(result) {
-				if (result) {
-					$.ajax({
-						type: 'POST',
-						url: 'plugins/calendar/core/ajax/calendar.ajax.php',
-						data: {
-							action: 'removeEvent',
-							id: $('.calendarAttr[data-l1key=id]').value()
-						},
-						dataType: 'json',
-						error: function(error) {
-							$('#div_eventEditAlert').showAlert({
-								message: error.message,
-								level: 'danger'
-							})
-						},
-						success: function(data) {
-							if (data.state != 'ok') {
-								$('#div_eventEditAlert').showAlert({
-									message: data.result,
-									level: 'danger'
+			jeeDialog.confirm({
+				title: "{{Suppression}}",
+				message: "{{Etes-vous sûr de vouloir supprimer cet évènement ?}}"
+				},
+				function(result) {
+					if (result) {
+						domUtils.ajax({
+							type: 'POST',
+							url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+							data: {
+								action: 'removeEvent',
+								id: eventId
+							},
+							dataType: 'json',
+							error: function (request, status, error) {
+								domUtils.handleAjaxError(request, status, error) // no attachTo with handleAjaxError
+							},
+							success: function(data) {
+								if (data.state != 'ok') {
+									jeedomUtils.showAlert({
+										message: data.result,
+										level: "danger",
+										attachTo: jeeDialog.get('#md_eventEdit', 'dialog')
+									})
+									return
+								}
+								jeedomUtils.showAlert({
+									message: '{{Evènement supprimé avec succès}}',
+									level: 'success'
 								})
-								return
+								calendar.refetchEvents()
+								updateEventList()
+								jeeFrontEnd.modifyWithoutSave = false
+								jeeDialog.get('#md_eventEdit').destroy()
 							}
-							$('#div_Alert').showAlert({
-								message: '{{Evènement supprimé avec succès}}',
-								level: 'success'
-							})
-							calendar.refetchEvents()
-							updateEventList()
-							modifyWithoutSave = false
-							$('#div_eventEdit').closest("div.ui-dialog-content").dialog("close")
-						}
-					})
+						})
+					}
 				}
-			})
-		}
+			)
+        }
 	})
 </script>

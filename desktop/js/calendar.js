@@ -16,31 +16,46 @@
 
 var calendar = undefined
 
-$('#bt_healthcalendar').on('click', function () {
-  $('#md_modal').dialog({ title: "{{Santé Agenda}}" })
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open')
+document.getElementById('bt_healthcalendar').addEventListener('click', function() {
+ jeeDialog.dialog({
+   title: "{{Santé Agenda}}",
+   contentUrl: 'index.php?v=d&plugin=calendar&modal=health'
+ })
 })
 
-$('#bt_addEvent').on('click', function () {
-  $('#bt_calendartab').trigger('click')
-  $('#md_modal').dialog({ title: "{{Ajouter un évènement}}" })
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open')
+document.getElementById('bt_addEvent').addEventListener('click', function() {
+  document.getElementById('bt_calendartab')?.triggerEvent('click')
+  jeeDialog.dialog({
+    title: "{{Ajouter un évènement}}",
+    contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + document.querySelector('.eqLogicAttr[data-l1key=id]').jeeValue()
+  })
 })
 
-$('#div_eventList').delegate('.editEvent', 'click', function () {
-  $('#bt_calendartab').trigger('click')
-  $('#md_modal').dialog({ title: "{{Modifier un évènement}}" })
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open')
+document.querySelector('#div_eventList').addEventListener('click', function(event) {
+  var _target = null
+  if (_target = event.target.closest('.editEvent')) {
+    let eqLogic_id = document.querySelector('.eqLogicAttr[data-l1key=id]').jeeValue()
+    let event_id = _target.getAttribute('data-event_id')
+    document.getElementById('bt_calendartab')?.click()
+    jeeDialog.dialog({
+      title: "{{Modifier un évènement}}",
+      contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + eqLogic_id + '&id=' + event_id
+    })
+  }
+  return
 })
 
-$('#bt_calendartab').on('click', function () {
+document.getElementById('bt_calendartab').addEventListener('click', function() {
   setTimeout(function () { calendar.render() }, 600)
 })
 
 if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
   setTimeout(function () {
-    $('#md_modal').dialog({ title: "{{Ajouter/Modifier un évènement}}" })
-    $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open')
+    let eqLogic_id = document.querySelector('.eqLogicAttr[data-l1key=id]').jeeValue()
+    jeeDialog.dialog({
+      title: "{{Ajouter/Modifier un évènement}}",
+      contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + eqLogic_id + '&id=' + getUrlVars('event_id')
+    })
   }, 1000)
 }
 
@@ -59,10 +74,12 @@ function printEqLogic(_eqLogic) {
       center: 'title',
       right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + $('.eqLogicAttr[data-l1key=id]').value(),
+    events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + document.querySelector('.eqLogicAttr[data-l1key=id]').jeeValue(),
     eventClick: function (info) {
-      $('#md_modal').dialog({ title: "{{Modifier un évènement}}" })
-      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start.toUTCString())).dialog('open')
+      jeeDialog.dialog({
+        title: "{{Modifier un évènement}}",
+        contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + document.querySelector('.eqLogicAttr[data-l1key=id]').jeeValue() + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start.toUTCString())
+      })
     },
     eventTimeFormat: {
       hour: 'numeric',
@@ -83,20 +100,20 @@ function printEqLogic(_eqLogic) {
 }
 
 function updateEventList() {
-  $.ajax({
-    type: 'POST',
-    url: 'plugins/calendar/core/ajax/calendar.ajax.php',
+  domUtils.ajax({
+    type: "POST",
+    url: "plugins/calendar/core/ajax/calendar.ajax.php",
     data: {
       action: 'getAllEvents',
-      eqLogic_id: $('.eqLogicAttr[data-l1key=id]').value()
+      eqLogic_id: document.querySelector('.eqLogicAttr[data-l1key=id]').jeeValue()
     },
-    dataType: 'json',
-    error: function (error) {
-      $.fn.showAlert({ message: error.message, level: 'danger' })
+    dataType: "json",
+    error: function (request, status, error) {
+     domUtils.handleAjaxError(request, status, error)
     },
     success: function (data) {
       if (data.state != 'ok') {
-        $('#div_alert').showAlert({ message: data.result, level: 'danger' })
+        jeedomUtils.showAlert({ message: data.result, level: "danger" })
         return
       }
       var html = ''
@@ -106,11 +123,12 @@ function updateEventList() {
           color = 'transparent'
         }
         html += '<span class="label editEvent" data-event_id="' + data.result[i].id + '" style="cursor:pointer!important;background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;padding:8px;font-weight:bold;">'
+        let icon = isset(data.result[i].cmd_param.icon) ? data.result[i].cmd_param.icon + ' ' : ''
         if (data.result[i].cmd_param.eventName != '') {
-          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName
+          html +=  icon + data.result[i].cmd_param.eventName
         }
         else {
-          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name
+          html += icon + data.result[i].cmd_param.name
         }
         html += '</a></span>'
         if (data.result[i].repeat.enable == 0) {
@@ -129,7 +147,7 @@ function updateEventList() {
           html += ' {{de}} ' + data.result[i].startDate.substr(11, 5) + ' {{à}} ' + data.result[i].endDate.substr(11, 5) + '<br><br>'
         }
       }
-      $('#div_eventList').empty().append(html)
+      document.getElementById('div_eventList').innerHTML = html
     }
   })
 }
