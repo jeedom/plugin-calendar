@@ -14,34 +14,54 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-var calendar = undefined
+var calendar
 
-$('#bt_healthcalendar').on('click', function () {
-  $('#md_modal').dialog({ title: "{{Santé Agenda}}" })
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=health').dialog('open')
+document.getElementById('div_mainContainer').addEventListener('click', function(event) {
+  let _target = null
+
+  if (_target = event.target.closest('#bt_healthcalendar')) {
+    jeeDialog.dialog({
+      id: 'jee_modal2',
+      title: '{{Santé Agenda}}',
+      contentUrl: 'index.php?v=d&plugin=calendar&modal=health'
+    })
+    return
+  }
+
+  if (_target = event.target.closest('#bt_addEvent')) {
+    document.getElementById('bt_calendartab').triggerEvent('click')
+    jeeDialog.dialog({
+      id: 'eventEditModal',
+      title: '{{Ajouter un évènement}}',
+      contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + document.querySelector('.eqLogicAttr[data-l1key="id"]').jeeValue()
+    })
+    return
+  }
+
+  if (_target = event.target.closest('.editEvent')) {
+    document.getElementById('bt_calendartab').triggerEvent('click')
+    jeeDialog.dialog({
+      id: 'eventEditModal',
+      title: '{{Modifier un évènement}}',
+      contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + document.querySelector('.eqLogicAttr[data-l1key="id"]').jeeValue() + '&id=' + _target.getAttribute('data-event_id')
+    })
+    return
+  }
+
+  if (_target = event.target.closest('#bt_calendartab')) {
+    setTimeout(function() { calendar.render() }, 200)
+    return
+  }
 })
 
-$('#bt_addEvent').on('click', function () {
-  $('#bt_calendartab').trigger('click')
-  $('#md_modal').dialog({ title: "{{Ajouter un évènement}}" })
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value()).dialog('open')
-})
-
-$('#div_eventList').delegate('.editEvent', 'click', function () {
-  $('#bt_calendartab').trigger('click')
-  $('#md_modal').dialog({ title: "{{Modifier un évènement}}" })
-  $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + $(this).attr('data-event_id')).dialog('open')
-})
-
-$('#bt_calendartab').on('click', function () {
-  setTimeout(function () { calendar.render() }, 600)
-})
-
-if (!isNaN(getUrlVars('event_id')) && getUrlVars('event_id') != '') {
-  setTimeout(function () {
-    $('#md_modal').dialog({ title: "{{Ajouter/Modifier un évènement}}" })
-    $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + getUrlVars('event_id')).dialog('open')
-  }, 1000)
+if (parseInt(getUrlVars('event_id')) > 0) {
+  setTimeout(function() {
+    jeeDialog.dialog({
+      id: 'eventEditModal',
+      title: '{{Modifier un évènement}}',
+      contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + document.querySelector('.eqLogicAttr[data-l1key="id"]').jeeValue() + '&id=' + getUrlVars('event_id')
+    })
+  }, 500)
 }
 
 function printEqLogic(_eqLogic) {
@@ -59,62 +79,66 @@ function printEqLogic(_eqLogic) {
       center: 'title',
       right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + $('.eqLogicAttr[data-l1key=id]').value(),
-    eventClick: function (info) {
-      $('#md_modal').dialog({ title: "{{Modifier un évènement}}" })
-      $('#md_modal').load('index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + $('.eqLogicAttr[data-l1key=id]').value() + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start.toUTCString())).dialog('open')
+    events: "plugins/calendar/core/ajax/calendar.ajax.php?action=getEvents&eqLogic_id=" + _eqLogic.id,
+    eventClick: function(info) {
+      jeeDialog.dialog({
+        id: 'eventEditModal',
+        title: '{{Modifier un évènement}}',
+        contentUrl: 'index.php?v=d&plugin=calendar&modal=event.edit&eqLogic_id=' + _eqLogic.id + '&id=' + info.event.id + '&date=' + encodeURI(info.event.start.toUTCString())
+      })
     },
     eventTimeFormat: {
       hour: 'numeric',
       minute: '2-digit',
       meridiem: false
     },
-    datesSet: function (dateInfo) {
+    datesSet: function(dateInfo) {
       document.querySelector('.eqLogicAttr[data-l2key="defaultView"]').value = dateInfo.view.type
     },
     initialView: _eqLogic.display.defaultView,
     eventDisplay: 'block',
-    eventContent: function (info) {
+    eventContent: function(info) {
       return { html: info.timeText + ' ' + info.event.title }
     }
   })
 
-  updateEventList()
+  updateEventList(_eqLogic.id)
 }
 
-function updateEventList() {
-  $.ajax({
+function updateEventList(_eqLogicId) {
+  domUtils.ajax({
     type: 'POST',
     url: 'plugins/calendar/core/ajax/calendar.ajax.php',
     data: {
       action: 'getAllEvents',
-      eqLogic_id: $('.eqLogicAttr[data-l1key=id]').value()
+      eqLogic_id: _eqLogicId || document.querySelector('.eqLogicAttr[data-l1key="id"]').jeeValue()
     },
     dataType: 'json',
-    error: function (error) {
-      $.fn.showAlert({ message: error.message, level: 'danger' })
-    },
-    success: function (data) {
+    success: function(data) {
       if (data.state != 'ok') {
-        $('#div_alert').showAlert({ message: data.result, level: 'danger' })
+        jeedomUtils.showAlert({
+          message: data.result,
+          level: 'danger'
+        })
         return
       }
-      var html = ''
-      for (var i in data.result) {
-        var color = init(data.result[i].cmd_param.color, '#2980b9')
+      let html = ''
+      for (const i in data.result) {
+        let color = init(data.result[i].cmd_param.color, '#2980b9')
         if (data.result[i].cmd_param.transparent == 1) {
           color = 'transparent'
         }
         html += '<span class="label editEvent" data-event_id="' + data.result[i].id + '" style="cursor:pointer!important;background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + ';margin-top:5px;padding:8px;font-weight:bold;">'
+        const icon = data.result[i].cmd_param.icon ? data.result[i].cmd_param.icon + ' ' : ''
         if (data.result[i].cmd_param.eventName != '') {
-          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName
+          html += icon + data.result[i].cmd_param.eventName
         }
         else {
-          html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name
+          html += icon + data.result[i].cmd_param.name
         }
-        html += '</a></span>'
+        html += '</span>'
         if (data.result[i].repeat.enable == 0) {
-          html += ' {{Le}} ' + new Date(data.result[i].startDate).toLocaleString().substring(0, 10)
+          html += ' {{Le}} ' + data.result[i].startDate.substring(0, 10)
         }
         else if (data.result[i].repeat.mode == 'simple') {
           html += ' {{Répétition simple}}'
@@ -129,7 +153,7 @@ function updateEventList() {
           html += ' {{de}} ' + data.result[i].startDate.substr(11, 5) + ' {{à}} ' + data.result[i].endDate.substr(11, 5) + '<br><br>'
         }
       }
-      $('#div_eventList').empty().append(html)
+      document.getElementById('div_eventList').innerHTML = html
     }
   })
 }

@@ -1,0 +1,36 @@
+:root {
+	--fc-button-bg-color: var(--btn-default-color);
+	--fc-button-hover-bg-color: var(--btn-default-color);
+	--fc-button-active-bg-color: var(--sc-formTxt-color);
+	--fc-list-event-hover-bg-color: var(--el-defaultColor);
+	--fc-page-bg-color: transparent;
+	--fc-button-border-color: transparent;
+	--fc-border-color: transparent;
+}
+
+#calendartab {
+	height: 100%;
+}
+
+.fc .fc-button:not(:disabled):hover {
+	color: var(--linkHoverLight-color) !important;
+	opacity: .85 !important;
+}
+
+.fc .fc-button:focus,
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+	box-shadow: none;
+}
+
+.fc-event {
+	overflow: hidden;
+}
+
+.fc-event-main {
+	margin-left: 2px;
+}
+
+.fc-list-event {
+	cursor: pointer;
+}

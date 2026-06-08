@@ -1,13 +1,15 @@
-<div
-  style="background-color:#background_color#;color:#text_color#; margin-top:2px;border-radius:5px;margin-right:5px;margin-left:5px;">
-  <i class="fas fa-times pull-left cursor removeEvent" data-uid="#uid#" style="margin-top:12px;margin-left:2px;"></i>
+<div style="background-color:#background_color#; color:#text_color#; border-radius:5px; margin:2px 5px;">
+  <i class="fas fa-times pull-left cursor removeEvent" data-uid="#uid#" style="margin-top:12px;margin-left:2px;" title="{{Supprimer}}"></i>
   <div style="font-weight: bold;">#name#</div>
   <div style="font-size:0.7em;">#start# - #end#</div>
   <script>
-    $('.removeEvent[data-uid=#uid#]').on('click', function () {
-      bootbox.confirm('Etes-vous sûr de vouloir supprimer cet événement ?', function (result) {
+    document.querySelector('.removeEvent[data-uid="#uid#"]').addEventListener('click', function(event) {
+      jeeDialog.confirm({
+        title: '{{Suppression}} #name# (#start# - #end#)',
+        message: '{{Etes-vous sûr de vouloir supprimer l\'occurence du #start# de l\'évènement #name#?}}'
+      }, function(result) {
         if (result) {
-          $.ajax({
+          domUtils.ajax({
             type: 'POST',
             url: 'plugins/calendar/core/ajax/calendar.ajax.php',
             data: {
@@ -16,15 +18,12 @@
               date: '#date#'
             },
             dataType: 'json',
-            error: function (error) {
-              $.fn.showAlert({ message: error.message, level: 'danger' })
-            },
-            success: function (data) {
+            success: function(data) {
               if (data.state != 'ok') {
-                $.fn.showAlert({ message: data.result, level: 'danger' })
+                jeedomUtils.showAlert({ message: data.result, level: "danger" })
                 return
               }
-              $('.removeEvent[data-uid=#uid#]').parent().remove()
+              event.target.parentElement.remove()
             }
           })
         }
