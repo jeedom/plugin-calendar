@@ -41,10 +41,10 @@ class calendar extends eqLogic {
 				$startDate = (new DateTime('-12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 				$endDate = (new DateTime('+12 month ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 			} else {
-				if($repeat['unite'] == 'hours'){
+				if ($repeat['unite'] == 'hours') {
 					$startDate = (new DateTime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 					$endDate = (new DateTime('+' . 9999 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
-				}else{
+				} else {
 					$startDate = (new DateTime('-' . 8 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 					$endDate = (new DateTime('+' . 99 * $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 				}
@@ -263,13 +263,13 @@ class calendar extends eqLogic {
 		if (!is_array($replace)) {
 			return $replace;
 		}
-		$version = jeedom::versionAlias($_version);
+		$_version = jeedom::versionAlias($_version);
 
 		$startDate = (new DateTime('-' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 		$endDate = (new DateTime('+' . $this->getConfiguration('nbWidgetDay', 7) . ' days ' . date('Y-m-d H:i:s')))->format('Y-m-d H:i:s');
 		$events = calendar_event::calculeEvents(calendar_event::getEventsByEqLogic($this->getId(), $startDate, $endDate), $startDate, $endDate);
 		usort($events, 'calendar::orderEvent');
-		$tEvent = getTemplate('core', $version, 'event', __CLASS__);
+		$tEvent = translate::exec(getTemplate('core', $_version, 'event', __CLASS__), 'plugins/calendar/core/template/' . $_version . '/event.html');
 		$dEvent = '';
 		$nbEvent = 1;
 		$eventList = array();
@@ -300,7 +300,7 @@ class calendar extends eqLogic {
 			}
 		}
 		$replace['#events#'] = $dEvent;
-		return template_replace($replace, getTemplate('core', $version, 'eqLogic', __CLASS__));
+		return template_replace($replace, getTemplate('core', $_version, 'eqLogic', __CLASS__));
 	}
 
 	/*     * **********************Getteur Setteur*************************** */
@@ -755,13 +755,13 @@ class calendar_event {
 					if ($repeat['freq'] == 0) {
 						break;
 					}
-					if($repeat['unite'] == 'hours'){
-				      		$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' .$startDate));
-				      		$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' .$endDate));
-				    	}else{
-				     		$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . substr($startDate, 0, 10) . ' ' . $initStartTime));
-				      		$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . substr($endDate, 0, 10) . ' ' . $initEndTime));
-				   	}
+					if ($repeat['unite'] == 'hours') {
+						$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $startDate));
+						$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . $endDate));
+					} else {
+						$startDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . substr($startDate, 0, 10) . ' ' . $initStartTime));
+						$endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . substr($endDate, 0, 10) . ' ' . $initEndTime));
+					}
 				}
 				if (strtotime($startDate) <= strtotime($prevStartDate)) {
 					break;
@@ -880,7 +880,7 @@ class calendar_event {
 		}
 		$repeat = $this->getRepeat();
 		$allEmpty = true;
-		if(isset($repeat['excludeDay']) && is_array($repeat['excludeDay'])){
+		if (isset($repeat['excludeDay']) && is_array($repeat['excludeDay'])) {
 			foreach ($repeat['excludeDay'] as $day) {
 				if ($day == 1) {
 					$allEmpty = false;
@@ -1010,7 +1010,7 @@ class calendar_event {
 			$cmd->event($cmd->execute());
 		}
 		$actions = $this->getCmd_param($_action);
-		if(is_array($actions)){
+		if (is_array($actions)) {
 			foreach ($actions as $action) {
 				try {
 					$options = array();
