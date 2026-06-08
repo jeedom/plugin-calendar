@@ -4,6 +4,14 @@
 >
 >Si no hay información sobre la actualización, significa que se trata solo de la actualización de la documentación, la traducción o el texto.
 
+# 
+
+- 
+- 
+- 
+- 
+- Se requiere la versión básica mínima de Jeedom : 
+
 # 26/08/2024
 
 - Se corrigió un error en la repetición de un evento cada hora

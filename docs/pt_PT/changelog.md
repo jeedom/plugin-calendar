@@ -4,6 +4,14 @@
 >
 >Se não houver informação sobre a atualização, significa que se trata apenas da atualização da documentação, tradução ou texto.
 
+# 
+
+- 
+- 
+- 
+- 
+- Versão mínima do núcleo do Jeedom necessária : 
+
 # 26/08/2024
 
 - Corrigido um bug na repetição de um evento a cada hora

@@ -4,6 +4,14 @@
 >
 >Wenn es keine Informationen über die Aktualisierung gibt, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt.
 
+# 
+
+- 
+- 
+- 
+- 
+- Mindestversion des Jeedom-Kerns erforderlich : 
+
 # 26.08.2024
 
 - Ein Fehler bei der stündlichen Wiederholung eines Ereignisses wurde behoben
