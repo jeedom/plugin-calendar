@@ -93,7 +93,7 @@ function printEqLogic(_eqLogic) {
       meridiem: false
     },
     datesSet: function(dateInfo) {
-      document.querySelector('.eqLogicAttr[data-l2key="defaultView"]').value = dateInfo.view.type
+      document.querySelector('.eqLogicAttr[data-l2key="defaultView"]').jeeValue(dateInfo.view.type)
     },
     initialView: _eqLogic.display.defaultView,
     eventDisplay: 'block',
