@@ -4,6 +4,10 @@
 >
 >S'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# 09/06/2026
+
+- Mise à jour de la librairie `fullcalendar` de 6.1.9 vers 6.1.20
+
 # 08/06/2026
 
 - Remplacement de jQuery par du JavaScript natif dans les vues bureau
