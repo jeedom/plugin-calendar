@@ -6,11 +6,15 @@
 
 # 
 
-- 
-- 
-- 
-- 
-- Mindestversion des Jeedom-Kerns erforderlich : 
+- .
+
+# 08/06/2026
+
+- Remplacement de jQuery par du JavaScript natif dans les vues bureau
+- Blocage et confirmation de fermeture de la fenêtre d'édition d'un évènement en cours de modification
+- Correction de plusieurs anomalies d'affichage dans la liste des évènements
+- Prise en charge des traductions sur le widget
+- Mindestversion des Jeedom-Kerns erforderlich : 4.4.12
 
 # 26.08.2024
 

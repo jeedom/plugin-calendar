@@ -6,11 +6,15 @@
 
 # 
 
-- 
-- 
-- 
-- 
-- Minimum Jeedom core version required : 
+- .
+
+# 08/06/2026
+
+- Remplacement de jQuery par du JavaScript natif dans les vues bureau
+- Blocage et confirmation de fermeture de la fenêtre d'édition d'un évènement en cours de modification
+- Correction de plusieurs anomalies d'affichage dans la liste des évènements
+- Prise en charge des traductions sur le widget
+- Minimum Jeedom core version required : 4.4.12
 
 # 08/26/2024
 
