@@ -26,6 +26,8 @@ jeedomUtils.datePickerInit('Y-m-d H:i')
 if (is_array(_calendarEvent)) {
   eventEditModal.querySelector('#div_eventEdit').setJeeValues(_calendarEvent, '.calendarAttr')
   displayRepeatOptions(_calendarEvent.repeat.enable == 1)
+  displayRepeatMode(_calendarEvent.repeat.mode)
+
 
   for (const type of ['start', 'end']) {
     if (isset(_calendarEvent.cmd_param[type])) {
@@ -338,12 +340,7 @@ eventEditModal.addEventListener('change', function(event) {
   }
 
   if (_target = event.target.closest('.calendarAttr[data-l1key=repeat][data-l2key=mode]')) {
-    const repeatMode = _target.jeeValue()
-    // 4.5.4 mini:
-    // eventEditModal.querySelector('.repeatMode:not(.' + repeatMode + ')').unseen()
-    // eventEditModal.querySelector('.repeatMode.' + repeatMode).seen()
-    eventEditModal.querySelector('.repeatMode:not(.' + repeatMode + ')').addClass('hidden')
-    eventEditModal.querySelector('.repeatMode.' + repeatMode).removeClass('hidden')
+    displayRepeatMode(_target.jeeValue())
     return
   }
 
@@ -455,4 +452,12 @@ function displayRepeatOptions(_display = false) {
     // 4.5.4 mini: eventEditModal.querySelectorAll('.div_repeatOption').unseen()
     eventEditModal.querySelectorAll('.div_repeatOption').addClass('hidden')
   }
+}
+
+function displayRepeatMode(_mode = 'simple') {
+  // 4.5.4 mini:
+  // eventEditModal.querySelector('.repeatMode:not(.' + _mode + ')').unseen()
+  // eventEditModal.querySelector('.repeatMode.' + _mode).seen()
+  eventEditModal.querySelector('.repeatMode:not(.' + _mode + ')').addClass('hidden')
+  eventEditModal.querySelector('.repeatMode.' + _mode).removeClass('hidden')
 }
