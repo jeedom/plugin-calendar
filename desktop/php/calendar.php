@@ -158,6 +158,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 <?php
 include_file('3rdparty', 'fullcalendar/index.global.min', 'js', 'calendar');
 include_file('3rdparty', 'fullcalendar/locales-all.global.min', 'js', 'calendar');
-include_file('core', 'plugin.template', 'js');
 include_file('desktop', 'calendar', 'js', 'calendar');
+include_file('core', 'plugin.template', 'js');
 ?>
