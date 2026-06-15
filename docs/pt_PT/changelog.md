@@ -4,9 +4,9 @@
 >
 >Se não houver informação sobre a atualização, significa que se trata apenas da atualização da documentação, tradução ou texto.
 
-# 
+# 09/06/2026
 
-- .
+- Mise à jour de la librairie `fullcalendar` de 6.1.9 vers 6.1.20
 
 # 08/06/2026
 
