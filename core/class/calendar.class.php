@@ -408,18 +408,6 @@ class calendar_event {
 		foreach ($events as $event) {
 			if (!is_object($event->getEqLogic())) {
 				$event->remove();
-				continue;
-			}
-			$repeat = $event->getRepeat();
-			if ($repeat['includeDateFromCalendar'] != '' && $repeat['includeDateFromEvent'] == '') {
-				$event->setRepeat('includeDateFromEvent', $repeat['includeDateFromCalendar']);
-				$event->setRepeat('includeDateFromCalendar', self::byId($repeat['includeDateFromCalendar'])->getEqLogic_id());
-				$event->save();
-			}
-			if ($repeat['excludeDateFromCalendar'] != '' && $repeat['excludeDateFromEvent'] == '') {
-				$event->setRepeat('excludeDateFromEvent', $repeat['excludeDateFromCalendar']);
-				$event->setRepeat('excludeDateFromCalendar', self::byId($repeat['excludeDateFromCalendar'])->getEqLogic_id());
-				$event->save();
 			}
 		}
 	}
