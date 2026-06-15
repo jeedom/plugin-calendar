@@ -27,7 +27,11 @@ if (is_array(_calendarEvent)) {
   eventEditModal.querySelector('#div_eventEdit').setJeeValues(_calendarEvent, '.calendarAttr')
   displayRepeatOptions(_calendarEvent.repeat.enable == 1)
   displayRepeatMode(_calendarEvent.repeat.mode)
-
+  for (const type of ['includeDateFromCalendar', 'excludeDateFromCalendar']) {
+    if (_calendarEvent.repeat[type]) {
+      displayFromCalendarEvents(eventEditModal.querySelector('.calendarAttr[data-l1key=repeat][data-l2key=' + type + ']'))
+    }
+  }
 
   for (const type of ['start', 'end']) {
     if (isset(_calendarEvent.cmd_param[type])) {
@@ -345,28 +349,7 @@ eventEditModal.addEventListener('change', function(event) {
   }
 
   if (_target = event.target.closest('.calendarAttr[data-l1key=repeat][data-l2key=includeDateFromCalendar], .calendarAttr[data-l1key=repeat][data-l2key=excludeDateFromCalendar]')) {
-    const formGroup = _target.parentNode.parentNode
-    for (const calendarEvents of formGroup.querySelectorAll('div[data-calendar_id]')) {
-      if (calendarEvents.isVisible()) {
-        // 4.5.4 mini: calendarEvents.unseen()
-        calendarEvents.addClass('hidden')
-
-        const calendarEventsSelect = calendarEvents.querySelector('select')
-        calendarEventsSelect.removeAttribute('data-l1key')
-        calendarEventsSelect.removeAttribute('data-l2key')
-        break
-      }
-    }
-
-    if (_target.jeeValue() != '') {
-      const calendarEvents = formGroup.querySelector('div[data-calendar_id="' + _target.jeeValue() + '"]')
-      // 4.5.4 mini: calendarEvents.seen()
-      calendarEvents.removeClass('hidden')
-
-      const calendarEventsSelect = calendarEvents.querySelector('select')
-      calendarEventsSelect.setAttribute('data-l1key', 'repeat')
-      calendarEventsSelect.setAttribute('data-l2key', _target.dataset.l2key.replace('Calendar', 'Event'))
-    }
+    displayFromCalendarEvents(_target)
     return
   }
 }, { signal: eventEditModal._ac.signal })
@@ -375,12 +358,13 @@ eventEditModal.querySelector('#actiontab').addEventListener('focusout', function
   let _target = null
 
   if (_target = event.target.closest('.cmdAction.expressionAttr[data-l1key="cmd"]')) {
-    const type = _target.getAttribute('data-type')
+    const type = _target.dataset.type
     const expression = _target.closest('.' + type).getJeeValues('.expressionAttr')
     jeedom.cmd.displayActionOption(_target.jeeValue(), init(expression[0].options), function(html) {
       _target.closest('.' + type).querySelector('.actionOptions').html(html)
       jeedomUtils.taAutosize()
     })
+    return
   }
 })
 
@@ -460,4 +444,33 @@ function displayRepeatMode(_mode = 'simple') {
   // eventEditModal.querySelector('.repeatMode.' + _mode).seen()
   eventEditModal.querySelector('.repeatMode:not(.' + _mode + ')').addClass('hidden')
   eventEditModal.querySelector('.repeatMode.' + _mode).removeClass('hidden')
+}
+
+function displayFromCalendarEvents(_calendarSelect) {
+  const formGroup = _calendarSelect.closest('.form-group')
+
+  const activeEvents = formGroup.querySelector('div[data-calendar_id]:not(.hidden)')
+  if (activeEvents) {
+    // 4.5.4 mini: calendarEvents.unseen()
+    activeEvents.addClass('hidden')
+
+    const eventsSelect = activeEvents.querySelector('select')
+    eventsSelect.removeAttribute('data-l1key')
+    eventsSelect.removeAttribute('data-l2key')
+  }
+
+  const calendarId = _calendarSelect.jeeValue()
+  if (calendarId) {
+    const newEvents = formGroup.querySelector('div[data-calendar_id="' + calendarId + '"]')
+    // 4.5.4 mini: calendarEvents.seen()
+    newEvents.removeClass('hidden')
+
+    const eventsSelect = newEvents.querySelector('select')
+    const l2key = _calendarSelect.dataset.l2key.replace('Calendar', 'Event')
+    eventsSelect.setAttribute('data-l1key', 'repeat')
+    eventsSelect.setAttribute('data-l2key', l2key)
+    if (_calendarEvent.repeat[_calendarSelect.dataset.l2key] == calendarId && isset(_calendarEvent.repeat[l2key])) {
+      eventsSelect.jeeValue(_calendarEvent.repeat[l2key])
+    }
+  }
 }
