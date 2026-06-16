@@ -23,31 +23,13 @@ eventEditModal._ac = new AbortController()
 
 jeedomUtils.datePickerInit('Y-m-d H:i')
 
-if (is_array(_calendarEvent)) {
-  eventEditModal.querySelector('#div_eventEdit').setJeeValues(_calendarEvent, '.calendarAttr')
-  displayRepeatOptions(_calendarEvent.repeat.enable == 1)
-  displayRepeatMode(_calendarEvent.repeat.mode)
-  for (const type of ['includeDateFromCalendar', 'excludeDateFromCalendar']) {
-    if (_calendarEvent.repeat[type]) {
-      displayFromCalendarEvents(eventEditModal.querySelector('.calendarAttr[data-l1key=repeat][data-l2key=' + type + ']'))
-    }
-  }
-
-  for (const type of ['start', 'end']) {
-    if (isset(_calendarEvent.cmd_param[type])) {
-      for (const i in _calendarEvent.cmd_param[type]) {
-        addAction(_calendarEvent.cmd_param[type][i], type)
-      }
-    }
-  }
-}
-
 eventEditModal.addEventListener('click', function(event) {
   let _target = null
 
   if (_target = event.target.closest('#bt_chooseIcon')) {
     jeedomUtils.chooseIcon(function(_icon) {
-      eventEditModal.querySelector('.calendarAttr[data-l1key=cmd_param][data-l2key=icon]').innerHTML = _icon
+      eventEditModal.querySelector('.calendarAttr[data-l1key="cmd_param"][data-l2key="icon"]').innerHTML = _icon
+      eventEditModal.addClass('jeeDialogNoCloseBackdrop')
     })
     return
   }
@@ -58,8 +40,7 @@ eventEditModal.addEventListener('click', function(event) {
   }
 
   if (_target = event.target.closest('.bt_removeAction')) {
-    const type = _target.dataset.type
-    _target.closest('.' + type).remove()
+    _target.closest('.' + _target.dataset.type).remove()
     eventEditModal.addClass('jeeDialogNoCloseBackdrop')
     return
   }
@@ -73,6 +54,7 @@ eventEditModal.addEventListener('click', function(event) {
         el.closest('.' + type).querySelector('.actionOptions').html(html)
         jeedomUtils.taAutosize()
       })
+      eventEditModal.addClass('jeeDialogNoCloseBackdrop')
     })
     return
   }
@@ -90,12 +72,13 @@ eventEditModal.addEventListener('click', function(event) {
         el.closest('.' + type).querySelector('.actionOptions').html(html)
         jeedomUtils.taAutosize()
       })
+      eventEditModal.addClass('jeeDialogNoCloseBackdrop')
     })
     return
   }
 
-  if (_target = event.target.closest('.calendarAction[data-action=allDay]')) {
-    const eventStart = eventEditModal.querySelector('.calendarAttr[data-l1key=startDate]')
+  if (_target = event.target.closest('.calendarAction[data-action="allDay"]')) {
+    const eventStart = eventEditModal.querySelector('.calendarAttr[data-l1key="startDate"]')
     let startDate = eventStart.jeeValue().substr(0, 10)
     if (startDate.trim() == '') {
       startDate = new Date()
@@ -107,7 +90,8 @@ eventEditModal.addEventListener('click', function(event) {
       startDate = y + '-' + m + '-' + d
     }
     eventStart.jeeValue(startDate + ' 00:00:00')
-    eventEditModal.querySelector('.calendarAttr[data-l1key=endDate]').jeeValue(startDate + ' 23:59:00')
+    eventEditModal.querySelector('.calendarAttr[data-l1key="endDate"]').jeeValue(startDate + ' 23:59:00')
+    eventEditModal.addClass('jeeDialogNoCloseBackdrop')
     return
   }
 
@@ -144,7 +128,7 @@ eventEditModal.addEventListener('click', function(event) {
 
         calendar.refetchEvents()
         updateEventList()
-        eventEditModal._jeeDialog.close()
+        closeEventEditModal()
         const eventName = _calendarEvent.cmd_param.eventName
         jeedomUtils.showAlert({
           message: (_calendarEvent.id != '') ? `{{L'évènement ${eventName} a été modifié}}` : `{{L'évènement ${eventName} a été ajouté}}`,
@@ -156,7 +140,7 @@ eventEditModal.addEventListener('click', function(event) {
   }
 
   if (_target = event.target.closest('#md_eventEditDuplicate')) {
-    eventEditModal.querySelector('.calendarAttr[data-l1key=id]').jeeValue('')
+    eventEditModal.querySelector('.calendarAttr[data-l1key="id"]').jeeValue('')
     _target.unseen()
     eventEditModal.querySelector('#md_eventEditRemove').unseen()
     eventEditModal.querySelector('#md_eventEditSave').addClass('rounded')
@@ -164,7 +148,7 @@ eventEditModal.addEventListener('click', function(event) {
   }
 
   if (_target = event.target.closest('#md_eventEditRemove')) {
-    if (is_array(_calendarEvent) && _calendarEvent.repeat.enable == 1 && _dateEvent != '') {
+    if (_calendarEvent.repeat.enable == 1 && _dateEvent != '') {
       jeeDialog.confirm({
         title: '{{Suppression}} ' + _calendarEvent.cmd_param.eventName,
         message: `{{Voulez-vous supprimer uniquement cette occurrence (${_calendarEvent.startDate} - ${_calendarEvent.endDate}) ou l'évènement complet?}}`,
@@ -214,7 +198,7 @@ eventEditModal.addEventListener('click', function(event) {
                     calendar.refetchEvents()
                     updateEventList()
                     event.target.closest('div.jeeDialog')._jeeDialog.close()
-                    eventEditModal._jeeDialog.close()
+                    closeEventEditModal()
                     jeedomUtils.showAlert({
                       message: '{{Occurrence supprimée avec succès}}',
                       level: 'success'
@@ -258,7 +242,7 @@ eventEditModal.addEventListener('click', function(event) {
                     calendar.refetchEvents()
                     updateEventList()
                     event.target.closest('div.jeeDialog')._jeeDialog.close()
-                    eventEditModal._jeeDialog.close()
+                    closeEventEditModal()
                     jeedomUtils.showAlert({
                       message: '{{Evènement supprimé avec succès}}',
                       level: 'success'
@@ -304,7 +288,7 @@ eventEditModal.addEventListener('click', function(event) {
 
               calendar.refetchEvents()
               updateEventList()
-              eventEditModal._jeeDialog.close()
+              closeEventEditModal()
               jeedomUtils.showAlert({
                 message: '{{Evènement supprimé avec succès}}',
                 level: 'success'
@@ -324,8 +308,7 @@ eventEditModal.addEventListener('click', function(event) {
 
     event.stopImmediatePropagation()
     if (confirm("{{Quitter la fenêtre sans sauvegarder l'évènement?}}")) {
-      eventEditModal.removeClass('jeeDialogNoCloseBackdrop')
-      eventEditModal._jeeDialog.close()
+      closeEventEditModal()
     }
     return
   }
@@ -334,22 +317,58 @@ eventEditModal.addEventListener('click', function(event) {
 eventEditModal.addEventListener('change', function(event) {
   let _target = null
 
-  if (_target = event.target.closest('.calendarAttr, .expressionAttr')) {
+  if (event.isTrusted && (_target = event.target.closest('.calendarAttr, .expressionAttr'))) {
     eventEditModal.addClass('jeeDialogNoCloseBackdrop')
   }
 
-  if (_target = event.target.closest('.calendarAttr[data-l1key=repeat][data-l2key=enable]')) {
-    displayRepeatOptions(_target.checked)
+  if (_target = event.target.closest('.calendarAttr[data-l1key="repeat"][data-l2key="enable"]')) {
+    if (_target.checked) {
+      // 4.5.4 mini: eventEditModal.querySelectorAll('.div_repeatOption').seen()
+      eventEditModal.querySelectorAll('.div_repeatOption').removeClass('hidden')
+    } else {
+      // 4.5.4 mini: eventEditModal.querySelectorAll('.div_repeatOption').unseen()
+      eventEditModal.querySelectorAll('.div_repeatOption').addClass('hidden')
+    }
     return
   }
 
-  if (_target = event.target.closest('.calendarAttr[data-l1key=repeat][data-l2key=mode]')) {
-    displayRepeatMode(_target.jeeValue())
+  if (_target = event.target.closest('.calendarAttr[data-l1key="repeat"][data-l2key="mode"]')) {
+    const repeatMode = _target.jeeValue()
+    // 4.5.4 mini:
+    // eventEditModal.querySelector('.repeatMode:not(.' + _mode + ')').unseen()
+    // eventEditModal.querySelector('.repeatMode.' + _mode).seen()
+    eventEditModal.querySelector('.repeatMode:not(.' + repeatMode + ')').addClass('hidden')
+    eventEditModal.querySelector('.repeatMode.' + repeatMode).removeClass('hidden')
     return
   }
 
-  if (_target = event.target.closest('.calendarAttr[data-l1key=repeat][data-l2key=includeDateFromCalendar], .calendarAttr[data-l1key=repeat][data-l2key=excludeDateFromCalendar]')) {
-    displayFromCalendarEvents(_target)
+  if (_target = event.target.closest('.calendarAttr[data-l1key="repeat"][data-l2key="includeDateFromCalendar"], .calendarAttr[data-l1key="repeat"][data-l2key="excludeDateFromCalendar"]')) {
+    const formGroup = _target.closest('.form-group')
+
+    const activeEvents = formGroup.querySelector('div[data-calendar_id]:not(.hidden)')
+    if (activeEvents) {
+      // 4.5.4 mini: calendarEvents.unseen()
+      activeEvents.addClass('hidden')
+
+      const eventsSelect = activeEvents.querySelector('select')
+      eventsSelect.removeAttribute('data-l1key')
+      eventsSelect.removeAttribute('data-l2key')
+    }
+
+    const calendarId = _target.jeeValue()
+    if (calendarId) {
+      const newEvents = formGroup.querySelector('div[data-calendar_id="' + calendarId + '"]')
+      // 4.5.4 mini: calendarEvents.seen()
+      newEvents.removeClass('hidden')
+
+      const eventsSelect = newEvents.querySelector('select')
+      const l2key = _target.dataset.l2key.replace('Calendar', 'Event')
+      eventsSelect.setAttribute('data-l1key', 'repeat')
+      eventsSelect.setAttribute('data-l2key', l2key)
+      if (_calendarEvent.repeat[_target.dataset.l2key] == calendarId && isset(_calendarEvent.repeat[l2key])) {
+        eventsSelect.jeeValue(_calendarEvent.repeat[l2key])
+      }
+    }
     return
   }
 }, { signal: eventEditModal._ac.signal })
@@ -368,12 +387,20 @@ eventEditModal.querySelector('#actiontab').addEventListener('focusout', function
   }
 })
 
-eventEditModal.querySelector('.calendarAttr[data-l1key=cmd_param][data-l2key=icon]').addEventListener('dblclick', function() {
+eventEditModal.querySelector('.calendarAttr[data-l1key="cmd_param"][data-l2key="icon"]').addEventListener('dblclick', function() {
   this.innerHTML = ''
-  this.triggerEvent('change')
+  eventEditModal.addClass('jeeDialogNoCloseBackdrop')
 })
 
+eventEditModal.querySelector('#div_eventEdit').setJeeValues(_calendarEvent, '.calendarAttr')
+
 for (const type of ['start', 'end']) {
+  if (isset(_calendarEvent.cmd_param) && isset(_calendarEvent.cmd_param[type])) {
+    for (const i in _calendarEvent.cmd_param[type]) {
+      addAction(_calendarEvent.cmd_param[type][i], type)
+    }
+  }
+
   new Sortable(eventEditModal.querySelector('#div_' + type), {
     delay: 50,
     delayOnTouchOnly: true,
@@ -428,49 +455,7 @@ function addAction(_action, _type) {
   })
 }
 
-function displayRepeatOptions(_display = false) {
-  if (_display) {
-    // 4.5.4 mini: eventEditModal.querySelectorAll('.div_repeatOption').seen()
-    eventEditModal.querySelectorAll('.div_repeatOption').removeClass('hidden')
-  } else {
-    // 4.5.4 mini: eventEditModal.querySelectorAll('.div_repeatOption').unseen()
-    eventEditModal.querySelectorAll('.div_repeatOption').addClass('hidden')
-  }
-}
-
-function displayRepeatMode(_mode = 'simple') {
-  // 4.5.4 mini:
-  // eventEditModal.querySelector('.repeatMode:not(.' + _mode + ')').unseen()
-  // eventEditModal.querySelector('.repeatMode.' + _mode).seen()
-  eventEditModal.querySelector('.repeatMode:not(.' + _mode + ')').addClass('hidden')
-  eventEditModal.querySelector('.repeatMode.' + _mode).removeClass('hidden')
-}
-
-function displayFromCalendarEvents(_calendarSelect) {
-  const formGroup = _calendarSelect.closest('.form-group')
-
-  const activeEvents = formGroup.querySelector('div[data-calendar_id]:not(.hidden)')
-  if (activeEvents) {
-    // 4.5.4 mini: calendarEvents.unseen()
-    activeEvents.addClass('hidden')
-
-    const eventsSelect = activeEvents.querySelector('select')
-    eventsSelect.removeAttribute('data-l1key')
-    eventsSelect.removeAttribute('data-l2key')
-  }
-
-  const calendarId = _calendarSelect.jeeValue()
-  if (calendarId) {
-    const newEvents = formGroup.querySelector('div[data-calendar_id="' + calendarId + '"]')
-    // 4.5.4 mini: calendarEvents.seen()
-    newEvents.removeClass('hidden')
-
-    const eventsSelect = newEvents.querySelector('select')
-    const l2key = _calendarSelect.dataset.l2key.replace('Calendar', 'Event')
-    eventsSelect.setAttribute('data-l1key', 'repeat')
-    eventsSelect.setAttribute('data-l2key', l2key)
-    if (_calendarEvent.repeat[_calendarSelect.dataset.l2key] == calendarId && isset(_calendarEvent.repeat[l2key])) {
-      eventsSelect.jeeValue(_calendarEvent.repeat[l2key])
-    }
-  }
+function closeEventEditModal() {
+  eventEditModal.removeClass('jeeDialogNoCloseBackdrop')
+  eventEditModal._jeeDialog.close()
 }
