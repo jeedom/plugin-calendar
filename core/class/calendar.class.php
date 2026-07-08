@@ -685,7 +685,7 @@ class calendar_event {
 			// }
 			$initStartTime = date('H:i:s', strtotime($startDate));
 			$initEndTime = date('H:i:s', strtotime($endDate));
-			while (strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00' || $this->getUntil() == null) {
+			while ($this->getUntil() == null || strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00') {
 				if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
 					if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
 						if (!isset($repeat['nationalDay']) || $repeat['nationalDay'] == 'all') {
