@@ -926,8 +926,13 @@ class calendar_event {
 		}
 		$repeat = $this->getRepeat();
 		if (isset($repeat['enable']) && $repeat['enable'] == 1) {
-			$startDate = (new DateTime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
-			$endDate = (new DateTime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
+			if ($repeat['nationalDay'] == 'onlyNationalDay' || !isset($repeat['freq']) || $repeat['freq'] == '' || $repeat['unite'] == '') {
+				$startDate = (new DateTime('-12 month ' . date('Y-m-d')))->format('Y-m-d H:i:s');
+				$endDate = (new DateTime('+12 month ' . date('Y-m-d')))->format('Y-m-d H:i:s');
+			} else {
+				$startDate = (new DateTime('-' . (8 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
+				$endDate = (new DateTime('+' . (99 * $repeat['freq']) . ' ' . $repeat['unite'] . ' ' . date('Y-m-d')))->format('Y-m-d H:i:s');
+			}
 		} else {
 			$startDate = null;
 			$endDate = null;
