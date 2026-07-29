@@ -831,6 +831,12 @@ class calendar_event {
 		$enddatetime = strtotime(date('Y-m-d 00:00:00', strtotime($this->getEndDate())));
 		$diff_day = floor(($enddatetime - $startdatetime) / 86400);
 		foreach ($includeDate as $date) {
+			/* if range provided, ignore the included date if outside the range */
+			if (!empty($_endDate) && !empty($_startDate)) {
+				if ((strtotime($date) > strtotime($_endDate)) || (strtotime($date) < strtotime($_startDate)))  {
+              		continue;
+            	}
+			}
 			foreach ($return as $value) {
 				if ($value['start'] == $date . ' ' . $initStartTime && $value['end'] == $date . ' ' . $initEndTime) {
 					continue (2);
