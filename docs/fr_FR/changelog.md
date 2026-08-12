@@ -7,6 +7,7 @@
 # 12/08/2026
 
 - Correction de 2 erreurs fatales pouvant apparaître lors de la restauration d'une sauvegarde
+- Nouvelle méthode de traduction de la documentation et du changelog
 
 # 09/06/2026
 
