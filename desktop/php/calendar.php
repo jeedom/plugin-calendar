@@ -2,52 +2,12 @@
 if (!isConnect('admin')) {
 	throw new Exception('401 - {{Accès non autorisé}}');
 }
-$jeedom4_4 = version_compare(config::byKey('version'), '4.4', '>=');
-if (!$jeedom4_4) {
-	include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'css');
-}
+include_file('desktop', 'calendar', 'css', 'calendar');
 $plugin = plugin::byId('calendar');
-sendVarToJS(['eqType' => $plugin->getId(), '_jeedom4_4' => $jeedom4_4]);
+sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
 ?>
-<style>
-	:root {
-		--fc-button-bg-color: var(--btn-default-color);
-		--fc-button-hover-bg-color: var(--btn-default-color);
-		--fc-button-active-bg-color: var(--sc-formTxt-color);
-		--fc-list-event-hover-bg-color: var(--el-defaultColor);
-		--fc-page-bg-color: transparent;
-		--fc-button-border-color: transparent;
-		--fc-border-color: transparent;
-	}
 
-	#calendartab {
-		height: 100%;
-	}
-
-	.fc .fc-button:not(:disabled):hover {
-		color: var(--linkHoverLight-color) !important;
-		opacity: .85 !important;
-	}
-
-	.fc .fc-button:focus,
-	.fc .fc-button-primary:focus,
-	.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
-		box-shadow: none;
-	}
-
-	.fc-event {
-		overflow: hidden;
-	}
-
-	.fc-event-main {
-		margin-left: 2px;
-	}
-
-	.fc-list-event {
-		cursor: pointer;
-	}
-</style>
 <div class="row row-overflow">
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
 		<div class="eqLogicThumbnailContainer">
@@ -196,9 +156,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 </div>
 
 <?php
-if (!$jeedom4_4) {
-	include_file('3rdparty', 'datetimepicker/jquery.datetimepicker', 'js');
-}
 include_file('3rdparty', 'fullcalendar/index.global.min', 'js', 'calendar');
 include_file('3rdparty', 'fullcalendar/locales-all.global.min', 'js', 'calendar');
 include_file('desktop', 'calendar', 'js', 'calendar');
