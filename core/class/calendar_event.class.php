@@ -393,6 +393,7 @@ class calendar_event {
       $hasUntil = ($until !== null && $until != '' && $until != '0000-00-00 00:00:00');
       $untilTime = $hasUntil ? strtotime($until) : null;
 
+      $nationalDayCache = array();
       $curStartTime = strtotime($startDate);
       $curEndTime = strtotime($endDate);
 
@@ -405,7 +406,7 @@ class calendar_event {
                 'end' => $endDate,
               );
             } else if ($repeat['nationalDay'] == 'exeptNationalDay') {
-              $nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
+              $nationalDay = $this->getNationalDayCached($nationalDayCache, $curStartTime);
               if (!in_array(date('Y-m-d', $curStartTime), $nationalDay)) {
                 $return[] = array(
                   'start' => $startDate,
@@ -413,7 +414,7 @@ class calendar_event {
                 );
               }
             } else if ($repeat['nationalDay'] == 'onlyNationalDay') {
-              $nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
+              $nationalDay = $this->getNationalDayCached($nationalDayCache, $curStartTime);
               if (in_array(date('Y-m-d', $curStartTime), $nationalDay)) {
                 $return[] = array(
                   'start' => $startDate,
@@ -563,6 +564,19 @@ class calendar_event {
     }
     usort($return, array('calendar_event', 'sortEventDate'));
     return $return;
+  }
+
+  /**
+   * Jours fériés de l'année de l'occurrence, mis en cache.
+   * easter_date() + 20 mktime() étaient recalculés à chaque itération, et pour
+   * l'année courante seulement (donc faux pour une occurrence en N+2).
+   */
+  private function getNationalDayCached(&$_cache, $_timestamp) {
+    $year = intval(date('Y', $_timestamp));
+    if (!isset($_cache[$year])) {
+      $_cache[$year] = self::getNationalDay($year);
+    }
+    return $_cache[$year];
   }
 
   public function preSave() {
