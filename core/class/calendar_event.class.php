@@ -28,6 +28,10 @@ class calendar_event {
   private $until = null;
   private $_changed = false;
 
+  /* Garde-fou : nombre maximum d'itérations dans la boucle de calcul des
+     occurrences, pour qu'un agenda mal configuré ne bloque pas le rendu. */
+  const MAX_OCCURRENCE_LOOP = 100000;
+
   public static function sortEventDate($a, $b) {
     if (strtotime($a['start']) == strtotime($b['start'])) {
       return 0;
@@ -394,12 +398,17 @@ class calendar_event {
       $untilTime = $hasUntil ? strtotime($until) : null;
 
       $nationalDayCache = array();
+      $loop = 0;
       $curStartTime = strtotime($startDate);
       $curEndTime = strtotime($endDate);
 
       while (!$hasUntil || $untilTime > $curStartTime) {
+        if (++$loop > self::MAX_OCCURRENCE_LOOP) {
+          log::add('calendar', 'debug', __('Calcul des occurrences interrompu (trop d\'itérations) pour l\'évènement', __FILE__) . ' : ' . $this->getId());
+          break;
+        }
         if (!isset($excludeDate[date('Y-m-d', $curStartTime)]) && ($startTime < $curStartTime || $curEndTime > $startTime)) {
-          if ($repeat['excludeDay'][date('N', $curStartTime)] == 1 || $isAdvanceMode) {
+          if ((isset($repeat['excludeDay'][date('N', $curStartTime)]) && $repeat['excludeDay'][date('N', $curStartTime)] == 1) || $isAdvanceMode) {
             if (!isset($repeat['nationalDay']) || $repeat['nationalDay'] == 'all') {
               $return[] = array(
                 'start' => $startDate,
@@ -452,7 +461,7 @@ class calendar_event {
           $endDate = date('Y-m-d H:i:s', strtotime($tmp_startDate . ' ' . $initEndTime));
           $startDate = date('Y-m-d H:i:s', strtotime($tmp_startDate . ' ' . $initStartTime));
         } else {
-          if ($repeat['freq'] == 0) {
+          if (!isset($repeat['freq']) || $repeat['freq'] == 0) {
             break;
           }
           if ($repeat['unite'] == 'hours') {
