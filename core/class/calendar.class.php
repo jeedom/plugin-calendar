@@ -318,11 +318,9 @@ class calendarCmd extends cmd {
 
 	/*     * *********************Methode d'instance************************* */
 
-	public function dontRemoveCmd() {
-		if (in_array($this->getLogicalId(), array('in_progress', 'add_exclude_date', 'add_include_date'))) {
-			return true;
-		}
-		return false;
+	public function dontRemoveCmd()
+	{
+		return true; // on ne supprime aucune commandes
 	}
 
 	public function postInsert() {
