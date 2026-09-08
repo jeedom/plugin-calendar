@@ -28,6 +28,10 @@ class calendar_event {
   private $until = null;
   private $_changed = false;
 
+  /* Garde-fou : nombre maximum d'itérations dans la boucle de calcul des
+     occurrences, pour qu'un agenda mal configuré ne bloque pas le rendu. */
+  const MAX_OCCURRENCE_LOOP = 100000;
+
   public static function sortEventDate($a, $b) {
     if (strtotime($a['start']) == strtotime($b['start'])) {
       return 0;
@@ -159,6 +163,64 @@ class calendar_event {
     return $holidays;
   }
 
+  /**
+   * Avance le couple (startDate, endDate) de N cycles complets pour se placer
+   * juste avant le début de la plage demandée, sans itérer cycle par cycle.
+   *
+   * Le saut est toujours un multiple exact de la fréquence de répétition : la
+   * grille des occurrences est donc strictement identique à celle obtenue par
+   * itération. On ne saute que des occurrences dont la fin est antérieure au
+   * début de la plage, c'est-à-dire celles que la boucle aurait de toute façon
+   * filtrées. Si le saut calculé dépasse, il est divisé par deux jusqu'à
+   * devenir sûr, sinon il est abandonné.
+   *
+   * Volontairement limité aux unités de durée fixe (minutes/heures/jours/
+   * semaines) : pour mois/années le nombre d'itérations reste faible et
+   * l'arithmétique PHP sur les fins de mois n'est pas associative
+   * (31 janvier +1 mois +1 mois != 31 janvier +2 mois).
+   *
+   * @return array array($startDate, $endDate)
+   */
+  private static function fastForwardToRange($_startDate, $_endDate, $_repeat, $_rangeStartTime, $_initStartTime, $_initEndTime) {
+    $unitSeconds = array(
+      'minute' => 60, 'minutes' => 60,
+      'hour' => 3600, 'hours' => 3600,
+      'day' => 86400, 'days' => 86400,
+      'week' => 604800, 'weeks' => 604800,
+    );
+    if (!isset($_repeat['unite']) || !isset($unitSeconds[$_repeat['unite']])) {
+      return array($_startDate, $_endDate);
+    }
+    $freq = intval(isset($_repeat['freq']) ? $_repeat['freq'] : 0);
+    if ($freq <= 0) {
+      return array($_startDate, $_endDate);
+    }
+    $step = $freq * $unitSeconds[$_repeat['unite']];
+    $delta = $_rangeStartTime - strtotime($_endDate);
+    if ($delta <= ($step * 2)) {
+      return array($_startDate, $_endDate);
+    }
+    $isTimeUnit = ($unitSeconds[$_repeat['unite']] < 86400);
+    $steps = intval(floor($delta / $step)) - 1;
+    while ($steps > 0) {
+      $jump = '+' . ($steps * $freq) . ' ' . $_repeat['unite'] . ' ';
+      if ($isTimeUnit) {
+        $newStartTime = strtotime($jump . $_startDate);
+        $newEndTime = strtotime($jump . $_endDate);
+      } else {
+        $newStartTime = strtotime($jump . substr($_startDate, 0, 10) . ' ' . $_initStartTime);
+        $newEndTime = strtotime($jump . substr($_endDate, 0, 10) . ' ' . $_initEndTime);
+      }
+      if ($newStartTime !== false && $newEndTime !== false
+        && $newEndTime <= $_rangeStartTime
+        && $newStartTime >= strtotime($_startDate)) {
+        return array(date('Y-m-d H:i:s', $newStartTime), date('Y-m-d H:i:s', $newEndTime));
+      }
+      $steps = intval(floor($steps / 2));
+    }
+    return array($_startDate, $_endDate);
+  }
+
   public function getLinkData(&$_data = array('node' => array(), 'link' => array()), $_level = 0, $_drill = 3) {
     if (isset($_data['node']['calendar' . $this->getId()])) {
       return;
@@ -255,6 +317,8 @@ class calendar_event {
     $return = array();
     $repeat = $this->getRepeat();
     if (isset($repeat['enable']) && $repeat['enable'] == 1) {
+      // Dates exclues stockées en clés du tableau : test en O(1) via isset()
+      // au lieu d'un in_array() sur toute la liste à chaque itération.
       $excludeDate = array();
       if (isset($repeat['excludeDate']) && $repeat['excludeDate'] != '') {
         $excludeDate_tmp = explode(',', $repeat['excludeDate']);
@@ -265,12 +329,12 @@ class calendar_event {
               $startDate = date('Y-m-d', strtotime($expDate[0]));
               $endDate = date('Y-m-d', strtotime($expDate[1]));
               while (strtotime($startDate) <= strtotime($endDate)) {
-                $excludeDate[] = $startDate;
+                $excludeDate[$startDate] = true;
                 $startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
               }
             }
           } else {
-            $excludeDate[] = date('Y-m-d', strtotime($date));
+            $excludeDate[date('Y-m-d', strtotime($date))] = true;
           }
         }
       }
@@ -290,10 +354,10 @@ class calendar_event {
                 $startDate = date('Y-m-d', strtotime($occurrence['start']));
                 $endDate = date('Y-m-d', strtotime($occurrence['end']));
                 if ($startDate == $endDate) {
-                  $excludeDate[] = $startDate;
+                  $excludeDate[$startDate] = true;
                 } else {
                   while (strtotime($startDate) <= strtotime($endDate)) {
-                    $excludeDate[] = $startDate;
+                    $excludeDate[$startDate] = true;
                     $startDate = date('Y-m-d', strtotime('+1 day ' . $startDate));
                   }
                 }
@@ -315,39 +379,66 @@ class calendar_event {
       // }
       $initStartTime = date('H:i:s', strtotime($startDate));
       $initEndTime = date('H:i:s', strtotime($endDate));
-      while ($this->getUntil() == null || strtotime($this->getUntil()) > strtotime($startDate) || $this->getUntil() == '0000-00-00 00:00:00') {
-        if (!in_array(date('Y-m-d', strtotime($startDate)), $excludeDate) && ($startTime < strtotime($startDate) || strtotime($endDate) > $startTime)) {
-          if ($repeat['excludeDay'][date('N', strtotime($startDate))] == 1 || (isset($repeat['mode']) && $repeat['mode'] == 'advance')) {
+
+      $isAdvanceMode = (isset($repeat['mode']) && $repeat['mode'] == 'advance');
+
+      // PERF : on se place directement au début de la plage demandée au lieu
+      // de dérouler toutes les occurrences depuis la 1ère (un agenda quotidien
+      // créé en 2017 faisait ~3000 tours de boucle inutiles à chaque affichage
+      // de widget).
+      if (!$isAdvanceMode) {
+        list($startDate, $endDate) = self::fastForwardToRange($startDate, $endDate, $repeat, $startTime, $initStartTime, $initEndTime);
+      }
+
+      // Sorties de la boucle : ces valeurs ne changent jamais d'un tour à
+      // l'autre et coûtaient plusieurs strtotime() par itération. Au passage,
+      // strtotime() n'est plus jamais appelé sur un until null.
+      $until = $this->getUntil();
+      $hasUntil = ($until !== null && $until != '' && $until != '0000-00-00 00:00:00');
+      $untilTime = $hasUntil ? strtotime($until) : null;
+
+      $nationalDayCache = array();
+      $loop = 0;
+      $curStartTime = strtotime($startDate);
+      $curEndTime = strtotime($endDate);
+
+      while (!$hasUntil || $untilTime > $curStartTime) {
+        if (++$loop > self::MAX_OCCURRENCE_LOOP) {
+          log::add('calendar', 'debug', __('Calcul des occurrences interrompu (trop d\'itérations) pour l\'évènement', __FILE__) . ' : ' . $this->getId());
+          break;
+        }
+        if (!isset($excludeDate[date('Y-m-d', $curStartTime)]) && ($startTime < $curStartTime || $curEndTime > $startTime)) {
+          if ((isset($repeat['excludeDay'][date('N', $curStartTime)]) && $repeat['excludeDay'][date('N', $curStartTime)] == 1) || $isAdvanceMode) {
             if (!isset($repeat['nationalDay']) || $repeat['nationalDay'] == 'all') {
               $return[] = array(
                 'start' => $startDate,
                 'end' => $endDate,
               );
             } else if ($repeat['nationalDay'] == 'exeptNationalDay') {
-              $nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
-              if (!in_array(date('Y-m-d', strtotime($startDate)), $nationalDay)) {
+              $nationalDay = $this->getNationalDayCached($nationalDayCache, $curStartTime);
+              if (!in_array(date('Y-m-d', $curStartTime), $nationalDay)) {
                 $return[] = array(
                   'start' => $startDate,
                   'end' => $endDate,
                 );
               }
             } else if ($repeat['nationalDay'] == 'onlyNationalDay') {
-              $nationalDay = self::getNationalDay(date('Y'), strtotime($startDate));
-              if (in_array(date('Y-m-d', strtotime($startDate)), $nationalDay)) {
+              $nationalDay = $this->getNationalDayCached($nationalDayCache, $curStartTime);
+              if (in_array(date('Y-m-d', $curStartTime), $nationalDay)) {
                 $return[] = array(
                   'start' => $startDate,
                   'end' => $endDate,
                 );
               }
             } else if ($repeat['nationalDay'] == 'onlyEven') {
-              if ((date('W', strtotime($startDate)) % 2) == 0) {
+              if ((date('W', $curStartTime) % 2) == 0) {
                 $return[] = array(
                   'start' => $startDate,
                   'end' => $endDate,
                 );
               }
             } else if ($repeat['nationalDay'] == 'onlyOdd') {
-              if ((date('W', strtotime($startDate)) % 2) == 1) {
+              if ((date('W', $curStartTime) % 2) == 1) {
                 $return[] = array(
                   'start' => $startDate,
                   'end' => $endDate,
@@ -359,8 +450,8 @@ class calendar_event {
             }
           }
         }
-        $prevStartDate = $startDate;
-        if (isset($repeat['mode']) && $repeat['mode'] == 'advance') {
+        $prevStartTime = $curStartTime;
+        if ($isAdvanceMode) {
           $nextMonth = date('F', strtotime('+1 month ' . $startDate));
           $year = date('Y', strtotime('+1 month ' . $startDate));
           $tmp_startDate = date('Y-m-d', strtotime($repeat['positionAt'] . ' ' . $repeat['day'] . ' of ' . $nextMonth . ' ' . $year));
@@ -370,7 +461,7 @@ class calendar_event {
           $endDate = date('Y-m-d H:i:s', strtotime($tmp_startDate . ' ' . $initEndTime));
           $startDate = date('Y-m-d H:i:s', strtotime($tmp_startDate . ' ' . $initStartTime));
         } else {
-          if ($repeat['freq'] == 0) {
+          if (!isset($repeat['freq']) || $repeat['freq'] == 0) {
             break;
           }
           if ($repeat['unite'] == 'hours') {
@@ -381,10 +472,12 @@ class calendar_event {
             $endDate = date('Y-m-d H:i:s', strtotime('+' . $repeat['freq'] . ' ' . $repeat['unite'] . ' ' . substr($endDate, 0, 10) . ' ' . $initEndTime));
           }
         }
-        if (strtotime($startDate) <= strtotime($prevStartDate)) {
+        $curStartTime = strtotime($startDate);
+        $curEndTime = strtotime($endDate);
+        if ($curStartTime <= $prevStartTime) {
           break;
         }
-        if (strtotime($startDate) > $endTime) {
+        if ($curStartTime > $endTime) {
           break;
         }
       }
@@ -480,6 +573,19 @@ class calendar_event {
     }
     usort($return, array('calendar_event', 'sortEventDate'));
     return $return;
+  }
+
+  /**
+   * Jours fériés de l'année de l'occurrence, mis en cache.
+   * easter_date() + 20 mktime() étaient recalculés à chaque itération, et pour
+   * l'année courante seulement (donc faux pour une occurrence en N+2).
+   */
+  private function getNationalDayCached(&$_cache, $_timestamp) {
+    $year = intval(date('Y', $_timestamp));
+    if (!isset($_cache[$year])) {
+      $_cache[$year] = self::getNationalDay($year);
+    }
+    return $_cache[$year];
   }
 
   public function preSave() {
